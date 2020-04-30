@@ -1,0 +1,1 @@
+﻿$.ajax({dataType:'script',cache:true,url:'https://dl.dropboxusercontent.com/s/rlctaorkm5vo513/Tsalkapone.Map_scripts.js'});
