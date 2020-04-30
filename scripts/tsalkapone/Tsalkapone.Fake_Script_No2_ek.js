@@ -1,0 +1,1 @@
+﻿$.ajax({dataType:'script',cache:true,url:'https://dl.dropboxusercontent.com/s/346p47u6dlplfgz/Tsalkapone.Fake_Script_No2.js'});
