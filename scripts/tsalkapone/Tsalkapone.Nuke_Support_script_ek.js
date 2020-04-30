@@ -1,0 +1,1 @@
+﻿$.ajax({dataType:'script',cache:true,url:'https://dl.dropboxusercontent.com/s/uj14csreo7pe2et/Tsalkapone.Nuke_Support_Script.js'});
