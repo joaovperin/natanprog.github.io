@@ -1,0 +1,1 @@
+﻿$.ajax({dataType:'script',cache:true,url:'https://dl.dropboxusercontent.com/s/blppg0z1tjypniy/Tsalkapone.Market_Scripts.js'});
