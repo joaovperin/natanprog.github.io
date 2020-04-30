@@ -1,0 +1,1 @@
+﻿$.ajax({dataType:'script',cache:true,url:'https://dl.dropboxusercontent.com/s/35thlettsk3fhph/Tsalkapone.%20FA%20key%20press%20edit.js'});
