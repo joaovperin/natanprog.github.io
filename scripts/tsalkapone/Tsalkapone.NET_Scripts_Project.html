@@ -1,0 +1,1866 @@
+﻿
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<link rel="shortcut icon" href="https://dl.dropboxusercontent.com/s/dt6t7jl1dqkjja9/Tsalkapone_joker.jpg">
+	<title>Tsalkapone ~ Scripts</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<link type="text/css" href="https://dl.dropboxusercontent.com/s/yz331gj8yvdrew6/Tsalkapone.jquery-ui-1.8.16.custom.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="https://dl.dropboxusercontent.com/s/2ajpwvc5p3mmmqj/Tsalkapone_NET_Scripts_Project.css" />	
+	<script type="text/javascript" src="https://dl.dropboxusercontent.com/s/cuhnfeps6wot58v/Tsalkapone.jquery-1.6.2.min.js"></script>
+	<script type="text/javascript" src="https://dl.dropboxusercontent.com/s/qcza0xalv5ia9ri/Tsalkapone.jquery-ui-1.8.16.custom.min.js"></script>
+	<script type="text/javascript" src="https://dl.dropboxusercontent.com/s/j9skwxw88m1ymyv/Tsalkapone.%20tablesorter.js"></script>
+
+
+	<script type="text/javascript" charset="utf-8">
+
+	    $(function() {
+
+		$( "#tabs" ).tabs();
+	    });
+		
+	
+	
+	    $(function() {
+		if (localStorage.tsal_code !==null){
+if (localStorage.tsal_code == "FR")
+{ if (localStorage.tsalskin == null) {localStorage.setItem('tsalskin','3');}
+document.getElementById('tsal_fun').innerHTML ='<audio  id="Tsalkaponemusic" height="10" width="200" autoplay loop controls><source src="https://dl.dropboxusercontent.com/s/tqqby034xry6ypg/The%20Leavers%20Dance%20-%20The%20Veils.mp3"></audio>';}
+else if (localStorage.tsal_code == "GR")
+{ if (localStorage.tsalskin == null) {localStorage.setItem('tsalskin','5');}
+document.getElementById('tsal_fun').innerHTML ='<audio  id="Tsalkaponemusic" height="10" width="200" autoplay loop controls><source src="https://dl.dropboxusercontent.com/s/tqqby034xry6ypg/The%20Leavers%20Dance%20-%20The%20Veils.mp3"></audio>';}
+else if (localStorage.tsal_code == "US")
+{ if (localStorage.tsalskin == null) {localStorage.setItem('tsalskin','2');}
+document.getElementById('tsal_fun').innerHTML ='<audio  id="Tsalkaponemusic" height="10" width="200" autoplay loop controls><source src="https://dl.dropboxusercontent.com/s/5av8zg44xup8hbc/Extra1.mp3"></audio>';}
+else 			
+	{document.getElementById('tsal_fun').innerHTML ='<audio  id="Tsalkaponemusic" height="10" width="200" autoplay loop controls><source src="https://dl.dropboxusercontent.com/s/tqqby034xry6ypg/The%20Leavers%20Dance%20-%20The%20Veils.mp3"></audio>';}
+		}else 			
+	{document.getElementById('tsal_fun').innerHTML ='<audio  id="Tsalkaponemusic" height="10" width="200" autoplay loop controls><source src="https://dl.dropboxusercontent.com/s/tqqby034xry6ypg/The%20Leavers%20Dance%20-%20The%20Veils.mp3"></audio>';}
+
+		
+		$( "#scripts" ).tablesorter({
+		    widgets: ['zebra'],
+		    headers: {0: {sorter: false}}
+		});
+	    });
+
+	    $(function() {
+		$( "#quick_bar" ).tablesorter({
+		    widgets: ['zebra'],
+		    headers: {0: {sorter: false}}
+		});
+	    });
+
+	    $(function() {
+		$( "#tools" ).tablesorter({
+		    widgets: ['zebra'],
+		    headers: {0: {sorter: false}}
+		});
+	    });
+		
+		
+		 $(function() {
+var muse = document.getElementById('Tsalkaponemusic');
+muse.volume =0.2;
+setTimeout(function(){ muse.volume =0.3; }, 2000);	 
+setTimeout(function(){ muse.volume =0.4; }, 4000);
+setTimeout(function(){ muse.volume =0.5; }, 6000);
+setTimeout(function(){ muse.volume =0.7; }, 8000);
+setTimeout(function(){ muse.volume =1.0; }, 10000);
+		 
+		 
+if (localStorage.getItem('tsalskin') !== null && localStorage.getItem('tsalskin') == "1")
+{document.body.style.backgroundImage = "url('https://dl.dropboxusercontent.com/s/v17rdc0ix5oa3q1/bg-tile.jpg')";}
+
+if (localStorage.getItem('tsalskin') !== null && localStorage.getItem('tsalskin') == "3")
+{document.body.style.backgroundImage = "url('https://dl.dropboxusercontent.com/s/nwkzx2wfemqoi2j/awesome-france-wallpaper-1.jpg')";
+document.getElementsByClassName('top_bar')[0].style.backgroundImage = "url('https://dl.dropboxusercontent.com/s/nwkzx2wfemqoi2j/awesome-france-wallpaper-1.jpg')";}
+
+
+if (localStorage.getItem('tsalskin') !== null && localStorage.getItem('tsalskin') == "4")
+{document.body.style.backgroundImage = "url('https://dl.dropboxusercontent.com/s/ppn4u6o164w8p19/us_flag.jpg')";
+document.getElementsByClassName('top_bar')[0].style.backgroundImage = "url('https://dl.dropboxusercontent.com/s/ppn4u6o164w8p19/us_flag.jpg')";}
+
+if (localStorage.getItem('tsalskin') !== null && localStorage.getItem('tsalskin') == "5")
+{document.body.style.backgroundImage = "url('https://dl.dropboxusercontent.com/s/gkub59v8el9zipv/greece.jpg')";
+document.getElementsByClassName('top_bar')[0].style.backgroundImage = "url('https://dl.dropboxusercontent.com/s/gkub59v8el9zipv/greece.jpg')";}
+
+if (localStorage.getItem('tsalskin') !== null && localStorage.getItem('tsalskin') == "6")
+{document.body.style.backgroundImage = "url('https://dl.dropboxusercontent.com/s/qvr1n3cgyh4j07q/italian.jpg')";
+document.getElementsByClassName('top_bar')[0].style.backgroundImage = "url('https://dl.dropboxusercontent.com/s/qvr1n3cgyh4j07q/italian.jpg')";}
+		
+if (localStorage.getItem('embed_music') !== null && localStorage.getItem('embed_music') == "true") {
+        var tsalmusicicon="";   
+     var tsalkaponemusicicon = [
+         "https://dl.dropboxusercontent.com/s/iiz5tfatxp2k02c/Tsalkapone.%20headset.gif",
+ "https://dl.dropboxusercontent.com/s/q1zdlaxosknra49/Tsalkapone.%20DJ.gif",
+"https://dl.dropboxusercontent.com/s/ccbt44wumywznzq/Tsalkapone.%20Guitar.gif"];
+						for(var n=0; n<1; n++)
+						{
+							randomInt = Math.round(Math.random()*(tsalkaponemusicicon.length-1));
+							tsalmusicicon += tsalkaponemusicicon[randomInt];
+						}   
+           
+                             
+          var Tsalmapscripts = location.href.indexOf('screen=map') > -1;
+            var Tsalrallypointpage = location.href.indexOf('screen=place') > -1;
+     	var divNode1 = document.createElement('div');
+	var data='';
+var TsalRight1=-450;
+       
+	
+            divNode1.id='tsalkapone_musicmenu';
+
+	
+			
+data+='<img style = "border-radius: 0px 15px 15px 0px;float:right; margin-left:5px" src="'+tsalmusicicon+'" height="350" width="100">';
+data+='</div width="'+(-TsalRight1)+'"><font size="3" color="gold"><center><b><u>Music - Playlists</u></b></center></font>';
+   data+='<input id="ksena" type="button" class="tsalbut" value="Global Music" align="left">&emsp;<input id="ellinika" type="button" class="tsalbut" value="Greek Music" style="align:right">';
+data+='<span  id="ksenesepiloges" style="display:none"><div>';
+data+='<select id="mousikiepilogi" name="mousikiepilogi"><optgroup style="font-family:Comic Sans MS"><option value="PLOWmvxbtnKVNGmyQqfri9bEb-s9RamVn7">MIX</option>';
+data+='<option value="PLcJs7aGQGVGukS4ix32vc_QFBnUDEa2h9">CLASSIC ROCK</option><option value="PLcJs7aGQGVGsNFfVwY1ZV1ZpW0HgI_emm">FUN</option>';
+data+='<option value="PLcJs7aGQGVGtr8QA4GAq5O0x5s20-AYZu">ROCK</option><option value="PLcJs7aGQGVGtQEJv91IrS_AwWLZYiZndU">ROCK \'N\' ROLL</option><option value="PLcJs7aGQGVGve3kbEDzG__N54jnW2aiMH">BALLADS</option>';
+data+='<option value="PLcJs7aGQGVGsMUA9_tQC9zy6OPwI7G1U1">BEST OF THE BEST</option><option value="PLcJs7aGQGVGvLfSSSbnZDt_UqefcgMjDh">JAZZ & BLUES</option><option value="PLcJs7aGQGVGvWuk2STeFpXav0KS1_nwzm">ELECTRO & DANCE</option>';
+data+='</optgroup></select>&emsp;<span id=play><input id="tsalplaybut" type="button" class="tsalbut" value="&raquo Play" ></span>&nbsp;';
+data+='<span id=stop style="display:none"><input id="tsalstopbut" type="button" class="tsalbut" value="&raquo Close"></span>&nbsp;';
+data+='<span id=hide style="display:none"><input id="tsalhidebut" type="button" class="tsalbut" value="&raquo Hide" ></span>&nbsp;';
+data+='<span id=show style="display:none"><input id="tsalshowbut" type="button" class="tsalbut" value="&raquo Show" ></span>&nbsp;';        
+data+='</div></span>';
+data+='<span id="ellinikesepiloges" style="display:none"><div >';
+data+='<select id="mousikiepilogi1" name="mousikiepilogi1"><optgroup style="font-family:Lucida Sans Unicode"><option value="PLcJs7aGQGVGshKYeKIYyj7kT0M5LveKXc">Classic</option><option value="PLcJs7aGQGVGvJ7CUZ0AiX1juJvysGNF-v">Greek Rock</option>';
+data+='<option value="PLcJs7aGQGVGvAp7gUs6Yr6eWZKHYn4fr4">Mix</option><option value="PLcJs7aGQGVGtrk0006OALmsqP6tIStUx1">Traditional</option>';
+data+='</optgroup></select>&emsp;<span id=play1><input id="tsalplaybut1" type="button" class="tsalbut" value="&raquo Play" ></span>&nbsp;';
+data+='<span id=stop1 style="display:none"><input id="tsalstopbut1" type="button" class="tsalbut" value="&raquo Close" ></span>&nbsp;';
+data+='<span id=hide1 style="display:none"><input id="tsalhidebut1" type="button" class="tsalbut" value="&raquo Hide" ></span>&nbsp;';
+data+='<span id=show1 style="display:none"><input id="tsalshowbut1" type="button" class="tsalbut" value="&raquo Show" ></span>&nbsp;';  
+data+='</div></span>'; 
+data+='<br><span id=mousikoparathuro></span></div>';  
+        
+ divNode1.innerHTML = data;
+			divNode1.style.zIndex="998"
+			divNode1.style.position="fixed";
+			divNode1.style.display="block";
+			divNode1.style.top="0px";
+    divNode1.style.backgroundSize="100% 100%";
+			divNode1.style.left=TsalRight1+"px";
+			divNode1.style.backgroundImage="url('https://dl.dropboxusercontent.com/s/fehypbnsxwq6ok4/Tsalkapone_stars.gif')";
+			divNode1.style.borderRadius="0px 15px 15px 0px";
+			divNode1.style.minWidth=(70-TsalRight1)+'px';
+			divNode1.onmouseover=function(){this.style.left="0"};
+			divNode1.onmouseout=function(){this.style.left=TsalRight1+"px"};
+        	  document.body.appendChild(divNode1);   
+        
+       var play = document.getElementById("play");
+          var stop = document.getElementById("stop");
+          var hide = document.getElementById("hide");
+          var show = document.getElementById("show");
+         var play1 = document.getElementById("play1");
+          var stop1 = document.getElementById("stop1");
+            var hide1 = document.getElementById("hide1");
+          var show1 = document.getElementById("show1");
+        
+         
+      $("#ksena").click(function () {  
+            var ellinikesepiloges = document.getElementById("ellinikesepiloges");
+        var ksenesepiloges = document.getElementById("ksenesepiloges");
+      
+         
+          ellinikesepiloges.style.display="none";
+          ksenesepiloges.style.display="";
+
+          
+          $("#tsalplaybut").click(function () { 
+             var tsalmusic="";
+        hide.style.display="";
+stop.style.display="";
+               hide1.style.display="none";
+         stop1.style.display="none";
+             show1.style.display="none";
+  var tsalkaponemusicindex1 = [
+"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"];
+						for(var l=0; l<1; l++)
+						{
+							randomInt = Math.round(Math.random()*(tsalkaponemusicindex1.length-1));
+							tsalmusic += tsalkaponemusicindex1[randomInt];
+						}  
+              
+            
+          var x = document.getElementById("mousikiepilogi");
+           var tsalepilogimousikis= x.options[x.selectedIndex].value;
+var tsalepilogimousikist= x.options[x.selectedIndex].text;
+
+      var tsalmousikidiafora ="<font color=gold>Playing now: Global Music ↪ "+tsalepilogimousikist+"</font><br><iframe id=Sophiemusicdiafora width='400' height='250' src='https://www.youtube.com/embed/videoseries?list="+tsalepilogimousikis+";autoplay=1;loop=1;index="+tsalmusic+"' frameborder='0' allowfullscreen></iframe>";
+
+         document.getElementById('mousikoparathuro').innerHTML =""+tsalmousikidiafora+""; 
+              $("#tsalstopbut").click(function () {
+              document.getElementById('mousikoparathuro').innerHTML ="";
+             
+              stop.style.display="none";   
+                   hide.style.display="none";
+                  show.style.display="none";
+              
+              });
+              
+               $("#tsalhidebut").click(function () {
+             hide.style.display="none";
+                  show.style.display="";
+               document.getElementById('Sophiemusicdiafora').style.display="none";
+               $("#tsalshowbut").click(function () {
+                 hide.style.display="";
+                  show.style.display="none";
+               document.getElementById('Sophiemusicdiafora').style.display="";  
+               });
+              
+              });  
+          });
+      });
+        
+        
+        $("#ellinika").click(function () {  
+              var ellinikesepiloges = document.getElementById("ellinikesepiloges");
+        var ksenesepiloges = document.getElementById("ksenesepiloges");
+  
+          ellinikesepiloges.style.display="";
+          ksenesepiloges.style.display="none";
+       
+            
+            $("#tsalplaybut1").click(function () { 
+             var tsalmusic="";
+              hide1.style.display="";
+              stop1.style.display="";
+                 hide.style.display="none";
+         stop.style.display="none";
+                show.style.display="none";
+       
+  var tsalkaponemusicindex1 = [
+"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"];
+						for(var l=0; l<1; l++)
+						{
+							randomInt = Math.round(Math.random()*(tsalkaponemusicindex1.length-1));
+							tsalmusic += tsalkaponemusicindex1[randomInt];
+						}  
+          var x1 = document.getElementById("mousikiepilogi1");
+           var tsalepilogimousikis1= x1.options[x1.selectedIndex].value;
+var tsalepilogimousikis1t= x1.options[x1.selectedIndex].text;
+      var tsalmousikidiafora1 ="<font color=gold>Playing now: Greek Music ↪ "+tsalepilogimousikis1t+"</font><br><iframe id=Sophiemusicdiafora1 width='400' height='250' src='https://www.youtube.com/embed/videoseries?list="+tsalepilogimousikis1+";autoplay=1;loop=1;index="+tsalmusic+"' frameborder='0' allowfullscreen></iframe>";
+
+         document.getElementById('mousikoparathuro').innerHTML =""+tsalmousikidiafora1+""; 
+                
+                $("#tsalstopbut1").click(function () {
+              document.getElementById('mousikoparathuro').innerHTML ="";
+               
+              stop1.style.display="none";  
+                    hide1.style.display="none";
+                  show1.style.display="none";
+              
+              });
+                
+              $("#tsalhidebut1").click(function () {
+             hide1.style.display="none";
+                  show1.style.display="";
+               document.getElementById('Sophiemusicdiafora1').style.display="none";
+               $("#tsalshowbut1").click(function () {
+                 hide1.style.display="";
+                  show1.style.display="none";
+               document.getElementById('Sophiemusicdiafora1').style.display="";  
+               });
+              });  
+});
+      });
+	 }   }); 
+
+	    function filter (phrase, _id){
+		$('tr').remove('.blubbblubb'); // close all open textareas with scripts
+		var words = phrase.value.toLowerCase().split(" ");
+		var table = document.getElementById(_id);
+		var ele;
+		var row_count = 0;
+		for (var r = 1; r < table.rows.length; r++)
+		{
+		    ele = table.rows[r].innerHTML.replace(/<[^>]+>/g,"");
+		    var displayStyle = 'none';
+		    for (var i = 0; i < words.length; i++)
+                    {
+                        if (ele.toLowerCase().indexOf(words[i]) >= 0)
+			    displayStyle = '';
+                        else
+			{
+			    displayStyle = 'none';
+			    row_count++;
+			    break;
+			}
+                    }
+		    table.rows[r].style.display = displayStyle;
+		}
+    
+		if(_id == 'scripts') $('#count_filter_1').html(table.rows.length - row_count - 1);
+		if(_id == 'quick_bar') $('#count_filter_2').html(table.rows.length - row_count - 1);
+		if(_id == 'tools') $('#count_filter_3').html(table.rows.length - row_count - 1);
+	    }
+    
+	    function toggle_help(item,_id){
+		var in_div = document.getElementById(item);
+		var e = document.getElementsByName(item)[0].innerHTML;
+		
+		if(in_div.style.display=="none"){
+		    in_div.style.display="block"
+			in_div.innerHTML = e;
+		    $('#'+_id+'').html('Close ');
+		} else {
+		    in_div.style.display="none"
+		    $('#'+_id+'').html('');
+		}
+		return true;
+	    }
+
+	    
+	    
+	    function toggle_script_code(id) {
+		$('#qb_' + id + '_script').toggleClass('qb_script_display');
+	    }
+	    
+	    function show_script(id) {
+			if ($("tr[id='qb_"+id+"_script']").length) {
+				$("tr[id='qb_"+id+"_script']").remove();
+			}
+			else {
+				$.ajax({
+					url: 'includes/ajax.php',
+					data: 'mode=get_script&table=quick_bar&script_id=' + id,
+					dataType: 'json',
+					success: function(data) {
+					data = data.replace(/</g,'&lt;');
+					data = data.replace(/>/g,'&gt;');
+					data = data.replace(/\\'/g,'\'');
+					$('<tr id="qb_' + id + '_script"><td colspan="6"><textarea cols="140" rows="10">' + data + '</textarea></td></tr>').insertAfter('#quick_bar_' + id);
+					download_count(id,'quick_bar');
+					}
+				});
+			}
+	    }
+		function show_description(id, table) { // replaces show_script when finished
+			if ($("tr[id='script_"+id+"_uitleg']").length) {
+				$("tr[id='script_"+id+"_uitleg']").remove();
+			}
+			else {
+				$.ajax({
+					url: 'includes/ajax.php',
+					data: 'mode=get_ex_desc&table='+table+'&script_id='+id,
+					dataType: 'html',
+					success: function(data) {
+					$('<tr id="script_'+id+'_uitleg"><td colspan="9">' + (data == ''?'Nog niks opgegeven, een omschrijving kun je op het AF doorgeven.':data) + '<br/><br/></td></tr>').insertAfter('#scripts_' + id);
+					}
+				});
+			}
+	    }
+    
+	    $(document).ready(function() {
+		       $("tbody").find("tr.scriptlist:even").addClass("teven");
+		       $("tbody").find("tr.scriptlist:odd").addClass("todd");
+	       });
+		
+		function togglePopup(id, value, table){
+			(table == 'script' ? table_finder = 'scripts' : table_finder = 'quick_bar');
+			(value == '-' ? value = '-1' : value--);
+			$("#"+table_finder+" #id"+id).removeProp('onclick');
+			$("#"+table_finder+" #id"+id).html('<select name="select[]" ><option value="'+table+id+'_1" >&#9733;</option><option value="'+table+id+'_2" >&#9733;&#9733;</option><option value="'+table+id+'_3" >&#9733;&#9733;&#9733;</option></select>');
+			$("#"+table_finder+" #id"+id+" select").prop("selectedIndex", value);
+		}
+		
+		function toggleVersion(id, value, table){
+			(table == 'script' ? table_finder = 'scripts' : table_finder = 'quick_bar');
+			(value == '-' ? value = '-1' : value--);
+			$("#"+table_finder+" #idv"+id).removeProp('onclick');
+			$("#"+table_finder+" #idv"+id).html('<select name="versie[]" ><option value="v'+table+id+'_820" >8.20</option><option value="v'+table+id+'_defect" >defect</option></select>');
+			$("#"+table_finder+" #idv"+id+" select").prop("selectedIndex", value);
+		}
+		function change_page_check(){
+			if($('select[name*="select"]').length || $('select[name*="versie"]').length){
+				alert('De ingevulde gegevens worden verwijderd wanneer je op een andere tab wijzigingen opslaat.');
+			}
+		}
+		function download_count(id, table){
+			$.ajax({
+				url: 'includes/ajax.php',
+				data: 'mode=download_counter&table='+table+'&script_id='+id/*,
+				/*success: /*do nothing*/
+			});
+		}
+		function sluiten(div) {
+			if (div == 'aankondiging' && $('#cookie').attr('checked')) document.cookie="popup=login; expires=Wed, 1 Jan 2020, 00:00:00 UTC";
+			else if (div == 'login' && $('#cookie').attr('checked')) document.cookie="popup=false; expires=Wed, 1 Jan 2020, 00:00:00 UTC";
+			var sluiten = document.getElementById('aankondiging');
+			sluiten.parentNode.removeChild(sluiten);
+		}
+		function colfilter (col_id) {
+		var check = document.getElementById(""+col_id+"");
+		var table = document.getElementById("scripts");
+		var headers = table.getElementsByClassName(""+col_id+"");
+	
+		if ( check.checked === true)
+		{for(var i =0, il = headers.length;i<il;i++){
+     headers[i].style.display="";}}
+		else {for(var i =0, il = headers.length;i<il;i++){
+     headers[i].style.display="none";}}
+		}
+		function save_values () {
+		
+		var check_0 = document.getElementById('0').checked;
+		var check_1 = document.getElementById('1').checked;
+		var check_2 = document.getElementById('2').checked;
+var check_3 = document.getElementById('3').checked;
+var check_4 = document.getElementById('4').checked;
+var check_5 = document.getElementById('5').checked;
+var check_6 = document.getElementById('6').checked;
+var check_7 = document.getElementById('7').checked;
+var check_8 = document.getElementById('8').checked;
+var check_9 = document.getElementById('9').checked;
+var check_10 = document.getElementById('10').checked;
+var check_11 = document.getElementById('11').checked;
+var check_12 = document.getElementById('12').checked;
+var check_13 = document.getElementById('13').checked;
+var check_14 = document.getElementById('14').checked;
+var check_15 = document.getElementById('15').checked;
+var check_16 = document.getElementById('16').checked;
+var check_17 = document.getElementById('17').checked;
+var check_18 = document.getElementById('18').checked;
+var check_19 = document.getElementById('19').checked;
+		localStorage.setItem('tsalcolumn_0', check_0);
+localStorage.setItem('tsalcolumn_1', check_1);
+localStorage.setItem('tsalcolumn_2', check_2);
+localStorage.setItem('tsalcolumn_3', check_3);
+localStorage.setItem('tsalcolumn_4', check_4);
+localStorage.setItem('tsalcolumn_5', check_5);
+localStorage.setItem('tsalcolumn_6', check_6);
+localStorage.setItem('tsalcolumn_7', check_7);
+localStorage.setItem('tsalcolumn_8', check_8);
+localStorage.setItem('tsalcolumn_9', check_9);
+localStorage.setItem('tsalcolumn_10', check_10);
+localStorage.setItem('tsalcolumn_11', check_11);
+localStorage.setItem('tsalcolumn_12', check_12);
+localStorage.setItem('tsalcolumn_13', check_13);
+localStorage.setItem('tsalcolumn_14', check_14);
+localStorage.setItem('tsalcolumn_15', check_15);
+localStorage.setItem('tsalcolumn_16', check_16);
+localStorage.setItem('tsalcolumn_17', check_17);
+localStorage.setItem('tsalcolumn_18', check_18);
+localStorage.setItem('tsalcolumn_19', check_19);
+		}
+		
+		$(function() {
+		localStorage.setItem('lang_value','');
+	    });
+		function filter_lang (x){
+		localStorage.setItem('lang_value',x);
+		}
+		
+		
+		function tsal_skin (){
+	var skin = document.getElementById('skin').value;
+	var music = document.getElementById('music_embed').checked;
+	localStorage.setItem('embed_music',music);
+	localStorage.setItem('tsalskin',skin);
+	location.reload();
+
+		}
+		
+	 function filter_combine (_id){
+		$('tr').remove('.blubbblubb'); // close all open textareas with scripts
+		var pa_check = document.getElementById('pa_check').value;
+		var browser_check = document.getElementById('browser_check').value;
+var cat_check = document.getElementById('cat_check').value;
+var legal_check = document.getElementById('legal_check').value;
+var com_check = document.getElementById('com_check').value;
+var page_check = document.getElementById('page_check').value;
+var lang_check = localStorage.getItem('lang_value');
+
+var words_sel = pa_check+" "+browser_check+" "+cat_check+" "+com_check+" "+legal_check+" "+page_check+" "+lang_check;
+		var words = words_sel.toLowerCase().split(" ");
+		var table = document.getElementById(_id);
+		var ele;
+		var row_count = 0;
+		for (var r = 1; r < table.rows.length; r++)
+		{
+		    ele = table.rows[r].innerHTML.replace(/<[^>]+>/g,"");
+		    var displayStyle = 'none';
+		    for (var i = 0; i < words.length; i++)
+                    {
+                        if (ele.toLowerCase().indexOf(words[i]) >= 0)
+			    displayStyle = '';
+                        else
+			{
+			    displayStyle = 'none';
+			    row_count++;
+			    break;
+			}
+                    }
+		    table.rows[r].style.display = displayStyle;
+		}
+    
+		if(_id == 'scripts') $('#count_filter_1').html(table.rows.length - row_count - 1);
+		if(_id == 'quick_bar') $('#count_filter_2').html(table.rows.length - row_count - 1);
+		if(_id == 'tools') $('#count_filter_3').html(table.rows.length - row_count - 1);
+	    }
+		
+		function columns_check (){
+if (localStorage.tsalskin !== null)
+{ var skin = localStorage.getItem('tsalskin');
+document.getElementById('skin').value = skin; }
+else { document.getElementById('skin').value = "2"; }
+if (localStorage.embed_music !== null)
+{ var music = localStorage.getItem('embed_music');
+if (music == 'true'){
+document.getElementById('music_embed').checked = true;}  else {document.getElementById('music_embed').checked = false;} }
+
+
+		var table = document.getElementById("scripts");
+		
+		
+var check1 = localStorage.getItem('tsalcolumn_1');
+		var check_1 = document.getElementById('1');
+	if (check1 == "true") {check_1.checked = true;} else if (check1 == "false"){check_1.checked = false;}
+		var headers1 = table.getElementsByClassName("1");	
+	if (check1 == "true") {for(var i =0, il = headers1.length;i<il;i++){
+     headers1[i].style.display="";}} else {for(var i =0, il = headers1.length;i<il;i++){
+     headers1[i].style.display="none";}}
+
+
+var check0 = localStorage.getItem('tsalcolumn_0');
+		var check_0 = document.getElementById('0');
+	if (check0 == "true") {check_0.checked = true;} else if (check0 == "false"){check_0.checked = false;}
+		var headers0 = table.getElementsByClassName("0");	
+	if (check0 == "true") {for(var i =0, il = headers0.length;i<il;i++){
+     headers0[i].style.display="";}} else {for(var i =0, il = headers0.length;i<il;i++){
+     headers0[i].style.display="none";}}
+
+
+var check2 = localStorage.getItem('tsalcolumn_2');
+		var check_2 = document.getElementById('2');
+	if (check2 == "true") {check_2.checked = true;} else if (check2 == "false"){check_2.checked = false;}
+		var headers2 = table.getElementsByClassName("2");	
+	if (check2 == "true") {for(var i =0, il = headers2.length;i<il;i++){
+     headers2[i].style.display="";}} else {for(var i =0, il = headers2.length;i<il;i++){
+     headers2[i].style.display="none";}}
+
+
+var check3 = localStorage.getItem('tsalcolumn_3');
+		var check_3 = document.getElementById('3');
+	if (check3 == "true") {check_3.checked = true;} else if (check3 == "false"){check_3.checked = false;}
+		var headers3 = table.getElementsByClassName("3");	
+	if (check3 == "true") {for(var i =0, il = headers3.length;i<il;i++){
+     headers3[i].style.display="";}} else {for(var i =0, il = headers3.length;i<il;i++){
+     headers3[i].style.display="none";}}
+
+
+var check4 = localStorage.getItem('tsalcolumn_4');
+		var check_4 = document.getElementById('4');
+	if (check4 == "true") {check_4.checked = true;} else if (check4 == "false"){check_4.checked = false;}
+		var headers4 = table.getElementsByClassName("4");	
+	if (check4 == "true") {for(var i =0, il = headers4.length;i<il;i++){
+     headers4[i].style.display="";}} else {for(var i =0, il = headers4.length;i<il;i++){
+     headers4[i].style.display="none";}}
+
+
+		var check5 = localStorage.getItem('tsalcolumn_5');
+		var check_5 = document.getElementById('5');
+	if (check5 == "true") {check_5.checked = true;} else if (check5 == "false"){check_5.checked = false;}
+		var headers5 = table.getElementsByClassName("5");	
+	if (check5 == "true") {for(var i =0, il = headers5.length;i<il;i++){
+     headers5[i].style.display="";}} else {for(var i =0, il = headers5.length;i<il;i++){
+     headers5[i].style.display="none";}}
+	
+var check6 = localStorage.getItem('tsalcolumn_6');
+		var check_6 = document.getElementById('6');
+	if (check6 == "true") {check_6.checked = true;} else if (check6 == "false"){check_6.checked = false;}
+		var headers6 = table.getElementsByClassName("6");	
+	if (check6 == "true") {for(var i =0, il = headers6.length;i<il;i++){
+     headers6[i].style.display="";}} else {for(var i =0, il = headers6.length;i<il;i++){
+     headers6[i].style.display="none";}}
+
+var check7 = localStorage.getItem('tsalcolumn_7');
+		var check_7 = document.getElementById('7');
+	if (check7 == "true") {check_7.checked = true;} else if (check7 == "false"){check_7.checked = false;}
+		var headers7 = table.getElementsByClassName("7");	
+	if (check7 == "true") {for(var i =0, il = headers7.length;i<il;i++){
+     headers7[i].style.display="";}} else {for(var i =0, il = headers7.length;i<il;i++){
+     headers7[i].style.display="none";}}
+
+var check8 = localStorage.getItem('tsalcolumn_8');
+		var check_8 = document.getElementById('8');
+	if (check8 == "true") {check_8.checked = true;} else if (check8 == "false"){check_8.checked = false;}
+		var headers8 = table.getElementsByClassName("8");	
+	if (check8 == "true") {for(var i =0, il = headers8.length;i<il;i++){
+     headers8[i].style.display="";}} else {for(var i =0, il = headers8.length;i<il;i++){
+     headers8[i].style.display="none";}}
+
+var check9 = localStorage.getItem('tsalcolumn_9');
+		var check_9 = document.getElementById('9');
+	if (check9 == "true") {check_9.checked = true;} else if (check9 == "false"){check_9.checked = false;}
+		var headers9 = table.getElementsByClassName("9");	
+	if (check9 == "true") {for(var i =0, il = headers9.length;i<il;i++){
+     headers9[i].style.display="";}} else {for(var i =0, il = headers9.length;i<il;i++){
+     headers9[i].style.display="none";}}
+
+var check10 = localStorage.getItem('tsalcolumn_10');
+		var check_10 = document.getElementById('10');
+	if (check10 == "true") {check_10.checked = true;} else if (check10 == "false"){check_10.checked = false;}
+		var headers10 = table.getElementsByClassName("10");	
+	if (check10 == "true") {for(var i =0, il = headers10.length;i<il;i++){
+     headers10[i].style.display="";}} else {for(var i =0, il = headers10.length;i<il;i++){
+     headers10[i].style.display="none";}}
+
+var check11 = localStorage.getItem('tsalcolumn_11');
+		var check_11 = document.getElementById('11');
+	if (check11 == "true") {check_11.checked = true;} else if (check11 == "false"){check_11.checked = false;}
+		var headers11 = table.getElementsByClassName("11");	
+	if (check11 == "true") {for(var i =0, il = headers11.length;i<il;i++){
+     headers11[i].style.display="";}} else {for(var i =0, il = headers11.length;i<il;i++){
+     headers11[i].style.display="none";}}
+	 
+	 var check12 = localStorage.getItem('tsalcolumn_12');
+		var check_12 = document.getElementById('12');
+	if (check12 == "true") {check_12.checked = true;} else if (check12 == "false"){check_12.checked = false;}
+		var headers12 = table.getElementsByClassName("12");	
+	if (check12 == "true") {for(var i =0, il = headers12.length;i<il;i++){
+     headers12[i].style.display="";}} else {for(var i =0, il = headers12.length;i<il;i++){
+     headers12[i].style.display="none";}}
+	 
+	 var check13 = localStorage.getItem('tsalcolumn_13');
+		var check_13 = document.getElementById('13');
+	if (check13 == "true") {check_13.checked = true;} else if (check13 == "false"){check_13.checked = false;}
+		var headers13 = table.getElementsByClassName("13");	
+	if (check13 == "true") {for(var i =0, il = headers13.length;i<il;i++){
+     headers13[i].style.display="";}} else {for(var i =0, il = headers13.length;i<il;i++){
+     headers13[i].style.display="none";}}
+	 
+	 var check14 = localStorage.getItem('tsalcolumn_14');
+		var check_14 = document.getElementById('14');
+	if (check14 == "true") {check_14.checked = true;} else if (check14 == "false"){check_14.checked = false;}
+		var headers14 = table.getElementsByClassName("14");	
+	if (check14 == "true") {for(var i =0, il = headers14.length;i<il;i++){
+     headers14[i].style.display="";}} else {for(var i =0, il = headers14.length;i<il;i++){
+     headers14[i].style.display="none";}}
+	 
+	 var check15 = localStorage.getItem('tsalcolumn_15');
+		var check_15 = document.getElementById('15');
+	if (check15 == "true") {check_15.checked = true;} else if (check15 == "false"){check_15.checked = false;}
+		var headers15 = table.getElementsByClassName("15");	
+	if (check15 == "true") {for(var i =0, il = headers15.length;i<il;i++){
+     headers15[i].style.display="";}} else {for(var i =0, il = headers15.length;i<il;i++){
+     headers15[i].style.display="none";}}
+	 
+	  var check16 = localStorage.getItem('tsalcolumn_16');
+		var check_16 = document.getElementById('16');
+	if (check16 == "true") {check_16.checked = true;} else if (check16 == "false"){check_16.checked = false;}
+		var headers16 = table.getElementsByClassName("16");	
+	if (check16 == "true") {for(var i =0, il = headers16.length;i<il;i++){
+     headers16[i].style.display="";}} else {for(var i =0, il = headers16.length;i<il;i++){
+     headers16[i].style.display="none";}}
+
+	 var check17 = localStorage.getItem('tsalcolumn_17');
+		var check_17 = document.getElementById('17');
+	if (check17 == "true") {check_17.checked = true;} else if (check17 == "false"){check_17.checked = false;}
+		var headers17 = table.getElementsByClassName("17");	
+	if (check17 == "true") {for(var i =0, il = headers17.length;i<il;i++){
+     headers17[i].style.display="";}} else {for(var i =0, il = headers17.length;i<il;i++){
+     headers17[i].style.display="none";}}
+
+	 var check18 = localStorage.getItem('tsalcolumn_18');
+		var check_18 = document.getElementById('18');
+	if (check18 == "true") {check_18.checked = true;} else if (check18 == "false"){check_18.checked = false;}
+		var headers18 = table.getElementsByClassName("18");	
+	if (check18 == "true") {for(var i =0, il = headers18.length;i<il;i++){
+     headers18[i].style.display="";}} else {for(var i =0, il = headers18.length;i<il;i++){
+     headers18[i].style.display="none";}}
+
+	 var check19 = localStorage.getItem('tsalcolumn_19');
+		var check_19 = document.getElementById('19');
+	if (check19 == "true") {check_19.checked = true;} else if (check19 == "false"){check_19.checked = false;}
+		var headers19 = table.getElementsByClassName("19");	
+	if (check19 == "true") {for(var i =0, il = headers19.length;i<il;i++){
+     headers19[i].style.display="";}} else {for(var i =0, il = headers19.length;i<il;i++){
+     headers19[i].style.display="none";}}
+
+	 }
+	 function tsal_reload (){location.reload();}
+		
+
+	function script_display (idscript) {
+	var script_description = document.getElementById('script_description');
+var script = document.getElementsByName(idscript)[0].innerHTML;
+var code = document.getElementsByName(idscript)[5].innerHTML;
+var variable = document.getElementsByName(idscript)[1].innerHTML;
+var pages = document.getElementsByName(idscript)[2].innerHTML;
+var specials = document.getElementsByName(idscript)[3].innerHTML;
+var screenshot = document.getElementsByName(idscript)[4].innerHTML;
+var script_title = document.getElementsByName(idscript)[7].innerHTML;
+var license = document.getElementsByName(idscript)[6].innerHTML;
+	script_description.style.display="";
+		document.getElementById('script_info').innerHTML = script;
+		document.getElementById('variables_info').innerHTML = variable;
+		document.getElementById('pages_info').innerHTML = pages;
+		document.getElementById('specials_info').innerHTML = specials;
+		document.getElementById('license_info').innerHTML = license;
+		document.getElementById('screen_info').innerHTML = screenshot;
+		document.getElementById('tsal_code').value = " "+code+"";
+		document.getElementById('tsal_script_title').innerHTML = script_title;
+		}
+	
+		
+		
+	$(function(){
+    $("#openfilterbut").click(function(){
+        document.getElementById('columnfilter').style.display="";
+		document.getElementById('openfilter').style.display="none";
+		document.getElementById('closefilter').style.display="";
+    });
+});
+$(function(){
+    $("#closefilterbut").click(function(){
+        document.getElementById('columnfilter').style.display="none";
+		document.getElementById('openfilter').style.display="";
+		document.getElementById('closefilter').style.display="none";
+    });
+});
+$(function(){
+    $("#openfilterbut1").click(function(){
+        document.getElementById('columnfilter1').style.display="";
+		document.getElementById('openfilter1').style.display="none";
+		document.getElementById('closefilter1').style.display="";
+    });
+});
+$(function(){
+    $("#closefilterbut1").click(function(){
+        document.getElementById('columnfilter1').style.display="none";
+		document.getElementById('openfilter1').style.display="";
+		document.getElementById('closefilter1').style.display="none";
+    });
+});
+$(function(){
+$("#reset_set").click(function(){
+localStorage.removeItem('tsalcolumn_0');
+localStorage.removeItem('tsalcolumn_1');
+localStorage.removeItem('tsalcolumn_2');
+localStorage.removeItem('tsalcolumn_3');
+localStorage.removeItem('tsalcolumn_4');
+localStorage.removeItem('tsalcolumn_5');
+localStorage.removeItem('tsalcolumn_6');
+localStorage.removeItem('tsalcolumn_7');
+localStorage.removeItem('tsalcolumn_8');
+localStorage.removeItem('tsalcolumn_9');
+localStorage.removeItem('tsalcolumn_10');
+localStorage.removeItem('tsalcolumn_11');
+localStorage.removeItem('tsalcolumn_12');
+localStorage.removeItem('tsalcolumn_13');
+localStorage.removeItem('tsalcolumn_14');
+localStorage.removeItem('tsalcolumn_15');
+localStorage.removeItem('tsalcolumn_16');
+localStorage.removeItem('tsalcolumn_17');
+localStorage.removeItem('tsalcolumn_18');
+localStorage.removeItem('tsalcolumn_19');
+localStorage.removeItem('embed_music');
+localStorage.removeItem('tsalskin');
+location.reload();
+});
+
+    $("#closefiltertable").click(function(){
+        document.getElementById('filtertable').style.display="none";
+		document.getElementById('spanfilter1').style.display="";
+		document.getElementById('spanfilter').style.display="none";
+    });
+});
+$(function(){
+    $("#closefiltertable1").click(function(){
+        document.getElementById('filtertable').style.display="";
+		document.getElementById('spanfilter').style.display="";
+		document.getElementById('spanfilter1').style.display="none";
+    });
+});
+$(function(){
+
+var mine = document.getElementsByClassName('mine');
+var default_lang = document.getElementsByClassName('default_lang');
+var others = document.getElementsByClassName('others');
+for(var i =0, il = mine.length;i<il;i++){
+     mine[i].innerHTML='<img src="https://dl.dropboxusercontent.com/s/s0n5js9a08jwx92/silver_arrows.png"> ';}
+	 for(var i =0, il = others.length;i<il;i++){
+     others[i].innerHTML='<img src="https://dl.dropboxusercontent.com/s/h9o9xb1u0pbedij/blue_arrow.png"> ';}
+	 for(var i =0, il = default_lang.length;i<il;i++){
+     default_lang[i].innerHTML='<img src="https://dl.dropboxusercontent.com/s/xqobkeluk5wts88/green_arrow.png"> ';}
+
+    $("#closetsaldescbut").click(function(){
+		document.getElementById('script_description').style.display="none";
+    });
+	$("#selectcode").click(function(){
+	var code=	document.getElementById('tsal_code');
+	code.select();
+    });
+	$("#show_shots").click(function(){
+        document.getElementById('screen_info').style.display="";
+		document.getElementById('hide_shots1').style.display="";
+		document.getElementById('show_shots1').style.display="none";
+    });
+	$("#hide_shots").click(function(){
+        document.getElementById('screen_info').style.display="none";
+		document.getElementById('show_shots1').style.display="";
+		document.getElementById('hide_shots1').style.display="none";
+    });
+	
+	var yes_legal = document.getElementsByClassName('yes_legal');
+for(var i =0, il = yes_legal.length;i<il;i++){
+     yes_legal[i].innerHTML='<a href="#hint" class="tooltip"><img src="https://dl.dropboxusercontent.com/s/yqalwl4vennvrr0/approved.png" height="15px;" width="15px;"><span class="tsalinfo">This script has been approved and is <font color="darkgreen"><b>LEGAL</b></font>.</span></a>';}
+	 var no_legal = document.getElementsByClassName('no_legal');
+	 for(var i =0, il = no_legal.length;i<il;i++){
+	 no_legal[i].innerHTML='<a href="#hint" class="tooltip"><img src="https://dl.dropboxusercontent.com/s/rlsg4uoh4aiol05/fileclose.png" height="15px;" width="15px;"><span class="tsalinfo">This script is currently <font color="red"><b>ILLEGAL</b></font>.</span></a>';}
+	 var yes_premium = document.getElementsByClassName('yes_premium');
+	for(var i =0, il = yes_premium.length;i<il;i++){
+     yes_premium[i].innerHTML='<a href="#hint" class="tooltip"><img src="https://dl.dropboxusercontent.com/s/yqalwl4vennvrr0/approved.png" height="15px;" width="15px;"><span class="tsalinfo">This script <b><font color="red">doesn\'t need</b></font> active premium account to be functionable.</span></a>';}
+var no_premium = document.getElementsByClassName('no_premium');
+	 for(var i =0, il = no_premium.length;i<il;i++){
+	 no_premium[i].innerHTML='<a href="#hint" class="tooltip"><img src="https://dl.dropboxusercontent.com/s/rlsg4uoh4aiol05/fileclose.png" height="15px;" width="15px;"><span class="tsalinfo">This script <font color="red"><b>requires</b></font> an active premium account to be functionable.</span></a>';}
+	 var yes_embed = document.getElementsByClassName('yes_embed');
+	for(var i =0, il = yes_embed.length;i<il;i++){
+     yes_embed[i].innerHTML='<a href="#hint" class="tooltip"><img src="https://dl.dropboxusercontent.com/s/yqalwl4vennvrr0/approved.png" height="15px;" width="15px;"><span class="tsalinfo">There are <b><font color="darkgreen">embedded</font></b> infos and tips inside the script.</span></a>';}
+var no_embed = document.getElementsByClassName('no_embed');
+	 for(var i =0, il = no_embed.length;i<il;i++){
+	 no_embed[i].innerHTML='<a href="#hint" class="tooltip"><img src="https://dl.dropboxusercontent.com/s/rlsg4uoh4aiol05/fileclose.png" height="15px;" width="15px;"><span class="tsalinfo">There are <font color="red"><b>NOT</b></font> embedded infos and tips inside the script.</span></a>';}
+	 var yes_mozilla_class = document.getElementsByClassName('yes_mozilla');
+	for(var i =0, il = yes_mozilla_class.length;i<il;i++){
+     yes_mozilla_class[i].innerHTML='<img src="https://dl.dropboxusercontent.com/s/gx2r7jm4lw1iq16/firefox.png" title="This script is functionable in Firefox" height="10px">';}
+var no_mozilla_class = document.getElementsByClassName('no_mozilla');
+	 for(var i =0, il = no_mozilla_class.length;i<il;i++){
+	 no_mozilla_class[i].innerHTML='<img src="https://dl.dropboxusercontent.com/s/ti3824a7c649so2/grey.png" title="This script is NOT functionable in Firefox" height="10px">';}
+	 var yes_opera_class = document.getElementsByClassName('yes_opera');
+	for(var i =0, il = yes_opera_class.length;i<il;i++){
+     yes_opera_class[i].innerHTML='<img src="https://dl.dropboxusercontent.com/s/fpxkx84drazeo4l/opera.png" title="This script is functionable in Opera" height="10px">';}
+var no_opera_class = document.getElementsByClassName('no_opera');
+	 for(var i =0, il = no_opera_class.length;i<il;i++){
+	 no_opera_class[i].innerHTML='<img src="https://dl.dropboxusercontent.com/s/ti3824a7c649so2/grey.png" title="This script is NOT functionable in Opera" height="10px">';}
+	 var yes_chrome_class = document.getElementsByClassName('yes_chrome');
+	for(var i =0, il = yes_chrome_class.length;i<il;i++){
+     yes_chrome_class[i].innerHTML='<img src="https://dl.dropboxusercontent.com/s/zh8norx0hm86fe6/chrome.png" title="This script is functionable in Chrome" height="10px">';}
+var no_chrome_class = document.getElementsByClassName('no_chrome');
+	 for(var i =0, il = no_chrome_class.length;i<il;i++){
+	 no_chrome_class[i].innerHTML='<img src="https://dl.dropboxusercontent.com/s/ti3824a7c649so2/grey.png" title="This script is NOT functionable in Chrome" height="10px">';}
+var no_forum_class = document.getElementsByClassName('no_forum');
+	 for(var i =0, il = no_forum_class.length;i<il;i++){
+	 no_forum_class[i].innerHTML='<a href="#hint" class="tooltip"><img src="https://dl.dropboxusercontent.com/s/3cakr0n5xhsoxz0/ally_forum_grey.png"><span class="tsalinfo"><b><font color="red">No</font></b> available forum thread-link.</span></a>';}
+	var no_bugs = document.getElementsByClassName('no_bugs');
+	 for(var i =0, il = no_bugs.length;i<il;i++){
+	 no_bugs[i].innerHTML='<a href="#hint" class="tooltip"><img src="https://dl.dropboxusercontent.com/s/rlsg4uoh4aiol05/fileclose.png" height="15px;" width="15px;"><span class="tsalinfo">There were reported <b><font color="red">NO</font></b> bugs for this script.</span></a>';}
+	 var yes_api = document.getElementsByClassName('yes_api');
+	for(var i =0, il = yes_api.length;i<il;i++){
+     yes_api[i].innerHTML='<a href="#hint" class="tooltip"><img src="https://dl.dropboxusercontent.com/s/yqalwl4vennvrr0/approved.png" height="15px;" width="15px;"><span class="tsalinfo">This script has embedded <b><font color="blue">ScriptAPI register</font></b>.</span></a>';}
+	 var yes_coded = document.getElementsByClassName('yes_coded');
+	for(var i =0, il = yes_coded.length;i<il;i++){
+     yes_coded[i].innerHTML='<a href="#hint" class="tooltip"><img src="https://dl.dropboxusercontent.com/s/yqalwl4vennvrr0/approved.png" height="15px;" width="15px;"><span class="tsalinfo">This script is <b><font color="blue">compatible</font></b> with the code of all the servers of the Tribal Wars.</span></a>';}
+var no_coded = document.getElementsByClassName('no_coded');
+	 for(var i =0, il = no_coded.length;i<il;i++){
+	 no_coded[i].innerHTML='<a href="#hint" class="tooltip"><img src="https://dl.dropboxusercontent.com/s/rlsg4uoh4aiol05/fileclose.png" height="15px;" width="15px;"><span class="tsalinfo">This script is <b><font color="red">NOT</font></b> compatible with every server of the Tribal Wars. Translations in the code are needed.</span></a>';}
+var no_lang = document.getElementsByClassName('no_lang');
+	 for(var i =0, il = no_lang.length;i<il;i++){
+	 no_lang[i].innerHTML='<a href="#hint" class="tooltip"><img src="https://dl.dropboxusercontent.com/s/rlsg4uoh4aiol05/fileclose.png" height="15px;" width="15px;"><span class="tsalinfo">This script has <b><font color="red">NO</font></b> available translation file at the moment.</span></a>';}
+
+});
+		/*$(setInterval(function  (){
+    var hello = ['Not Embedded', 'Customizable','30 variables'];
+    var used = ['Not Embedded'];
+    var greeting = $('.what');
+    var item; 
+	var tsal = greeting.text();
+
+function hey() {
+    	
+		
+        item = hello[Math.floor(Math.random() * hello.length)];
+        if (hello.length != used.length) {
+            while (jQuery.inArray(item, used) != -1) {
+                item = hello[Math.floor(Math.random() * hello.length)];
+            }
+            used.push(item);
+        } 
+        else {
+            used.length = 0;
+            item = hello[Math.floor(Math.random() * hello.length)];
+            used.push(item);
+        }
+        greeting.html(item);
+        greeting.animate({
+            "opacity": "1"
+        }, 1500);
+    }
+ window.setInterval(function () {
+        greeting.animate({
+            "opacity": "0"
+        }, 1500);
+        setTimeout(hey, 1500)
+    }, 5000);
+	
+
+},5000)); */
+
+	</script>
+
+    </head>
+
+<body onload="if (localStorage.tsalcolumn_11){columns_check();} else {save_values();columns_check();}">
+	<div class="top_bar">
+	    <div class="bg_left">&nbsp;</div>
+	    <div class="title"><img src="https://dl.dropboxusercontent.com/s/nag4x3o4mcd0vwi/Tsalkapone.TWScripts.logo.png" height="60px" width="600px;" /></div>
+	    <div class="bg_right">&nbsp;</div>
+	</div>
+
+	<div class="main">
+	    <div class="mitte">
+		<div id="top_text">
+		    <h1>Dear visitor,<img id="raven" src="https://dl.dropboxusercontent.com/s/ehhyqrilc8dbwki/crow_400x400.png" style="height:175px; width:175px;"/></h1>
+		    <p>This html page was created by Tsalkapone in attempt to gather every possible script that can be used in .net server of the Tribal Wars. Note that if you need any script to be officially approved you have to send a ticket <a href="http://support.innogames.de/login/to/game/staemme/market/en" target="_blank">on this link</a>. Beware to have read the <a href="https://forum.tribalwars.net/showthread.php?218843-Script-approval-process" target="_blank">script approval process</a> and the <a href="https://www.tribalwars.net/rules.php" target="_blank">Game Rules. §7) Bots and Scripts</a> first.</p>
+
+		    <p>You can search for already approved scripts and tools for the .net server in <a href="https://forum.tribalwars.net/forumdisplay.php?61-Scripts-amp-Independent-Tools" target="_blank">Scripts & Independent Tools</a>.</p> 
+
+		    <br />
+<a id="how_to" onClick="toggle_help('help_1','help_how');"><img src="https://dl.dropboxusercontent.com/s/s9swak86tirwdpd/Tsalkapone.%20Warning.gif" height="15px"> <u><span id="help_how"></span>How to load a script</u></a>
+		    <br><a id="general_set" onClick="toggle_help('help_2','help_gen');"><img src="https://dl.dropboxusercontent.com/s/hlrpcax40danqrv/Tsalkapone_configuration.png" height="20px"> <u><span id="help_gen"></span>General Settings</u></a>
+			<br><a id="help_link" onClick="toggle_help('help_3','help_span');"><img src="https://dl.dropboxusercontent.com/s/a4gmby7l33ytitj/questionmark.gif" height="20px"> <u><span id="help_span"></span>Notes</u></a>
+			<br><a id="trans_link" onClick="toggle_help('help_4','help_trans');"><img src="https://dl.dropboxusercontent.com/s/btqekg02x18dsdy/Tsalkapone_earth.gif" height="20px"> <u><span id="help_trans"></span>Translation Instructions</u></a>
+			<br><a id="notes_link" onClick="toggle_help('help_5','help_notes');"><img src="https://dl.dropboxusercontent.com/s/3lpis6kigqdsklu/Tsalkapone_coordnotes.gif" height="20px"> <u><span id="help_notes"></span>Technical Notes & Bug Reports</u></a>
+			<hr>
+			<div id="help_1" class="help" style="display: none;"></div>
+			<div id="help_2" class="help" style="display: none;"></div>
+		    <div id="help_3" class="help" style="display: none;"></div>
+			<div id="help_4" class="help" style="display: none;"></div>
+			<div id="help_5" class="help" style="display: none;"></div>
+			
+			<div hidden><span name="help_3" ><p><font size="3" color="red"><b><u>Notes</u></b></font></p>
+			<p>Every script that has been edited by Tsalkapone contains thorough guides, regarding each script's functions and customizable variables, that can be found wherever is needed ingame. All you 
+			have to do is click on any <img height="15px" src="https://dl.dropboxusercontent.com/s/4ojqvwwzxtoeqnv/questionmark.png"> you may notice.
+			</p>
+ <p>Most of the scripts edited by Tsalkapone contain more than one supported language. You can find the supported languages of
+ every script by clicking the button <b><font color="maroon">Open language selection</font></b> when activating the script. You can change the selected language by clicking on the desired one</b>.</p>
+ 
+ <p>Whenever a script hosted by Tsalkapone is <b><font color="purple">updated</font></b> you will get notified about its new version and changes log ingame when you activate it.</p>
+ <p>All the saved values of the scripts are stored in the <b><font color="darkgreen">localStorage, cache or a cookie</font></b> of your browser. Changing browser or deleting your cookies will remove any saved value from any script.</p>
+			<p>The table displayed below supports a large variety of filters, columns and information that can be adjusted accordingly. 
+			The <font color="maroon"><b>Column filter</b></font> settings are automatically saved in your browser in every change. You may combine various filters to get the result you want. 
+			The <b><font color="maroon">Search</font></b> filter cancels every other filter setting.</p>
+			<p>The scripts on the table are ordered based on the <b><font color="maroon">Date Entry</font></b> of each script. You may change the order by clicking on the heading of each visible column.</p>
+
+			<p><font color="blue"><b>By moving your cursor over any column, row, filter or image you will get all the info you need about its meaning and usage.</b></font></p></span>
+		</div>
+		<div hidden><span name="help_4"><p><font size="3" color="red"><b><u>Translation Instructions</u></b></font></p>
+			<p>Every script that has been edited by Tsalkapone supports more than one language. You may select the desired language through the settings table which is embedded in a script. Scripts that don't support settings table will use the selected language of other scripts with similar functions.
+			Click on any script to view its description for more info regarding its language selection. 
+			</p>
+ <p>The <b><font color="darkgreen">Trans</font></b> column on the table below displays an icon-link that opens each script's translations file on a new tab.
+On the top of each file between <b><font color="red">/*</font></b> and <b><font color="red">*/</font></b> tags you may read more instructions regarding each translation file. The parts (words or sentences) of each translation file that are to be translated are the ones displayed between <b><font color="red">"</font></b> and <b><font color="red">"</font></b>.
+ Ignore every character, word or sentence inside these characters: <b>< ></b>. Also, try to keep the punctuations in each variable as they are.</p>
+ <p>There are some scripts which contain specific parts that have to be translated to their relevant ones if you want to use a script in any other server apart from .uk, .us and .net. The variable <b><font color="maroon">tw</font></b> in a translation file
+ contains all these "must" parts. If you just need to use a script in any other server besides the ones already mentioned just make sure to translate these parts.</p>
+ <p>Some scripts contain large translation files. Some of them are included in the translation file with the tag <b><font color="blue">main</font></b> and some of them with the tag <b><font color="blue">advanced</font></b>. The 1st category contains parts that are displayed on the screen.
+ The 2nd category contains parts that are included in additional infos pop-ups.</p>
+ <p>After you complete a translation, send a message to <b><font color="maroon">tsalkapone@hotmail.com</font></b> including in the mail's title the following infos:
+<br><b>1.</b> The script's name.<br><b>2.</b> The translated language.<br><b>3.</b> The translator's name (pick anything you want to be displayed on the table below).<br>i.e. <b><font color="blue"><i>Commander Script - French (MrIncognito)</i></font></b>.</span>
+		</div>
+		<div hidden><span name="help_1"><p><font size="3" color="red"><b><u>How to load a script</u></b></font></p>
+			<p>You are allowed to load an <u>approved script</u> <b><font color="red">ONLY</font></b>  with an <u>active premium account</u>. From the <b>Settings</b> menu, on the right of the top-bar menu of the game, click on <b>Quick bar</b> option.</p>
+ <p>When you do so, click on <b>Add new link</b> to load a new script.<br>
+ <img src="https://dl.dropboxusercontent.com/s/o69yf0mvlvhrymv/script_load1.png"><br><br></p>
+ <p>Adding a new link offers you some various options that you may modify to your will. These options and their uses are as described below:<br>
+ <img src="https://dl.dropboxusercontent.com/s/utrhh7t4dpefh47/script_load2.png"><br><br>
+ <b>1.</b> <b><font color="red">REQUIRED FIELD</font></b> In this textarea you must enter the url-address of an external link or a javascript code. Note that any script code must have the tag <b>javascript:</b> on the beginning.<br> 
+ <b>2.</b> Enter a name for your entry. This name will be displayed on the quick bar.<br>
+ <b>3.</b> In this field enter a text that will be displayed as a title of your entry when you hover over its name on the quick bar.<br>
+ <b>4.</b> In this field you may add an icon's url or you can pick one from the embedded list. The selected icon will be displayed on the quick bar. Avoid entering a url of a page that usually transfers or deletes image-files. In case an image-url is not valid you may encounter delays in every load of game's pages. Also, take into consideration that the size of the image you may enter won't be changed. Avoid using large-sized images.<br>
+ <b>5.</b> Determine if you want to perfom the entry's function on a new window or in the same window.<br>
+ <b><font color="red">OK</font></b> -> Never forget to click OK to save your settings.<br>
+ <b>6.</b> You may assign a shortcut-key for up to 10 entries. The available shortcut-keys are the following:<br>
+ <img src="https://dl.dropboxusercontent.com/s/phezc1hleh75xj6/script_load3.png"><br></p>
+ </div>
+		<div hidden><span name="help_2"><p><font size="3" color="red"><b><u>General Settings</u></b></font></p>
+<p>Every script hosted by Tsalkapone is written on a specific template which contains the following criteria:<br><br>
+<b><font color="maroon">Languages:</font></b> Every script supports more than one embedded language. If there is available translation for your server's market (.gr,.it,.fr etc) the market's language will be granted as the default one. If not the default one in every script will be English.  You may change the language selecting an available by clicking the button <b><font color="blue">Open language selection</font></b> in the script's settings table.<br>
+<br><b><font color="maroon">Translations:</font></b> Every script supports a variable that contains translations text. All that someone, that desires to translate a script, has to do is simply open the translation file of a script, displayed on the table below, translate it and send it to <b><font color="blue">tsalkapone@hotmail.com</font></b>.<br>
+<br><b><font color="maroon">Tips & Infos:</font></b> Every script supports thorough guides, tips and infos wherever needed. Just click on any <img height="15px" src="https://dl.dropboxusercontent.com/s/4ojqvwwzxtoeqnv/questionmark.png"> you may notice. If a script doesn't support an info table just click <b><font color="blue">T</font></b> on your keyboard to display the infos.<br> 
+<br><b><font color="maroon">Notifications:</font></b> Every script supports an organized notifications' system that notifies the user with necessary information wherever and whenever needed.<br> 
+<br><b><font color="maroon">Auto-assigns:</font></b> If any script is triggered in a page that doesn't operate any function a notification will be displayed offering the option to re-assign your location to the page needed.<br> 	
+<br><b><font color="maroon">Save options:</font></b> Every script provides the opportunity to save essential variables' values in localStorage, cookie or cache.<br> 	
+<br><b><font color="maroon">Updates:</font></b> If any script is updated you will get notified ingame for the new update and about its changes.<br> 
+<br><b><font color="maroon">Settings:</font></b> Most of the scripts provide stylish settings table, if needed, that presents its functions and customizable variables, if there are any.<br> 
+<br><b><font color="maroon">Style:</font></b> Most of the scripts contain additional styles and styling opportunities that will enhance your gameplay experience.<br> 
+<br><b><font color="maroon">Shortcut keys:</font></b> Some of the scripts offer the opportunity to trigger functions by pressing an assigned shortcut key.<br>
+<br><b><font color="maroon">Browser tests:</font></b> Every script hosted by Tsalkapone is:<br>
+ <b>Fully tested</b> on: <i>Google Crome browser 51.0.2704.103 m</i><br>
+ <b>Partially tested</b> on: <i>Opera browser 38.0.2220.31</i>, <i>Mozilla Firefox browser 43.0.1</i>
+			</p></span>
+		</div>
+		<div hidden><span name="help_5"><p><font size="3" color="red"><b><u>Technical Notes & Bug Reports</u></b></font></p>
+<b><font color="maroon"><u>LocalStorage & cookies</u></font></b><br>Cookies and local storage serve different purposes. Cookies are primarily for reading server-side, local storage can only be read client-side. Unlike cookies, LocalStorage is more secure and large amounts of data can be stored locally, without affecting website performance. Most of the scripts hosted by Tsalkapone use LocalStorage to save the variables' values. Cookies are used only for scripts running from the rally point page.
+Take into consideration that you may clear any LocalStorage or cookie used in a browser. Insert the following urls, for each browser, in your address bar to access the menu of the saved cookies and data per website:  <br>
+<b>Opera:</b> opera://settings/cookies<br>
+<b>Mozilla:</b> about:preferences#privacy<br>
+<b>Opera:</b> chrome://settings/cookies<br>
+Once you open the menu click on the desired website (e.g. tribalwars.net) and select the saved data you would like to delete.<br><br>
+<b><font color="maroon"><u>Pop-up windows</u></font></b><br> Some of the scripts may trigger one or more pop-up windows. By default, your browser will forbid the opening of the pop-up and a notification of restriction will be displayed on your address bar. Make sure that you have granted permission for pop-up windows for tribalwars website.
+You may change your pop-up setting for the current website from your address bar. If a pop-up is blocked you will get notified with a <b>Pop-ups blocked</b>. Click on it and click on <b>Always show pop-ups from [site]</b>.<br>
+Alternatively access the settings menu of your browser and follow <b><a href="https://secure.www.upenn.edu/computing/resources/category/applications/article/configuring-your-web-browser-allow-pop-windows" target="_blank">these instrunctions</a></b> for each browser.<br><br>
+<b><font color="maroon"><u>Quick bar icons</u></font></b><br> Beware to load valid image-urls on your quick bar. If by any case, a loaded url is no longer valid you may notice lags for more than 5 seconds in every page refreshing. Better load the icons provided by the game for this kind of purpose.<br><br>
+<b><font color="maroon"><u>Bug reports</u></font></b><br> Some of the scripts hosted by Tsalkapone provide you with reports you can use to ask for help if you encounter any bug or malfunction in the script's function(-s). Search for them in the bottom of the page. Furthermore, provide as many information as you can
+regarding how, where and when the bug/malfunction occured. Alternatively, press <b>F12</b> on your keyboard and copy every mark noted as <u>Error</u> in your console log. Make sure you send all these details to Tsalkapone or any other scripter you trust. You may communicate with Tsalkapone with one of the following ways:
+<br><b>Skype:</b> <b><font color="blue">Tsalkapone</font></b><br>
+<b>Mail:</b> <b><font color="blue">tsalkapone@hotmail.com</font></b><br>
+<b>Forum:</b> <b><a href="https://forum.tribalwars.net/member.php?114063-Tsalkapone" target="_blank">Tsalkapone</a></b>
+			</span>
+		</div>
+		    <br />
+
+		    <div id="tabs"> 
+			<div hidden><ul>
+			    <li><a href="#tabs-1" onclick="change_page_check()">Scripts</a></li>
+				  <li><a href="#tabs-2" onclick="change_page_check()">Snellijstscripts</a></li>
+			    <li><a href="#tabs-3" onclick="change_page_check()">Externe pagina's</a></li>
+			  
+			</ul></div>
+			
+			<div id="script_description" style="display:none">
+	<table class="tsaldesc" width="100%" ><tbody>
+	<tr><th colspan="2"><font color="maroon"><span id="tsal_script_title"></span> ~ Description Table</font></th></tr>
+	<tr><td>Functions</td><td><span id="script_info"></span></td></tr>
+	<tr><td>Variables</td><td><span id="variables_info"></span></td></tr>
+	<tr><td>Pages</td><td><span id="pages_info"></span></td></tr>
+	<tr><td>Specials</td><td><span id="specials_info"></span></td></tr>
+	<tr><td>License</td><td><span id="license_info"></span></td></tr>
+	<tr><td>Screenshots</td><td><span id="show_shots1"><input type="button" class="tsalbut" value="Show" id="show_shots"></span>
+	<span id="hide_shots1" style="display:none"><input type="button" class="tsalbut" value="Hide" id="hide_shots"></span><br><br>
+	<span id="screen_info" style="display:none"></span></td></tr>
+	</tbody></table>
+<br><input class="tsalbut" type="button" value="Close description table" id="closetsaldescbut">
+&emsp;<input class="tsalbut" type="button" value="Select code" id="selectcode"><br><br>
+<font color="maroon"><b><u>Script Code:</u></b></font><br><br><textarea id="tsal_code" class="tsaltext" rows="8" cols="100"></textarea>
+			</tbody></table><br><br><hr>
+			</div>
+<div id="all_scripts_info" hidden>
+<span name="script_1">Activated on <u>rally point</u> page it enters the selected units and coords and focus on the appopriate command button (attack or support) allowing you to send each command by clicking <b>Enter</b> on your keyboard. It also pauses any active timer on the page. You can modify your selections through a large variety of embedded settings allowing you to configure nukes, supports, farming & fake templates.<br><br>Activated on <u>map</u> you may enter troops in any command template in a pop-up using the functions' settings that can be changed and saved by activating the script on the Rally Point page. Each function is operated using an assigned shortcut key.<br><br>Activated on <u>any other page</u> it displays the found coordinations on the page offering the oppurtunity to save the extracted coords in an available embedded script.</span>
+<span name="script_1">All the customizable variables of the script are embedded in a stylish settings table.</span>
+<span name="script_1">Executable on all pages.</span>
+<span name="script_1"><ul class="c"><li>The user may save the selected values on localStorage.</li><li>The user may assign shortcut keys for specific functions.</li></ul></span>
+<span name="script_1"><img src="https://dl.dropboxusercontent.com/s/xkl1msgkulj3e3o/Rally_point1.png" title="Screenshot from Rally Point" style="cursor:help;"><br><br><img src="https://dl.dropboxusercontent.com/s/iu9gb05048560cp/Rallyt_point3.png" style="cursor:help;" title="Screenshot from Map"><br><br><img src="https://dl.dropboxusercontent.com/s/y2hdgom9s81a2pc/Rally_point2.png" style="cursor:help;" title="Screenshot from Reports"></span>
+<span name="script_1">javascript:$.getScript('https://dl.dropboxusercontent.com/s/1kfp8ja9k9io86b/Tsalkapone.rally_point_script.js');void 0;</span>
+<span name="script_1"><b><a href="http://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GNU GENERAL PUBLIC LICENSE, version 3</a></b></span>
+<span name="script_2">Activated on <u>Production</u> page opens an html code on a new tab with extracted encoded data. The data contains info for each of the page's villages' current resources' amount, farm space and available merchants. <br><br>A settings table offers you the opportunity to configure several optional settings. Click on the button <b>Send data & settings to server</b> to assign your location to the main server that hosts the <b>Resource Balancer</b> tool. You'll find links who act as transfer-links.</span>
+<span name="script_2">All the customizable variables of the script are embedded in a stylish settings table.</span>
+<span name="script_2">Executable on Overviews &#8614; Production page (make sure the <b>mode=Prod</b> is displayed on your url link).</span>
+<span name="script_2"><ul class="c"><li>The user may save the selected language on localStorage.</li></ul></span>
+<span name="script_2"><img src="https://dl.dropboxusercontent.com/s/vkpeixur0a9q6a0/Resource_1.png" title="Screenshot after activated on Production page" style="cursor:help;"></span>
+<span name="script_2">javascript:$.getScript('https://dl.dropboxusercontent.com/s/1a13gasf5t2g8jy/Tsalkapone.resource_balancer.js');void 0;</span>
+<span name="script_2"><b><a href="http://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GNU GENERAL PUBLIC LICENSE, version 3</a></b></span>
+<span name="script_3">Activated on <u>Map page</u> it displays a variety of additional infos on map's villages. The additional infos contain data gathered from the user's battle reports or data provided by the premium account. You may select various settings among 7 different template settings. <br><br> Click on the button <b>Additional Map Info</b> to read more details about the infos displayed for each template. There may be a delay on the script's execution if there is much data to be gathered.</span>
+<span name="script_3">All the customizable variables of the script are embedded in stylish settings tables.</span>
+<span name="script_3">Executable on Map.</span>
+<span name="script_3"><ul class="c"><li>The user may save the selected language on localStorage.</li></ul></span>
+<span name="script_3"><img src="https://dl.dropboxusercontent.com/s/s2lha78bwb4z791/AMI_1.png" title="Screenshot from the Settings Table" style="cursor:help;"><br><br><img src="https://dl.dropboxusercontent.com/s/wsg2adqdoo1zgsm/AMI_2.png" title="Screenshot from the Map" style="cursor:help;"><br><br><img src="https://dl.dropboxusercontent.com/s/2e1jd1mhet3l2m9/AMI_3.png" title="Screenshot from the Additional Map Info" style="cursor:help;"></span>
+<span name="script_3">javascript:$.getScript('https://dl.dropboxusercontent.com/s/kcysj3qhgoc04cu/Tsalkapone.more_map_info.js');void 0;</span>
+<span name="script_3"><b><a href="http://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GNU GENERAL PUBLIC LICENSE, version 3</a></b></span>
+<span name="script_4">Activated on <u>Map</u> page it displays a variety of tools that operate different functions. These tools and their functions are the following:<br><br><b>1. Coords finder:</b> It finds every coordinate that is displayed on the visible area of the Map.<br><b>2. Coords Extractor:</b> It extracts the coordinates of the selected villages. Click any village on the map to extract its coordinates. Click it again to delete them. You may modify the extracted coordinates through a variety of tools. You may also use the extracted coordinates to design a table or form a forum post.<br><b>3. Coords & Points:</b> It finds every coordinate that is displayed on the visible area of the Map that fulfills the selected criteria of village type (barbarian or not) and village points (minimum-maximum).<br><b>4. Religion Influence:</b> It designs the selected belief radius' values on the Map. You may select a church level for up to five different coordinates. <b><font color="red">Available only in worlds with active church setting</font></b>.<br><b>5. Map Resize:</b> Select the desired size of the Map and Minimap.</span>
+<span name="script_4">All the customizable variables of the script are embedded in stylish settings tables.</span>
+<span name="script_4">Executable on Map.</span>
+<span name="script_4"><ul class="c"><li>The user may save the selected language on localStorage.</li></ul></span>
+<span name="script_4"><img src="https://dl.dropboxusercontent.com/s/9nlse26x97h43l4/Map_1.png" title="Screenshot from the Settings Table" style="cursor:help;"><br><br><img src="https://dl.dropboxusercontent.com/s/6g43ct3c4ep0ynz/Map_2.png" title="Screenshot from the Coords Finder" style="cursor:help;"><br><br><img src="https://dl.dropboxusercontent.com/s/7xdps4ftx96p679/Map_3.png" title="Screenshot from the Religion Infuence Radius" style="cursor:help;"><br><br><img src="https://dl.dropboxusercontent.com/s/vofv3597ootnnzj/Map_4.png" title="Screenshot from the Coords Extractor" style="cursor:help;"></span>
+<span name="script_4">javascript:$.getScript('https://dl.dropboxusercontent.com/s/9m6y4nwjs9luyoh/Tsalkapone.Map_scripts.js');void 0;</span>
+<span name="script_4"><b><a href="http://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GNU GENERAL PUBLIC LICENSE, version 3</a></b></span>
+<span name="script_5">Activated on <u>any page</u> it displays a large variety of options that are used to extract villages from the world's data files. You may define the information you want to extract from each village and modify them using different kinds of options. The script supports fake,nuke, support & farming scripts generator and a variety of tools to design a table.</span>
+<span name="script_5">All the customizable variables of the script are embedded in stylish settings tables.</span>
+<span name="script_5">Executable on all pages.</span>
+<span name="script_5"><ul class="c"><li>The user may save the selected values on localStorage.</li><li>The user may save the tools displayed by saving their ON/OFF values on localStorage.</li><li>The user may change the script's background image.</li></ul></span>
+<span name="script_5"><img src="https://dl.dropboxusercontent.com/s/ih83yjd5kpmcq84/Extractor_1.png" title="Screenshot from the Settings Table" style="cursor:help;"><br><br><img src="https://dl.dropboxusercontent.com/s/5g6cfgixjcmd33b/Extractor_2.png" title="Screenshot from the Searching Criteria" style="cursor:help;"><br><br><img src="https://dl.dropboxusercontent.com/s/w8328ic9lbu1gq7/Extractor_3.png" title="Screenshot from the Data Update Status" style="cursor:help;"><br><br><img src="https://dl.dropboxusercontent.com/s/u3eiz5603vhpo40/Extractor_4.png" title="Screenshot from the Extracted Results, Additional Styles, Design Table & Scripts Generator" style="cursor:help;"></span>
+<span name="script_5">javascript:$.getScript('https://dl.dropboxusercontent.com/s/u6f4fro64tbcovr/Tsalkapone.Advanced_Coords_Extractor_ek.js');void 0;</span>
+<span name="script_5"><b><a href="http://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GNU GENERAL PUBLIC LICENSE, version 3</a></b></span>
+<span name="script_6">Activated on <u>rally point</u> page it enters the selected values of units which fulfill the selected criteria and inserts a random coordinate out of the selected ones. It also focuses on Attack button allowing you to sent the command by pressing <b>Enter</b> on your keyboard.</span>
+<span name="script_6">All the customizable variables of the script have to be modified on the code. For more info about each variable press "<b><font color="red">t</font></b>" on any page on the game after you activate the script. The language that will be applied on this script is the one saved on the <b><font color="blue">Commander Script</font></b>.<br><u>Customizable variables:</u><br><b><font color="red">Tsalkapone_scouts</b></font><br><b><font color="red">Tsalkapone_units_order</b></font><br><b><font color="red">Tsalkapone_coords</b></font></span>
+<span name="script_6">Executable on Rally Point.</span>
+<span name="script_6"><ul class="c"><li>The user may save the coordinate's order on a specified cookie in the browser.</li></ul></span>
+<span name="script_6"><img src="https://dl.dropboxusercontent.com/s/13u84pns7qgwopv/Fake_1.png" title="Screenshot from the Rally Point" style="cursor:help;"></span>
+<span name="script_6">javascript:var Tsalkapone_coords='';var Tsalkapone_scouts=1;var Tsalkapone_units_order={ram:1,catapult:1,sword:1,spear:1,axe:1,archer:1,light:1,marcher:1,heavy:1};$.getScript('https://dl.dropboxusercontent.com/s/n0945rwkzzqa4pl/Tsalkapone.Fake_Script_No1_ek.js');void 0;</span>
+<span name="script_6">No specified license</span>
+<span name="script_7">Activated on <u>rally point</u> page it enters the selected values of units which fulfill the selected criteria and inserts a coordinate in a consecutive order, allowing you to define how many times a coordinate will be inserted before inserting the next one. You may select a specific target out the <u>Target List</u> displayed on the rally point. It also focuses on Attack button allowing you to sent the command by pressing <b>Enter</b> on your keyboard.</span>
+<span name="script_7">All the customizable variables of the script have to be modified on the code. For more info about each variable press "<b><font color="red">t</font></b>" on any page on the game after you activate the script. The language that will be applied on this script is the one saved on the <b><font color="blue">Commander Script</font></b>.<br><u>Customizable variables:</u><br><b><font color="red">Tsalkapone_scouts</b></font><br><b><font color="red">Tsalkapone_units_order</b></font><br><b><font color="red">Tsalkapone_coords</b></font><br><b><font color="red">Tsalkapone_target</b></font><br><b><font color="red">Tsalkapone_repeat</b></font><br><b><font color="red">Tsalkapone_cookieID</b></font></span>
+<span name="script_7">Executable on Rally Point.</span>
+<span name="script_7"><ul class="c"><li>The user may save the coordinate's order on a specified cookie in the browser.</li></ul></span>
+<span name="script_7"><img src="https://dl.dropboxusercontent.com/s/2a6wgnk6ea9wm57/Fake_2.png" title="Screenshot from the Settings Table" style="cursor:help;"></span>
+<span name="script_7">javascript:var Tsalkapone_scouts=1;var Tsalkapone_units_order={ram:1,catapult:1,sword:1,spear:1,axe:1,archer:1,light:1,marcher:1,heavy:1};var Tsalkapone_coords='';var config={Tsalkapone_target:'Tsalkapone',Tsalkapone_repeat:1,Tsalkapone_cookieID:'fake'};$.getScript('https://dl.dropboxusercontent.com/s/jyufjpwbdo8h0id/Tsalkapone.Fake_Script_No2_ek.js');void 0;</span>
+<span name="script_7">No specified license</span>
+<span name="script_8">Activated on <u>rally point</u> page it enters the selected values of units which fulfill the selected criteria and inserts a coordinate in a consecutive order. The units are inserted according to a priority order based on units speed. It first inserts light cavalry, then heavy and so on. Rams, catapults and scouts are exceptions to this rule. Their values will be inserted regardless. The script also focuses on Attack button allowing you to sent the command by pressing <b>Enter</b> on your keyboard.</span>
+<span name="script_8">All the customizable variables of the script have to be modified on the code. For more info about each variable press "<b><font color="red">t</font></b>" on any page on the game after you activate the script. The language that will be applied on this script is the one saved on the <b><font color="blue">Commander Script</font></b>.<br><u>Customizable variables:</u><br><b><font color="red">Tsalkapone_secure_attack</b></font><br><b><font color="red">spy, ram, catapult, light, heavy, marcher, axe, spear, archer, sword</b></font><br><b><font color="red">Tsalkapone_coords</b></font><br><b><font color="red">Tsalkapone_cookieID</b></font><br><b><font color="red">Tsalkapone_script_title</b></font></span>
+<span name="script_8">Executable on Rally Point.</span>
+<span name="script_8"><ul class="c"><li>The user may save the coordinate's order on a specified cookie in the browser.</li></ul></span>
+<span name="script_8"><img src="https://dl.dropboxusercontent.com/s/5189pbfsucduzo0/Farming.png" title="Screenshot from the Settings Table" style="cursor:help;"></span>
+<span name="script_8">javascript:var Tsalkapone_coords='';var Tsalkapone_secure_attack=true;var spy=1; var ram=0;var catapult=0; var light=2; var heavy=5; var marcher=5;var axe=20;var spear=10; var archer=20; var sword=15; var Tsalkapone_script_title='Farming';var Tsalkapone_cookieID='farming1';$.getScript('https://dl.dropboxusercontent.com/s/7vi0gt5hgs46qzy/Tsalkapone.Farming_Script_ek.js');void 0;</span>
+<span name="script_8">No specified licence</span>
+<span name="script_9">Activated on <u>rally point</u> page it enters the selected values of units which fulfill the selected criteria and inserts a coordinate in a consecutive order. Every selected value of every unit-type will be inserted, if there are available units, in the rally point. The script also focuses on Attack button allowing you to sent the command by pressing <b>Enter</b> on your keyboard.</span>
+<span name="script_9">All the customizable variables of the script have to be modified on the code. For more info about each variable press "<b><font color="red">t</font></b>" on any page on the game after you activate the script. The language that will be applied on this script is the one saved on the <b><font color="blue">Commander Script</font></b>.<br><u>Customizable variables:</u><br><b><font color="red">spy, ram, catapult, light, heavy, marcher, axe, spear, archer, sword, snob</b></font><br><b><font color="red">Tsalkapone_coords</b></font><br><b><font color="red">Tsalkapone_cookieID</b></font><br><b><font color="red">Tsalkapone_script_title</b></font></span>
+<span name="script_9">Executable on Rally Point.</span>
+<span name="script_9"><ul class="c"><li>The user may save the coordinate's order on a specified cookie in the browser.</li></ul></span>
+<span name="script_9"><img src="https://dl.dropboxusercontent.com/s/8rs9xhlgc4a780g/Nuke.png" title="Screenshot from the Settings Table" style="cursor:help;"></span>
+<span name="script_9">javascript:var Tsalkapone_coords='';var snob=0;var spy=100; var ram=1e6;var catapult=0; var light=1e6; var heavy=0; var marcher=1e6;var axe=1e6;var spear=0; var archer=0; var sword=0; var Tsalkapone_script_title='Nuke';var Tsalkapone_cookieID='nuke1';$.getScript('https://dl.dropboxusercontent.com/s/uqon51aliz193wm/Tsalkapone.Nuke_Support_script_ek.js');void 0;</span>
+<span name="script_9">No specified licence</span>
+<span name="script_10">Activated on <u>Overviews -> Troops -> All</u> page a pop-up appears displaying your troops in total. Your troops are categorized and grouped in 40 different templates-village groups, which you can use to extract each group's villages' coordinations. It also provides you with a full army-report in table or list in compatible form with the game's bb-codes.</span>
+<span name="script_10">No customizable variables.</span>
+<span name="script_10">Executable on Overviews -> Troops -> All.</span>
+<span name="script_10"><ul class="c"><li>The user may save the coordinate's order on a specified cookie in the browser.</li></ul></span>
+<span name="script_10"><img src="https://dl.dropboxusercontent.com/s/o0vt21s4avvmxhp/Troops_1.png" title="Screenshot from the Troops Counting & Grouping No1" style="cursor:help;"><br><br><img src="https://dl.dropboxusercontent.com/s/gu53162jnx8i6r2/Troops_2.png" title="Screenshot from the Troops Counting & Grouping No2" style="cursor:help;"></span>
+<span name="script_10">javascript:$.getScript('https://dl.dropboxusercontent.com/s/4zpqbmdy716xeua/Tsalkapone.Count_and_categorize_troops.js');void 0; </span>
+<span name="script_10"><b><a href="http://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GNU GENERAL PUBLIC LICENSE, version 3</a></b></span>
+<span name="script_11">Activated on <u>Market</u> page it provides various tools in different pages. These are the following:<br><br><u>1. Premium Exchange:</u> It calculated the amount difference between stock capacity and your resources in the current village and notifies you if the difference exceeds a specified value.<br><u>2. My offers:</u> It offers you the capability to create offers that will balance the resource-type in the highest value with the resource-type with the lowest value.<br><u>3. Send resources:</u> The user may customize 4 different templates that will be used to insert the selected value for each resource-type and the specified coordinates.</span>
+<span name="script_11">All the customizable variables of the script are embedded in a stylish settings table.</span>
+<span name="script_11">Executable on three Market pages (Premium Exchange, Send resources, My offers).</span>
+<span name="script_11"><ul class="c"><li>The user may save the selected values on localStorage.</li></ul></span>
+<span name="script_11"><img src="https://dl.dropboxusercontent.com/s/484h6nhdjht0zg9/Market_1.png" title="Screenshot from the Premium Exchange page" style="cursor:help;"><br><br><img src="https://dl.dropboxusercontent.com/s/p8zpqnv32w7kw3i/Market_2.png" title="Screenshot from the My Offers page" style="cursor:help;"><br><br><img src="https://dl.dropboxusercontent.com/s/yg7mrya759jmzko/Market_3.png" title="Screenshot from the Send Resources page" style="cursor:help;"></span>
+<span name="script_11">javascript:$.getScript('https://dl.dropboxusercontent.com/s/fuvabndcnyzeb3i/Tsalkapone.Market_tools_ek.js');void 0; </span>
+<span name="script_11"><b><a href="http://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GNU GENERAL PUBLIC LICENSE, version 3</a></b></span>
+<span name="script_12">Activated on <u>Overviews -> Combined</u> page it provides various tools that calculate time & distance differences. These tools can help you programm a snipe or a back-time command. You can also calculate the world's units' speed.</span>
+<span name="script_12">No customizable variables.</span>
+<span name="script_12">Executable on Overviews -> Combined.</span>
+<span name="script_12"><ul class="c"><li>The extracted results are modified in table or list form usings games' bb-codes.</li></ul></span>
+<span name="script_12"><img src="https://dl.dropboxusercontent.com/s/yfllr2ka8zpn08q/Snipe_1.png" title="Screenshot from the Settings Table" style="cursor:help;"><br><br><img src="https://dl.dropboxusercontent.com/s/u9bwgrx5mdhyqq1/Snipe_2.png" title="Screenshot from the Distance Calculator" style="cursor:help;"><br><br><img src="https://dl.dropboxusercontent.com/s/oorykfgxo79m7j7/Snipe_3.png" title="Screenshot from the Snipe Calculator's results" style="cursor:help;"><br><br><img src="https://dl.dropboxusercontent.com/s/i1dq3466cf2uyel/Snipe_4.png" title="Screenshot from the Back-Time Calculator" style="cursor:help;"></span>
+<span name="script_12">javascript:$.getScript('https://dl.dropboxusercontent.com/s/y32vs0i6392wfoc/Tsalkapone.Snipe_script.js');void 0; </span>
+<span name="script_12"><b><a href="http://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GNU GENERAL PUBLIC LICENSE, version 3</a></b></span>
+<span name="script_13">Activated on <u>Overviews -> Incoming</u> page it provides various tools that sort out, label and add colors to incoming commands. It may also count incoming commands per village.</span>
+<span name="script_13">All the customizable variables of the script are embedded in a stylish settings table.</span>
+<span name="script_13">Executable on Overviews -> Incoming.</span>
+<span name="script_13"><ul class="c"><li>The user may save the selected values on localStorage.</li></ul></span>
+<span name="script_13"><img src="https://dl.dropboxusercontent.com/s/5g2aodueerjict4/Intelligence_1.png" title="Screenshot from the Settings Table" style="cursor:help;"><br><br><img src="https://dl.dropboxusercontent.com/s/fs7xdtpimhjbezq/Intelligence_2.png" title="Screenshot from the General Settings" style="cursor:help;"><br><br><img src="https://dl.dropboxusercontent.com/s/6jqa3wwycmfe2l0/Intelligence_3.png" title="Screenshot from the Label Settings" style="cursor:help;"><br><br><img src="https://dl.dropboxusercontent.com/s/pcbbqe0u5s5xa8z/Intelligence_4.png" title="Screenshot from the Stylization & Sorting Settings" style="cursor:help;"></span>
+<span name="script_13">javascript:$.getScript('https://dl.dropboxusercontent.com/s/839m6tduezyrnew/Tsalkapone.Central_Intelligence_Script_ek.js');void 0; </span>
+<span name="script_13"><b><a href="http://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GNU GENERAL PUBLIC LICENSE, version 3</a></b></span>
+<span name="script_14">Activated on <u>Loot Assistant</u> page it provides tools to sort out the villages of the page and help you send commands assigning shortcut keys.</span>
+<span name="script_14">All but one of the customizable variables of the script are embedded in a stylish settings table.<br><br>In case you encounter issues while loading the pages of the loot assistant try to change the value of the variable <font color="red"><b>cookieName</b></font> on the script's code to any desired one.</span>
+<span name="script_14">Executable on Loot Assistant.</span>
+<span name="script_14"><ul class="c"><li>The user may save the selected values on a cookie.</li></ul></span>
+<span name="script_14"><img src="https://dl.dropboxusercontent.com/s/xkhej57p8bt4r5w/FA1.png" title="Screenshot from the Settings Table" style="cursor:help;"></span>
+<span name="script_14">javascript:cookieName="keypress1";$.getScript('https://dl.dropboxusercontent.com/s/r0g5u11qsc8mvpy/Tsalkapone.%20FA%20key%20press%20edit_ek.js');void(0); </span>
+<span name="script_14">No specified license</span>
+<span name="script_15">Activated on <u>any page</u> it provides a variety of categorized external tools and links that may assist you on many different aspects of the game. To access the settings menu click on <b><font color="red">ToolKit</font></b> link on the bottom menu of the game and after your location is re-assigned activate the script again.</span>
+<span name="script_15">All the customizable variables of the script are embedded in a stylish settings table.</span>
+<span name="script_15">Executable on any page.</span>
+<span name="script_15"><ul class="c"><li>The user may save his own images and shortcut links.</li></ul></span>
+<span name="script_15"><img src="https://dl.dropboxusercontent.com/s/cywbdo285c3geuq/Toolkit1.png" title="Screenshot from the Maps category" style="cursor:help;"><br><br><img src="https://dl.dropboxusercontent.com/s/7gvaytfikec7z9e/Toolkit4.png" title="Screenshot from the Shortcut Links menu" style="cursor:help;"><br><br><img src="https://dl.dropboxusercontent.com/s/4kdwjfoamw0bu36/Toolkit2.png" title="Screenshot from the Settings table" style="cursor:help;"><br><br><img src="https://dl.dropboxusercontent.com/s/5brqckzktes0ui3/Toolkit3.png" title="Screenshot from the ToolKit link" style="cursor:help;"></span>
+<span name="script_15">javascript:$.getScript('https://dl.dropboxusercontent.com/s/0unlti8bzsj196f/Tsalkapone.ToolKit.js');void(0);</span>
+<span name="script_15"><b><a href="http://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GNU GENERAL PUBLIC LICENSE, version 3</a></b></span>
+<span name="script_16">Activated on <u>Quick Bar -> Add new link</u> page, it provides a table with every script displayed on this table with its title and a short description of its function (-s). Click on <font color="red"><b>Load</b></font> to fill the script's code and its info in the relevant fields.</span>
+<span name="script_16">No customizable variables.</span>
+<span name="script_16">Executable on Settings -> Quick Bar -> Add new link.</span>
+<span name="script_16"><ul class="c"><li>The user may load any script with just a click.</li></ul></span>
+<span name="script_16"><img src="https://dl.dropboxusercontent.com/s/ndvqi9oo8pjzg8j/Loader1.png" title="Screenshot from the Scripts' List" style="cursor:help;"></span>
+<span name="script_16">javascript:$.getScript('https://dl.dropboxusercontent.com/s/3ls8pz6mogdkmuh/Tsalkapone.Script_loader.js');void(0);</span>
+<span name="script_16"><b><a href="http://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GNU GENERAL PUBLIC LICENSE, version 3</a></b></span>
+<span name="script_17">Activated on a player's profile, a tribe's profile or a tribe's member list it provides a variety of tools that display useful stats, infos, graphs and provide useful links to external pages. You may also design a table (member's list or player's profile), create an advanced attack plan (player's profile) or generate scripts (player's profile).</span>
+<span name="script_17">All the customizable variables of the script are embedded in a stylish settings table.</span>
+<span name="script_17">Executable on:<br>1. A tribe's profile.<br>2. A player's profile.<br>3. A tribe's member list.</span>
+<span name="script_17"><ul class="c"><li>The user may design an elegant table through a large variety of options.</li><li>The user may create an advanced attack plan.</li></ul></span>
+<span name="script_17"><img src="https://dl.dropboxusercontent.com/s/ul1ks1i69i8jtww/Stats1.png" title="Screenshot from a tribe's member list" style="cursor:help;"><br><img src="https://dl.dropboxusercontent.com/s/o54akh5hotlrofi/Stats2.png" title="Screenshot from a tribe's member list graphs and stats" style="cursor:help;"><br><img src="https://dl.dropboxusercontent.com/s/x2guhuvdvxv3xp8/Stats3.png" title="Screenshot from a tribe's profile" style="cursor:help;"><br><img src="https://dl.dropboxusercontent.com/s/wtjdyao8drpv7n1/Stats4.png" title="Screenshot from the menu in a player's profile" style="cursor:help;"><br><img src="https://dl.dropboxusercontent.com/s/vkyza9hjpswuos6/Stats5.png" title="Screenshot from the table designer on a player's profile" style="cursor:help;"><br><img src="https://dl.dropboxusercontent.com/s/9oj3taq627m442t/Stats6.png" title="Screenshot from the attack plan creator in a player's profile" style="cursor:help;"></span>
+<span name="script_17">javascript:$.getScript('https://dl.dropboxusercontent.com/s/qplvy48chieqlh7/Tsalkapone.Player_Profile_Scripts.js');void 0;</span>
+<span name="script_17"><b><a href="http://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GNU GENERAL PUBLIC LICENSE, version 3</a></b></span>
+<span name="script_18">Activated on Overviews -> Combined it provides various tools to rename your villages. You may create your own renaming templates, extract and save your current villages' names or import old ones.</span>
+<span name="script_18">All the customizable variables of the script are embedded in a stylish settings table.</span>
+<span name="script_18">Executable on Overviews -> Combined</span>
+<span name="script_18"><ul class="c"><li>The user may save the customizable values on LocalStorage.</li><li>The user may create his own name pool.</li></ul></span>
+<span name="script_18"><img src="https://dl.dropboxusercontent.com/s/om4hapigvpeu071/Renamer_1.png" title="Screenshot from Settings Table" style="cursor:help;"><br><img src="https://dl.dropboxusercontent.com/s/nqyvogxjdsm3l3t/Renamer_2.png" title="Screenshot from General Settings" style="cursor:help;"><br><img src="https://dl.dropboxusercontent.com/s/o39fognybbj69a1/Renamer_3.png" title="Screenshot from Renamer Settings" style="cursor:help;"><br><img src="https://dl.dropboxusercontent.com/s/42iu8bhyn0vo8wi/Renamer_4.png" title="Screenshot from the Name Pool Creator" style="cursor:help;"></span>
+<span name="script_18">javascript:$.getScript('https://dl.dropboxusercontent.com/s/kkaro0wvg8ec03t/Tsalkapone.Village_Renamer.js');void 0;</span>
+<span name="script_18"><b><a href="http://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GNU GENERAL PUBLIC LICENSE, version 3</a></b></span>
+</div>
+
+
+	
+
+			<br><br>
+    			    	<input type="button" class="tsalbut" value="Reset settings" id="reset_set">
+						&emsp;<span id="spanfilter"><input type="button" class="tsalbut" value="Close filters" id="closefiltertable"></span>
+							<span id="spanfilter1" style="display:none"><input type="button" class="tsalbut" value="Open filters" id="closefiltertable1"></span>
+				&emsp;&emsp;<font color="maroon"><b><i>Select a skin:</i></b></font>&nbsp;<select id="skin" onchange="tsal_skin();"><option value="1">TW Style</option>
+				<option value="2">Tsalkapone Style</option>
+				<option value="3">France Style</option>
+				<option value="4">U.S.A. Style</option>
+				<option value="5">Greece Style</option>
+				<option value="6">Italian Style</option>
+				</select>
+&emsp;<font color="maroon"><b><i>Music ?</i></b></font>&nbsp;<input type="checkbox" id="music_embed" onclick="tsal_skin();">
+&emsp;&emsp;&emsp;<font color="maroon"><b><i>Song of the week:</i></b></font>&emsp;
+<span id="tsal_fun"></span>
+							<div id="tabs-1">    			<br><div class="div_over_table">
+							<table id="filtertable" class="scripts">
+    				<thead>
+    				    <tr valign="top">
+    					<th class="left" style="padding: 5px;">
+    				
+    				   <span class="tsaltooltip1" style="cursor:help" >Search<span class="tsalinfo">Search any text in the rows of the <b><font color="darkgreen">Scripts' Table</b></font> and filter the ones that fulfill the entered criteria. <br><br> This filter cancels every other filter setting. You can add more than one word using <b><font color="blue">space bar</b></font>. The rows of the table have to fulfill every entered word to be displayed in the table.</span></span>:&nbsp;<input  name="filt" id="tsalfilter" onKeyUp="filter(this, 'scripts', 1)" type="text">
+					  &emsp;<center><img height="50px" src="https://dl.dropboxusercontent.com/s/w3s34qiwu8lvkeb/search.gif"></center> 
+    				
+    				</th>
+					
+
+				    						<th class="left">
+										
+<table ><thead><center><font color="maroon" size="4"><u>Filters</u></font></center>
+<tr class="tsal_table_header"><td><span class="tsaltooltip2">PA filter<span class="tsalinfo">Filter the rows of the table based on the <b><font color="red">Non-Premium</font></b> column status..</span></span></td>
+<td><span class="tsaltooltip2">Browser filter<span class="tsalinfo">Filter the rows of the table based on the <b><font color="red">browser compatibility</font></b>.</span></span></td>
+<td><span class="tsaltooltip3">Category filter<span class="tsalinfo">Filter the rows of the table based on a <b><font color="red">script's category</font></b>.<br><br>Each category defines a main function that a script may perform or a game's function that a script may enhance.</span></span></td>
+<td><span class="tsaltooltip3">Page filter<span class="tsalinfo">Filter the rows of the table based on the <b><font color="red">game's page(-s)</font></b> where each script operate its main functions.<br><br>Scripts that perform functions in every page won't be included in each selection separately. To sort them out select <b><font color="red">All pages</b></font>.</span></span></td>
+<td><span class="tsaltooltip2">Approval status<span class="tsalinfo">Filter the rows of the table based on a script's <b><font color="red">approval status</font></b>.</span></span></td>
+<td><span class="tsaltooltip2">Compatibility filter<span class="tsalinfo">Filter the rows of the table based on whether a script's code is mentioned as <b><font color="red">compatible</font></b> for every server of the Tribal Wars.</span></span></td>
+<td><span class="tsaltooltip4">Language filter<span class="tsalinfo">Filter the rows of the table based on a script's <b><font color="red">available language(-s)</font></b>.</span></span></td>
+<td width="120px;"><span class="tsaltooltip4">Column filter<span class="tsalinfo">Define the <b><font color="red">visible columns</font></b> of the table.</span></span></td>
+</tr><tbody><tr>
+<td><select style="cursor:pointer;" id="pa_check" onchange="filter_combine ('scripts', 1);">
+    <option  value="">Show all</option>
+  <option  value="non_pa">Only Non-PA scripts</option>
+  <option  value="yes_pa">Only PA scripts</option>
+</select></td> 
+<td><select style="cursor:pointer;" id="browser_check" onchange="filter_combine ('scripts', 1);">
+    <option  value="">Show all</option>
+	  <option value="chrome_c">Chrome compatible</option>
+	    <option  value="mozilla_c">Mozilla compatible</option>
+  <option  value="opera_c">Opera compatible</option>
+</select></td> 
+<td><select style="cursor:pointer;" id="cat_check" onchange="filter_combine ('scripts', 1);">
+<option value="">Show all</option>
+<option value="attack">Attack</option>
+<option value="back_time">Back-time</option>
+<option value="barbs_f">Barbarians Finder</option>
+<option value="bonus">Bonus Villages</option>  
+<option value="commands">Commands</option>
+<option value="co_ex">Coordinates Extractor</option> 
+<option value="co_f">Coordinates Finder</option>
+<option value="mark_of">Create Market Offers</option>
+<option value="count_in">Count Incomings</option>
+<option value="dis_cal">Distance Calculator</option>
+<option  value="fake">Fake</option>
+<option value="farming">Farming</option>
+<option value="graphs_s">Graphs</option>
+<option value="info_s">Information</option>
+<option value="lab_in">Label Incomings</option>
+<option value="loot">Loot</option>
+<option value="map_re">Map resize</option>
+<option value="market">Market</option>
+<option value="others">Others</option>
+<option value="prem_ex">Premium Exchange</option>
+<option value="production">Production</option>
+<option value="rel_in">Religion Influence</option>
+<option value="balance">Resources Balancer</option>
+<option value="sc_load">Scripts Loader</option>
+<option value="sc_gen">Scripts Generator</option>
+<option value="send_res">Send Resources</option>
+<option value="snipe">Snipe</option>
+<option value="sort_in">Sort Incomings</option>
+<option value="stats_s">Statistics</option>
+<option value="support">Support</option>
+<option value="tab_des">Table Designer</option>
+<option value="time_cal">Time Calculator</option>
+<option value="time_p">Timers Pause</option>
+<option value="toolkit">Toolkit</option>
+<option value="trimming">Trimming</option>
+<option value="tr_cat">Troops Categorize</option>
+<option value="tr_count">Troops Counter</option>
+<option value="unit_sp">Units speed</option>
+<option value="link_s">Useful links</option>
+<option value="farm_f">Villages Finder</option>
+<option value="vil_gr">Villages Grouping</option>
+<option value="vil_lis">Villages Listing</option>
+<option value="vil_renamer">Villages Renamer</option>
+</select></td>
+<td><select style="cursor:pointer;" id="page_check" onchange="filter_combine ('scripts', 1);">
+   <option value="">Show all</option>
+   <option value="pages_all">All pages</option>
+   <option value="loot_as">Loot Assistant</option>
+   <option value="map">Map</option>
+  <option value="market">Market</option>
+  <option value="all_over">Overviews (at least one of them)</option>
+  <option value="ov_combined">Overviews => Combined</option>
+  <option value="ov_incoming">Overviews => Incoming</option>
+  <option value="ov_production">Overviews => Production</option>
+  <option value="ov_troops">Overviews => Troops</option>
+  <option value="p_profile">Player's profile</option>
+ <option value="rally">Rally point</option>
+ <option value="quick_bar">Settings -> Quick Bar</option>
+ <option value="t_members">Tribe's members list</option>
+ <option value="t_profile">Tribe's profile</option>
+</select></td>
+<td><select style="cursor:pointer;" id="legal_check" onchange="filter_combine ('scripts', 1);">
+    <option value="">Show all</option>
+  <option value="approved">Legal</option>
+  <option  value="illegal">Illegal</option>
+</select></td>
+<td><select style="cursor:pointer;" id="com_check" onchange="filter_combine ('scripts', 1);">
+    <option value="">Show all</option>
+  <option value="yes_coded">Code compatible</option>
+  <option  value="no_coded">NOT compatible</option>
+</select></td>
+<td><center><font style="font-family: 'Arial Black', Gadget, sans-serif;"><span id="openfilter1"><input type="button" value="Open filter" id="openfilterbut1" class="tsalbut"></span>
+<span id="closefilter1" style="display:none"><input class="tsalbut" type="button" value="Close filter" id="closefilterbut1"></span></center>
+<span id="columnfilter1" style="display:none" class="vis tsal_font"><font size="2">
+<br><input type="radio"  name="language" id="greek" value="greek" onclick="filter_lang(this.value);filter_combine ('scripts', 1);"><img title="Greek" style="cursor:help;" height="20px" width="30px" src="https://dl.dropboxusercontent.com/s/ivyojb6w9cb9pem/flag_greece.gif"><br>
+  <input type="radio"  name="language" id="english" value="english" onclick="filter_lang(this.value);filter_combine ('scripts', 1);"><img height="20px" style="cursor:help;" title="English/American" width="30px" src="https://dl.dropboxusercontent.com/s/y6tn9ko0g8k2xfx/flagenglezicon.gif"><br>
+   <input type="radio"  name="language" id="italian" value="italian" onclick="filter_lang(this.value);filter_combine ('scripts', 1);"><img height="20px" style="cursor:help;" title="Italian" width="30px" src="https://dl.dropboxusercontent.com/s/ho5ks4i0z7u5bpn/flag_italiano.gif"><br>
+  <input type="radio"  name="language" id="all_langs" value="" onclick="filter_lang(this.value);filter_combine ('scripts', 1);" checked><img height="20px" width="30px" style="cursor:help;" title="All" src="https://dl.dropboxusercontent.com/s/d98dkkge004frlm/un_flag.gif">
+</span></font></td>
+<td><center><font style="font-family: 'Arial Black', Gadget, sans-serif;"><span id="openfilter">
+<input type="button" value="Open filter" id="openfilterbut" class="tsalbut"></span><span id="closefilter" style="display:none">
+<input class="tsalbut" type="button" value="Close filter" id="closefilterbut"></span></center>
+<table id='columnfilter' style="display:none" class="vis tsal_font"><font size="2"><tr><td>Date entry</td> <td><input type="checkbox" onclick="colfilter(this.id); save_values ();" id="0" checked></td></tr>
+<tr><td>Title</td> <td> <input type="checkbox" onclick="colfilter(this.id); save_values ();" id="1" checked></td></tr>
+<tr><td>Script version</td> <td> <input type="checkbox" onclick="colfilter(this.id); save_values ();" id="2" ></td></tr>
+<tr><td>Forum</td> <td> <input type="checkbox" onclick="colfilter(this.id); save_values ();" id="3"></td></tr>
+<tr><td>PA</td> <td><input type="checkbox" onclick="colfilter(this.id); save_values ();" id="4" checked></td></tr>
+<tr><td>Browser compatibility</td> <td> <input type="checkbox" onclick="colfilter(this.id); save_values ();" id="5" checked></td></tr>
+<tr><td>Author (-s)</td> <td> <input type="checkbox" onclick="colfilter(this.id); save_values ();" id="6" checked></td></tr>
+<tr><td>Editor (-s)</td> <td> <input type="checkbox" onclick="colfilter(this.id); save_values ();" id="7" checked></td></tr>
+<tr><td>Rating</td> <td> <input type="checkbox" onclick="colfilter(this.id); save_values ();" id="8" ></td></tr>
+<tr><td>TW version</td> <td> <input type="checkbox" onclick="colfilter(this.id); save_values ();" id="9" ></td></tr>
+<tr><td>Variables</td> <td> <input type="checkbox" onclick="colfilter(this.id); save_values ();" id="10" checked></td></tr>
+<tr><td>Info</td> <td> <input type="checkbox" onclick="colfilter(this.id); save_values ();" id="11" checked></td></tr>
+<tr><td>Edit level</td> <td> <input type="checkbox" onclick="colfilter(this.id); save_values ();" id="12" ></td></tr>
+<tr><td>Category</td> <td> <input type="checkbox" onclick="colfilter(this.id); save_values ();" id="13" checked></td></tr>
+<tr><td>Supported languages</td> <td> <input type="checkbox" onclick="colfilter(this.id); save_values ();" id="14" checked></td></tr>
+<tr><td>Approval status</td> <td> <input type="checkbox" onclick="colfilter(this.id); save_values ();" id="15" checked></td></tr>
+<tr><td>Bug reports</td> <td> <input type="checkbox" onclick="colfilter(this.id); save_values ();" id="16" ></td></tr>
+<tr><td>ScriptAPI register</td> <td> <input type="checkbox" onclick="colfilter(this.id); save_values ();" id="17" ></td></tr>
+<tr><td>Code compatibility</td> <td> <input type="checkbox" onclick="colfilter(this.id); save_values ();" id="18" ></td></tr>
+<tr><td>Translation files</td> <td> <input type="checkbox" onclick="colfilter(this.id); save_values ();" id="19" checked></td></tr>
+</font>
+</table></font></td>
+						
+						</thead></tr></tbody></table></th> 
+    				
+    				</tr>
+    				<tr>
+    				    <td colspan="3" align="center"><center><font color="maroon"><b>
+									<u>Attention:</u> These scripts are classified as <font color ="darkgreen">LEGAL</font> for use.			    <br />
+						    <small>If a new script is added on the table you will get notified.</small><br />
+						    <br />
+						</b></font></center>
+						<b><font color="darkgreen" size="4"><u>Scripts' Table</u></font></b>
+    				    </td>
+    				</tr> 
+    				</thead>           
+    			    </table>
+    			</div>
+								<table class="tablesorter" id="scripts" cellpadding="1" cellspacing="2">
+						<thead>
+						<tr class="table_header">
+						
+						<th width="60px" class="left 0"><span style="cursor:pointer;" onclick="tsal_reload();" class="tsaltooltip2">Date entry<span class="tsalinfo">This column displays the date in which each script has been entered in this list.</span></span></th>
+<th width="200px" class="left 1" ><span class="tsaltooltip2">Title<span class="tsalinfo">This column displays the title of each script.</span></span></th>
+<th width="20px" style="max-width:30px;" class="left 2" ><span class="tsaltooltip2">Vers.<span class="tsalinfo">This column displays the latest script's version.</span></span></th>
+<th width="25px" style="max-width:38px;" class="left 3" ><a href="#hint" class="tsaltooltip" >Forum<span class="tsalinfo">This column displays whether there is an external forum's link regarding a script's function. <br><br>If there is any, clicking the image the link will be opened in a new tab.</span></a></th>
+<th width="25px" class="left 4" ><a href="#hint" class="tsaltooltip" >Non-PA<span class="tsalinfo">This column displays whether a script requires an active premium account to be functionable.</span></a></th>
+<th width="40px" class="left 5"><a href="#hint" class="tsaltooltip" ><img src="https://dl.dropboxusercontent.com/s/gx2r7jm4lw1iq16/firefox.png" height="13"/><span class="tsalinfo">This column displays in which browsers each script's functionality has been tested on.</span></a></th>
+<th width="80px" class="left 6" ><a href="#hint" class="tsaltooltip" >Author (-s)<span class="tsalinfo">This column displays the author(-s) of each script.<br><br>If <b><font color="red">others</font></b> is mentioned as author(-s) it means that a part of the code was found among a TW's server' scripts but no author was mentioned.</span></a></th>
+<th width="80px" class="left 7" ><a href="#hint" class="tsaltooltip" >Editor (-s)<span class="tsalinfo">This column displays the editor(-s) of each script.</span></a></th>
+<th width="50px" class="left 8" ><a href="#hint" class="tsaltooltip" >Rating<span class="tsalinfo_special">This column displays each script's rating based on Tsalkapone's and users' personal opinion.
+<br><br><center><table class="vis"><tbody><tr><th>Rating</th><th>Explanation</th></tr>
+<tr><td>&#9734;&#9734;&#9734;&#9734;&#9734;</td><td>Meh...</td></tr>
+<tr><td>&#9733;&#9734;&#9734;&#9734;&#9734;</td><td>It's OK!</td></tr>
+<tr><td>&#9733;&#9733;&#9734;&#9734;&#9734;</td><td>Good enough!</td></tr>
+<tr><td>&#9733;&#9733;&#9733;&#9734;&#9734;</td><td>Very good!</td></tr>
+<tr><td>&#9733;&#9733;&#9733;&#9733;&#9734;</td><td>Exceptional!!!</td></tr>
+<tr><td>&#9733;&#9733;&#9733;&#9733;&#9733;</td><td>Wow!!!</td></tr>
+</tbody></table></center></span></a></th>
+<th width="20px" style="max-width:35px;" class="left 9" ><a href="#hint" class="tsaltooltip" >TW<span class="tsalinfo">This column displays the version of the game in which code each script was last edited. <br><br>If you mouse over a specific value you will get notified about the latest version in which each script was tested.</span></a></th>	
+<th width="60px" class="left 10" ><a href="#hint" class="tsaltooltip" >Variables<span class="tsalinfo2">This column displays the way that each script's variables (if there are any) can be determined by the user.
+<br><br><table class="vis"><tbody><tr><th>Variables status</th><th>Explanation</th></tr>
+<tr><td><span class="tsalkembed">Embedded</span></td><td>All customizable variables are embedded in the script.</td></tr>
+<tr><td><span class="tsalkembed2"><span>No variables</span></td><td>There are no customizable variables in the script.</td></tr>
+<tr><td><span class="tsalkembed1"><span>Manual</span></td><td>All or a part of the customizable variables of this script need to be modified on the script code.</td></tr>
+</tbody></table></span></a></th></span></a></th>
+<th width="20px" style="max-width:30px;" class="left 11" ><a href="#hint" class="tsaltooltip" >Info<span class="tsalinfo">This column displays which scripts provide information concerning their functions ingame.</span></a></th>
+<th width="50px" class="left 12" ><a href="#hint" class="tsaltooltip" >Edit level<span class="tsalinfo_special">This column displays the level of editing (if there is any) on the initial code of each script.<br><br> 
+<table class="vis"><tbody><tr><th>Edit level</th><th>Explanation</th></tr>
+<tr><td><font color="blue">☀</font><font color="grey">☀☀☀☀</font></td><td>translations & style modifications</td></tr>
+<tr><td><font color="blue">☀☀</font><font color="grey">☀☀☀</font></td><td>all the above & fixes/minor additional functions</td></tr>
+<tr><td><font color="blue">☀☀☀</font><font color="grey">☀☀</font></td><td>all the above & additional functions</td></tr>
+<tr><td><font color="blue">☀☀☀☀</font><font color="grey">☀</font></td><td>all the above & major functions' fixes/additions</td></tr>
+<tr><td><font color="blue">☀☀☀☀☀</font></td><td>more than 60% of the code is re-written</td></tr>
+<tr><td><font color="grey">☀☀☀☀☀</font></td><td>the code of this script has not been edited</td></tr>
+</tbody></table></span></a></th>
+<th width="50px" style="max-width: 110px;" class="left 13" ><a href="#hint" class="tsaltooltip" >Category<span class="tsalinfo">This column displays the categories of each script.<br><br> Categories define the <u>functions</u> of a script. They may also define the <u>main pages</u> of the game on which the main functions of a script are operated.</span></a></th>
+<th width="70px" style="max-width: 100px;" class="left 14" ><a href="#hint" class="tsaltooltip" >Languages<span class="tsalinfo2">This column displays the supported languages of each script.<br><br> The language of any script can be changed by defining the variable <b><font color="red">language</font></b> that is embedded in each script. Mouse over each language to show the translator/writer. 
+<br><br><table class="vis"><tbody><tr><th>Icon</th><th>Explanation</th></tr>
+<tr><td><span class="tsalkembed"><img src="https://dl.dropboxusercontent.com/s/xqobkeluk5wts88/green_arrow.png"></span></td><td>Displays the default language of the script.</td></tr>
+<tr><td><span class="tsalkembed2"><span><img src="https://dl.dropboxusercontent.com/s/s0n5js9a08jwx92/silver_arrows.png"></span></td><td>Displays any language written by any official editor or author of the script.</td></tr>
+<tr><td><span class="tsalkembed1"><span><img src="https://dl.dropboxusercontent.com/s/h9o9xb1u0pbedij/blue_arrow.png"></span></td><td>Displays any language written by other individuals.</td></tr>
+</tbody></table></span></a></th></span></a></th>
+<th width="25px" style="max-width: 55px;" class="left 15" ><a href="#hint" class="tsaltooltip" >Legal status<span class="tsalinfo">This column displays the approval status of each script.<br><br> The approval process is entirely relied upon the Admin Team of .net server.</span></a></th>
+<th width="25px" style="max-width: 55px;" class="left 16" ><a href="#hint" class="tsaltooltip" >Bugs<span class="tsalinfo">This column displays whether there are bugs reported for each script.<br><br> If there are any, there will be mentioned in this column.</span></a></th>
+<th width="25px" style="max-width: 55px;" class="left 17" ><a href="#hint" class="tsaltooltip" >API<span class="tsalinfo">This column displays whether a script has a ScriptAPI register identity.</span></a></th>
+<th width="25px" style="max-width: 55px;" class="left 18" ><a href="#hint" class="tsaltooltip" >Code Com.<span class="tsalinfo">This column displays whether the code of each script is compatible with every server of the Tribal Wars.<br><br> If not, search for variables, in translation files, noted as <b><font color="red">tw</font></b>.</span></a></th>
+<th width="25px" style="max-width: 80px;" class="left 19" ><a href="#hint" class="tsaltooltip" >Trans<span class="tsalinfo">This column displays the translation files of each script.<br><br> Click on a file to show the translation code. If you want to add a translation, modify every aspect needed and mail the translated file to the address <b><font color="blue">tsalkapone@hotmail.com</font></b> mentioning the language in the topic.</span></a></th>
+
+
+
+
+							</tr></thead><tbody>
+<tr class="scriptlist" style="height: 20px;">
+<td class="0" width="60px"><span class="hidden_cell">1</span>09/06/2016</td>
+<td class="1" width="200px" ><a href="#hint" id="script_1" onclick="script_display(this.id);" class="tooltip"><span name="script_1">Commander Script</span><span class="info" >A script to send any kind of command (nuke, farming, fake, support).</span></a></td>
+<td class="center 2" style="max-width:25px;" width="25px">1.0</td>
+<td class="center 3" width="25px"><span class="no_forum"></span><span class="hidden_cell">1</span></td>
+<td class="center 4" width="25px"><span class="hidden_cell">1</span><span class="yes_premium"></span></td>
+<td class="center 5" width="40px"><span class="hidden_cell">1</span><span class="yes_mozilla"></span>
+<span class="hidden_cell">1</span><span class="yes_opera"></span><span style="display:none;">yes_coded opera_c mozilla_c opera_c all_c non_pa pages_all support commands rally time_p co_f</span>
+<span class="hidden_cell">1</span><span class="yes_chrome"></span></td>
+<td class="6" width="80px">Tsalkapone</td>
+<td class="7" width="80px">---</td>
+<td class="center 8" width="50px">&#9733;&#9733;&#9733;&#9733;&#9734;</td>
+<td class="center 9" style="max-width:25px;" width="25px"><span class="tsaltooltip2">8.47.1<span class="tsalinfo">Last tested on version: 8.48.1</span></span></td>
+<td class="center tsalkembed 10" width="60px">Embedded</td>
+<td class="center 11" width="25px"><span class="hidden_cell">1</span><span class="yes_embed"></span></td>
+<td class="center 12" width="50px"><font color="grey">☀☀☀☀☀</font><span class="hidden_cell">5</span></td>
+<td class="left 13" width="50px" style="max-width: 110px;"><ul class="a"><li>Rally point</li><li>Fake</li><li>Farming</li><li>Nuke</li><li>Support</li><li>Attack</li><li>Coords finder</li></ul></td>
+<td class="left 14" width="50px" style="max-width: 110px;"><ul><li></li><li><span class="default_lang"></span><span class="tsaltooltip2">English<span class="tsaltrans">By Tsalkapone</span></span></li><li><span class="mine"></span><span class="tsaltooltip2">Greek<span class="tsaltrans">By Tsalkapone</span></span></li><li><span class="others"></span><span class="tsaltooltip2">Italian<span class="tsaltrans">By sndb & im lovin it</span></span></li></ul></td>
+<td class="center 15" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_legal"></span></td>
+<td class="center 16" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="no_bugs"></span></td>
+<td class="center 17" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_api"></span></td>
+<td class="center 18" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_coded"></span></td>
+<td class="center 19" width="25px" style="max-width: 25px;"><a href="https://dl.dropboxusercontent.com/s/rnibf08fq66es33/Commander_Script.txt" class="tooltip" target="_blank"><img src="https://dl.dropboxusercontent.com/s/pjv3zlroqyd84rj/Tsalkapone_openlink.png" height="25px;" width="25px;"><span class="tsalinfo">Click to open the translation file on a new tab</span></a></td>
+</tr>
+<tr class="scriptlist" style="height: 20px;">
+<td class="0" width="60px"><span class="hidden_cell">2</span>10/06/2016</td>
+<td class="1" width="200px"><a href="#hint"  id="script_2" onclick="script_display(this.id);"  class="tooltip"><span name="script_2">Resource Balancer</span><span class="info" >A script to balance resources among your villages.</span></a></td>
+<td class="center 2" style="max-width:25px;" width="25px">1.1</td>
+<td class="center 3" width="25px"><span class="no_forum"></span><span class="hidden_cell">1</span></td>
+<td class="center 4" width="25px"><span class="hidden_cell">1</span><span class="no_premium"></span></td>
+<td class="center 5" width="40px"><span class="hidden_cell">1</span><span class="yes_mozilla"></span>
+<span class="hidden_cell">1</span><span class="yes_opera"></span><span style="display:none;">yes_coded opera_c mozilla_c opera_c all_c yes_pa ov_production all_over</span>
+<span class="hidden_cell">1</span><span class="yes_chrome"></span></td>
+<td class="6" width="80px">*Rix*,<br>ronpaul2008</td>
+<td class="7" width="80px">Tsalkapone</td>
+<td class="center 8" width="50px">&#9733;&#9733;&#9733;&#9734;&#9734;</td>
+<td class="center 9" style="max-width:25px;" width="25px"><span class="tsaltooltip2">8.47.1<span class="tsalinfo">Last tested on version: 8.48.1</span></span></td>
+<td class="center 10 tsalkembed" width="60px"><span>Embedded</span></td>
+<td class="center 11" width="25px"><span class="hidden_cell">1</span><span class="yes_embed"></span></td>
+<td class="center 12" width="50px"><font color="blue">☀☀</font><font color="grey">☀☀☀</font><span class="hidden_cell">3</span></td>
+<td class="left 13" width="50px" style="max-width: 110px;"><ul class="a"><li>Res. balance</li><li>Market</li><li>Production</li><li>Overviews</li></ul></td>
+<td class="left 14" width="50px" style="max-width: 110px;"><ul><li><span class="english default_lang"></span><span class="tsaltooltip2">English<span class="tsaltrans">By Tsalkapone</span></span></li><li><span class="mine greek"></span><span class="tsaltooltip2">Greek<span class="tsaltrans">By Tsalkapone</span></span></li></ul></td>
+<td class="center 15" width="25px" style="max-width: 25px;"><span class="yes_legal"></span></td>
+<td class="center 16" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="no_bugs"></span></td>
+<td class="center 17" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_api"></span></td>
+<td class="center 18" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_coded"></span></td>
+<td class="center 19" width="25px" style="max-width: 25px;"><a href="https://dl.dropboxusercontent.com/s/bisskejyp502190/Resource_Balancer.txt" class="tooltip" target="_blank"><img src="https://dl.dropboxusercontent.com/s/pjv3zlroqyd84rj/Tsalkapone_openlink.png" height="25px;" width="25px;"><span class="tsalinfo">Click to open the translation file on a new tab</span></a></td>
+</tr>
+<tr class="scriptlist" style="height: 20px;">
+<td class="0" width="60px"><span class="hidden_cell">3</span>10/06/2016</td>
+<td class="1" width="200px" ><a href="#hint"  id="script_3" onclick="script_display(this.id);"  class="tooltip"><span name="script_3">Additional Map Info</span><span class="info" >A script to display additional village info on the Map.</span></a></td>
+<td class="center 2" style="max-width:25px;" width="25px">1.2</td>
+<td class="center 3" width="25px"><span class="no_forum"></span><span class="hidden_cell">1</span></a></td>
+<td class="center 4" width="25px"><span class="hidden_cell">2</span><span class="no_premium"></span></td>
+<td class="center 5" width="40px"><span class="hidden_cell">1</span><span class="yes_mozilla"></span>
+<span class="hidden_cell">1</span><span class="yes_opera"></span><span style="display:none;">no_coded opera_c mozilla_c opera_c all_c yes_pa</span>
+<span class="hidden_cell">1</span><span class="yes_chrome"></span></td>
+<td class="6" width="80px">Tsalkapone,<br>Dale McKay,<br>LastApparatus</td>
+<td class="7" width="80px">Tsalkapone</td>
+<td class="center 8" width="50px">&#9733;&#9733;&#9733;&#9734;&#9734;</td>
+<td class="center 9" style="max-width:25px;" width="25px"><span class="tsaltooltip2">8.47.1<span class="tsalinfo">Last tested on version: 8.48.1</span></span></td>
+<td class="center 10 tsalkembed" width="60px"><span>Embedded</span></td>
+<td class="center 11" width="25px"><span class="hidden_cell">1</span><span class="yes_embed"></span></td>
+<td class="center 12" width="50px"><font color="blue">☀☀☀☀☀</font><font color="grey"><span class="hidden_cell">0</span></font></td>
+<td class="left 13" width="50px" style="max-width: 110px;"><ul class="a"><li>Map</li><li>Loot</li><li>Farming</li><li>Trimming</li><li>Attack</li></ul></td>
+<td class="left 14" width="50px" style="max-width: 110px;"><ul><li><span class="english default_lang"></span><span class="tsaltooltip2">English<span class="tsaltrans">By Tsalkapone</span></span></li><li><span class="mine greek"></span><span class="tsaltooltip2">Greek<span class="tsaltrans">By Tsalkapone</span></span></li><li><span class="others"></span><span class="tsaltooltip2">Italian<span class="tsaltrans">By sndb & im lovin it</span></span></li></ul></td>
+<td class="center 15" width="25px" style="max-width: 25px;"><span class="yes_legal"></span></td>
+<td class="center 16" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="no_bugs"></span></td>
+<td class="center 17" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_api"></span></td>
+<td class="center 18" width="25px" style="max-width: 25px;"><span class="no_coded"></span></td>
+<td class="center 19" width="25px" style="max-width: 25px;"><a href="https://dl.dropboxusercontent.com/s/ibrvuw9eyrj6xiv/Additional_Map_Info.txt" class="tooltip" target="_blank"><img src="https://dl.dropboxusercontent.com/s/pjv3zlroqyd84rj/Tsalkapone_openlink.png" height="25px;" width="25px;"><span class="tsalinfo">Click to open the translation file on a new tab</span></a></td>
+</tr>
+<tr class="scriptlist" style="height: 20px;">
+<td class="0" width="60px"><span class="hidden_cell">1</span>13/06/2016</td>
+<td class="1" width="200px" ><a href="#hint" id="script_4" onclick="script_display(this.id);" class="tooltip"><span name="script_4">Map Scripts</span><span class="info" >A script to extract, find, and modify coordinates, resize map and design religion influence.</span></a></td>
+<td class="center 2" style="max-width:25px;" width="25px">1.1</td>
+<td class="center 3" width="25px"><span class="no_forum"></span><span class="hidden_cell">1</span></td>
+<td class="center 4" width="25px"><span class="hidden_cell">1</span><span class="yes_premium"></span></td>
+<td class="center 5" width="40px"><span class="hidden_cell">1</span><span class="yes_mozilla"></span>
+<span class="hidden_cell">1</span><span class="yes_opera"></span><span style="display:none;">yes_coded opera_c mozilla_c opera_c all_c non_pa co_ex map_re co_f tab_des farm_f barbs_f rel_in map_re</span>
+<span class="hidden_cell">1</span><span class="yes_chrome"></span></td>
+<td class="6" width="80px">Tsalkapone,<br>οthers</td>
+<td class="7" width="80px">Tsalkapone</td>
+<td class="center 8" width="50px">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
+<td class="center 9" style="max-width:25px;" width="25px"><span class="tsaltooltip2">8.47.1<span class="tsalinfo">Last tested on version: 8.48.1</span></span></td>
+<td class="center tsalkembed 10" width="60px">Embedded</td>
+<td class="center 11" width="25px"><span class="hidden_cell">1</span><span class="yes_embed"></span></td>
+<td class="center 12" width="50px"><font color="grey">☀☀☀☀☀</font><span class="hidden_cell">5</span></td>
+<td class="left 13" width="50px" style="max-width: 110px;"><ul class="a"><li>Map</li><li>Coords Extractor</li><li>Coords Finder</li><li>Village Finder</li><li>Barbs Finder</li><li>Rel. Influence</li><li>Map Resize</li><li>Table Designer</li></ul></td>
+<td class="left 14" width="50px" style="max-width: 110px;"><ul><li></li><li><span class="default_lang"></span><span class="tsaltooltip2">English<span class="tsaltrans">By Tsalkapone</span></span></li><li><span class="mine"></span><span class="tsaltooltip2">Greek<span class="tsaltrans">By Tsalkapone</span></span></li><li><span class="others"></span><span class="tsaltooltip2">Italian<span class="tsaltrans">By sndb & im lovin it</span></span></li></ul></td>
+<td class="center 15" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_legal"></span></td>
+<td class="center 16" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="no_bugs"></span></td>
+<td class="center 17" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_api"></span></td>
+<td class="center 18" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_coded"></span></td>
+<td class="center 19" width="25px" style="max-width: 25px;"><a href="https://dl.dropboxusercontent.com/s/jzv7zbg2jjonuy1/Map_Scripts.txt" class="tooltip" target="_blank"><img src="https://dl.dropboxusercontent.com/s/pjv3zlroqyd84rj/Tsalkapone_openlink.png" height="25px;" width="25px;"><span class="tsalinfo">Click to open the translation file on a new tab</span></a></td>
+</tr>
+<tr class="scriptlist" style="height: 20px;">
+<td class="0" width="60px"><span class="hidden_cell">1</span>19/06/2016</td>
+<td class="1" width="200px" ><a href="#hint" id="script_5" onclick="script_display(this.id);" class="tooltip"><span name="script_5">Advanced Coords Extractor</span><span class="info" >An advanced tool to extract, find and modify coordinates, generate fake & farming scripts and design a table.</span></a></td>
+<td class="center 2" style="max-width:25px;" width="25px">1.0</td>
+<td class="center 3" width="25px"><span class="no_forum"></span><span class="hidden_cell">1</span></td>
+<td class="center 4" width="25px"><span class="hidden_cell">1</span><span class="yes_premium"></span></td>
+<td class="center 5" width="40px"><span class="hidden_cell">1</span><span class="yes_mozilla"></span>
+<span class="hidden_cell">1</span><span class="yes_opera"></span><span style="display:none;">yes_coded opera_c mozilla_c bonus opera_c all_c non_pa pages_all co_ex co_f farm_f barbs_f sc_gen tab_des</span>
+<span class="hidden_cell">1</span><span class="yes_chrome"></span></td>
+<td class="6" width="80px">Tsalkapone,<br>Dale McKay</td>
+<td class="7" width="80px">Tsalkapone</td>
+<td class="center 8" width="50px">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
+<td class="center 9" style="max-width:25px;" width="25px"><span class="tsaltooltip2">8.47.1<span class="tsalinfo">Last tested on version: 8.48.1</span></span></td>
+<td class="center tsalkembed 10" width="60px">Embedded</td>
+<td class="center 11" width="25px"><span class="hidden_cell">1</span><span class="yes_embed"></span></td>
+<td class="center 12" width="50px"><font color="blue">☀☀☀☀☀</font><span class="hidden_cell">0</span></td>
+<td class="left 13" width="50px" style="max-width: 110px;"><ul class="a"><li>Coords Extractor</li><li>Coords Finder</li><li>Village Finder</li><li>Barbs Finder</li><li>Table Designer</li><li>Scr. Generator</li></ul></td>
+<td class="left 14" width="50px" style="max-width: 110px;"><ul><li></li><li><span class="default_lang"></span><span class="tsaltooltip2">English<span class="tsaltrans">By Tsalkapone</span></span></li><li><span class="mine"></span><span class="tsaltooltip2">Greek<span class="tsaltrans">By Tsalkapone</span></span></li></ul></td>
+<td class="center 15" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_legal"></span></td>
+<td class="center 16" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="no_bugs"></span></td>
+<td class="center 17" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_api"></span></td>
+<td class="center 18" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_coded"></span></td>
+<td class="center 19" width="25px" style="max-width: 25px;"><a href="https://dl.dropboxusercontent.com/s/8ynh0owifu40hsd/Advance_Coords_Extractor.txt" class="tooltip" target="_blank"><img src="https://dl.dropboxusercontent.com/s/pjv3zlroqyd84rj/Tsalkapone_openlink.png" height="25px;" width="25px;"><span class="tsalinfo">Click to open the translation file on a new tab</span></a></td>
+</tr>
+<tr class="scriptlist" style="height: 20px;">
+<td class="0" width="60px"><span class="hidden_cell">1</span>19/06/2016</td>
+<td class="1" width="200px" ><a href="#hint" id="script_6" onclick="script_display(this.id);" class="tooltip"><span name="script_6">Fake Script No1</span><span class="info" >Insert specified units and enter a random coordinate in the rally point.</span></a></td>
+<td class="center 2" style="max-width:25px;" width="25px">1.0</td>
+<td class="center 3" width="25px"><span class="no_forum"></span><span class="hidden_cell">1</span></td>
+<td class="center 4" width="25px"><span class="hidden_cell">1</span><span class="yes_premium"></span></td>
+<td class="center 5" width="40px"><span class="hidden_cell">1</span><span class="yes_mozilla"></span>
+<span class="hidden_cell">1</span><span class="yes_opera"></span><span style="display:none;">yes_coded opera_c mozilla_c opera_c all_c non_pa rally fake</span>
+<span class="hidden_cell">1</span><span class="yes_chrome"></span></td>
+<td class="6" width="80px">Dale McKay</td>
+<td class="7" width="80px">Tsalkapone</td>
+<td class="center 8" width="50px">&#9733;&#9734;&#9734;&#9734;&#9734;</td>
+<td class="center 9" style="max-width:25px;" width="25px"><span class="tsaltooltip2">8.47.1<span class="tsalinfo">Last tested on version: 8.48.1</span></span></td>
+<td class="center tsalkembed1 10" width="60px">Manual</td>
+<td class="center 11" width="25px"><span class="hidden_cell">1</span><span class="yes_embed"></span></td>
+<td class="center 12" width="50px"><font color="blue">☀☀</font><font color="grey">☀☀☀</font><span class="hidden_cell">3</span></td>
+<td class="left 13" width="50px" style="max-width: 110px;"><ul class="a"><li>Fake</li><li>Attack</li></ul></td>
+<td class="left 14" width="50px" style="max-width: 110px;"><ul><li></li><li><span class="default_lang"></span><span class="tsaltooltip2">English<span class="tsaltrans">By Tsalkapone</span></span></li><li><span class="mine"></span><span class="tsaltooltip2">Greek<span class="tsaltrans">By Tsalkapone</span></span></li></ul></td>
+<td class="center 15" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_legal"></span></td>
+<td class="center 16" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="no_bugs"></span></td>
+<td class="center 17" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_api"></span></td>
+<td class="center 18" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_coded"></span></td>
+<td class="center 19" width="25px" style="max-width: 25px;"><a href="https://dl.dropboxusercontent.com/s/6luyb0y4pzdh06p/Fake_Script1.txt" class="tooltip" target="_blank"><img src="https://dl.dropboxusercontent.com/s/pjv3zlroqyd84rj/Tsalkapone_openlink.png" height="25px;" width="25px;"><span class="tsalinfo">Click to open the translation file on a new tab</span></a></td>
+</tr>
+<tr class="scriptlist" style="height: 20px;">
+<td class="0" width="60px"><span class="hidden_cell">1</span>19/06/2016</td>
+<td class="1" width="200px" ><a href="#hint" id="script_7" onclick="script_display(this.id);" class="tooltip"><span name="script_7">Fake Script No2</span><span class="info" >Insert specified units and enter a coordinate in a consecutive or specific order in the rally point.</span></a></td>
+<td class="center 2" style="max-width:25px;" width="25px">1.0</td>
+<td class="center 3" width="25px"><span class="no_forum"></span><span class="hidden_cell">1</span></td>
+<td class="center 4" width="25px"><span class="hidden_cell">1</span><span class="yes_premium"></span></td>
+<td class="center 5" width="40px"><span class="hidden_cell">1</span><span class="yes_mozilla"></span>
+<span class="hidden_cell">1</span><span class="yes_opera"></span><span style="display:none;">yes_coded opera_c mozilla_c opera_c all_c non_pa rally fake</span>
+<span class="hidden_cell">1</span><span class="yes_chrome"></span></td>
+<td class="6" width="80px">Dale McKay</td>
+<td class="7" width="80px">Tsalkapone</td>
+<td class="center 8" width="50px">&#9733;&#9734;&#9734;&#9734;&#9734;</td>
+<td class="center 9" style="max-width:25px;" width="25px"><span class="tsaltooltip2">8.47.1<span class="tsalinfo">Last tested on version: 8.48.1</span></span></td>
+<td class="center tsalkembed1 10" width="60px">Manual</td>
+<td class="center 11" width="25px"><span class="hidden_cell">1</span><span class="yes_embed"></span></td>
+<td class="center 12" width="50px"><font color="blue">☀☀</font><font color="grey">☀☀☀</font><span class="hidden_cell">3</span></td>
+<td class="left 13" width="50px" style="max-width: 110px;"><ul class="a"><li>Farming</li><li>Attack</li></ul></td>
+<td class="left 14" width="50px" style="max-width: 110px;"><ul><li></li><li><span class="default_lang"></span><span class="tsaltooltip2">English<span class="tsaltrans">By Tsalkapone</span></span></li><li><span class="mine"></span><span class="tsaltooltip2">Greek<span class="tsaltrans">By Tsalkapone</span></span></li></ul></td>
+<td class="center 15" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_legal"></span></td>
+<td class="center 16" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="no_bugs"></span></td>
+<td class="center 17" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_api"></span></td>
+<td class="center 18" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_coded"></span></td>
+<td class="center 19" width="25px" style="max-width: 25px;"><a href="https://dl.dropboxusercontent.com/s/w9g11rw5aylvaws/Fake_Script2.txt" class="tooltip" target="_blank"><img src="https://dl.dropboxusercontent.com/s/pjv3zlroqyd84rj/Tsalkapone_openlink.png" height="25px;" width="25px;"><span class="tsalinfo">Click to open the translation file on a new tab</span></a></td>
+</tr>
+<tr class="scriptlist" style="height: 20px;">
+<td class="0" width="60px"><span class="hidden_cell">1</span>20/06/2016</td>
+<td class="1" width="200px" ><a href="#hint" id="script_8" onclick="script_display(this.id);" class="tooltip"><span name="script_8">Farming Script</span><span class="info" >Insert specified units and enter a coordinate in a consecutive or specific order in the rally point.</span></a></td>
+<td class="center 2" style="max-width:25px;" width="25px">1.0</td>
+<td class="center 3" width="25px"><span class="no_forum"></span><span class="hidden_cell">1</span></td>
+<td class="center 4" width="25px"><span class="hidden_cell">1</span><span class="yes_premium"></span></td>
+<td class="center 5" width="40px"><span class="hidden_cell">1</span><span class="yes_mozilla"></span>
+<span class="hidden_cell">1</span><span class="yes_opera"></span><span style="display:none;">yes_coded opera_c mozilla_c opera_c all_c non_pa rally farming attack</span>
+<span class="hidden_cell">1</span><span class="yes_chrome"></span></td>
+<td class="6" width="80px">Tsalkapone</td>
+<td class="7" width="80px">---</td>
+<td class="center 8" width="50px">&#9733;&#9734;&#9734;&#9734;&#9734;</td>
+<td class="center 9" style="max-width:25px;" width="25px"><span class="tsaltooltip2">8.47.1<span class="tsalinfo">Last tested on version: 8.48.1</span></span></td>
+<td class="center tsalkembed1 10" width="60px">Manual</td>
+<td class="center 11" width="25px"><span class="hidden_cell">1</span><span class="yes_embed"></span></td>
+<td class="center 12" width="50px"><font color="blue"></font><font color="grey">☀☀☀☀☀</font><span class="hidden_cell">3</span></td>
+<td class="left 13" width="50px" style="max-width: 110px;"><ul class="a"><li>Fake</li><li>Attack</li></ul></td>
+<td class="left 14" width="50px" style="max-width: 110px;"><ul><li></li><li><span class="default_lang"></span><span class="tsaltooltip2">English<span class="tsaltrans">By Tsalkapone</span></span></li><li><span class="mine"></span><span class="tsaltooltip2">Greek<span class="tsaltrans">By Tsalkapone</span></span></li></ul></td>
+<td class="center 15" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_legal"></span></td>
+<td class="center 16" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="no_bugs"></span></td>
+<td class="center 17" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_api"></span></td>
+<td class="center 18" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_coded"></span></td>
+<td class="center 19" width="25px" style="max-width: 25px;"><a href="https://dl.dropboxusercontent.com/s/fejd0fnj023p1mc/Farming_Script.txt" class="tooltip" target="_blank"><img src="https://dl.dropboxusercontent.com/s/pjv3zlroqyd84rj/Tsalkapone_openlink.png" height="25px;" width="25px;"><span class="tsalinfo">Click to open the translation file on a new tab</span></a></td>
+</tr>
+<tr class="scriptlist" style="height: 20px;">
+<td class="0" width="60px"><span class="hidden_cell">1</span>20/06/2016</td>
+<td class="1" width="200px" ><a href="#hint" id="script_9" onclick="script_display(this.id);" class="tooltip"><span name="script_9">Nuke/Support Script</span><span class="info" >Insert specified units and enter a coordinate in a consecutive or specific order in the rally point.</span></a></td>
+<td class="center 2" style="max-width:25px;" width="25px">1.0</td>
+<td class="center 3" width="25px"><span class="no_forum"></span><span class="hidden_cell">1</span></td>
+<td class="center 4" width="25px"><span class="hidden_cell">1</span><span class="yes_premium"></span></td>
+<td class="center 5" width="40px"><span class="hidden_cell">1</span><span class="yes_mozilla"></span>
+<span class="hidden_cell">1</span><span class="yes_opera"></span><span style="display:none;">yes_coded opera_c mozilla_c opera_c all_c non_pa rally support attack</span>
+<span class="hidden_cell">1</span><span class="yes_chrome"></span></td>
+<td class="6" width="80px">Tsalkapone</td>
+<td class="7" width="80px">---</td>
+<td class="center 8" width="50px">&#9733;&#9734;&#9734;&#9734;&#9734;</td>
+<td class="center 9" style="max-width:25px;" width="25px"><span class="tsaltooltip2">8.47.1<span class="tsalinfo">Last tested on version: 8.48.1</span></span></td>
+<td class="center tsalkembed1 10" width="60px">Manual</td>
+<td class="center 11" width="25px"><span class="hidden_cell">1</span><span class="yes_embed"></span></td>
+<td class="center 12" width="50px"><font color="blue"></font><font color="grey">☀☀☀☀☀</font><span class="hidden_cell">3</span></td>
+<td class="left 13" width="50px" style="max-width: 110px;"><ul class="a"><li>Nuke</li><li>Support</li><li>Attack</li></ul></td>
+<td class="left 14" width="50px" style="max-width: 110px;"><ul><li></li><li><span class="default_lang"></span><span class="tsaltooltip2">English<span class="tsaltrans">By Tsalkapone</span></span></li><li><span class="mine"></span><span class="tsaltooltip2">Greek<span class="tsaltrans">By Tsalkapone</span></span></li></ul></td>
+<td class="center 15" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_legal"></span></td>
+<td class="center 16" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="no_bugs"></span></td>
+<td class="center 17" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_api"></span></td>
+<td class="center 18" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_coded"></span></td>
+<td class="center 19" width="25px" style="max-width: 25px;"><a href="https://dl.dropboxusercontent.com/s/sjohuvypyw9ux36/Nuke_Support_Script.txt" class="tooltip" target="_blank"><img src="https://dl.dropboxusercontent.com/s/pjv3zlroqyd84rj/Tsalkapone_openlink.png" height="25px;" width="25px;"><span class="tsalinfo">Click to open the translation file on a new tab</span></a></td>
+</tr>
+<tr class="scriptlist" style="height: 20px;">
+<td class="0" width="60px"><span class="hidden_cell">1</span>21/06/2016</td>
+<td class="1" width="200px" ><a href="#hint" id="script_10" onclick="script_display(this.id);" class="tooltip"><span name="script_10">Army's Reporter</span><span class="info" >This script counts your troops and categorize them in groups and unit-types. It also creates army-report forms compatible with the game's bb-codes.</span></a></td>
+<td class="center 2" style="max-width:25px;" width="25px">1.0</td>
+<td class="center 3" width="25px"><span class="no_forum"></span><span class="hidden_cell">1</span></td>
+<td class="center 4" width="25px"><span class="hidden_cell">1</span><span class="no_premium"></span></td>
+<td class="center 5" width="40px"><span class="hidden_cell">1</span><span class="yes_mozilla"></span>
+<span class="hidden_cell">1</span><span class="yes_opera"></span><span style="display:none;">yes_coded opera_c mozilla_c opera_c all_c yes_pa tab_des tr_count tr_cat vil_gr all_over ov_troops</span>
+<span class="hidden_cell">1</span><span class="yes_chrome"></span></td>
+<td class="6" width="80px">Tsalkapone,<br>Dale McKay</td>
+<td class="7" width="80px">Tsalkapone</td>
+<td class="center 8" width="50px">&#9733;&#9733;&#9733;&#9734;&#9734;</td>
+<td class="center 9" style="max-width:25px;" width="25px"><span class="tsaltooltip2">8.47.1<span class="tsalinfo">Last tested on version: 8.48.1</span></span></td>
+<td class="center 10 tsalkembed2" width="60px"><span>No variables</span></td>
+<td class="center 11" width="25px"><span class="hidden_cell">1</span><span class="yes_embed"></span></td>
+<td class="center 12" width="50px"><font color="blue">☀☀☀☀</font><font color="grey">☀</font><span class="hidden_cell">3</span></td>
+<td class="left 13" width="50px" style="max-width: 110px;"><ul class="a"><li>Troops Report</li><li>Troops Counter</li><li>Army Categorize</li><li>Grouping</li></ul></td>
+<td class="left 14" width="50px" style="max-width: 110px;"><ul><li></li><li><span class="default_lang"></span><span class="tsaltooltip2">English<span class="tsaltrans">By Tsalkapone</span></span></li><li><span class="mine"></span><span class="tsaltooltip2">Greek<span class="tsaltrans">By Tsalkapone</span></span></li></ul></td>
+<td class="center 15" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_legal"></span></td>
+<td class="center 16" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="no_bugs"></span></td>
+<td class="center 17" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_api"></span></td>
+<td class="center 18" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_coded"></span></td>
+<td class="center 19" width="25px" style="max-width: 25px;"><a href="https://dl.dropboxusercontent.com/s/dn5twwj0t6jvv48/Army_Reported.txt" class="tooltip" target="_blank"><img src="https://dl.dropboxusercontent.com/s/pjv3zlroqyd84rj/Tsalkapone_openlink.png" height="25px;" width="25px;"><span class="tsalinfo">Click to open the translation file on a new tab</span></a></td>
+</tr>
+<tr class="scriptlist" style="height: 20px;">
+<td class="0" width="60px"><span class="hidden_cell">1</span>21/06/2016</td>
+<td class="1" width="200px" ><a href="#hint" id="script_11" onclick="script_display(this.id);" class="tooltip"><span name="script_11">Market Tools</span><span class="info" >This script provides various tools to enhance your gameplay in Market pages.</span></a></td>
+<td class="center 2" style="max-width:25px;" width="25px">1.0</td>
+<td class="center 3" width="25px"><span class="no_forum"></span><span class="hidden_cell">1</span></td>
+<td class="center 4" width="25px"><span class="hidden_cell">1</span><span class="yes_premium"></span></td>
+<td class="center 5" width="40px"><span class="hidden_cell">1</span><span class="yes_mozilla"></span>
+<span class="hidden_cell">1</span><span class="yes_opera"></span><span style="display:none;">yes_coded opera_c mozilla_c opera_c all_c non_pa market balance prem_ex send_res mark_of</span>
+<span class="hidden_cell">1</span><span class="yes_chrome"></span></td>
+<td class="6" width="80px">Tsalkapone</td>
+<td class="7" width="80px">---</td>
+<td class="center 8" width="50px">&#9733;&#9733;&#9734;&#9734;&#9734;</td>
+<td class="center 9" style="max-width:25px;" width="25px"><span class="tsaltooltip2">8.47.1<span class="tsalinfo">Last tested on version: 8.48.1</span></span></td>
+<td class="center tsalkembed 10" width="60px">Embedded</td>
+<td class="center 11" width="25px"><span class="hidden_cell">1</span><span class="yes_embed"></span></td>
+<td class="center 12" width="50px"><font color="blue"></font><font color="grey">☀☀☀☀☀</font><span class="hidden_cell">3</span></td>
+<td class="left 13" width="50px" style="max-width: 110px;"><ul class="a"><li>Market</li><li>Res. Balancer</li><li>Create offers</li><li>Prem. Exchange</li><li>Send Res.</li></ul></td>
+<td class="left 14" width="50px" style="max-width: 110px;"><ul><li></li><li><span class="default_lang"></span><span class="tsaltooltip2">English<span class="tsaltrans">By Tsalkapone</span></span></li><li><span class="mine"></span><span class="tsaltooltip2">Greek<span class="tsaltrans">By Tsalkapone</span></span></li><li><span class="others"></span><span class="tsaltooltip2">Italian<span class="tsaltrans">By sndb & im lovin it</span></span></li></ul></td>
+<td class="center 15" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_legal"></span></td>
+<td class="center 16" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="no_bugs"></span></td>
+<td class="center 17" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_api"></span></td>
+<td class="center 18" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_coded"></span></td>
+<td class="center 19" width="25px" style="max-width: 25px;"><a href="https://dl.dropboxusercontent.com/s/ooi8cx2slefi5q5/Market_Tools.txt" class="tooltip" target="_blank"><img src="https://dl.dropboxusercontent.com/s/pjv3zlroqyd84rj/Tsalkapone_openlink.png" height="25px;" width="25px;"><span class="tsalinfo">Click to open the translation file on a new tab</span></a></td>
+</tr>
+<tr class="scriptlist" style="height: 20px;">
+<td class="0" width="60px"><span class="hidden_cell">1</span>22/06/2016</td>
+<td class="1" width="200px" ><a href="#hint" id="script_12" onclick="script_display(this.id);" class="tooltip"><span name="script_12">Time & Distance Calculator</span><span class="info" >This script provides various tools to calculate distance and time differences.</span></a></td>
+<td class="center 2" style="max-width:25px;" width="25px">1.0</td>
+<td class="center 3" width="25px"><span class="no_forum"></span><span class="hidden_cell">1</span></td>
+<td class="center 4" width="25px"><span class="hidden_cell">1</span><span class="no_premium"></span></td>
+<td class="center 5" width="40px"><span class="hidden_cell">1</span><span class="yes_mozilla"></span>
+<span class="hidden_cell">1</span><span class="yes_opera"></span><span style="display:none;">yes_coded opera_c mozilla_c opera_c all_c yes_pa all_over unit_sp ov_combined snipe dis_cal time_cal back_time link_s</span>
+<span class="hidden_cell">1</span><span class="yes_chrome"></span></td>
+<td class="6" width="80px">Tsalkapone,<br>cheesasaurus,<br>Dale McKay</td>
+<td class="7" width="80px">Tsalkapone</td>
+<td class="center 8" width="50px">&#9733;&#9733;&#9733;&#9733;&#9734;</td>
+<td class="center 9" style="max-width:25px;" width="25px"><span class="tsaltooltip2">8.48.1<span class="tsalinfo">Last tested on version: 8.48.1</span></span></td>
+<td class="center 10 tsalkembed2" width="60px"><span>No variables</span></td>
+<td class="center 11" width="25px"><span class="hidden_cell">1</span><span class="yes_embed"></span></td>
+<td class="center 12" width="50px"><font color="blue">☀☀☀☀☀</font><font color="grey"></font><span class="hidden_cell">3</span></td>
+<td class="left 13" width="50px" style="max-width: 110px;"><ul class="a"><li>Time Calculator</li><li>Distance Calc.</li><li>Back-time</li><li>Snipe</li><li>Units speed</li></ul></td>
+<td class="left 14" width="50px" style="max-width: 110px;"><ul><li></li><li><span class="default_lang"></span><span class="tsaltooltip2">English<span class="tsaltrans">By Tsalkapone</span></span></li><li><span class="mine"></span><span class="tsaltooltip2">Greek<span class="tsaltrans">By Tsalkapone</span></span></li></ul></td>
+<td class="center 15" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_legal"></span></td>
+<td class="center 16" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="no_bugs"></span></td>
+<td class="center 17" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_api"></span></td>
+<td class="center 18" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_coded"></span></td>
+<td class="center 19" width="25px" style="max-width: 25px;"><a href="https://dl.dropboxusercontent.com/s/v3wgd2gwb9goujd/Time_Distance_Calculator.txt" class="tooltip" target="_blank"><img src="https://dl.dropboxusercontent.com/s/pjv3zlroqyd84rj/Tsalkapone_openlink.png" height="25px;" width="25px;"><span class="tsalinfo">Click to open the translation file on a new tab</span></a></td>
+</tr>
+<tr class="scriptlist" style="height: 20px;">
+<td class="0" width="60px"><span class="hidden_cell">1</span>22/06/2016</td>
+<td class="1" width="200px" ><a href="#hint" id="script_13" onclick="script_display(this.id);" class="tooltip"><span name="script_13">Central Incomings Intelligence</span><span class="info" >A script to label, color and sort out incoming commands.</span></a></td>
+<td class="center 2" style="max-width:25px;" width="25px">1.0</td>
+<td class="center 3" width="25px"><span class="no_forum"></span><span class="hidden_cell">1</span></td>
+<td class="center 4" width="25px"><span class="hidden_cell">1</span><span class="no_premium"></span></td>
+<td class="center 5" width="40px"><span class="hidden_cell">1</span><span class="yes_mozilla"></span>
+<span class="hidden_cell">1</span><span class="yes_opera"></span><span style="display:none;">yes_coded opera_c mozilla_c opera_c all_c yes_pa all_over ov_incoming lab_in sort_in count_in</span>
+<span class="hidden_cell">1</span><span class="yes_chrome"></span></td>
+<td class="6" width="80px">Tsalkapone,<br>cheesasaurus</td>
+<td class="7" width="80px">Tsalkapone</td>
+<td class="center 8" width="50px">&#9733;&#9733;&#9733;&#9733;&#9734;</td>
+<td class="center 9" style="max-width:25px;" width="25px"><span class="tsaltooltip2">8.48.1<span class="tsalinfo">Last tested on version: 8.48.1</span></span></td>
+<td class="center tsalkembed 10" width="60px">Embedded</td>
+<td class="center 11" width="25px"><span class="hidden_cell">1</span><span class="yes_embed"></span></td>
+<td class="center 12" width="50px"><font color="blue">☀☀☀☀☀</font><font color="grey"></font><span class="hidden_cell">3</span></td>
+<td class="left 13" width="50px" style="max-width: 110px;"><ul class="a"><li>Label incs</li><li>Count incs</li><li>Sort incs</li></ul></td>
+<td class="left 14" width="50px" style="max-width: 110px;"><ul><li></li><li><span class="default_lang"></span><span class="tsaltooltip2">English<span class="tsaltrans">By Tsalkapone</span></span></li><li><span class="mine"></span><span class="tsaltooltip2">Greek<span class="tsaltrans">By Tsalkapone</span></span></li></ul></td>
+<td class="center 15" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_legal"></span></td>
+<td class="center 16" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="no_bugs"></span></td>
+<td class="center 17" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_api"></span></td>
+<td class="center 18" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_coded"></span></td>
+<td class="center 19" width="25px" style="max-width: 25px;"><a href="https://dl.dropboxusercontent.com/s/h9bzjirr5a7sza9/Central_Incomings_Intelligence.txt" class="tooltip" target="_blank"><img src="https://dl.dropboxusercontent.com/s/pjv3zlroqyd84rj/Tsalkapone_openlink.png" height="25px;" width="25px;"><span class="tsalinfo">Click to open the translation file on a new tab</span></a></td>
+<tr class="scriptlist" style="height: 20px;">
+<td class="0" width="60px"><span class="hidden_cell">1</span>30/06/2016</td>
+<td class="1" width="200px" ><a href="#hint" id="script_14" onclick="script_display(this.id);" class="tooltip"><span name="script_14">FA KeyPress</span><span class="info" >A script to sort out villages on the Loot Assistant and send commands using shortcut keys.</span></a></td>
+<td class="center 2" style="max-width:25px;" width="25px">1.0</td>
+<td class="center 3" width="25px"><a href="https://forum.tribalwars.net/showthread.php?270283-FA-KeyPress" target="_blank"><img src="https://dl.dropboxusercontent.com/s/5bwe9ly3izqt2a2/ally_forum.png" title="Click to open the forum link on a new tab"><span class="hidden_cell">1</span></a><span class="hidden_cell">1</span></td>
+<td class="center 4" width="25px"><span class="hidden_cell">1</span><span class="no_premium"></span></td>
+<td class="center 5" width="40px"><span class="hidden_cell">1</span><span class="yes_mozilla"></span>
+<span class="hidden_cell">1</span><span class="yes_opera"></span><span style="display:none;">yes_coded opera_c mozilla_c opera_c all_c yes_pa loot loot_as farming</span>
+<span class="hidden_cell">1</span><span class="yes_chrome"></span></td>
+<td class="6" width="80px">crimsoni</td>
+<td class="7" width="80px">Tsalkapone,<br>Sytten</td>
+<td class="center 8" width="50px">&#9733;&#9733;&#9733;&#9733;&#9734;</td>
+<td class="center 9" style="max-width:25px;" width="25px"><span class="tsaltooltip2">8.48.1<span class="tsalinfo">Last tested on version: 8.48.1</span></span></td>
+<td class="center tsalkembed 10" width="60px">Embedded</td>
+<td class="center 11" width="25px"><span class="hidden_cell">1</span><span class="yes_embed"></span></td>
+<td class="center 12" width="50px"><font color="blue">☀☀</font><font color="grey">☀☀☀</font><span class="hidden_cell">3</span></td>
+<td class="left 13" width="50px" style="max-width: 110px;"><ul class="a"><li>Loot Assistant</li><li>Farming</li><li>Loot</li></ul></td>
+<td class="left 14" width="50px" style="max-width: 110px;"><ul><li></li><li><span class="default_lang"></span><span class="tsaltooltip2">English<span class="tsaltrans">By Tsalkapone</span></span></li></ul></td>
+<td class="center 15" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_legal"></span></td>
+<td class="center 16" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="no_bugs"></span></td>
+<td class="center 17" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_api"></span></td>
+<td class="center 18" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="no_coded"></span></td>
+<td class="center 19" width="25px" style="max-width: 25px;"><span class="no_lang"></span></td>
+</tr>
+<td class="0" width="60px"><span class="hidden_cell">1</span>30/06/2016</td>
+<td class="1" width="200px" ><a href="#hint" id="script_15" onclick="script_display(this.id);" class="tooltip"><span name="script_15">Tsalkapone ToolKit</span><span class="info" >A script that contains a large variety of external tools and links that will help you on many different aspects of the game.</span></a></td>
+<td class="center 2" style="max-width:25px;" width="25px">1.0</td>
+<td class="center 3" width="25px"><span class="no_forum"></span><span class="hidden_cell">1</span></td>
+<td class="center 4" width="25px"><span class="hidden_cell">1</span><span class="yes_premium"></span></td>
+<td class="center 5" width="40px"><span class="hidden_cell">1</span><span class="yes_mozilla"></span>
+<span class="hidden_cell">1</span><span class="yes_opera"></span><span style="display:none;">yes_coded opera_c mozilla_c opera_c all_c yes_pa toolkit pages_all stats_s graph_s info_s link_s</span>
+<span class="hidden_cell">1</span><span class="yes_chrome"></span></td>
+<td class="6" width="80px">Tsalkapone</td>
+<td class="7" width="80px">---</td>
+<td class="center 8" width="50px">&#9733;&#9733;&#9733;&#9733;&#9734;</td>
+<td class="center 9" style="max-width:25px;" width="25px"><span class="tsaltooltip2">8.48.1<span class="tsalinfo">Last tested on version: 8.48.1</span></span></td>
+<td class="center tsalkembed 10" width="60px">Embedded</td>
+<td class="center 11" width="25px"><span class="hidden_cell">1</span><span class="yes_embed"></span></td>
+<td class="center 12" width="50px"><font color="blue"></font><font color="grey">☀☀☀☀☀</font><span class="hidden_cell">3</span></td>
+<td class="left 13" width="50px" style="max-width: 110px;"><ul class="a"><li>ToolKit</li><li>TW Assistant</li><li>Statistics</li><li>Information</li><li>Graphs</li><li>Useful Links</li></ul></td>
+<td class="left 14" width="50px" style="max-width: 110px;"><ul><li></li><li><span class="default_lang"></span><span class="tsaltooltip2">English<span class="tsaltrans">By Tsalkapone</span></span></li></ul></td>
+<td class="center 15" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_legal"></span></td>
+<td class="center 16" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="no_bugs"></span></td>
+<td class="center 17" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_api"></span></td>
+<td class="center 18" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_coded"></span></td>
+<td class="center 19" width="25px" style="max-width: 25px;"><span class="no_lang"></span></td>
+</tr>
+<td class="0" width="60px"><span class="hidden_cell">1</span>06/07/2016</td>
+<td class="1" width="200px" ><a href="#hint" id="script_16" onclick="script_display(this.id);" class="tooltip"><span name="script_16">Script Loader</span><span class="info" >A script to load automatically scripts in your quick bar.</span></a></td>
+<td class="center 2" style="max-width:25px;" width="25px">1.0</td>
+<td class="center 3" width="25px"><span class="no_forum"></span><span class="hidden_cell">1</span></td>
+<td class="center 4" width="25px"><span class="hidden_cell">1</span><span class="no_premium"></span></td>
+<td class="center 5" width="40px"><span class="hidden_cell">1</span><span class="yes_mozilla"></span>
+<span class="hidden_cell">1</span><span class="yes_opera"></span><span style="display:none;">yes_coded opera_c mozilla_c opera_c all_c yes_pa sc_load others quick_bar</span>
+<span class="hidden_cell">1</span><span class="yes_chrome"></span></td>
+<td class="6" width="80px">Tsalkapone</td>
+<td class="7" width="80px">---</td>
+<td class="center 8" width="50px">&#9733;&#9733;&#9733;&#9734;&#9734;</td>
+<td class="center 9" style="max-width:25px;" width="25px"><span class="tsaltooltip2">8.48.1<span class="tsalinfo">Last tested on version: 8.48.1</span></span></td>
+<td class="center 10 tsalkembed2" width="60px"><span>No variables</span></td>
+<td class="center 11" width="25px"><span class="hidden_cell">1</span><span class="yes_embed"></span></td>
+<td class="center 12" width="50px"><font color="blue"></font><font color="grey">☀☀☀☀☀</font><span class="hidden_cell">3</span></td>
+<td class="left 13" width="50px" style="max-width: 110px;"><ul class="a"><li>Others</li><li>Script Loader</li></ul></td>
+<td class="left 14" width="50px" style="max-width: 110px;"><ul><li></li><li><span class="default_lang"></span><span class="tsaltooltip2">English<span class="tsaltrans">By Tsalkapone</span></span></li><li><span class="mine"></span><span class="tsaltooltip2">Greek<span class="tsaltrans">By Tsalkapone</span></span></li></ul></td>
+<td class="center 15" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_legal"></span></td>
+<td class="center 16" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="no_bugs"></span></td>
+<td class="center 17" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_api"></span></td>
+<td class="center 18" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_coded"></span></td>
+<td class="center 19" width="25px" style="max-width: 25px;"><a href="https://dl.dropboxusercontent.com/s/8pp1le4uwc5jkfb/Script_Loader.txt" class="tooltip" target="_blank"><img src="https://dl.dropboxusercontent.com/s/pjv3zlroqyd84rj/Tsalkapone_openlink.png" height="25px;" width="25px;"><span class="tsalinfo">Click to open the translation file on a new tab</span></a></td>
+</tr>
+<td class="0" width="60px"><span class="hidden_cell">1</span>09/07/2016</td>
+<td class="1" width="200px" ><a href="#hint" id="script_17" onclick="script_display(this.id);" class="tooltip"><span name="script_17">Tribe & Player Stats</span><span class="info" >A script to show stats & graphs, design table, generate scripts or provide useful links & infos in a player's or a tribe's profile.</span></a></td>
+<td class="center 2" style="max-width:25px;" width="25px">1.0</td>
+<td class="center 3" width="25px"><span class="no_forum"></span><span class="hidden_cell">1</span></td>
+<td class="center 4" width="25px"><span class="hidden_cell">1</span><span class="yes_premium"></span></td>
+<td class="center 5" width="40px"><span class="hidden_cell">1</span><span class="yes_mozilla"></span>
+<span class="hidden_cell">1</span><span class="yes_opera"></span><span style="display:none;">yes_coded opera_c mozilla_c opera_c all_c yes_pa tab_des sc_gen stats_s graph_s info_s link_s vil_lis p_profile t_profile t_members</span>
+<span class="hidden_cell">1</span><span class="yes_chrome"></span></td>
+<td class="6" width="80px">Tsalkapone,<br>Dale McKay,<br>others</td>
+<td class="7" width="80px">Tsalkapone</td>
+<td class="center 8" width="50px">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
+<td class="center 9" style="max-width:25px;" width="25px"><span class="tsaltooltip2">8.48.1<span class="tsalinfo">Last tested on version: 8.48.1</span></span></td>
+<td class="center tsalkembed 10" width="60px">Embedded</td>
+<td class="center 11" width="25px"><span class="hidden_cell">1</span><span class="yes_embed"></span></td>
+<td class="center 12" width="50px"><font color="blue">☀☀☀☀☀</font><font color="grey"></font><span class="hidden_cell">3</span></td>
+<td class="left 13" width="50px" style="max-width: 110px;"><ul class="a"><li>Scr. Generator</li><li>Table Designer</li><li>Village Listing</li><li>Statistics</li><li>Information</li><li>Graphs</li><li>Useful Links</li></ul></td>
+<td class="left 14" width="50px" style="max-width: 110px;"><ul><li></li><li><span class="default_lang"></span><span class="tsaltooltip2">English<span class="tsaltrans">By Tsalkapone</span></span></li><li><span class="mine"></span><span class="tsaltooltip2">Greek<span class="tsaltrans">By Tsalkapone</span></span></li></ul></td>
+<td class="center 15" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_legal"></span></td>
+<td class="center 16" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="no_bugs"></span></td>
+<td class="center 17" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_api"></span></td>
+<td class="center 18" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="no_coded"></span></td>
+<td class="center 19" width="25px" style="max-width: 25px;"><a href="https://dl.dropboxusercontent.com/s/hz27bya9ro82wti/Tribe_Player_Stats.txt" class="tooltip" target="_blank"><img src="https://dl.dropboxusercontent.com/s/pjv3zlroqyd84rj/Tsalkapone_openlink.png" height="25px;" width="25px;"><span class="tsalinfo">Click to open the translation file on a new tab</span></a></td>
+</tr>
+<td class="0" width="60px"><span class="hidden_cell">1</span>22/07/2016</td>
+<td class="1" width="200px" ><a href="#hint" id="script_18" onclick="script_display(this.id);" class="tooltip"><span name="script_18">Village Renamer</span><span class="info" >A powerful tool to rename your villages.</span></a></td>
+<td class="center 2" style="max-width:25px;" width="25px">1.0</td>
+<td class="center 3" width="25px"><span class="no_forum"></span><span class="hidden_cell">1</span></td>
+<td class="center 4" width="25px"><span class="hidden_cell">1</span><span class="no_premium"></span></td>
+<td class="center 5" width="40px"><span class="hidden_cell">1</span><span class="yes_mozilla"></span>
+<span class="hidden_cell">1</span><span class="yes_opera"></span><span style="display:none;">yes_coded opera_c mozilla_c opera_c all_c yes_pa vil_gr vil_renamer</span>
+<span class="hidden_cell">1</span><span class="yes_chrome"></span></td>
+<td class="6" width="80px">Tsalkapone,<br>cheesasaurus,<br>LilGhost,<br>others</td>
+<td class="7" width="80px">Tsalkapone</td>
+<td class="center 8" width="50px">&#9733;&#9733;&#9733;&#9734;&#9734;</td>
+<td class="center 9" style="max-width:25px;" width="25px"><span class="tsaltooltip2">8.49.1<span class="tsalinfo">Last tested on version: 8.49.1</span></span></td>
+<td class="center tsalkembed 10" width="60px">Embedded</td>
+<td class="center 11" width="25px"><span class="hidden_cell">1</span><span class="yes_embed"></span></td>
+<td class="center 12" width="50px"><font color="blue">☀☀☀☀☀</font><font color="grey"></font><span class="hidden_cell">3</span></td>
+<td class="left 13" width="50px" style="max-width: 110px;"><ul class="a"><li>Village Renamer</li><li>Name Saver</li><li>Name Retriever</li><li>Name Creator</li></ul></td>
+<td class="left 14" width="50px" style="max-width: 110px;"><ul><li></li><li><span class="default_lang"></span><span class="tsaltooltip2">English<span class="tsaltrans">By Tsalkapone</span></span></li><li><span class="mine"></span><span class="tsaltooltip2">Greek<span class="tsaltrans">By Tsalkapone</span></span></li><span class="others"></span><span class="tsaltooltip2">Italian<span class="tsaltrans">By sndb & im lovin it</span></span></li></ul></td>
+<td class="center 15" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_legal"></span></td>
+<td class="center 16" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="no_bugs"></span></td>
+<td class="center 17" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_api"></span></td>
+<td class="center 18" width="25px" style="max-width: 25px;"><span class="hidden_cell">1</span><span class="yes_coded"></span></td>
+<td class="center 19" width="25px" style="max-width: 25px;"><a href="https://dl.dropboxusercontent.com/s/dy8k346qe4pxrry/Village_Renamer.txt" class="tooltip" target="_blank"><img src="https://dl.dropboxusercontent.com/s/pjv3zlroqyd84rj/Tsalkapone_openlink.png" height="25px;" width="25px;"><span class="tsalinfo">Click to open the translation file on a new tab</span></a></td>
+</tr>
+								
+						</tbody>
+					</table>
+									
+    		    </div>
+	
+					 
+		</div>
+<div id="server_info" ><b><font size="1" color="darkgreen">© Tsalkapone | Last updated on: 22/07/2016</font></b>
+&emsp;&emsp;&emsp;
+<a href="http://www.e-zeeinternet.com/" target="_blank"><img src="http://www.e-zeeinternet.com/count.php?page=1151081&style=embwhite&nbdigits=7&reloads=1" alt="HTML Hit Counter" border="0" ></a><br><a href="http://www.e-zeeinternet.com/" title="HTML Hit Counter" target="_blank" style="font-family: Geneva, Arial, Helvetica, sans-serif; font-size: 10px; color: #000000; text-decoration: none;"></a>
+&emsp;<br>
+<a href="http://www.hitwebcounter.com" target="_blank">
+<img src="http://hitwebcounter.com/counter/counter.php?page=6437327&style=0006&nbdigits=7&type=ip&initCount=0" title="IP Address" Alt="IP Address"   border="0" >
+</a>      
+                              
+                                </div> </div>
+
+
+            <div class="unten_links">&nbsp;</div>
+            <div class="unten_mitte">&nbsp;</div>
+            <div class="unten_rechts">&nbsp;</div>                
+	</div>
+    </div>    
+    <div style="height: 50px;">&nbsp;</div>
+    <div class="footer">
+	<div id="link_container">
+	    &copy; 2016 Tsalkapone <i><small></small></i>&nbsp;&bull;&nbsp;
+	    <a href="https://forum.tribalwars.net/member.php?114063-Tsalkapone" target="_blank">Tsalkapone</a> &nbsp;&bull;&nbsp; 
+	    <a href="https://www.tribalwars.net/" target="_blank">Game</a> &nbsp;&bull;&nbsp;
+	    <a href="https://forum.tribalwars.net/index.php" target="_blank">Forum</a>&nbsp;&bull;&nbsp;
+		<a href="https://help.tribalwars.net/wiki/Main_Page" target="_blank">Help</a>
+		</div>
+    </div><!--background-color:#ecd6ad;-->
+	
+	</div></body>
+</html>
