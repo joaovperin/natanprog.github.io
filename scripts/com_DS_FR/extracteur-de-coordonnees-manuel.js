@@ -1,0 +1,204 @@
+﻿win = window;
+// === ScriptAPI lib ===
+ScriptAPI.lib = {
+    launchOnScreen: function (screen, onError, noConflict) {
+        if (game_data.screen != screen) {
+        	if (onError == null) return false;
+            if (onError.substring(0, 1) == "/") window.location.href = onError;
+            	else UI.ErrorMessage(onError, 5000);
+            return false;
+        }
+        if (ScriptAPI.preventLaunch === true)  {
+            UI.ErrorMessage('Un script est déjà en cours d\'exécution', 5000);
+            return false;
+    	}
+        win.DSSelectVillages.enableScript();
+        ScriptAPI.preventLaunch = (noConflict !== false) ? true : false;
+       	return true; 
+    }
+}
+win.DSSelectVillages =
+    {
+        currentLang: 'fr',
+        
+        showWithCoords: true,
+        
+        showWithCounter: true,
+        
+        showWithNewLine: true,
+        
+        breakAfter: -1,
+        
+        enabled: false,
+        
+        villages: [],
+        
+        villagesId: [],
+        
+        lang: {
+            de: {
+                UI: {
+                    selectedVillages: "Ausgewählte Dörfer:",
+                    enableShowWithCoords: "Mit BBCodes anzeigen",
+                    enableShowWithCounter: "Mit Zähler anzeigen"
+                }
+            },
+            fr: {
+                UI: {
+                    selectedVillages: "Selectionner des Villages",
+                    enableShowWithCoords: "BBcodes",
+                    enableShowWithCounter: "Liste",
+                    enableShowWithNewLine: "Nouvelle ligne"
+                }
+            }
+        },
+        
+        enableScript: function () {
+            this.enabled = true;
+            this.showWithCoords = win.showWithCoords;
+            this.showWithCounter = win.showWithCounter;
+            this.breakAfter = win.breakAfter;
+            win.TWMap.mapHandler.integratedSpawnSector = win.TWMap.mapHandler.spawnSector;
+            win.TWMap.mapHandler.spawnSector = this.spawnSector;
+            
+            this.oldClickFunction = win.TWMap.mapHandler.onClick;
+            win.TWMap.mapHandler.onClick = this.clickFunction;
+            win.TWMap.reload();
+            
+            this.showUi();
+        },
+        
+        spawnSector: function (data, sector) {
+            win.TWMap.mapHandler.integratedSpawnSector(data, sector);
+            for (var i = 0; i < win.DSSelectVillages.villagesId.length; i++) {
+                var villageId = win.DSSelectVillages.villagesId[i];
+                if(villageId === null){
+                    continue;
+                }
+                var v = $('#map_village_' + villageId);
+                $('<div class="DSSelectVillagesOverlay" id="DSSelectVillages_overlay_' + villageId + '" style="width:52px; height:37px; position: absolute; z-index: 50; left:' + $(v).css('left') + '; top: ' + $(v).css('top') + ';"></div>').appendTo(v.parent());
+                $('#DSSelectVillages_overlay_' + villageId).css('outline', 'rgba(51, 255, 0, 0.7) solid 2px').css('background-color', 'rgba(155, 252, 10, 0.14)');
+            }
+        },
+        
+        markVillageAsSelected: function (id) {
+            $('#DSSelectVillages_overlay_' + id).css('outline', 'rgba(51, 255, 0, 0.7) solid 2px').css('background-color', 'rgba(155, 252, 10, 0.14)');
+        },
+        demarkVillageAsSelected: function (id) {
+            $('#DSSelectVillages_overlay_' + id).css('outline', '').css('background-color', '');
+        },
+        
+        disableScript: function () {
+            this.enabled = false;
+            this.villages = [];
+            this.villagesId = [];
+            win.TWMap.mapHandler.onClick = this.oldClickFunction;
+            win.TWMap.mapHandler.spawnSector = win.TWMap.mapHandler.integratedSpawnSector;
+            win.TWMap.reload();
+            $('#bb_main_div').remove();
+        },
+        
+        showUi: function () {
+            
+            $('#map_config').prepend('<table id="bb_main_div" class="vis" style="border-spacing:0px;border-collapse:collapse;margin-top:15px;" width="100%"><tbody>'
+									+'<tr><th colspan="3">' + this.lang[this.currentLang].UI.selectedVillages + '</th></tr>'
+									+'<tr>'
+                                    +'	<td>'
+                                    +'		<input type="checkbox" id="bbcode">'
+                                    +'	</td>'
+                                    +'	<td>'
+									+'		<label for="warplanner_enabled">' + this.lang[this.currentLang].UI.enableShowWithCoords + '</label>'
+									+'	</td>'
+                                    +'</tr>'
+                                    +'<tr>'
+                                    +'	<td>'
+                                    +'		<input type="checkbox" id="zaehlen">'
+                                    +'	</td>'
+                                    +'	<td>'
+									+'		<label for="warplanner_enabled">' + this.lang[this.currentLang].UI.enableShowWithCounter + '</label>'
+									+'	</td>'
+                                    +'</tr>'
+                                    +'<tr>'
+                                    +'	<td>'
+                                    +'		<input type="checkbox" id="new-line">'
+                                    +'	</td>'
+                                    +'	<td>'
+									+'		<label for="new-line">' + this.lang[this.currentLang].UI.enableShowWithNewLine + '</label>'
+									+'	</td>'
+                                    +'</tr>'
+                                    +'<tr><td></td>'
+                                    +'	<td>'
+                                     +'		<textarea id="output" rows="5" style="width:95%;" readonly></textarea>'
+                                    +'	</td>'
+                                    +'</tr>'
+                                    +'</tbody></table>');
+            var chkbxBBcode = $('#bbcode');
+            var chkbxcounter = $('#zaehlen');
+            var chkbxShowWithNewLine = $('#new-line');
+            chkbxBBcode.prop('checked', this.showWithCoords);
+            chkbxcounter.prop('checked', this.showWithCounter);
+            chkbxShowWithNewLine.prop('checked', this.showWithNewLine);
+            chkbxBBcode.change(function () {
+                win.DSSelectVillages.showWithCoords = this.checked;
+                win.DSSelectVillages.outputCoords();
+            });
+            chkbxcounter.change(function () {
+                win.DSSelectVillages.showWithCounter = this.checked;
+                win.DSSelectVillages.outputCoords();
+            });
+            chkbxShowWithNewLine.change(function () {
+            	win.DSSelectVillages.showWithNewLine = this.checked;
+                win.DSSelectVillages.outputCoords();
+            });
+        },
+        
+        outputCoords: function () {
+            var coordsOutput = "";
+            for (var i = 0; i < this.villages.length; i++) {
+                if (this.villages[i] === null) {
+                    continue;
+                }
+                var realCount = 0;
+                for (var j = 0; j <= i; j++) {
+                    if (this.villages[j] != null) {
+                        realCount++;
+                    }
+                }
+                coordsOutput += (this.showWithCounter ? realCount + ". " : "" ) + (this.showWithCoords ? "[coord]" : "") + this.villages[i] + (this.showWithCoords ? "[/coord]" : "") + (this.showWithNewLine ? "\n" : " ");
+                if (this.breakAfter != -1 && realCount % this.breakAfter == 0) {
+                    coordsOutput += "\n";
+                }
+            }
+            $('#output').html(coordsOutput);
+            $("#output").select();
+        },
+        
+        handleVillage: function (x, y) {
+            var coord = x + "|" + y;
+            var index = this.villages.indexOf(coord);
+            var village = win.TWMap.villages[(x) * 1000 + y];
+            if (!village) {
+                return;
+            }
+            if (index === -1) {
+                this.villages.push(coord);
+                this.villagesId.push(village.id);
+                this.markVillageAsSelected(village.id);
+                win.TWMap.reload();
+            } else {
+                this.villages[index] = null;
+                var indexId = this.villagesId.indexOf(village.id);
+                this.villagesId[indexId] = null;
+                this.demarkVillageAsSelected(village.id);
+            }
+            this.outputCoords();
+        },
+        
+        clickFunction: function (x, y, event) {
+            win.DSSelectVillages.handleVillage(x, y);
+            return false; //Signal that the TWMap should not follow the URL associated to this click event
+        },
+        
+        oldClickFunction: null
+    };
+ScriptAPI.lib.launchOnScreen('map', "Ce script doit être lancé depuis la carte");
