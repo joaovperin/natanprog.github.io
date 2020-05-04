@@ -96,6 +96,16 @@
             "ram": false
         };
     }
+
+    if (typeof categoryEnabled == 'undefined') {
+        var categoryEnabled = {
+            "1": true,
+            "2": true,
+            "3": true,
+            "4": true,
+        };
+    }
+
     if(game_data.units.indexOf("archer")==-1)
     {
         delete troopTypeEnabled["archer"];
@@ -272,7 +282,7 @@
     }
     //first UI, will always open as soon as you run the script.
     html = `
-    <div id="massScavengeSophie" class="ui-widget-content" style="position:fixed;background-color:${backgroundColor};cursor:move;z-index:50;">
+    <div id="massScavengeSophie" class="ui-widget-content" style="width:600px;background-color:${backgroundColor};cursor:move;z-index:50;">
         <table id="massScavengeSophieTable" class="vis" border="1" style="width: 100%;background-color:${backgroundColor};border-color:${borderColor}">
             <tr>
                 <td colspan="10" id="massScavengeSophieTitle" style="text-align:center; width:auto; background-color:${headerColor}">
@@ -317,10 +327,10 @@
                     <td style="text-align:center; width:auto; background-color:${headerColor};padding: 10px;"><font color="${titleColor}">${categoryNames[4].name}</font></td>
                 </tr>
                 <tr>
-                    <td style="text-align:center; width:auto; background-color:${backgroundColor}"><center><input type="checkbox" ID="category1" name="cat1" checked="checked"></center></td>
-                    <td style="text-align:center; width:auto; background-color:${backgroundColor}"><center><input type="checkbox" ID="category2" name="cat2" checked="checked"></center></td>
-                    <td style="text-align:center; width:auto; background-color:${backgroundColor}"><center><input type="checkbox" ID="category3" name="cat3" checked="checked"></center></td>
-                    <td style="text-align:center; width:auto; background-color:${backgroundColor}"><center><input type="checkbox" ID="category4" name="cat4" checked="checked"></center></td>
+                    <td style="text-align:center; width:auto; background-color:${backgroundColor}"><center><input type="checkbox" ID="category1" name="cat1"></center></td>
+                    <td style="text-align:center; width:auto; background-color:${backgroundColor}"><center><input type="checkbox" ID="category2" name="cat2"></center></td>
+                    <td style="text-align:center; width:auto; background-color:${backgroundColor}"><center><input type="checkbox" ID="category3" name="cat3"></center></td>
+                    <td style="text-align:center; width:auto; background-color:${backgroundColor}"><center><input type="checkbox" ID="category4" name="cat4"></center></td>
                 </tr>
             </tbody>
         </table>
@@ -344,7 +354,11 @@
     `;
         $("#contentContainer").eq(0).prepend(html);
         $("#mobileContent").eq(0).prepend(html);
+        if(game_data.device=="desktop")
+        {
+            $("#massScavengeSophie").css("position","fixed");
         $("#massScavengeSophie").draggable();
+    }
 
     //create checkboxes and add them to the UI
     localUnitNames = [];
@@ -469,12 +483,18 @@
     function enableCorrectTroopTypes()
     {
         worldUnits = game_data.units;
-    for (var i = 0; i < worldUnits.length; i++) {
-
-        if (worldUnits[i] != "militia" && worldUnits[i] != "snob" && worldUnits[i] != "ram" && worldUnits[i] != "catapult" && worldUnits[i] != "spy") {
-            if(troopTypeEnabled[worldUnits[i]]==true) $(`#${worldUnits[i]}`).prop( "checked", true );
+        for (var i = 0; i < worldUnits.length; i++) {
+            if (worldUnits[i] != "militia" && worldUnits[i] != "snob" && worldUnits[i] != "ram" && worldUnits[i] != "catapult" && worldUnits[i] != "spy") {
+                if(troopTypeEnabled[worldUnits[i]]==true) $(`#${worldUnits[i]}`).prop( "checked", true );
+            }
         }
-    }
+        for(var i=1;i<Object.keys(categoryEnabled).length+1;i++)
+        {
+            if(categoryEnabled[i]==true)
+            {
+                $(`#category${i}`).prop( "checked", true );
+            }
+        }
     }
 
     function calculateUnitsPerVillage(troopsAllowed)
