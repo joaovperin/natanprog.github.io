@@ -255,10 +255,10 @@
      */
      vlk.init = function()
      {
-        if (!game_data.player.premium) {
+/*        if (!game_data.player.premium) {
             UI.InfoMessage('Para utilizar esse script é necessário uma Conta Premium!', 3000, true);
             end();
-        }
+        } */
         if(!vlk.innerCache.menu_carregado){
             for (var x in vlk.menu){
                 vlk.innerCache.menu_id.push(x);
