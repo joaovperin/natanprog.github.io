@@ -8,7 +8,7 @@ if(game_data.player.sitter != 0)
 	licznik_wojska.link="/game.php?t=" + game_data.player.id + "&village="+game_data.village.id+"&type=complete&mode=units&group=0&page=-1&screen=overview_villages";
 licznik_wojska.pobraneGrupy = false;
 licznik_wojska.obrazki = "spear,sword,axe,archer,spy,light,marcher,heavy,ram,catapult,knight,snob".split(",");
-licznik_wojska.nazwyJednostek = "Pikinier,Miecznik,Topornik,.C5.81ucznik,Zwiadowca,Lekki_Kawalerzysta,.C5.81ucznik_na_koniu,Ci.C4.99.C5.BCki_kawalerzysta,Taran,Katapulta,Rycerz,Szlachcic".split(",");
+licznik_wojska.nazwyJednostek = "Spear fighter,Swordsman,Axeman,Archer,Scout,Light cavalry,Mounted archer,Heavy cavalry,Ram,Catapult,Paladin,Nobleman".split(",");
 var okienko = "<h2 align='center'>Stan wojska</h2><table width='100%'><tr><th>Grupa: <select id='listaGrup' onchange=\"licznik_wojska.link = this.value; pobierzDane();\"><option value='"+licznik_wojska.link+"'>Wszystkie</select>";
 okienko += "<tr><td><table width='100%'><tr><th colspan='4'>Rodzaj: <select onchange=\"zmiana(this.value);\"><option value='0'>Dostępne wojska<option value='0p2p3'>Wszystkie własne<option value='1'>W wioskach<option value='1m0'>Samo wsparcie<option value='2'>Wysłane wsparcie<option value='3'>W drodze</select><tbody id='dostepne_wojska'></table><tr><th><b id='ilosc_wiosek'></b><a href='#' style='float: right;' onclick=\"eksportuj();\">Eksportuj</a></table>";
 Dialog.show("okienko_komunikatu",okienko);
