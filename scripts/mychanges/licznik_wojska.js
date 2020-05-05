@@ -10,7 +10,7 @@ licznik_wojska.pobraneGrupy = false;
 licznik_wojska.obrazki = "spear,sword,axe,archer,spy,light,marcher,heavy,ram,catapult,knight,snob".split(",");
 licznik_wojska.nazwyJednostek = "Spear_fighter,Swordsman,Axeman,Archer,Scout,Light_cavalry,Mounted_archer,Heavy_cavalry,Ram,Catapult,Paladin,Nobleman".split(",");
 var okienko = "<h2 align='center'>Troop Counter</h2><table width='100%'><tr><th>Group: <select id='listaGrup' onchange=\"licznik_wojska.link = this.value; pobierzDane();\"><option value='"+licznik_wojska.link+"'>All</select>";
-okienko += "<tr><td><table width='100%'><tr><th colspan='4'>Rodzaj: <select onchange=\"zmiana(this.value);\"><option value='0'>Dostępne wojska<option value='0p2p3'>Wszystkie własne<option value='1'>W wioskach<option value='1m0'>Samo wsparcie<option value='2'>Wysłane wsparcie<option value='3'>W drodze</select><tbody id='dostepne_wojska'></table><tr><th><b id='ilosc_wiosek'></b><a href='#' style='float: right;' onclick=\"eksportuj();\">Eksportuj</a></table>";
+okienko += "<tr><td><table width='100%'><tr><th colspan='4'>Type: <select onchange=\"zmiana(this.value);\"><option value='0'>Available<option value='0p2p3'>All Your Own<option value='1'>W wioskach<option value='1m0'>Samo wsparcie<option value='2'>Wysłane wsparcie<option value='3'>W drodze</select><tbody id='dostepne_wojska'></table><tr><th><b id='ilosc_wiosek'></b><a href='#' style='float: right;' onclick=\"eksportuj();\">Eksportuj</a></table>";
 Dialog.show("okienko_komunikatu",okienko);
 pobierzDane();
 void 0;
