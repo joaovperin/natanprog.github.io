@@ -74,7 +74,7 @@ if(game_data.player.sitter != 0)
 	licznik_wojska.link="/game.php?t=" + game_data.player.id + "&village="+game_data.village.id+"&type=complete&mode=units&group=0&page=-1&screen=overview_villages";
 licznik_wojska.pobraneGrupy = false;
 licznik_wojska.obrazki = "spear,sword,axe,archer,spy,light,marcher,heavy,ram,catapult,knight,snob".split(",");
-licznik_wojska.nazwyJednostek = langScript[0]+","+langScript[1]+","+langScript[2]+","+langScript[3]+","+langScript[4]+","+langScript[5]+","+langScript[6]+","+langScript[7]+","+langScript[8]+","+langScript[9]+","+langScript[10]+","+langScript[11].split(",");
+licznik_wojska.nazwyJednostek = $langScript[0]+","+langScript[1]+","+langScript[2]+","+langScript[3]+","+langScript[4]+","+langScript[5]+","+langScript[6]+","+langScript[7]+","+langScript[8]+","+langScript[9]+","+langScript[10]+","+langScript[11].split(",");
 var okienko = "<h2 align='center'>Troop Counter</h2><table width='100%'><tr><th>Group: <select id='listaGrup' onchange=\"licznik_wojska.link = this.value; pobierzDane();\"><option value='"+licznik_wojska.link+"'>All</select>";
 okienko += "<tr><td><table width='100%'><tr><th colspan='4'>Type: <select onchange=\"zmiana(this.value);\"><option value='0'>Available<option value='0p2p3'>All Your Own<option value='1'>In Villages<option value='1m0'>Support<option value='2'>Outwards<option value='3'>In Transit</select><tbody id='dostepne_wojska'></table><tr><th><b id='ilosc_wiosek'></b><a href='#' style='float: right;' onclick=\"eksportuj();\">Export</a></table>";
 Dialog.show("okienko_komunikatu",okienko);
