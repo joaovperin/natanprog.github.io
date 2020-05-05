@@ -8,7 +8,7 @@ if(game_data.player.sitter != 0)
 	licznik_wojska.link="/game.php?t=" + game_data.player.id + "&village="+game_data.village.id+"&type=complete&mode=units&group=0&page=-1&screen=overview_villages";
 licznik_wojska.pobraneGrupy = false;
 licznik_wojska.obrazki = "spear,sword,axe,archer,spy,light,marcher,heavy,ram,catapult,knight,snob".split(",");
-licznik_wojska.nazwyJednostek = "Spear fighter,Swordsman,Axeman,Archer,Scout,Light cavalry,Mounted archer,Heavy cavalry,Ram,Catapult,Paladin,Nobleman".split(",");
+licznik_wojska.nazwyJednostek = "Spear_fighter,Swordsman,Axeman,Archer,Scout,Light_cavalry,Mounted_archer,Heavy_cavalry,Ram,Catapult,Paladin,Nobleman".split(",");
 var okienko = "<h2 align='center'>Troop Counter</h2><table width='100%'><tr><th>Group: <select id='listaGrup' onchange=\"licznik_wojska.link = this.value; pobierzDane();\"><option value='"+licznik_wojska.link+"'>All</select>";
 okienko += "<tr><td><table width='100%'><tr><th colspan='4'>Rodzaj: <select onchange=\"zmiana(this.value);\"><option value='0'>Dostępne wojska<option value='0p2p3'>Wszystkie własne<option value='1'>W wioskach<option value='1m0'>Samo wsparcie<option value='2'>Wysłane wsparcie<option value='3'>W drodze</select><tbody id='dostepne_wojska'></table><tr><th><b id='ilosc_wiosek'></b><a href='#' style='float: right;' onclick=\"eksportuj();\">Eksportuj</a></table>";
 Dialog.show("okienko_komunikatu",okienko);
@@ -109,7 +109,7 @@ function wypisz(sumaWojskDoWypisania){
 	licznik_wojska.eksport = "<textarea rows='7' cols='25' onclick=\"this.select();\">";
 	for(i=0;i<licznik_wojska.obrazki.length;i++){
 		licznik_wojska.eksport +="[unit]"+licznik_wojska.obrazki[i]+"[/unit]"+sumaWojskDoWypisania[i]+(i%2==0?rysujSpacje(sumaWojskDoWypisania[i]):"\n");
-		elem += (i%2==0?"<tr>":"")+"<th width='20'><a href='https://help.plemiona.pl/wiki/Jednostki#"+licznik_wojska.nazwyJednostek[i]+"' target='_blank'><img src='"+image_base + "unit/unit_"+licznik_wojska.obrazki[i]+".png'></a><td bgcolor='#fff5da'>"+sumaWojskDoWypisania[i];
+		elem += (i%2==0?"<tr>":"")+"<th width='20'><a href='https://help.tribalwars.net/wiki/"+licznik_wojska.nazwyJednostek[i]+"' target='_blank'><img src='"+image_base + "unit/unit_"+licznik_wojska.obrazki[i]+".png'></a><td bgcolor='#fff5da'>"+sumaWojskDoWypisania[i];
 	}
 	licznik_wojska.eksport += "</textarea>";
 	$("#dostepne_wojska").html(elem);
