@@ -10,7 +10,7 @@ licznik_wojska.pobraneGrupy = false;
 licznik_wojska.obrazki = "spear,sword,axe,archer,spy,light,marcher,heavy,ram,catapult,knight,snob".split(",");
 licznik_wojska.nazwyJednostek = "Spear_fighter,Swordsman,Axeman,Archer,Scout,Light_cavalry,Mounted_archer,Heavy_cavalry,Ram,Catapult,Paladin,Nobleman".split(",");
 var okienko = "<h2 align='center'>Troop Counter</h2><table width='100%'><tr><th>Group: <select id='listaGrup' onchange=\"licznik_wojska.link = this.value; pobierzDane();\"><option value='"+licznik_wojska.link+"'>All</select>";
-okienko += "<tr><td><table width='100%'><tr><th colspan='4'>Type: <select onchange=\"zmiana(this.value);\"><option value='0'>Available<option value='0p2p3'>All Your Own<option value='1'>In Villages<option value='1m0'>Support<option value='2'>Outwards<option value='3'>In Transit</select><tbody id='dostepne_wojska'></table><tr><th><b id='ilosc_wiosek'></b><a href='#' style='float: right;' onclick=\"eksportuj();\">Eksportuj</a></table>";
+okienko += "<tr><td><table width='100%'><tr><th colspan='4'>Type: <select onchange=\"zmiana(this.value);\"><option value='0'>Available<option value='0p2p3'>All Your Own<option value='1'>In Villages<option value='1m0'>Support<option value='2'>Outwards<option value='3'>In Transit</select><tbody id='dostepne_wojska'></table><tr><th><b id='ilosc_wiosek'></b><a href='#' style='float: right;' onclick=\"eksportuj();\">Export</a></table>";
 Dialog.show("okienko_komunikatu",okienko);
 pobierzDane();
 void 0;
@@ -21,7 +21,7 @@ function eksportuj(){
 		zmiana(domyslnyWiersz);
 }
 function pobierzDane(){
-	$("#ilosc_wiosek").html(" Czekaj...");
+	$("#ilosc_wiosek").html(" Please Wait...");
 	$(mobile?'#loading':'#loading_content').show();
 	var r;
 	r = new XMLHttpRequest();
@@ -31,9 +31,9 @@ function pobierzDane(){
 			requestedBody = document.createElement("body");
 			requestedBody.innerHTML = r.responseText;
 			tabela = $(requestedBody).find('#units_table').get()[0];
-			if(!tabela){ $("#dostepne_wojska").html("Wybrana grupa jest bez wiosek. <br>Wybierz inną"); $("#ilosc_wiosek").html(" błąd"); return false;}
+			if(!tabela){ $("#dostepne_wojska").html("There are no villages in the group. <br />Choose another group."); $("#ilosc_wiosek").html(" Empty"); return false;}
 			var grupy = $(requestedBody).find('.vis_item').get()[0].getElementsByTagName(mobile?'option':'a');
-			if(tabela.rows.length>4000) alert("Uwaga\nSumuję tylko pierwsze 1000 wiosek");
+			if(tabela.rows.length>4000) alert("Attention\nOnly the first 1000 villages");
 			if(!licznik_wojska.pobraneGrupy){
 				for(i=0;i<grupy.length;i++){
 					nazwa = grupy[i].textContent;
@@ -114,5 +114,5 @@ function wypisz(sumaWojskDoWypisania){
 	licznik_wojska.eksport += "</textarea>";
 	$("#dostepne_wojska").html(elem);
 	$(mobile?'#loading':'#loading_content').hide();
-	$("#ilosc_wiosek").html("\Suma "+((tabela.rows.length-1)/5)+" wiosek");
+	$("#ilosc_wiosek").html("Total of "+((tabela.rows.length-1)/5)+" villages");
 }
