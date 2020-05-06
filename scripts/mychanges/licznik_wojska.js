@@ -1,6 +1,6 @@
 ﻿javascript:
+if(!licznik_wojska) var licznik_wojska={};
 var langScript = [];
-var licznik_wojska.nazwyJednostek;
 if (game_data.locale == "en_DK") {
         langScript = [
             "Troop Counter"
@@ -12,8 +12,7 @@ if (game_data.locale == "pt_BR") {
             "Contador de Tropas"
         ]
         licznik_wojska.nazwyJednostek = "Lanceiro,Espadachim,Bárbaro,Arqueiro,Explorador,Cavalaria_Leve,Arqueiro_a_cavalo,Cavalaria_Pesada,Aríete,Catapulta,Paladino,Nobres".split(",");
-    } ;   
-if(!licznik_wojska) var licznik_wojska={};
+    };   
 var tabela;
 var sumaWojsk = [];
 var domyslnyWiersz = '0';
