@@ -1,0 +1,1 @@
+javascript: (function() {var ss = document.getElementById('message').value; ss = ss.replace("Przesłane raporty:", "").replace(/report/g,"report_display"); document.getElementById('message').value = "[spoiler]"+ss+"[/spoiler]";})()
