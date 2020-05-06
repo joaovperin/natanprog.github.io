@@ -1,13 +1,13 @@
 ﻿javascript:
 if(!licznik_wojska) var licznik_wojska={};
 var langScript = [];
-if (game_data.locale == "en_DK") {
+if (game_data.locale == "pt_BR") {
         langScript = [
             "Troop Counter"
         ]
         licznik_wojska.nazwyJednostek = "Spear_fighter,Swordsman,Axeman,Archer,Scout,Light_cavalry,Mounted_archer,Heavy_cavalry,Ram,Catapult,Paladin,Nobleman".split(",");
     };
-if (game_data.locale == "pt_BR") {
+if (game_data.locale == "en_DK") {
         langScript = [
             "Contador de Tropas"
         ]
