@@ -1,15 +1,49 @@
 ﻿javascript:
 if(!licznik_wojska) var licznik_wojska={};
 var langScript = [];
-if (game_data.locale == "pt_BR") {
+if (game_data.locale == "en_DK") {
         langScript = [
-            "Troop Counter"
+            "Troop Counter",
+   			"Group: ",
+    		"All",
+    		"Type: ",
+    		"Available",
+    		"All Your Own",
+    		"In Villages",
+    		"Support",
+    		"Outwards",
+    		"In Transit",
+    		"Export",
+    		" Please Wait...",
+    		"There are no villages in the group. <br />Choose another group.",
+    		" Empty",
+    		"Attention\nOnly the first 1000 villages",
+    		"https://help.tribalwars.net/wiki/",
+    		"Total of ",
+    		" villages"
         ]
         licznik_wojska.nazwyJednostek = "Spear_fighter,Swordsman,Axeman,Archer,Scout,Light_cavalry,Mounted_archer,Heavy_cavalry,Ram,Catapult,Paladin,Nobleman".split(",");
     };
-if (game_data.locale == "en_DK") {
+if (game_data.locale == "pt_BR") {
         langScript = [
-            "Contador de Tropas"
+            "Contador de Tropas",
+    		"Grupo: ",
+    		"Todos",
+    		"Tipo: ",
+    		"Disponível",
+    		"Todas as Suas Próprias",
+    		"Nas Aldeias",
+    		"Apoios",
+    		"Fora",
+    		"Em Trânsito",
+    		"Exportar",
+    		" Por Favor, Espere...",
+    		"Não há aldeias no grupo. <br />Escolha outro grupo.",
+    		" Vazio",
+    		"Atenção\nSomente as primeiras 1000 aldeias",
+    		"https://help.tribalwars.com.br/wiki/",
+    		"Total de ",
+    		" aldeias"
         ]
         licznik_wojska.nazwyJednostek = "Lanceiro,Espadachim,Bárbaro,Arqueiro,Explorador,Cavalaria_Leve,Arqueiro_a_cavalo,Cavalaria_Pesada,Aríete,Catapulta,Paladino,Nobres".split(",");
     };   
@@ -22,8 +56,8 @@ if(game_data.player.sitter != 0)
 licznik_wojska.pobraneGrupy = false;
 licznik_wojska.obrazki = "spear,sword,axe,archer,spy,light,marcher,heavy,ram,catapult,knight,snob".split(",");
 
-var okienko = "<h2 align='center'>Troop Counter</h2><table width='100%'><tr><th>Group: <select id='listaGrup' onchange=\"licznik_wojska.link = this.value; pobierzDane();\"><option value='"+licznik_wojska.link+"'>All</select>";
-okienko += "<tr><td><table width='100%'><tr><th colspan='4'>Type: <select onchange=\"zmiana(this.value);\"><option value='0'>Available<option value='0p2p3'>All Your Own<option value='1'>In Villages<option value='1m0'>Support<option value='2'>Outwards<option value='3'>In Transit</select><tbody id='dostepne_wojska'></table><tr><th><b id='ilosc_wiosek'></b><a href='#' style='float: right;' onclick=\"eksportuj();\">Export</a></table>";
+var okienko = "<h2 align='center'>"+langScript[0]+"</h2><table width='100%'><tr><th>"+langScript[0]+"<select id='listaGrup' onchange=\"licznik_wojska.link = this.value; pobierzDane();\"><option value='"+licznik_wojska.link+"'>"+langScript[0]+"</select>";
+okienko += "<tr><td><table width='100%'><tr><th colspan='4'>"+langScript[0]+"<select onchange=\"zmiana(this.value);\"><option value='0'>"+langScript[0]+"<option value='0p2p3'>"+langScript[0]+"<option value='1'>"+langScript[0]+"<option value='1m0'>"+langScript[0]+"<option value='2'>"+langScript[0]+"<option value='3'>"+langScript[0]+"</select><tbody id='dostepne_wojska'></table><tr><th><b id='ilosc_wiosek'></b><a href='#' style='float: right;' onclick=\"eksportuj();\">"+langScript[0]+"</a></table>";
 Dialog.show("okienko_komunikatu",okienko);
 pobierzDane();
 void 0;
