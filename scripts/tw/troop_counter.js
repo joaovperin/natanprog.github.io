@@ -1,4 +1,12 @@
-﻿javascript:
+﻿/*
+			scriptname: 	Licznik wojska
+			author: 		to6iasz, Rinne i Gangsta Anime Girl
+			original url:	https://media.innogamescdn.com/com_DS_PL/skrypty/licznik_wojska.js
+			editor: 		natanprog
+			url: 			https://natanprog.github.io/scripts/tw/troop_counter.js
+*/
+
+javascript:
 if(!licznik_wojska) var licznik_wojska={};
 var langScript = [];
 if (game_data.locale == "en_DK") {
