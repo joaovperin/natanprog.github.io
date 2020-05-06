@@ -1,70 +1,18 @@
 ﻿javascript:
+var langScript =[];
+if (game_data.locale == "en_DK") {
+        langScript = [
+            "Troop Counter"
+        ]
+        licznik_wojska.nazwyJednostek = "Spear_fighter,Swordsman,Axeman,Archer,Scout,Light_cavalry,Mounted_archer,Heavy_cavalry,Ram,Catapult,Paladin,Nobleman".split(",");
+    };
+if (game_data.locale == "pt_BR") {
+        langScript = [
+            "Contador de Tropas"
+        ]
+        licznik_wojska.nazwyJednostek = "Lanceiro,Espadachim,Bárbaro,Arqueiro,Explorador,Cavalaria_Leve,Arqueiro_a_cavalo,Cavalaria_Pesada,Aríete,Catapulta,Paladino,Nobres".split(",");
+    } ;   
 if(!licznik_wojska) var licznik_wojska={};
-var langScript = { "en_DK": {
-    "0": "Spear_fighter",
-    "1": "Swordsman",
-    "2": "Axeman",
-    "3": "Archer",
-    "4": "Scout",
-    "5": "Light_cavalry",
-    "6": "Mounted_archer",
-    "7": "Heavy_cavalry",
-    "8": "Ram",
-    "9": "Catapult",
-    "10": "Paladin",
-    "11": "Nobleman",
-    "12": "Troop Counter",
-    "13": "Group: ",
-    "14": "All",
-    "15": "Type: ",
-    "16": "Available",
-    "17": "All Your Own",
-    "18": "In Villages",
-    "19": "Support",
-    "20": "Outwards",
-    "21": "In Transit",
-    "22": "Export",
-    "23": " Please Wait...",
-    "24": "There are no villages in the group. <br />Choose another group.",
-    "25": " Empty",
-    "26": "Attention\nOnly the first 1000 villages",
-    "27": "https://help.tribalwars.net/wiki/",
-    "28": "Total of ",
-    "29": " villages"
-    },
-    "pt_BR": {
-        "0": "Lanceiro",
-        "1": "Espadachim",
-        "2": "Bárbaro",
-        "3": "Arqueiro",
-        "4": "Explorador",
-        "5": "Cavalaria_Leve",
-        "6": "Arqueiro_a_cavalo",
-        "7": "Cavalaria_Pesada",
-        "8": "Aríete",
-        "9": "Catapulta",
-        "10": "Paladino",
-        "11": "Nobres",
-        "12": "Contador de Tropas",
-        "13": "Grupo: ",
-        "14": "Todos",
-        "15": "Tipo: ",
-        "16": "Disponível",
-        "17": "Todas as Suas Próprias",
-        "18": "Nas Aldeias",
-        "19": "Apoios",
-        "20": "Fora",
-        "21": "Em Trânsito",
-        "22": "Exportar",
-        "23": " Por Favor, Espere...",
-        "24": "Não há aldeias no grupo. <br />Escolha outro grupo.",
-        "25": " Vazio",
-        "26": "Atenção\nSomente as primeiras 1000 aldeias",
-        "27": "https://help.tribalwars.com.br/wiki/",
-        "28": "Total de ",
-        "29": " aldeias"
-    }
-}
 var tabela;
 var sumaWojsk = [];
 var domyslnyWiersz = '0';
@@ -73,7 +21,7 @@ if(game_data.player.sitter != 0)
 	licznik_wojska.link="/game.php?t=" + game_data.player.id + "&village="+game_data.village.id+"&type=complete&mode=units&group=0&page=-1&screen=overview_villages";
 licznik_wojska.pobraneGrupy = false;
 licznik_wojska.obrazki = "spear,sword,axe,archer,spy,light,marcher,heavy,ram,catapult,knight,snob".split(",");
-licznik_wojska.nazwyJednostek = langScript[game_data.locale]["0"]+","+langScript[game_data.locale]["1"]+","+langScript[game_data.locale]["2"]+","+langScript[game_data.locale]["3"]+","+langScript[game_data.locale]["4"]+","+langScript[game_data.locale]["5"]+","+langScript[game_data.locale]["6"]+","+langScript[game_data.locale]["7"]+","+langScript[game_data.locale]["8"]+","+langScript[game_data.locale]["9"]+","+langScript[game_data.locale]["10"]+","+langScript[game_data.locale]["11"].split(",");
+
 var okienko = "<h2 align='center'>Troop Counter</h2><table width='100%'><tr><th>Group: <select id='listaGrup' onchange=\"licznik_wojska.link = this.value; pobierzDane();\"><option value='"+licznik_wojska.link+"'>All</select>";
 okienko += "<tr><td><table width='100%'><tr><th colspan='4'>Type: <select onchange=\"zmiana(this.value);\"><option value='0'>Available<option value='0p2p3'>All Your Own<option value='1'>In Villages<option value='1m0'>Support<option value='2'>Outwards<option value='3'>In Transit</select><tbody id='dostepne_wojska'></table><tr><th><b id='ilosc_wiosek'></b><a href='#' style='float: right;' onclick=\"eksportuj();\">Export</a></table>";
 Dialog.show("okienko_komunikatu",okienko);
