@@ -1,0 +1,1 @@
+javascript:var villas=$("table[class=content-border]").html().match(/\d+\|\d+/gi);alert((villas&&(villas.length>0)?villas.join(" "):"Nie znaleziono współrzędnych"));void(0);
