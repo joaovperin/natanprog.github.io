@@ -1,5 +1,6 @@
 ﻿javascript:
-var langScript =[];
+var langScript = [];
+var licznik_wojska.nazwyJednostek;
 if (game_data.locale == "en_DK") {
         langScript = [
             "Troop Counter"
