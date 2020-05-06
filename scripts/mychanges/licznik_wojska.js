@@ -56,8 +56,8 @@ if(game_data.player.sitter != 0)
 licznik_wojska.pobraneGrupy = false;
 licznik_wojska.obrazki = "spear,sword,axe,archer,spy,light,marcher,heavy,ram,catapult,knight,snob".split(",");
 
-var okienko = "<h2 align='center'>"+langScript[0]+"</h2><table width='100%'><tr><th>"+langScript[0]+"<select id='listaGrup' onchange=\"licznik_wojska.link = this.value; pobierzDane();\"><option value='"+licznik_wojska.link+"'>"+langScript[0]+"</select>";
-okienko += "<tr><td><table width='100%'><tr><th colspan='4'>"+langScript[0]+"<select onchange=\"zmiana(this.value);\"><option value='0'>"+langScript[0]+"<option value='0p2p3'>"+langScript[0]+"<option value='1'>"+langScript[0]+"<option value='1m0'>"+langScript[0]+"<option value='2'>"+langScript[0]+"<option value='3'>"+langScript[0]+"</select><tbody id='dostepne_wojska'></table><tr><th><b id='ilosc_wiosek'></b><a href='#' style='float: right;' onclick=\"eksportuj();\">"+langScript[0]+"</a></table>";
+var okienko = "<h2 align='center'>"+langScript[0]+"</h2><table width='100%'><tr><th>"+langScript[1]+"<select id='listaGrup' onchange=\"licznik_wojska.link = this.value; pobierzDane();\"><option value='"+licznik_wojska.link+"'>"+langScript[2]+"</select>";
+okienko += "<tr><td><table width='100%'><tr><th colspan='4'>"+langScript[3]+"<select onchange=\"zmiana(this.value);\"><option value='0'>"+langScript[4]+"<option value='0p2p3'>"+langScript[5]+"<option value='1'>"+langScript[6]+"<option value='1m0'>"+langScript[7]+"<option value='2'>"+langScript[8]+"<option value='3'>"+langScript[9]+"</select><tbody id='dostepne_wojska'></table><tr><th><b id='ilosc_wiosek'></b><a href='#' style='float: right;' onclick=\"eksportuj();\">"+langScript[10]+"</a></table>";
 Dialog.show("okienko_komunikatu",okienko);
 pobierzDane();
 void 0;
@@ -68,7 +68,7 @@ function eksportuj(){
 		zmiana(domyslnyWiersz);
 }
 function pobierzDane(){
-	$("#ilosc_wiosek").html(" Please Wait...");
+	$("#ilosc_wiosek").html(langScript[11]);
 	$(mobile?'#loading':'#loading_content').show();
 	var r;
 	r = new XMLHttpRequest();
@@ -78,9 +78,9 @@ function pobierzDane(){
 			requestedBody = document.createElement("body");
 			requestedBody.innerHTML = r.responseText;
 			tabela = $(requestedBody).find('#units_table').get()[0];
-			if(!tabela){ $("#dostepne_wojska").html("There are no villages in the group. <br />Choose another group."); $("#ilosc_wiosek").html(" Empty"); return false;}
+			if(!tabela){ $("#dostepne_wojska").html(langScript[12]); $("#ilosc_wiosek").html(langScript[13]); return false;}
 			var grupy = $(requestedBody).find('.vis_item').get()[0].getElementsByTagName(mobile?'option':'a');
-			if(tabela.rows.length>4000) alert("Attention\nOnly the first 1000 villages");
+			if(tabela.rows.length>4000) alert(langScript[14]);
 			if(!licznik_wojska.pobraneGrupy){
 				for(i=0;i<grupy.length;i++){
 					nazwa = grupy[i].textContent;
@@ -156,10 +156,10 @@ function wypisz(sumaWojskDoWypisania){
 	licznik_wojska.eksport = "<textarea rows='7' cols='25' onclick=\"this.select();\">";
 	for(i=0;i<licznik_wojska.obrazki.length;i++){
 		licznik_wojska.eksport +="[unit]"+licznik_wojska.obrazki[i]+"[/unit]"+sumaWojskDoWypisania[i]+(i%2==0?rysujSpacje(sumaWojskDoWypisania[i]):"\n");
-		elem += (i%2==0?"<tr>":"")+"<th width='20'><a href='https://help.tribalwars.net/wiki/"+licznik_wojska.nazwyJednostek[i]+"' target='_blank'><img src='"+image_base + "unit/unit_"+licznik_wojska.obrazki[i]+".png'></a><td bgcolor='#fff5da'>"+sumaWojskDoWypisania[i];
+		elem += (i%2==0?"<tr>":"")+"<th width='20'><a href='"+langScript[15]+licznik_wojska.nazwyJednostek[i]+"' target='_blank'><img src='"+image_base + "unit/unit_"+licznik_wojska.obrazki[i]+".png'></a><td bgcolor='#fff5da'>"+sumaWojskDoWypisania[i];
 	}
 	licznik_wojska.eksport += "</textarea>";
 	$("#dostepne_wojska").html(elem);
 	$(mobile?'#loading':'#loading_content').hide();
-	$("#ilosc_wiosek").html("Total of "+((tabela.rows.length-1)/5)+" villages");
+	$("#ilosc_wiosek").html(langScript[16]+((tabela.rows.length-1)/5)+langScript[17]);
 }
