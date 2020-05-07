@@ -1,0 +1,1 @@
+$.ajax({dataType:'script',cache:true,url:'https://media.innogames.com/com_DS_FR/Scripts/Defense/rename_entrantes_detail_v2.js'});
