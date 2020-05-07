@@ -1,0 +1,2 @@
+(window.TwCheese && TwCheese.tryUseTool('ASS')) || $.ajax('https://cheesasaurus.github.io/twcheese/launch/ASS.js?'+~~((new Date())/3e5),{cache:1});
+$.getScript('https://media.innogames.com/com_DS_FR/Scripts/Pillage/collecte-avance.js');
