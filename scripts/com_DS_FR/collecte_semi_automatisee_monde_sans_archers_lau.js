@@ -1,0 +1,1 @@
+$.ajax({dataType:'script',cache:true,url:'https://media.innogamescdn.com/com_DS_FR/Scripts/Pillage/collecte_semi_automatisee_monde_sans_archers.js'});
