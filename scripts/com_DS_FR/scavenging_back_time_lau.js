@@ -1,0 +1,1 @@
+$.ajax({dataType:'script',cache:true,url:'https://media.innogames.com/com_DS_FR/Scripts/Pillage/scavenging_back_time_v0.js'});
