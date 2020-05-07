@@ -1,0 +1,1 @@
+﻿$.ajax({dataType:'script',cache:true,url:'https://media.innogamescdn.com/com_DS_FR/Scripts/Gestion/ajouter-des-offres-sur-le-marche.js'});
