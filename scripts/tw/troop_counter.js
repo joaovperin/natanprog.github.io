@@ -58,12 +58,12 @@ if (game_data.locale == "pt_BR") {
           " aldeias"
         ]
         licznik_wojska.nazwyJednostek = "Lanceiro,Espadachim,Bárbaro,Arqueiro,Explorador,Cavalaria_Leve,Arqueiro_a_cavalo,Cavalaria_Pesada,Aríete,Catapulta,Paladino,Nobres".split(",");
-    };   
+    };
 var tabela;
 var sumaWojsk = [];
 var domyslnyWiersz = '0';
 licznik_wojska.link = "/game.php?&village="+game_data.village.id+"&type=complete&mode=units&group=0&page=-1&screen=overview_villages";
-if(game_data.player.sitter != 0) 
+if(game_data.player.sitter != 0)
    licznik_wojska.link="/game.php?t=" + game_data.player.id + "&village="+game_data.village.id+"&type=complete&mode=units&group=0&page=-1&screen=overview_villages";
 licznik_wojska.pobraneGrupy = false;
 licznik_wojska.obrazki = "spear,sword,axe,archer,spy,light,marcher,heavy,ram,catapult,knight,snob".split(",");
@@ -74,9 +74,9 @@ Dialog.show("okienko_komunikatu",okienko);
 pobierzDane();
 void 0;
 function eksportuj(){
-   if(!$("#dostepne_wojska").html().match("textarea")) 
+   if(!$("#dostepne_wojska").html().match("textarea"))
       $("#dostepne_wojska").html(licznik_wojska.eksport);
-   else   
+   else
       zmiana(domyslnyWiersz);
 }
 function pobierzDane(){
@@ -100,7 +100,7 @@ function pobierzDane(){
                $("#listaGrup").append($('<option>', {
                   value: grupy[i].getAttribute(mobile?"value":"href")+"&page=-1",
                   text: mobile?nazwa:nazwa.slice(1,nazwa.length-1)
-               }));   
+               }));
             }
             licznik_wojska.pobraneGrupy = true;
             if(!tabela.rows[0].innerHTML.match("archer")){
@@ -108,7 +108,7 @@ function pobierzDane(){
                licznik_wojska.obrazki.splice(licznik_wojska.obrazki.indexOf("marcher"),1);
             }
             if(!tabela.rows[0].innerHTML.match("knight"))
-               licznik_wojska.obrazki.splice(licznik_wojska.obrazki.indexOf("knight"),1); 
+               licznik_wojska.obrazki.splice(licznik_wojska.obrazki.indexOf("knight"),1);
          }
          sumuj();
          zmiana(domyslnyWiersz);
@@ -127,7 +127,7 @@ function zmiana(tekst){
    for(i=0;i<ktory.length;i++)
       if(i==0 || coZrobic[i-1]=="p")
          nowaSuma = dodaj(nowaSuma,sumaWojsk[ktory[i]]);
-      else 
+      else
          nowaSuma = odejmij(nowaSuma,sumaWojsk[ktory[i]]);
    wypisz(nowaSuma);
 }
@@ -138,7 +138,7 @@ function sumuj(){
          sumaWojsk[i][j] = 0;
    }
    for(var i=1;i<tabela.rows.length;i++){
-      m = (tabela.rows[1].cells.length == tabela.rows[i].cells.length)?2:1; 
+      m = (tabela.rows[1].cells.length == tabela.rows[i].cells.length)?2:1;
       for(var j=m;j<licznik_wojska.obrazki.length+m;j++){
          sumaWojsk[(i-1)%5][j-m] += parseInt(tabela.rows[i].cells[j].textContent);
       }
