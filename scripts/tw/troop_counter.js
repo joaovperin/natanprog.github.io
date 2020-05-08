@@ -60,7 +60,7 @@ if (game_data.locale == "pt_BR") {
 };
 var tabela;
 var sumaWojsk = [];
-var domyslnyWiersz = '0';
+var domyslnyWiersz = "0";
 licznik_wojska.link = "/game.php?&village=" + game_data.village.id + "&type=complete&mode=units&group=0&page=-1&screen=overview_villages";
 if (game_data.player.sitter != 0)
     licznik_wojska.link = "/game.php?t=" + game_data.player.id + "&village=" + game_data.village.id + "&type=complete&mode=units&group=0&page=-1&screen=overview_villages";
@@ -82,28 +82,28 @@ function eksportuj() {
 
 function pobierzDane() {
     $("#ilosc_wiosek").html(langScript[11]);
-    $(mobile ? '#loading' : '#loading_content').show();
+    $(mobile ? "#loading" : "#loading_content").show();
     var r;
     r = new XMLHttpRequest();
-    r.open('GET', licznik_wojska.link, true);
+    r.open("GET", licznik_wojska.link, true);
 
     function processResponse() {
         if (r.readyState == 4 && r.status == 200) {
             requestedBody = document.createElement("body");
             requestedBody.innerHTML = r.responseText;
-            tabela = $(requestedBody).find('#units_table').get()[0];
+            tabela = $(requestedBody).find("#units_table").get()[0];
             if (!tabela) {
                 $("#dostepne_wojska").html(langScript[12]);
                 $("#ilosc_wiosek").html(langScript[13]);
                 return false;
             }
-            var grupy = $(requestedBody).find('.vis_item').get()[0].getElementsByTagName(mobile ? 'option' : 'a');
+            var grupy = $(requestedBody).find(".vis_item").get()[0].getElementsByTagName(mobile ? "option" : "a");
             if (tabela.rows.length > 4000) alert(langScript[14]);
             if (!licznik_wojska.pobraneGrupy) {
                 for (i = 0; i < grupy.length; i++) {
                     nazwa = grupy[i].textContent;
                     if (mobile && grupy[i].textContent == "wszystkie") continue;
-                    $("#listaGrup").append($('<option>', {
+                    $("#listaGrup").append($("<option>", {
                         value: grupy[i].getAttribute(mobile ? "value" : "href") + "&page=-1",
                         text: mobile ? nazwa : nazwa.slice(1, nazwa.length - 1)
                     }));
@@ -184,6 +184,6 @@ function wypisz(sumaWojskDoWypisania) {
     }
     licznik_wojska.eksport += "</textarea>";
     $("#dostepne_wojska").html(elem);
-    $(mobile ? '#loading' : '#loading_content').hide();
+    $(mobile ? "#loading" : "#loading_content").hide();
     $("#ilosc_wiosek").html(langScript[16] + ((tabela.rows.length - 1) / 5) + langScript[17]);
 }
