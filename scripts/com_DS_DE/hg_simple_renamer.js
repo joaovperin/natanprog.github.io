@@ -1,0 +1,2 @@
+ScriptAPI.register( '14-Dorfumbenennungsscript - Hauptgebäude (Einfach)', true, 'i.V.Harpstennah', 'support-nur-im-forum@arcor.de' );
+document.forms[0].elements[0].value=name;document.forms[0].submit();
