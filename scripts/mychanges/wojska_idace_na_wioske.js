@@ -21,7 +21,8 @@ if (game_data.locale == "en_DK") {
         "Carregar Dados",
         "Tipo",
         "Criado por",
-        "Reparado por"
+        "Reparado por",
+        "Tropas a caminho"
     ]
 };
 if (game_data.locale == "pt_BR") {
@@ -32,7 +33,8 @@ if (game_data.locale == "pt_BR") {
         "Carregar Dados",
         "Tipo",
         "Criado por",
-        "Reparado por"
+        "Reparado por",
+        "Tropas a caminho"
     ]
 };
 var jednostkiObrazki = "spear,sword,axe,archer,spy,light,marcher,heavy,ram,catapult,knight,snob".split(",");
@@ -128,7 +130,7 @@ for (var i = 1;i<linijkii.length;i++)
 var razemzag = Math.round(((((1*tablicax[1])+(1*tablicax[2])+(1*tablicax[4])+(6*tablicax[8]))/20000))* 100)/100;
 if (razemzag == undefined){razemzag=0;};
 }
-$("#hofcio_suma_1h")[0].innerHTML = "Wojsko w drodze na wioskę";
+$("#hofcio_suma_1h")[0].innerHTML = langScript[7];
 $("#hofcio_suma_off")[0].innerHTML = "<font color=red>Ofensywa:</font><br>Topornik: <b>"+hofcio_sum[2]+"</b><br>LK: <b>"+hofcio_sum[5]+"</b><br>ŁK: <b>"+hofcio_sum[6]+"</b><br>Taran: <b>"+hofcio_sum[8]+"</b>";
 $("#hofcio_suma_def")[0].innerHTML = "<font color=red>Defensywa:</font><br>Pikinier: <b>"+hofcio_sum[0]+"</b><br>Miecznik: <b>"+hofcio_sum[1]+"</b><br>Łucznik: <b>"+hofcio_sum[3]+"</b><br>CK: <b>"+hofcio_sum[7]+"</b><br><br>Razem Zagród DEF: <b>"+zagrody+"</b>";
 $("#hofcio_suma_o")[0].innerHTML = "<font color=red>Inne:</font><br>Zwiadowca: <b>"+hofcio_sum[4]+"</b><br>Katapulta: <b>"+hofcio_sum[9]+"</b><br>Rycerz: <b>"+hofcio_sum[10]+"</b><br>Szlachcic: <b>"+hofcio_sum[11]+"</b>";
