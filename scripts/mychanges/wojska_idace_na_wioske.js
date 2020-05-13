@@ -26,10 +26,10 @@ if (game_data.locale == "en_DK") {
         "Ofensivas:",
         "Defensivas:",
         "Outras:",
-        "Bárbaro",
-        "Cavalaria Leve",
-        "Arqueiro a Cavalo",
-        "Aríete"
+        "Bárbaro: ",
+        "Cavalaria Leve: ",
+        "Arqueiro a Cavalo: ",
+        "Aríete: "
     ]
 };
 if (game_data.locale == "pt_BR") {
