@@ -54,12 +54,12 @@ if (game_data.locale == "pt_BR") {
 var jednostkiObrazki = "spear,sword,axe,archer,spy,light,marcher,heavy,ram,catapult,knight,snob".split(",");
 var tabelka= "<style>#hofcio_div td{white-space: nowrap;} #hofcio_suma_off,#hofcio_suma_def,#hofcio_suma_o,#hofcio_suma_in div{margin:0px 5px 5px 0px;} h4{color:green;} tr{border-spacing: 2px;border-collapse: separate;}</style>";
 tabelka +="<div id='hofcio_div' style='width:750px;'><h2>" + langScript[0] + "</h2>"+
-"<div style='width:68%;float:left;overflow: auto; height: 350px;'>"+
+"<div style='width:63%;float:left;overflow: auto; height: 350px;'>"+
 "<select id='howcio_sel'><option value=0>" + langScript[1] + "</option><option value=1>" + langScript[2] + "</option></select> <input type=button id='howcio_subm' class=btn value='" + langScript[3] + "' onclick='letsgo();'><br><br>"+
 "<table class='vis hofcio' id=tabelkahow><tbody><tr class=zostaw>";
 for(var a=0;a<jednostkiObrazki.length;a++){    tabelka += "<th width='25px'><img src='"+unitlink+jednostkiObrazki[a]+".png'></th>"}
 tabelka +="<th>" + langScript[4] + "</th></tr></tbody></table></div>";
-tabelka +="<div style='width:31%;float:right;'><div style='width:100% text-align:center;'><h4 id='hofcio_suma_1h'></h4><div id='hofcio_suma_off' style ='width:45%; float:left;'></div><div id='hofcio_suma_def' style ='width:45%; float:right;'></div></div><div id='hofcio_suma_o'></div><div id='hofcio_suma_in'></div><div style='position: fixed;bottom: 0;right: 0;fontSize:8px'>" + langScript[5] + " <b>Howcio712</b> / " + langScript[6] + " <b>Rinne</b> & <b>Gangsta Anime Girl</b></div></div>";
+tabelka +="<div style='width:36%;float:right;'><div style='width:100% text-align:center;'><h4 id='hofcio_suma_1h'></h4><div id='hofcio_suma_off' style ='width:45%; float:left;'></div><div id='hofcio_suma_def' style ='width:45%; float:right;'></div></div><div id='hofcio_suma_o'></div><div id='hofcio_suma_in'></div><div style='position: fixed;bottom: 0;right: 0;fontSize:8px'>" + langScript[5] + " <b>Howcio712</b> / " + langScript[6] + " <b>Rinne</b> & <b>Gangsta Anime Girl</b></div></div>";
 Dialog.show("okienko_komunikatu",tabelka);
 function letsgo(){
     document.getElementById("howcio_subm").disabled=true;
