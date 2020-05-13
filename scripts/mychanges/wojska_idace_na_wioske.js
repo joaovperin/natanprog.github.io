@@ -25,7 +25,11 @@ if (game_data.locale == "en_DK") {
         "Tropas a caminho",
         "Ofensivas:",
         "Defensivas:",
-        "Outras:"
+        "Outras:",
+        "Bárbaro",
+        "Cavalaria Leve",
+        "Arqueiro a Cavalo",
+        "Aríete"
     ]
 };
 if (game_data.locale == "pt_BR") {
@@ -40,7 +44,11 @@ if (game_data.locale == "pt_BR") {
         "Tropas a caminho",
         "Ofensivas:",
         "Defensivas:",
-        "Outras:"
+        "Outras:",
+        "Bárbaro: ",
+        "Cavalaria Leve: ",
+        "Arqueiro a Cavalo: ",
+        "Aríete: "
     ]
 };
 var jednostkiObrazki = "spear,sword,axe,archer,spy,light,marcher,heavy,ram,catapult,knight,snob".split(",");
@@ -137,7 +145,7 @@ var razemzag = Math.round(((((1*tablicax[1])+(1*tablicax[2])+(1*tablicax[4])+(6*
 if (razemzag == undefined){razemzag=0;};
 }
 $("#hofcio_suma_1h")[0].innerHTML = langScript[7];
-$("#hofcio_suma_off")[0].innerHTML = "<font color=red>" + langScript[8] + "</font><br>Topornik: <b>"+hofcio_sum[2]+"</b><br>LK: <b>"+hofcio_sum[5]+"</b><br>ŁK: <b>"+hofcio_sum[6]+"</b><br>Taran: <b>"+hofcio_sum[8]+"</b>";
+$("#hofcio_suma_off")[0].innerHTML = "<font color=red>" + langScript[8] + "</font><br>" + langScript[11] + "<b>"+hofcio_sum[2]+"</b><br>" + langScript[12] + "<b>"+hofcio_sum[5]+"</b><br>" + langScript[13] + "<b>"+hofcio_sum[6]+"</b><br>" + langScript[14] + "<b>"+hofcio_sum[8]+"</b>";
 $("#hofcio_suma_def")[0].innerHTML = "<font color=red>" + langScript[9] + "</font><br>Pikinier: <b>"+hofcio_sum[0]+"</b><br>Miecznik: <b>"+hofcio_sum[1]+"</b><br>Łucznik: <b>"+hofcio_sum[3]+"</b><br>CK: <b>"+hofcio_sum[7]+"</b><br><br>Razem Zagród DEF: <b>"+zagrody+"</b>";
 $("#hofcio_suma_o")[0].innerHTML = "<font color=red>" + langScript[10] + "</font><br>Zwiadowca: <b>"+hofcio_sum[4]+"</b><br>Katapulta: <b>"+hofcio_sum[9]+"</b><br>Rycerz: <b>"+hofcio_sum[10]+"</b><br>Szlachcic: <b>"+hofcio_sum[11]+"</b>";
 $("#hofcio_suma_in")[0].innerHTML = "<h4>Def znajdujący się w wiosce</h4>Pikinier: <b>"+tablicax[1]+"</b><br>Miecznik: <b>"+tablicax[2]+"</b><br>Łucznik: <b>"+tablicax[4]+"</b><br>CK: <b>"+tablicax[8]+"</b><br>Razem Zagród <b>"+razemzag+"</b><br>Katapulta: <b>"+tablicax[10]+"</b><br>Rycerz: <b>"+tablicax[11]+"</b><br>";
