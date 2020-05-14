@@ -34,7 +34,7 @@ if (game_data.locale == "en_DK") {
         "Espadachins: ",
         "Arqueiros: ",
         "CP: ",
-        "Fazendas DEF :"
+        "Fazendas DEF: "
     ]
 };
 if (game_data.locale == "pt_BR") {
