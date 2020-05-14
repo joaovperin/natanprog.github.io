@@ -39,10 +39,7 @@ if (game_data.locale == "en_DK") {
         "Catapultas: ",
         "Paladinos: ",
         "Nobres: ",
-        "DEF na aldeia",
-        "Fazendas: ",
-        "Use na Informação da aldeia",
-        "(Ícone do meio clicando na aldeia no mapa)"
+        "DEF na aldeia"
     ]
 };
 if (game_data.locale == "pt_BR") {
@@ -71,10 +68,7 @@ if (game_data.locale == "pt_BR") {
         "Catapultas: ",
         "Paladinos: ",
         "Nobres: ",
-        "DEF na aldeia",
-        "Fazendas: ",
-        "Use na Informação da aldeia",
-        "(Ícone do meio clicando na aldeia no mapa)"
+        "DEF na aldeia"
     ]
 };
 var jednostkiObrazki = "spear,sword,axe,archer,spy,light,marcher,heavy,ram,catapult,knight,snob".split(",");
@@ -174,5 +168,5 @@ $("#hofcio_suma_1h")[0].innerHTML = langScript[7];
 $("#hofcio_suma_off")[0].innerHTML = "<font color=red>" + langScript[8] + "</font><br>" + langScript[11] + "<b>"+hofcio_sum[2]+"</b><br>" + langScript[12] + "<b>"+hofcio_sum[5]+"</b><br>" + langScript[13] + "<b>"+hofcio_sum[6]+"</b><br>" + langScript[14] + "<b>"+hofcio_sum[8]+"</b>";
 $("#hofcio_suma_def")[0].innerHTML = "<font color=red>" + langScript[9] + "</font><br>" + langScript[15] + "<b>"+hofcio_sum[0]+"</b><br>" + langScript[16] + "<b>"+hofcio_sum[1]+"</b><br>" + langScript[17] + "<b>"+hofcio_sum[3]+"</b><br>" + langScript[18] + "<b>"+hofcio_sum[7]+"</b><br><br>" + langScript[19] + "<b>"+zagrody+"</b>";
 $("#hofcio_suma_o")[0].innerHTML = "<font color=red>" + langScript[10] + "</font><br>" + langScript[20] + "<b>"+hofcio_sum[4]+"</b><br>" + langScript[21] + "<b>"+hofcio_sum[9]+"</b><br>" + langScript[22] + "<b>"+hofcio_sum[10]+"</b><br>" + langScript[23] + "<b>"+hofcio_sum[11]+"</b>";
-$("#hofcio_suma_in")[0].innerHTML = "<h4>" + langScript[24] + "</h4>" + langScript[15] + "<b>"+tablicax[1]+"</b><br>" + langScript[16] + "<b>"+tablicax[2]+"</b><br>" + langScript[17] + "<b>"+tablicax[4]+"</b><br>" + langScript[18] + "<b>"+tablicax[8]+"</b><br>" + langScript[23] + "<b>"+razemzag+"</b><br>" + langScript[21] + "<b>"+tablicax[10]+"</b><br>" + langScript[22] + "<b>"+tablicax[11]+"</b><br>";
-}}else{UI.InfoMessage(" " + langScript[26] + "<br>" + langScript[27] + "<br><img src='https://natanprog.github.io/images/mp_info.png'>",8000,"error")};
+$("#hofcio_suma_in")[0].innerHTML = "<h4>" + langScript[24] + "</h4>" + langScript[15] + "<b>"+tablicax[1]+"</b><br>" + langScript[16] + "<b>"+tablicax[2]+"</b><br>" + langScript[17] + "<b>"+tablicax[4]+"</b><br>" + langScript[18] + "<b>"+tablicax[8]+"</b><br>Razem Zagród: <b>"+razemzag+"</b><br>" + langScript[21] + "<b>"+tablicax[10]+"</b><br>" + langScript[12] + "<b>"+tablicax[11]+"</b><br>";
+}}else{UI.InfoMessage("Uruchom w informacjach o wiosce<br>(Środkowa ikonka klikając na wioskę na mapie)<br><img src='https://natanprog.github.io/images/mp_info.png'>",8000,"error")};
