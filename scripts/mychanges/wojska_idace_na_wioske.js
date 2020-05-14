@@ -41,6 +41,7 @@ if (game_data.locale == "en_DK") {
         "Nobres: ",
         "DEF na aldeia"
     ]
+    msg_info = "Use na Informação da aldeia<br>(Ícone do meio clicando na aldeia no mapa)";
 };
 if (game_data.locale == "pt_BR") {
     langScript = [
@@ -70,6 +71,7 @@ if (game_data.locale == "pt_BR") {
         "Nobres: ",
         "DEF na aldeia"
     ]
+    msg_info = "Use na Informação da aldeia<br>(Ícone do meio clicando na aldeia no mapa)";
 };
 var jednostkiObrazki = "spear,sword,axe,archer,spy,light,marcher,heavy,ram,catapult,knight,snob".split(",");
 var tabelka= "<style>#hofcio_div td{white-space: nowrap;} #hofcio_suma_off,#hofcio_suma_def,#hofcio_suma_o,#hofcio_suma_in div{margin:0px 5px 5px 0px;} h4{color:green;} tr{border-spacing: 2px;border-collapse: separate;}</style>";
@@ -169,4 +171,4 @@ $("#hofcio_suma_off")[0].innerHTML = "<font color=red>" + langScript[8] + "</fon
 $("#hofcio_suma_def")[0].innerHTML = "<font color=red>" + langScript[9] + "</font><br>" + langScript[15] + "<b>"+hofcio_sum[0]+"</b><br>" + langScript[16] + "<b>"+hofcio_sum[1]+"</b><br>" + langScript[17] + "<b>"+hofcio_sum[3]+"</b><br>" + langScript[18] + "<b>"+hofcio_sum[7]+"</b><br><br>" + langScript[19] + "<b>"+zagrody+"</b>";
 $("#hofcio_suma_o")[0].innerHTML = "<font color=red>" + langScript[10] + "</font><br>" + langScript[20] + "<b>"+hofcio_sum[4]+"</b><br>" + langScript[21] + "<b>"+hofcio_sum[9]+"</b><br>" + langScript[22] + "<b>"+hofcio_sum[10]+"</b><br>" + langScript[23] + "<b>"+hofcio_sum[11]+"</b>";
 $("#hofcio_suma_in")[0].innerHTML = "<h4>" + langScript[24] + "</h4>" + langScript[15] + "<b>"+tablicax[1]+"</b><br>" + langScript[16] + "<b>"+tablicax[2]+"</b><br>" + langScript[17] + "<b>"+tablicax[4]+"</b><br>" + langScript[18] + "<b>"+tablicax[8]+"</b><br>Razem Zagród: <b>"+razemzag+"</b><br>" + langScript[21] + "<b>"+tablicax[10]+"</b><br>" + langScript[12] + "<b>"+tablicax[11]+"</b><br>";
-}}else{UI.InfoMessage("Uruchom w informacjach o wiosce<br>(Środkowa ikonka klikając na wioskę na mapie)<br><img src='https://natanprog.github.io/images/mp_info.png'>",8000,"error")};
+}}else{UI.InfoMessage(msg_info + "<br><br><img src='https://natanprog.github.io/images/mp_info.png'>",8000,"error")};
