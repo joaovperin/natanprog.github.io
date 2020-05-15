@@ -81,7 +81,7 @@ tabelka +="<div id='hofcio_div' style='width:750px;'><h2>" + langScript[0] + "</
 "<table class='vis hofcio' id=tabelkahow><tbody><tr class=zostaw>";
 for(var a=0;a<jednostkiObrazki.length;a++){    tabelka += "<th width='25px'><img src='"+unitlink+jednostkiObrazki[a]+".png'></th>"}
 tabelka +="<th>" + langScript[4] + "</th></tr></tbody></table></div>";
-tabelka +="<div style='width:35%;float:right;'><div style='width:100% text-align:center;'><h4 id='hofcio_suma_1h'></h4><div id='hofcio_suma_off' style ='width:45%; float:left;'></div><div id='hofcio_suma_def' style ='width:45%; float:right;'></div></div><div id='hofcio_suma_o'></div><div id='hofcio_suma_in'></div><div style='position: fixed;bottom: 0;right: 0;fontSize:8px'>" + langScript[5] + " <b>Howcio712</b><br>" + langScript[6] + " <b>Rinne</b> & <b>Gangsta Anime Girl</b></div></div>";
+tabelka +="<div style='width:39%;float:right;'><div style='width:100% text-align:center;'><h4 id='hofcio_suma_1h'></h4><div id='hofcio_suma_off' style ='width:45%; float:left;'></div><div id='hofcio_suma_def' style ='width:45%; float:right;'></div></div><div id='hofcio_suma_o'></div><div id='hofcio_suma_in'></div><div style='position: fixed;bottom: 0;right: 0;fontSize:8px'>" + langScript[5] + " <b>Howcio712</b><br>" + langScript[6] + " <b>Rinne</b> & <b>Gangsta Anime Girl</b></div></div>";
 Dialog.show("okienko_komunikatu",tabelka);
 function letsgo(){
     document.getElementById("howcio_subm").disabled=true;
