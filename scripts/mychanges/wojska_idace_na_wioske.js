@@ -76,7 +76,7 @@ if (game_data.locale == "pt_BR") {
 var jednostkiObrazki = "spear,sword,axe,archer,spy,light,marcher,heavy,ram,catapult,knight,snob".split(",");
 var tabelka= "<style>#hofcio_div td{white-space: nowrap;} #hofcio_suma_off,#hofcio_suma_def,#hofcio_suma_o,#hofcio_suma_in div{margin:0px 5px 5px 0px;} h4{color:green;} tr{border-spacing: 2px;border-collapse: separate;}</style>";
 tabelka +="<div id='hofcio_div' style='width:750px;'><h2>" + langScript[0] + "</h2>"+
-"<div style='width:64%;float:left;overflow: auto; height: 350px;'>"+
+"<div style='width:63%;float:left;overflow: auto; height: 350px;'>"+
 "<select id='howcio_sel'><option value=0>" + langScript[1] + "</option><option value=1>" + langScript[2] + "</option></select> <input type=button id='howcio_subm' class=btn value='" + langScript[3] + "' onclick='letsgo();'><br><br>"+
 "<table class='vis hofcio' id=tabelkahow><tbody><tr class=zostaw>";
 for(var a=0;a<jednostkiObrazki.length;a++){    tabelka += "<th width='25px'><img src='"+unitlink+jednostkiObrazki[a]+".png'></th>"}
