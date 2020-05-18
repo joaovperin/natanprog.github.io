@@ -78,11 +78,11 @@ var jednostkiObrazki = "spear,sword,axe,archer,spy,light,marcher,heavy,ram,catap
 var tabelka= "<style>#hofcio_div td{white-space: nowrap;} #hofcio_suma_off,#hofcio_suma_def,#hofcio_suma_o,#hofcio_suma_in div{margin:0px 5px 5px 0px;} h4{color:green;} tr{border-spacing: 2px;border-collapse: separate;}</style>";
 tabelka +="<div id='hofcio_div' style='width:750px;'><h2>" + langScript[0] + "</h2>"+
 "<div style='width:68%;float:left;overflow: auto; height: 350px;'>"+
-"<select id='howcio_sel'><option value=0>Tylko własne komendy</option><option value=1>Wszystkie komendy</option></select> <input type=button id='howcio_subm' class=btn value='Załaduj Dane' onclick='letsgo();'><br><br>"+
+"<select id='howcio_sel'><option value=0>" + langScript[1] + "</option><option value=1>" + langScript[2] + "</option></select> <input type=button id='howcio_subm' class=btn value='" + langScript[3] + "' onclick='letsgo();'><br><br>"+
 "<table class='vis hofcio' id=tabelkahow><tbody><tr class=zostaw>";
 for(var a=0;a<jednostkiObrazki.length;a++){    tabelka += "<th width='25px'><img src='"+unitlink+jednostkiObrazki[a]+".png'></th>"}
-tabelka +="<th>Typ</th></tr></tbody></table></div>";
-tabelka +="<div style='width:31%;float:right;'><div style='width:100% text-align:center;'><h4 id='hofcio_suma_1h'></h4><div id='hofcio_suma_off' style ='width:45%; float:left;'></div><div id='hofcio_suma_def' style ='width:45%; float:right;'></div></div><div id='hofcio_suma_o'></div><div id='hofcio_suma_in'></div><div style='position: fixed;bottom: 0;right: 0;fontSize:8px'>Created by <b>Howcio712</b> / Repaired by <b>Rinne</b> & <b>Gangsta Anime Girl</b></div></div>";
+tabelka +="<th>" + langScript[4] + "</th></tr></tbody></table></div>";
+tabelka +="<div style='width:31%;float:right;'><div style='width:100% text-align:center;'><h4 id='hofcio_suma_1h'></h4><div id='hofcio_suma_off' style ='width:45%; float:left;'></div><div id='hofcio_suma_def' style ='width:45%; float:right;'></div></div><div id='hofcio_suma_o'></div><div id='hofcio_suma_in'></div><div style='position: fixed;bottom: 0;right: 0;fontSize:8px'>" + langScript[5] + " <b>Howcio712</b><br>" + langScript[6] + " <b>Rinne</b> & <b>Gangsta Anime Girl</b></div></div>";
 Dialog.show("okienko_komunikatu",tabelka);
 function letsgo(){
     document.getElementById("howcio_subm").disabled=true;
@@ -167,9 +167,17 @@ for (var i = 1;i<linijkii.length;i++)
 var razemzag = Math.round(((((1*tablicax[1])+(1*tablicax[2])+(1*tablicax[4])+(6*tablicax[8]))/20000))* 100)/100;
 if (razemzag == undefined){razemzag=0;};
 }
-$("#hofcio_suma_1h")[0].innerHTML = "Wojsko w drodze na wioskę";
-$("#hofcio_suma_off")[0].innerHTML = "<font color=red>Ofensywa:</font><br>Topornik: <b>"+hofcio_sum[2]+"</b><br>LK: <b>"+hofcio_sum[5]+"</b><br>ŁK: <b>"+hofcio_sum[6]+"</b><br>Taran: <b>"+hofcio_sum[8]+"</b>";
-$("#hofcio_suma_def")[0].innerHTML = "<font color=red>Defensywa:</font><br>Pikinier: <b>"+hofcio_sum[0]+"</b><br>Miecznik: <b>"+hofcio_sum[1]+"</b><br>Łucznik: <b>"+hofcio_sum[3]+"</b><br>CK: <b>"+hofcio_sum[7]+"</b><br><br>Razem Zagród DEF: <b>"+zagrody+"</b>";
-$("#hofcio_suma_o")[0].innerHTML = "<font color=red>Inne:</font><br>Zwiadowca: <b>"+hofcio_sum[4]+"</b><br>Katapulta: <b>"+hofcio_sum[9]+"</b><br>Rycerz: <b>"+hofcio_sum[10]+"</b><br>Szlachcic: <b>"+hofcio_sum[11]+"</b>";
-$("#hofcio_suma_in")[0].innerHTML = "<h4>Def znajdujący się w wiosce</h4>Pikinier: <b>"+tablicax[1]+"</b><br>Miecznik: <b>"+tablicax[2]+"</b><br>Łucznik: <b>"+tablicax[4]+"</b><br>CK: <b>"+tablicax[8]+"</b><br>Razem Zagród <b>"+razemzag+"</b><br>Katapulta: <b>"+tablicax[10]+"</b><br>Rycerz: <b>"+tablicax[11]+"</b><br>";
-}}else{UI.InfoMessage("Uruchom w informacjach o wiosce<br>(Środkowa ikonka klikając na wioskę na mapie)<br><img src='http://michuni.pl/112.png'>",8000,"error")};
+$("#hofcio_suma_1h")[0].innerHTML = langScript[7];
+$("#hofcio_suma_off")[0].innerHTML = "<font color=red>" + langScript[8] + "</font><br>" + langScript[11] + "<b>"+hofcio_sum[2]+"</b><br>" + langScript[12] + "<b>"+hofcio_sum[5]+"</b><br>" + langScript[13] + "<b>"+hofcio_sum[6]+"</b><br>" + langScript[14] + "<b>"+hofcio_sum[8]+"</b>";
+$("#hofcio_suma_def")[0].innerHTML = "<font color=red>" + langScript[9] + "</font><br>" + langScript[15] + "<b>"+hofcio_sum[0]+"</b><br>" + langScript[16] + "<b>"+hofcio_sum[1]+"</b><br>" + langScript[17] + "<b>"+hofcio_sum[3]+"</b><br>" + langScript[18] + "<b>"+hofcio_sum[7]+"</b><br><br>" + langScript[19] + "<b>"+zagrody+"</b>";
+$("#hofcio_suma_o")[0].innerHTML = "<font color=red>" + langScript[10] + "</font><br>" + langScript[20] + "<b>"+hofcio_sum[4]+"</b><br>" + langScript[21] + "<b>"+hofcio_sum[9]+"</b><br>" + langScript[22] + "<b>"+hofcio_sum[10]+"</b><br>" + langScript[23] + "<b>"+hofcio_sum[11]+"</b>";
+$("#hofcio_suma_in")[0].innerHTML = "<h4>" + langScript[24] + "</h4>" + langScript[15] + "<b>"+tablicax[1]+"</b><br>" + langScript[16] + "<b>"+tablicax[2]+"</b><br>" + langScript[17] + "<b>"+tablicax[4]+"</b><br>" + langScript[18] + "<b>"+tablicax[8]+"</b><br>" + langScript[25] + "<b>"+razemzag+"</b><br>" + langScript[21] + "<b>"+tablicax[10]+"</b><br>" + langScript[22] + "<b>"+tablicax[11]+"</b><br>";
+}}else{
+    switch(game_data.locale) {
+        case "pt_BR":
+        UI.InfoMessage("Use na Informação da aldeia<br>(Ícone do meio clicando na aldeia no mapa)<br><img src='https://natanprog.github.io/images/mp_info.png'>",8000,"error");
+        break;
+        default:
+        UI.InfoMessage("Use in the Village Information<br>(Middle icon by clicking on the village on the map)<br><img src='https://natanprog.github.io/images/mp_info.png'>",8000,"error");
+    }
+};
