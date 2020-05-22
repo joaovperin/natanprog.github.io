@@ -6,6 +6,28 @@ javascript:
     window.location.assign(game_data.link_base_pure + "ally&mode=members");
 }*/
 // Sophie "Shinko to Kuma"
+var langShinko;
+switch(game_data.locale) {
+  case "pt_BR":
+    langShinko = {
+        "ODA": "ODA",
+        "ODD": "ODD",
+        "ODS": "ODS",
+        "Loot": "Saque",
+        "Gathered": "Coletado",
+        "Combined": "Combinado"
+    }
+    break;
+  default:
+    langShinko = {
+        "ODA": "ODA",
+        "ODD": "ODD",
+        "ODS": "ODS",
+        "Loot": "Loot",
+        "Gathered": "Gathered",
+        "Combined": "Combined"
+}
+
 var tribeTable='';
 var rowStart=1;
 var columnStart=6;
@@ -104,7 +126,7 @@ for (var i = 0; i < names.length; i++) {
     linksLoot.push("/game.php?screen=ranking&mode=in_a_day&type=loot_res&name=" + names[i]);
     linksGathering.push("/game.php?screen=ranking&mode=in_a_day&type=scavenge&name=" + names[i]);
 }
-$(tribeTable+" tr").eq(rowStart-1).append("<th onclick='sortTableTest("+columnStart+")'>ODA</th><th onclick='sortTableTest("+(columnStart+1)+")'>ODD</th><th onclick='sortTableTest("+(columnStart+2)+")'>ODS</th><th onclick='sortTableTest("+(columnStart+3)+")'>Loot</th><th onclick='sortTableTest("+(columnStart+4)+")'>Gathered</th><th onclick='sortTableTest("+(columnStart+5)+")'>Combined</th>")
+$(tribeTable+" tr").eq(rowStart-1).append("<th onclick='sortTableTest("+columnStart+")'>"+langShinko["ODA"]+"</th><th onclick='sortTableTest("+(columnStart+1)+")'>"+langShinko["ODD"]+"</th><th onclick='sortTableTest("+(columnStart+2)+")'>"+langShinko["ODS"]+"</th><th onclick='sortTableTest("+(columnStart+3)+")'>"+langShinko["Loot"]+"</th><th onclick='sortTableTest("+(columnStart+4)+")'>"+langShinko["Gathered"]+"</th><th onclick='sortTableTest("+(columnStart+5)+")'>"+langShinko["Combined"]+"</th>")
 $(tribeTable).eq(rowStart-1).attr('id', 'tableMembers');
 $("#contentContainer").eq(0).prepend(`
                 <div id="progressbar" style="width: 100%;
