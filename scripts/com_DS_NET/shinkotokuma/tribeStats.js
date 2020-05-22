@@ -26,6 +26,7 @@ switch(game_data.locale) {
         "Loot": "Loot",
         "Gathered": "Gathered",
         "Combined": "Combined"
+    }
 }
 
 var tribeTable='';
