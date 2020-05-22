@@ -68,6 +68,15 @@ var langShinko = {
         "Sold": " تم بيع",
         "giftTo": "to:",
         "giftFrom": "from: "
+    },
+    "pt_BR": {
+        "Purchase": "Compra",
+        "Premium Exchange": "Troca Premium",
+        "Points redeemed": "Utilizado",
+        "Transfer": "Transferir",
+        "Sold": "vendido",
+        "giftTo": "to: ",
+        "giftFrom": "from: "
     }
 
 }
