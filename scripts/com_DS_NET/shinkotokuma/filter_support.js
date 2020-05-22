@@ -128,6 +128,31 @@ if (game_data.locale == "it_IT") {
     ];
 }
 
+if (game_data.locale == "ar_AE") {
+    langShinko = [
+        "فلترة الدعم",
+        "اختار الصفحة التي ترد الذهاب اليها",
+        "سحب",
+        "إعادة ارسال",
+        "أغلق الصفحه",
+        "الصانع: ",
+        "فلترة",
+        "الكمية التي تم فلترتها",
+        "أجد فقط الدعم الهجومي",
+        "تم فلترتها حاليا: ",
+        "أظهر الدعم الأجنبي",
+        "فلتر اللاعب/القبيلة",
+        "سحب",
+        "Leftover offense recalling currently broken",
+        "اللاعب",
+        "القبيلة",
+        "تم اختيارها",
+        "السكان",
+        "After filtering export data will be placed here",
+        "الدعم المتواجد على/ومن"
+    ];
+}
+
 
 
 //if not on correct page yet, ask which page to go to
@@ -161,9 +186,9 @@ if (window.location.href.indexOf('overview_villages&mode=units&type=away_detail&
     </center>
     <br>
     <hr>
-    <center><img class="tooltip-delayed"
+    <center><img id="sophieImg" class="tooltip-delayed"
        title="<font color=darkgreen>Sophie -Shinko to Kuma-</font>"
-       src="https://dl.dropboxusercontent.com/s/0do4be4rzef4j30/sophie2.gif"
+       src="https://dl.dropboxusercontent.com/s/bxoyga8wa6yuuz4/sophie2.gif"
        style="cursor:help; position: relative"></center>
     <br>
     <center>
@@ -186,6 +211,9 @@ if (window.location.href.indexOf('overview_villages&mode=units&type=away_detail&
             'popup_box_close');
         close_this[0].click();
     });
+    if (game_data.locale == "ar_AE") {
+        $("#sophieImg").attr("src", "https://media2.giphy.com/media/qYr8p3Dzbet5S/giphy.gif");
+    }
 }
 
 function search_table() {
@@ -328,7 +356,7 @@ function search_table() {
             for (i = 0; i < checkboxes.length; i++) {
                 //checking if support is at another player
                 supportedPlayer = checkboxes[i].nextElementSibling.nextElementSibling;
-                if (supportedPlayer) {
+                if (supportedPlayer!=null) {
                     supportInfo = playersSupported[supportedPlayer.innerHTML];
                     playerName = supportedPlayer.innerHTML;
                     tribeName = checkboxes[i].nextElementSibling.nextElementSibling.nextElementSibling.innerHTML;
