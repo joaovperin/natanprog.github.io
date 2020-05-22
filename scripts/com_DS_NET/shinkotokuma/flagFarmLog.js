@@ -27,6 +27,17 @@ var langShinko = {
         "Population capacity":"Inwonersaantal",
         "Lower coin costs": "Muntkosten verlagen",
         "Haul capacity": "Buitcapaciteit"
+    },
+    "pt_BR": {
+        "Produced nobleman": "Nobres produzidos",
+        "Resource production": "Produção de recursos",
+        "Recruitment speed": "Velocidade de recrutamento",
+        "Attack strength": "Força de ataque",
+        "Defense strength": "Força de defesa",
+        "Luck": "Sorte",
+        "Population capacity": "Capacidade da população",
+        "Lower coin costs": "Menores custos de moeda",
+        "Haul capacity": "Capacidade de saque"
     }
 };
 var flagPerType = {
