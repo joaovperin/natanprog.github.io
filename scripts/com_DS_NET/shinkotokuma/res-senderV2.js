@@ -40,7 +40,7 @@ var langShinko = [
 ]
 if (game_data.locale == "en_DK") {
     langShinko = [
-        "Resource sender for flag boost minting",
+        "Enviar recursos para aldeia com bandeira de moedas",
         "Enter coordinate to send to",
         "Save",
         "Creator",
