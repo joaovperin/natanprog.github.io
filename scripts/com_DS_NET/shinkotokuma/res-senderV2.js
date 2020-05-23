@@ -108,7 +108,7 @@ if (game_data.locale == "nl_NL") {
     ]
 }
 if (game_data.locale == "it_IT") {
-    langShinko =[
+    langShinko = [
         "Script pushing per coniare",
         "Inserire le coordinate a cui mandare risorse",
         "Salva",
@@ -450,7 +450,16 @@ function createList() {
 
 function sendResource(sourceID, targetID, woodAmount, stoneAmount, ironAmount, rowNr) {
     $(':button[id^="sendResources"]').prop('disabled', true);
-    setTimeout(function () { $("#" + rowNr)[0].remove(); $(':button[id^="sendResources"]').prop('disabled', false); $(":button,#sendResources")[3].focus(); }, 200);
+    setTimeout(function () { $("#" + rowNr)[0].remove(); $(':button[id^="sendResources"]').prop('disabled', false); $(":button,#sendResources")[3].focus(); if($("#tableSend tr").length<=2)
+    {
+        alert("Finished sending!");
+        
+        if($(".btn-pp").length>0)
+        {
+            $(".btn-pp").remove(); 
+        }
+        throw Error("Done.");
+    }}, 200);
     var e = { "target_id": targetID, "wood": woodAmount, "stone": stoneAmount, "iron": ironAmount };
     TribalWars.post("market", {
         ajaxaction: "map_send", village: sourceID
@@ -464,9 +473,10 @@ function sendResource(sourceID, targetID, woodAmount, stoneAmount, ironAmount, r
         $("#woodSent").eq(0).text(`${numberWithCommas(totalWoodSent)}`);
         $("#stoneSent").eq(0).text(`${numberWithCommas(totalStoneSent)}`);
         $("#ironSent").eq(0).text(`${numberWithCommas(totalIronSent)}`);
-    },
+       },
         !1
     );
+    
 }
 
 function numberWithCommas(x) {
@@ -513,9 +523,9 @@ function askCoordinate() {
     </center>
     <br>
     <hr>
-    <center><img class="tooltip-delayed"
+    <center><img id="sophieImg" class="tooltip-delayed"
        title="<font color=darkgreen>Sophie -Shinko to Kuma-</font>"
-       src="https://dl.dropboxusercontent.com/s/0do4be4rzef4j30/sophie2.gif"
+       src="https://dl.dropboxusercontent.com/s/bxoyga8wa6yuuz4/sophie2.gif"
        style="cursor:help; position: relative"></center>
     <br>
     <center>
@@ -527,6 +537,9 @@ function askCoordinate() {
     </center>
  </div>`;
     Dialog.show('Supportfilter', content);
+    if (game_data.locale == "ar_AE") {
+        $("#sophieImg").attr("src", "https://media2.giphy.com/media/qYr8p3Dzbet5S/giphy.gif");
+    }
     $("#saveCoord").click(function () {
         coordinate = $("#coordinateTargetFirstTime")[0].value.match(/\d+\|\d+/)[0];
         sessionStorage.setItem("coordinate", coordinate);
