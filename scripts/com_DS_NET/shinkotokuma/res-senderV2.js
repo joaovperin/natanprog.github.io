@@ -18,7 +18,7 @@ var borderColor = "#3e4147";
 var headerColor = "#202225";
 var titleColor = "#ffffdf";
 var langShinko = [
-    "Resource sender for flag boost minting",
+    "Enviar recursos para aldeia com bandeira de moedas",
     "Enter coordinate to send to",
     "Save",
     "Creator",
