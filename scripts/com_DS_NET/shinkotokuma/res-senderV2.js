@@ -18,7 +18,7 @@ var borderColor = "#3e4147";
 var headerColor = "#202225";
 var titleColor = "#ffffdf";
 var langShinko = [
-    "Enviar recursos para aldeia com bandeira de moedas",
+    "Enviar recursos para cunhagem de moedas",
     "Enter coordinate to send to",
     "Save",
     "Creator",
@@ -40,7 +40,7 @@ var langShinko = [
 ]
 if (game_data.locale == "en_DK") {
     langShinko = [
-        "Enviar recursos para aldeia com bandeira de moedas",
+        "Enviar recursos para cunhagem de moedas",
         "Enter coordinate to send to",
         "Save",
         "Creator",
