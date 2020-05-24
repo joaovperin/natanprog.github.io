@@ -63,25 +63,25 @@ if (game_data.locale == "pt_BR") {
 }
 if (game_data.locale == "en_DK") {
     langShinko = [
-        "Resource sender for flag boost minting",
-        "Enter coordinate to send to",
-        "Save",
-        "Creator",
-        "Player",
-        "Village",
-        "Points",
-        "Coordinate to send to",
-        "Keep WH% behind",
-        "Recalculate res/change",
-        "Res sender",
-        "Source village",
-        "Target village",
-        "Distance",
-        "Wood",
-        "Clay",
-        "Iron",
-        "Send resources",
-        "Created by Sophie 'Shinko to Kuma'"
+        "Enviar recursos para cunhagem de moedas",
+        "Insira coordenada para enviar recursos",
+        "Salvar",
+        "Criador",
+        "Jogador",
+        "Aldeia",
+        "Pontos",
+        "Coordenada para enviar",
+        "Manter % no armazém",
+        "Recalcular transporte",
+        "Enviar recursos",
+        "Aldeia de origem",
+        "Aldeia de destino",
+        "Distância",
+        "Madeira",
+        "Argila",
+        "Ferro",
+        "Enviar recursos",
+        "Criado por Sophie 'Shinko to Kuma'"
     ]
 }
 if (game_data.locale == "el_GR") {
