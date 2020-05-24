@@ -18,7 +18,7 @@ var borderColor = "#3e4147";
 var headerColor = "#202225";
 var titleColor = "#ffffdf";
 var langShinko = [
-    "Enviar recursos para cunhagem de moedas",
+    "Resource sender for flag boost minting",
     "Enter coordinate to send to",
     "Save",
     "Creator",
@@ -38,9 +38,32 @@ var langShinko = [
     "Send resources",
     "Created by Sophie 'Shinko to Kuma'"
 ]
-if (game_data.locale == "en_DK") {
+if (game_data.locale == "pt_BR") {
     langShinko = [
         "Enviar recursos para cunhagem de moedas",
+        "Enter coordinate to send to",
+        "Save",
+        "Creator",
+        "Player",
+        "Village",
+        "Points",
+        "Coordinate to send to",
+        "Keep WH% behind",
+        "Recalculate res/change",
+        "Res sender",
+        "Source village",
+        "Target village",
+        "Distance",
+        "Wood",
+        "Clay",
+        "Iron",
+        "Send resources",
+        "Created by Sophie 'Shinko to Kuma'"
+    ]
+}
+if (game_data.locale == "en_DK") {
+    langShinko = [
+        "Resource sender for flag boost minting",
         "Enter coordinate to send to",
         "Save",
         "Creator",
