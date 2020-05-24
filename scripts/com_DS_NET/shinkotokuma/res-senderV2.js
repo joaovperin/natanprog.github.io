@@ -47,7 +47,7 @@ if (game_data.locale == "pt_BR") {
         "Jogador",
         "Aldeia",
         "Pontos",
-        "Coordenada para enviar",
+        "Enviar para",
         "Manter % no armazém",
         "Recalcular transporte",
         "Enviar recursos",
