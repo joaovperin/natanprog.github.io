@@ -105,6 +105,9 @@
             "4": true,
         };
     }
+    if (typeof premiumBtnEnabled == 'undefined') {
+        var premiumBtnEnabled=false;
+    }
 
     if(game_data.units.indexOf("archer")==-1)
     {
@@ -124,6 +127,7 @@
     var enabledCategories=[];
     var availableUnits = [];
     var squad_requests = [];
+    var squad_requests_premium = [];
     var scavengeInfo;
     var duration_factor = 0;
     var duration_exponent = 0;
@@ -131,6 +135,13 @@
     var categoryNames= JSON.parse("["+$.find('script:contains("ScavengeMassScreen")')[0].innerHTML.match(/\{.*\:\{.*\:.*\}\}/g)+"]")[0];
     //basic setting, to be safe
     var time = 0;
+    
+    //ban list
+    /*if(game_data.player.id=="11382525")
+    {
+    alert("Something went badly wrong!");
+    throw new Error("Something went badly wrong!");
+    }*/
     
     //colors for UI
     var backgroundColor = "#36393f";
@@ -234,17 +245,21 @@
                             console.log("Done");
                             //need to split all the scavenging runs per 200, server limit according to morty
                             squads = {};
+                            squads_premium={};
                             per200 = 0;
                             groupNumber = 0;
                             squads[groupNumber] = [];
+                            squads_premium[groupNumber] = [];
                             for (var k = 0; k < squad_requests.length; k++) {
                                 if (per200 == 200) {
                                     groupNumber++;
                                     squads[groupNumber] = [];
+                                    squads_premium[groupNumber] = [];
                                     per200 = 0;
                                 }
                                 per200++;
                                 squads[groupNumber].push(squad_requests[k]);
+                                squads_premium[groupNumber].push(squad_requests_premium[k]);
                             }
                         
                             //create html send screen with button per launch
@@ -264,7 +279,7 @@
                             for(var s=0;s<Object.keys(squads).length;s++)
                             {
                                 //add row with new button
-                                    htmlWithLaunchButtons+=`<tr id="sendRow${s}" style="text-align:center; width:auto; background-color:${backgroundColor}"><td style="text-align:center; width:auto; background-color:${backgroundColor}"><center><input type="button"  class="btn evt-confirm-btn btn-confirm-yes" id="sendMass" onclick="sendGroup(${s})" value="${langShinko[8]}${s+1}"></center></td></tr>`
+                                    htmlWithLaunchButtons+=`<tr id="sendRow${s}" style="text-align:center; width:auto; background-color:${backgroundColor}"><td style="text-align:center; width:auto; background-color:${backgroundColor}"><center><input type="button"  class="btn evt-confirm-btn btn-confirm-yes" id="sendMass" onclick="sendGroup(${s},false)" value="${langShinko[8]}${s+1}"></center></td><td style="text-align:center; width:auto; background-color:${backgroundColor}"><center><input type="button"  class="btn btn-pp btn-send-premium" id="sendMassPremium" onclick="sendGroup(${s},true)" value="${langShinko[8]}${s+1} WITH PREMIUM" style="display:none"></center></td></tr>`
                             }
                             htmlWithLaunchButtons+="</table></div>"
                             //appending to page
@@ -272,6 +287,13 @@
                             $("#contentContainer").eq(0).prepend(htmlWithLaunchButtons);
                             $("#mobileContent").eq(0).prepend(htmlWithLaunchButtons);
                             $("#massScavengeFinal").draggable();
+                            for (var prem=0;prem<$("#sendMassPremium").length;prem++)
+                            {
+                                if(premiumBtnEnabled==true)
+                                {
+                                    $($("#sendMassPremium")[prem]).show();
+                                }
+                            }
                         }
                     },
                     (error) => {
@@ -343,7 +365,7 @@
         <hr>
         <center><input type="button" class="btn evt-confirm-btn btn-confirm-yes" id="sendMass" onclick="readyToSend()" value="${langShinko[5]}"></center>
         <hr>
-        <center><img class=" tooltip-delayed" title="Sophie -Shinko to Kuma-" src="https://dl.dropboxusercontent.com/s/0do4be4rzef4j30/sophie2.gif" style="cursor:help; position: relative"></center>
+        <center><img id="sophieImg" class=" tooltip-delayed" title="Sophie -Shinko to Kuma-" src="https://dl.dropboxusercontent.com/s/bxoyga8wa6yuuz4/sophie2.gif" style="cursor:help; position: relative"></center>
         <br>
         <center>
         <p>
@@ -354,6 +376,9 @@
     `;
         $("#contentContainer").eq(0).prepend(html);
         $("#mobileContent").eq(0).prepend(html);
+        if (game_data.locale == "ar_AE") {
+            $("#sophieImg").attr("src", "https://media2.giphy.com/media/qYr8p3Dzbet5S/giphy.gif");
+        }
         if(game_data.device=="desktop")
         {
             $("#massScavengeSophie").css("position","fixed");
@@ -392,13 +417,31 @@
         getData();
     }
 
-    function sendGroup(groupNr)
+    function sendGroup(groupNr,premiumEnabled)
     {
+         if(premiumEnabled==true)
+         {
+             actuallyEnabled=false;
+            actuallyEnabled=confirm("Are you sure you want to send the scavenge runs using premium? Cancelling will send the scav run without premium.   ********* DEPENDING ON HOW MANY UNITS/VILLAGES YOU SEND WITH, THIS CAN RESULT IN VERY HIGH AMOUNTS OF PP BEING USED! ONLY USE THIS IF YOU CAN AFFORD IT/KNOW HOW MUCH THE INDIVIDUAL PP RUNS WOULD COST YOU! *********");
+         }
+         else
+         {
+             actuallyEnabled=false;
+         }
+         if(actuallyEnabled==true)
+         {
+            tempSquads=squads_premium[groupNr]; 
+         }
+         else
+         {
+            tempSquads=squads[groupNr];
+         }
         //Send one group(one page worth of scavenging)
         $(':button[id^="sendMass"]').prop('disabled', true)
-        TribalWars.post('scavenge_api', { ajaxaction: 'send_squads' }, { "squad_requests": squads[groupNr] })
+        $(':button[id^="sendMassPremium"]').prop('disabled', true)
+        TribalWars.post('scavenge_api', { ajaxaction: 'send_squads' }, { "squad_requests": tempSquads })
         //once group is sent, remove the row from the table
-        setTimeout(function () { $(`#sendRow${groupNr}`).remove(); $(':button[id^="sendMass"]').prop('disabled', false); $(":button,#sendMass")[0].focus(); }, 200);
+        setTimeout(function () { $(`#sendRow${groupNr}`).remove(); $(':button[id^="sendMass"]').prop('disabled', false);$(':button[id^="sendMassPremium"]').prop('disabled', false); $(":button,#sendMass")[0].focus(); }, 200);
     }
 
 
@@ -472,7 +515,12 @@
             
             for (var k = 0; k < Object.keys(unitsReadyForSend).length; k++) {
                 candidate_squad = { "unit_counts": unitsReadyForSend[k], "carry_max": 9999999999 };
+                if(data.options[k+1].is_locked==false)
+                {
                 squad_requests.push({ "village_id": data.village_id, "candidate_squad": candidate_squad, "option_id": k + 1, "use_premium": false })
+                squad_requests_premium.push({ "village_id": data.village_id, "candidate_squad": candidate_squad, "option_id": k + 1, "use_premium": true })
+             
+                }
             }
         }
         else {
