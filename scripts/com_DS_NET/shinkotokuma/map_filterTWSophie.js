@@ -66,7 +66,7 @@ else {
     var villageListData;
     if (localStorage.getItem("barbmapVillageTime") != null) {
         mapVillageTime = localStorage.getItem("barbmapVillageTime");
-        if (currentTime >= mapVillageTime + 60 * 60 * 24 * 1000) {
+        if (currentTime >= parseInt(mapVillageTime) + 60 * 60 * 24 * 1000) {
             //hour has passed
             console.log("Hour has passed, recollecting the village data");
             $.get("map/village.txt", function (data) {
@@ -153,7 +153,7 @@ else {
           </tr>
         </table>
         <hr>
-        <center><img class="tooltip-delayed" title="Sophie -Shinko to Kuma-" src="https://dl.dropboxusercontent.com/s/0do4be4rzef4j30/sophie2.gif" style="cursor:help; position: relative"></center>
+        <center><img id="sophieImg" class="tooltip-delayed" title="Sophie -Shinko to Kuma-" src="https://dl.dropboxusercontent.com/s/bxoyga8wa6yuuz4/sophie2.gif" style="cursor:help; position: relative"></center>
         <br>
         <center>
         <p><font color="${titleColor}">Creator: </font><a href="https://forum.tribalwars.net/index.php?members/shinko-to-kuma.121220/" style="text-shadow:-1px -1px 0 ${titleColor},1px -1px 0 ${titleColor},-1px 1px 0 ${titleColor},1px 1px 0 ${titleColor};" title="Sophie profile" target="_blank">Sophie "Shinko to Kuma"</a>
@@ -163,6 +163,9 @@ else {
 
         $("#minimap_whole").before(fakeHtml);
         $("#script").hide();
+        if (game_data.locale == "ar_AE") {
+            $("#sophieImg").attr("src", "https://media2.giphy.com/media/qYr8p3Dzbet5S/giphy.gif");
+        }
     }
 
 
