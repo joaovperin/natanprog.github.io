@@ -6,59 +6,58 @@ javascript:
     window.location.assign(game_data.link_base_pure + "ally&mode=members");
 }*/
 // Sophie "Shinko to Kuma"
+var tribeTable = '';
+var rowStart = 1;
+var columnStart = 6;
+var columnName = 0;
+var rows;
+var BBTable = "";
+
 var langShinko;
-switch(game_data.locale) {
-  case "pt_BR":
-    langShinko = {
-        "ODA": "ODA",
-        "ODD": "ODD",
-        "ODS": "ODS",
-        "Loot": "Saque",
-        "Gathered": "Coletado",
-        "Combined": "Combinado"
-    }
-    break;
-  default:
-    langShinko = {
-        "ODA": "ODA",
-        "ODD": "ODD",
-        "ODS": "ODS",
-        "Loot": "Loot",
-        "Gathered": "Gathered",
-        "Combined": "Combined"
-    }
+switch (game_data.locale) {
+    case "pt_BR":
+        langShinko = {
+            "ODA": "ODA",
+            "ODD": "ODD",
+            "ODS": "ODS",
+            "Loot": "Saqueado",
+            "Gathered": "Coletado",
+            "Combined": "Combinado"
+        }
+        break;
+    default:
+        langShinko = {
+            "ODA": "ODA",
+            "ODD": "ODD",
+            "ODS": "ODS",
+            "Loot": "Loot",
+            "Gathered": "Gathered",
+            "Combined": "Combined"
+        }
 }
 
-var tribeTable='';
-var rowStart=1;
-var columnStart=6;
-var columnName=0;
-var rows;
-if (window.location.href.indexOf('screen=ally&mode=members') >-1)
-{
+if (window.location.href.indexOf('screen=ally&mode=members') > -1) {
     //members own tribe
-    tribeTable= "#content_value table.vis";
-    rowStart=3;
-    columnStart=6;
-    columnName=0;
+    tribeTable = "#content_value table.vis";
+    rowStart = 3;
+    columnStart = 6;
+    columnName = 0;
     rows = $($("table .vis")[2]).find('tr');
 }
-if  (window.location.href.indexOf('&screen=info_ally') >-1)
-{
+if (window.location.href.indexOf('&screen=info_ally') > -1) {
     //any tribe
-    tribeTable= ".vis:eq(2)";
-    rowStart=1;
-    columnStart=5;
-    columnName=0;
+    tribeTable = ".vis:eq(2)";
+    rowStart = 1;
+    columnStart = 5;
+    columnName = 0;
     rows = $($("table .vis")[2]).find('tr');
 }
-if (window.location.href.indexOf('screen=ranking&mode=player') >-1 || (window.location.href.indexOf('screen=ranking') >-1 && window.location.href.indexOf('&mode') == -1))
-{
+if (window.location.href.indexOf('screen=ranking&mode=player') > -1 || (window.location.href.indexOf('screen=ranking') > -1 && window.location.href.indexOf('&mode') == -1)) {
     //any player
-    tribeTable= ".vis:eq(1)";
-    rowStart=1;
-    columnStart=6;
-    columnName=1;
+    tribeTable = ".vis:eq(1)";
+    rowStart = 1;
+    columnStart = 6;
+    columnName = 1;
     rows = $($("table .vis")[1]).find('tr');
 }
 
@@ -105,10 +104,29 @@ $.getAll = function (
     }
 };
 var names = [];
-
-for (var i = 1; i < rows.length; i++) {
-    names.push($(rows[i]).find('a')[0].innerText.trim().split(' ').join('+'));
+var html = "<div style='width:500px'>";
+if (typeof customNames == 'undefined') {
+    for (var i = 1; i < rows.length; i++) {
+        names.push($(rows[i]).find('a')[0].innerText.trim().split(' ').join('+'));
+    }
 }
+else {
+    html += `<table class="vis" id="tableMembers" style="width: 100%"><tr><th>Player Name</th></tr>`;
+    tribeTable = "#tableMembers";
+    rowStart = 1;
+    columnStart = 1;
+    columnName = 0;
+    rows = customNames.length;
+    for (var i = 0; i < customNames.length; i++) {
+        html += `<tr><td id="${customNames[i]}">${customNames[i]}</td></tr>`
+        customNames[i] = customNames[i].trim().split(' ').join('+');
+    }
+    html += `</table></div>`
+    names = customNames;
+    Dialog.show("Content", html);
+}
+
+$("#contentContainer").eq(0).prepend("<textarea id='BBCODE' rows='" + (rows + 4) + "' cols='100'></textarea>");
 
 linksODS = [];
 linksODD = [];
@@ -127,8 +145,8 @@ for (var i = 0; i < names.length; i++) {
     linksLoot.push("/game.php?screen=ranking&mode=in_a_day&type=loot_res&name=" + names[i]);
     linksGathering.push("/game.php?screen=ranking&mode=in_a_day&type=scavenge&name=" + names[i]);
 }
-$(tribeTable+" tr").eq(rowStart-1).append("<th onclick='sortTableTest("+columnStart+")'>"+langShinko["ODA"]+"</th><th onclick='sortTableTest("+(columnStart+1)+")'>"+langShinko["ODD"]+"</th><th onclick='sortTableTest("+(columnStart+2)+")'>"+langShinko["ODS"]+"</th><th onclick='sortTableTest("+(columnStart+3)+")'>"+langShinko["Loot"]+"</th><th onclick='sortTableTest("+(columnStart+4)+")'>"+langShinko["Gathered"]+"</th><th onclick='sortTableTest("+(columnStart+5)+")'>"+langShinko["Combined"]+"</th>")
-$(tribeTable).eq(rowStart-1).attr('id', 'tableMembers');
+$(tribeTable + " tr").eq(rowStart - 1).append("<th onclick='sortTableTest(" + columnStart + ")'>" + langShinko["ODA"] + "</th><th onclick='sortTableTest(" + (columnStart + 1) + ")'>" + langShinko["ODD"] + "</th><th onclick='sortTableTest(" + (columnStart + 2) + ")'>" + langShinko["ODS"] + "</th><th onclick='sortTableTest(" + (columnStart + 3) + ")'>" + langShinko["Loot"] + "</th><th onclick='sortTableTest(" + (columnStart + 4) + ")'>" + langShinko["Gathered"] + "</th><th onclick='sortTableTest(" + (columnStart + 5) + ")'>" + langShinko["Combined"] + "</th>")
+$(tribeTable).eq(rowStart - 1).attr('id', 'tableMembers');
 $("#contentContainer").eq(0).prepend(`
                 <div id="progressbar" style="width: 100%;
                 background-color: #36393f;"><div id="progress" style="width: 0%;
@@ -161,7 +179,7 @@ $.getAll(linksODA, (i, data) => {
     () => {
         $("#progress").css("width", `${(linksODA.length) / linksODA.length * 100}%`);
         for (var o = rowStart; o < ODAperPlayer.length + rowStart; o++) {
-            $(tribeTable +" tr").eq(o).append("<td title=" + ODAperPlayer[o - rowStart][1] + ">" + ODAperPlayer[o - rowStart][0] + "</td>")
+            $(tribeTable + " tr").eq(o).append("<td title=" + ODAperPlayer[o - rowStart][1] + ">" + ODAperPlayer[o - rowStart][0] + "</td>")
         }
         //ODD
         $.getAll(linksODD, (i, data) => {
@@ -176,7 +194,7 @@ $.getAll(linksODA, (i, data) => {
         },
             () => {
                 for (var o = rowStart; o < ODDperPlayer.length + rowStart; o++) {
-                    $(tribeTable +" tr").eq(o).append("<td title=" + ODDperPlayer[o - rowStart][1] + ">" + ODDperPlayer[o - rowStart][0] + "</td>")
+                    $(tribeTable + " tr").eq(o).append("<td title=" + ODDperPlayer[o - rowStart][1] + ">" + ODDperPlayer[o - rowStart][0] + "</td>")
                 }
                 //ODS
                 $.getAll(linksODS, (i, data) => {
@@ -191,7 +209,7 @@ $.getAll(linksODA, (i, data) => {
                 },
                     () => {
                         for (var o = rowStart; o < ODSperPlayer.length + rowStart; o++) {
-                            $(tribeTable +" tr").eq(o).append("<td title=" + ODSperPlayer[o - rowStart][1] + ">" + ODSperPlayer[o - rowStart][0] + "</td>")
+                            $(tribeTable + " tr").eq(o).append("<td title=" + ODSperPlayer[o - rowStart][1] + ">" + ODSperPlayer[o - rowStart][0] + "</td>")
                         }
 
                         //loot
@@ -207,7 +225,7 @@ $.getAll(linksODA, (i, data) => {
                         },
                             () => {
                                 for (var o = rowStart; o < lootperPlayer.length + rowStart; o++) {
-                                    $(tribeTable +" tr").eq(o).append("<td title=" + lootperPlayer[o - rowStart][1] + ">" + lootperPlayer[o - rowStart][0] + "</td>")
+                                    $(tribeTable + " tr").eq(o).append("<td title=" + lootperPlayer[o - rowStart][1] + ">" + lootperPlayer[o - rowStart][0] + "</td>")
                                 }
                                 //gathering
                                 $.getAll(linksGathering, (i, data) => {
@@ -222,11 +240,12 @@ $.getAll(linksODA, (i, data) => {
                                 },
                                     () => {
                                         for (var o = rowStart; o < gatheredperPlayer.length + rowStart; o++) {
-                                            $(tribeTable +" tr").eq(o).append("<td title=" + gatheredperPlayer[o - rowStart][1] + ">" + gatheredperPlayer[o - rowStart][0] + "</td>")
-                                            $(tribeTable +" tr").eq(o).append("<td>" + (parseInt(gatheredperPlayer[o - rowStart][0].replace(".", ""))+ parseInt(lootperPlayer[o - rowStart][0].replace(".", ""))) + "</td>")
+                                            $(tribeTable + " tr").eq(o).append("<td title=" + gatheredperPlayer[o - rowStart][1] + ">" + gatheredperPlayer[o - rowStart][0] + "</td>")
+                                            $(tribeTable + " tr").eq(o).append("<td>" + (parseInt(gatheredperPlayer[o - rowStart][0].replace(".", "")) + parseInt(lootperPlayer[o - rowStart][0].replace(".", ""))) + "</td>")
                                         }
 
                                         $("#progress").remove();
+                                        sortTableTest(columnStart + 5);
 
                                     },
                                     (error) => {
@@ -261,7 +280,7 @@ function sortTableTest(n) {
     table = document.getElementById("tableMembers");
     switching = true;
     // Set the sorting direction to ascending:
-    dir = "asc";
+    dir = "desc";
     /* Make a loop that will continue until
     no switching has been done: */
     while (switching) {
@@ -303,10 +322,53 @@ function sortTableTest(n) {
         } else {
             /* If no switching has been done AND the direction is "asc",
             set the direction to "desc" and run the while loop again. */
-            if (switchcount == 0 && dir == "asc") {
-                dir = "desc";
+            if (switchcount == 0 && dir == "desc") {
+                dir = "asc";
                 switching = true;
             }
         }
     }
+    createBB(tribeTable, rowStart);
+    $("#BBCODE")[0].value = BBTable;
+}
+
+function createBB(tableID, rowStart) {
+    BBTable = "[table]\n";
+
+    //grab rows
+    for (var i = rowStart - 1; i < $(tableID + " tr").length; i++) {
+        //grab cells
+        if (i == rowStart - 1) {
+            BBTable += "[**]";
+        }
+        else {
+            BBTable += "[*]";
+        }
+        for (var j = 0; j < $(tableID + " tr")[i].children.length; j++) {
+            //add text to code
+            if (i == rowStart - 1) {
+                //header row
+                BBTable += $(tableID + " tr")[i].children[j].innerText;
+                if (j != $(tableID + " tr")[i].children.length - 1) {
+                    BBTable += "[||]";
+                }
+            }
+            else {
+                //regular row
+                BBTable += $(tableID + " tr")[i].children[j].innerText;
+                if (j != $(tableID + " tr")[i].children.length - 1) {
+                    BBTable += "[|]";
+                }
+            }
+
+        }
+        if (i == rowStart - 1) {
+            BBTable += "[/**]\n";
+        }
+        else {
+            BBTable += "\n";
+        }
+    }
+
+    BBTable += "[/table]"
 }
