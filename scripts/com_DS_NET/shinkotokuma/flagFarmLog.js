@@ -14,7 +14,32 @@ var langShinko = {
         "Luck": "Luck",
         "Population capacity": "Population capacity",
         "Lower coin costs": "Lower coin costs",
-        "Haul capacity": "Haul capacity"
+        "Haul capacity": "Haul capacity",
+        "Reduced package costs": "Reduced package costs"
+    },
+    "en_US": {
+        "Produced nobleman": "Produced nobleman",
+        "Resource production": "Resource production",
+        "Recruitment speed": "Recruitment speed",
+        "Attack strength": "Attack strength",
+        "Defense strength": "Defense strength",
+        "Luck": "Luck",
+        "Population capacity": "Population capacity",
+        "Lower coin costs": "Lower coin costs",
+        "Haul capacity": "Haul capacity",
+        "Reduced package costs": "Reduced package costs"
+    },
+    "en_UK": {
+        "Produced nobleman": "Produced nobleman",
+        "Resource production": "Resource production",
+        "Recruitment speed": "Recruitment speed",
+        "Attack strength": "Attack strength",
+        "Defense strength": "Defense strength",
+        "Luck": "Luck",
+        "Population capacity": "Population capacity",
+        "Lower coin costs": "Lower coin costs",
+        "Haul capacity": "Haul capacity",
+        "Reduced package costs": "Reduced package costs"
     },
     "nl_NL":
     {
@@ -24,9 +49,23 @@ var langShinko = {
         "Attack strength": "Aanvalssterkte",
         "Defense strength": "Verdedigingskracht",
         "Luck": "Geluk",
-        "Population capacity":"Inwonersaantal",
+        "Population capacity": "Inwonersaantal",
         "Lower coin costs": "Muntkosten verlagen",
-        "Haul capacity": "Buitcapaciteit"
+        "Haul capacity": "Buitcapaciteit",
+        "Reduced package costs": "?"
+    },
+    "it_IT":
+    {
+        "Produced nobleman": "Produzione nobile",
+        "Resource production": "Produzione risorse",
+        "Recruitment speed": "Velocità reclutamento",
+        "Attack strength": "Potenza d'attacco",
+        "Defense strength": "Forza di difesa",
+        "Luck": "Fortuna",
+        "Population capacity": "Aumento della popolazione",
+        "Lower coin costs": "Ridotti costi pacchetto",
+        "Haul capacity": "Capacità bottino",
+        "Reduced package costs": "?"
     },
     "pt_BR": {
         "Produced nobleman": "Nobres produzidos",
@@ -37,8 +76,10 @@ var langShinko = {
         "Luck": "Sorte",
         "Population capacity": "Capacidade da população",
         "Lower coin costs": "Menores custos de moeda",
-        "Haul capacity": "Capacidade de saque"
+        "Haul capacity": "Capacidade de saque",
+        "Reduced package costs": "?"
     }
+
 };
 var flagPerType = {
     "Resource production": 0,
@@ -119,7 +160,14 @@ $.getAll = function (
 $.getAll(URLs,
     (i, data) => {
         console.log("Grabbing page " + i);
+        if ($(data).find("rc-anchor-container")[0]) {
+            alert("Triggered captcha! Please restart the script")
+            throw Error("Rip");
+        }
+
         tempRows = $(data).find("table .vis> tbody > tr");
+
+
         for (var j = 0; j < tempRows.length - 2; j++) {
             // Produced nobleman
             if (tempRows[j + 2].children[4].innerText.indexOf(langShinko[game_data.locale]["Produced nobleman"]) > -1) {
@@ -149,6 +197,9 @@ $.getAll(URLs,
                     case langShinko[game_data.locale]["Haul capacity"]:
                         flagPerType["Haul capacity"] += 1;
                         break;
+                    case langShinko[game_data.locale]["Reduced package costs"]:
+                        flagPerType["Lower coin costs"] += 1;
+                        break;
                     default:
                         throw Error("Can't recognize this flag");
                 }
@@ -164,7 +215,7 @@ $.getAll(URLs,
         for (var i = 0; i < Object.keys(flagPerType).length; i++) {
             html += `
         <tr>
-            <td><img src='/graphic/flags/medium/${i + 1}_1.png'/></td>
+            <td><img src='/graphic/flags/medium/${i + 1}_1.png' title='${langShinko[game_data.locale][Object.keys(langShinko[game_data.locale])[i + 1]]}'/></td>
             <td>${flagPerType[Object.keys(flagPerType)[i]]}</td>
         </tr>`
         }
