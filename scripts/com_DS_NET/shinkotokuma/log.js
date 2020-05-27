@@ -59,7 +59,7 @@ var langShinko = {
         "Sold": "Πουλήθηκε",
         "giftTo": "to:",
         "giftFrom": "from: "
-    }    ,
+    },
     "ar_AE": {
         "Purchase": "شراء",
         "Premium Exchange": "مصرف نقاط التميز",
@@ -75,6 +75,15 @@ var langShinko = {
         "Points redeemed": "Utilizado",
         "Transfer": "Transferir",
         "Sold": "vendido",
+        "giftTo": "to: ",
+        "giftFrom": "from: "
+    },
+    "de_DE": {
+        "Purchase": "Kauf",
+        "Premium Exchange": "Premium-Depot",
+        "Points redeemed": " Eingesetzt ",
+        "Transfer": "Übertragen",
+        "Sold": "verkauft",
         "giftTo": "to: ",
         "giftFrom": "from: "
     }
@@ -162,9 +171,9 @@ $.getAll(URLs,
     (i, data) => {
         console.log("Grabbing page " + i);
         tempRows = $(data).find("table .vis> tbody > tr");
-        var thisPageAmount=0;
+        var thisPageAmount = 0;
         for (var j = 0; j < tempRows.length - 2; j++) {
-            
+
             // buying
             if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Purchase"]) > -1) {
                 console.log("Found a purchase!");
@@ -197,7 +206,7 @@ $.getAll(URLs,
                 thisPageAmount++;
             }
             // gifted to others
-            if (tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["giftTo"]) > -1) {
+            if (tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["giftTo"]) == 0) {
                 console.log("Found a gift sent!");
                 giftTo.push({ "Date": tempRows[j + 2].children[0].innerText, "World": tempRows[j + 2].children[1].innerText, "Transaction": tempRows[j + 2].children[2].innerText, "Amount": tempRows[j + 2].children[3].innerText, "newTotal": tempRows[j + 2].children[4].innerText, "moreInformation": tempRows[j + 2].children[5].innerText })
                 totalGiftsSent += -parseInt(tempRows[j + 2].children[3].innerText);
@@ -212,13 +221,11 @@ $.getAll(URLs,
             }
 
         }
-        if(thisPageAmount<tempRows.length-2)
-        {
-            console.log("MISSING ENTRIES ON PAGE "+(i+1)+": "+(tempRows.length-2-thisPageAmount));
+        if (thisPageAmount < tempRows.length - 2) {
+            console.log("MISSING ENTRIES ON PAGE " + (i + 1) + ": " + (tempRows.length - 2 - thisPageAmount));
         }
-        if(thisPageAmount>tempRows.length-2)
-        {
-            console.log("EXTRA ENTRIES ON PAGE "+(i+1)+": "+(thisPageAmount-tempRows.length-2));
+        if (thisPageAmount > tempRows.length - 2) {
+            console.log("EXTRA ENTRIES ON PAGE " + (i + 1) + ": " + (thisPageAmount - tempRows.length - 2));
         }
     },
     () => {
@@ -458,11 +465,11 @@ function displayCategory(category) {
     allCategories = ["overview", "purchaseHistory", "giftReceived", "giftSent"]
 
     $("#" + category).eq(0).css("display", "")
-    $("#"+category+"Button").attr("class","btn evt-cancel-btn btn-confirm-no");
+    $("#" + category + "Button").attr("class", "btn evt-cancel-btn btn-confirm-no");
     for (var i = 0; i < allCategories.length; i++) {
         if (category != allCategories[i]) {
-            $("#"+allCategories[i]).css("display", "none");
-            $("#"+allCategories[i]+"Button").attr("class","btn evt-confirm-btn btn-confirm-yes");
+            $("#" + allCategories[i]).css("display", "none");
+            $("#" + allCategories[i] + "Button").attr("class", "btn evt-confirm-btn btn-confirm-yes");
         }
     }
 }
