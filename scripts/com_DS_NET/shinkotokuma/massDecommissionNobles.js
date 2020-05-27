@@ -15,6 +15,9 @@ if (game_data.locale == "nl_NL") {
 if (game_data.locale == "it_IT") {
     langShinko = ["Congedati tutti i nobili nel gruppo attuale."]
 }
+if (game_data.locale == "pt_BR") {
+    langShinko = ["Todos os nobres foram dispensados no grupo atual."]
+}
 
 //mass decomission nobles Sophie "Shinko to Kuma"
 var units = {};
