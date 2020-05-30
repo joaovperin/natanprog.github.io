@@ -16,7 +16,7 @@ var scriptData = {
 	author: 'RedAlert',
 	authorUrl: 'https://twtools.ga/',
 	helpLink:
-		'https://forum.tribalwars.net/index.php?threads/farming-efficiency-calculator.285288/',
+		'https://forum.tribalwars.net/index.php?threads/farming-efficiency-calculator.285288/'
 };
 
 // User Input
@@ -50,7 +50,7 @@ function init() {
 		// Show popup
 		var content = `
 			<p class="ra-fs16">
-				<strong>${tt('Efficiency:')}:</strong> <span id="farmingEfficiency">0%</span>
+				<strong>${tt('Efficiency:')}</strong> <span id="farmingEfficiency">0%</span>
 			</p>
 			<p class="ra-fs12">
 				<strong>${tt('Total Looted:')}</strong> <span id="totalLooted">0</span><br>
@@ -328,7 +328,7 @@ function tt(string) {
 			'Total Iron:': 'Total Iron:',
 			'Script must be run from': 'Script must be run from',
 			'Reports Overview': 'Reports Overview',
-			Help: 'Help',
+			'Help:': 'Help'
 		},
 		en_US: {
 			'Farming Efficiency Calculator': 'Farming Efficiency Calculator',
@@ -342,7 +342,7 @@ function tt(string) {
 			'Total Iron:': 'Total Iron:',
 			'Script must be run from': 'Script must be run from',
 			'Reports Overview': 'Reports Overview',
-			Help: 'Help',
+			'Help:': 'Help'
 		},
 		pt_BR: {
 			'Farming Efficiency Calculator': 'Calculadora Eficiência de Saque',
@@ -356,8 +356,8 @@ function tt(string) {
 			'Total Iron:': 'Total de Ferro',
 			'Script must be run from': 'O script deve ser usado em',
 			'Reports Overview': 'Relatórios/Ataques',
-			Help: 'Ajuda',
-		},
+			'Help:': 'Ajuda'
+		}
 	};
 
 	return translations[gameLocale][string];
