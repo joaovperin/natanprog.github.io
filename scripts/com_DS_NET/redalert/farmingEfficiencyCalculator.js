@@ -308,8 +308,8 @@ function initDebug() {
 function tt(string) {
 	var gameLocale = game_data.locale;
 	if (
-		gameLocale !== 'en_DK' ||
-		gameLocale !== 'en_US' ||
+		gameLocale !== 'en_DK' &&
+		gameLocale !== 'en_US' &&
 		gameLocale !== 'pt_BR'
 	) {
 		gameLocale = 'en_DK';
