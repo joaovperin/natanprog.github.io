@@ -328,7 +328,7 @@ function tt(string) {
 			'Total Iron:': 'Total Iron:',
 			'Script must be run from': 'Script must be run from',
 			'Reports Overview': 'Reports Overview',
-			'Help:': 'Help'
+			'Help': 'Help'
 		},
 		en_US: {
 			'Farming Efficiency Calculator': 'Farming Efficiency Calculator',
@@ -342,7 +342,7 @@ function tt(string) {
 			'Total Iron:': 'Total Iron:',
 			'Script must be run from': 'Script must be run from',
 			'Reports Overview': 'Reports Overview',
-			'Help:': 'Help'
+			'Help': 'Help'
 		},
 		pt_BR: {
 			'Farming Efficiency Calculator': 'Calculadora Eficiência de Saque',
@@ -356,7 +356,7 @@ function tt(string) {
 			'Total Iron:': 'Total de Ferro',
 			'Script must be run from': 'O script deve ser usado em',
 			'Reports Overview': 'Relatórios/Ataques',
-			'Help:': 'Ajuda'
+			'Help': 'Ajuda'
 		}
 	};
 
