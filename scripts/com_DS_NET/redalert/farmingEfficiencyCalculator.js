@@ -254,7 +254,7 @@ function preparePopupContent(
 		scriptData.author
 	}</a> - <a href="${
 		scriptData.helpLink
-	}" target="_blank" rel="noreferrer noopener">${tt(Help)}</a></small>`;
+	}" target="_blank" rel="noreferrer noopener">${tt('Help')}</a></small>`;
 	const popupStyle = `
 		<style>
 			.popup_box_content { overflow-y: hidden; }
