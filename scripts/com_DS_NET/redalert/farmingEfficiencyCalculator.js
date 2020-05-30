@@ -350,10 +350,10 @@ function tt(string) {
 			'Total Looted:': 'Total Saqueado:',
 			'Total Estimated:': 'Total Estimado:',
 			'Villages Looted:': 'Aldeias Saqueadas:',
-			'Looted/Village:': 'Saqueado/Aldeia',
+			'Looted/Village:': 'Saqueado/Aldeia:',
 			'Total Wood:': 'Total de Madeira:',
 			'Total Clay:': 'Total de Argila:',
-			'Total Iron:': 'Total de Ferro',
+			'Total Iron:': 'Total de Ferro:',
 			'Script must be run from': 'O script deve ser usado em',
 			'Reports Overview': 'Relatórios/Ataques',
 			'Help': 'Ajuda'
