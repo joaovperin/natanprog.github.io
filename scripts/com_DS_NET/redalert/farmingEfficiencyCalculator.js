@@ -1,18 +1,18 @@
 /*
  * Script Name: Farming Efficiency Calculator
- * Version: v1.1
+ * Version: v1.2
  * Last Updated: 2020-05-29
  * Author: RedAlert
  * Author URL: https://twtools.ga/
  * Author Contact: RedAlert#9859 (Discord)
  * Approved: t13970817
- * Approved Date: 2020-05-28
+ * Approved Date: 2020-05-27
  * Mod: JawJaw
  */
 
 var scriptData = {
 	name: 'Farming Efficiency Calculator',
-	version: 'v1.1',
+	version: 'v1.2',
 	author: 'RedAlert',
 	authorUrl: 'https://twtools.ga/',
 	helpLink:
@@ -20,7 +20,7 @@ var scriptData = {
 };
 
 // User Input
-if (typeof DEBUG !== 'boolean') DEBUG = true;
+if (typeof DEBUG !== 'boolean') DEBUG = false;
 
 // Globals
 var farmingEfficiency = 0;
@@ -49,19 +49,22 @@ function init() {
 
 		// Show popup
 		var content = `
-			<p class="ra-fs16"><strong>Efficiency:</strong> <span id="farmingEfficiency">0%</span></p>
-			<p class="ra-fs12">
-				<strong>Total Looted:</strong> <span id="totalLooted">0</span><br>
-				<strong>Total Estimated:</strong> <span id="totalEstimated">0</span>
+			<p class="ra-fs16">
+				<strong>${tt('Efficiency:')}:</strong> <span id="farmingEfficiency">0%</span>
 			</p>
 			<p class="ra-fs12">
-				<strong>Villages Looted:</strong> <span id="villagesLooted">0</span><br>
-				<strong>Looted/Village:</strong> <span id="lootedPerVillage">0</span>
+				<strong>${tt('Total Looted:')}</strong> <span id="totalLooted">0</span><br>
+				<strong>${tt('Total Estimated:')}</strong> <span id="totalEstimated">0</span>
 			</p>
 			<p class="ra-fs12">
-				<strong>Total Wood:</strong> <span id="totalWood">0</span><br>
-				<strong>Total Clay:</strong> <span id="totalClay">0</span><br>
-				<strong>Total Iron:</strong> <span id="totalIron">0</span>
+				<strong>${tt('Villages Looted:')}</strong>
+				<span id="villagesLooted">0</span><br>
+				<strong>${tt('Looted/Village:')}</strong> <span id="lootedPerVillage">0</span>
+			</p>
+			<p class="ra-fs12">
+				<strong>${tt('Total Wood:')}</strong> <span id="totalWood">0</span><br>
+				<strong>${tt('Total Clay:')}</strong> <span id="totalClay">0</span><br>
+				<strong>${tt('Total Iron:')}</strong> <span id="totalIron">0</span>
 			</p>
 		`;
 
@@ -69,7 +72,11 @@ function init() {
 		Dialog.show('content', popupContent);
 	} else {
 		UI.ErrorMessage(
-			'Script must be run from <a href="/game.php?screen=report&mode=attack" class="btn">Reports Overview</a>',
+			`${tt(
+				'Script must be run from'
+			)} <a href="/game.php?screen=report&mode=attack" class="btn">${tt(
+				'Reports Overview'
+			)}</a>`,
 			4000
 		);
 	}
@@ -234,8 +241,20 @@ function preparePopupContent(
 	minWidth = '340px',
 	maxWidth = '360px'
 ) {
-	const popupHeader = `<h3 class="ra-fs18 ra-fw600">${scriptData.name}</h3><div class="ra-body">`;
-	const popupFooter = `</div><small><strong>${scriptData.name} ${scriptData.version}</strong> by <a href="${scriptData.authorUrl}" target="_blank" rel="noreferrer noopener">${scriptData.author}</a> - <a href="${scriptData.helpLink}" target="_blank" rel="noreferrer noopener">Help</a></small>`;
+	const popupHeader = `
+		<h3 class="ra-fs18 ra-fw600">
+			${tt(scriptData.name)}
+		</h3>
+		<div class="ra-body">`;
+	const popupFooter = `</div><small><strong>${tt(scriptData.name)} ${
+		scriptData.version
+	}</strong> - <a href="${
+		scriptData.authorUrl
+	}" target="_blank" rel="noreferrer noopener">${
+		scriptData.author
+	}</a> - <a href="${
+		scriptData.helpLink
+	}" target="_blank" rel="noreferrer noopener">Help</a></small>`;
 	const popupStyle = `
 		<style>
 			.popup_box_content { overflow-y: hidden; }
@@ -283,6 +302,65 @@ function initDebug() {
 		console.debug(`${scriptInfo()} Game Build:`, game_data.version);
 		console.debug(`${scriptInfo()} Locale:`, game_data.locale);
 	}
+}
+
+// Helper: Text Translator
+function tt(string) {
+	var gameLocale = game_data.locale;
+	if (
+		gameLocale !== 'en_DK' ||
+		gameLocale !== 'en_US' ||
+		gameLocale !== 'pt_BR'
+	) {
+		gameLocale = 'en_DK';
+	}
+
+	var translations = {
+		en_DK: {
+			'Farming Efficiency Calculator': 'Farming Efficiency Calculator',
+			'Efficiency:': 'Efficiency:',
+			'Total Looted:': 'Total Looted:',
+			'Total Estimated:': 'Total Estimated:',
+			'Villages Looted:': 'Villages Looted:',
+			'Looted/Village:': 'Looted/Village:',
+			'Total Wood:': 'Total Wood:',
+			'Total Clay:': 'Total Clay:',
+			'Total Iron:': 'Total Iron:',
+			'Script must be run from': 'Script must be run from',
+			'Reports Overview': 'Reports Overview',
+			Help: 'Help',
+		},
+		en_US: {
+			'Farming Efficiency Calculator': 'Farming Efficiency Calculator',
+			'Efficiency:': 'Efficiency:',
+			'Total Looted:': 'Total Looted:',
+			'Total Estimated:': 'Total Estimated:',
+			'Villages Looted:': 'Villages Looted:',
+			'Looted/Village:': 'Looted/Village:',
+			'Total Wood:': 'Total Wood:',
+			'Total Clay:': 'Total Clay:',
+			'Total Iron:': 'Total Iron:',
+			'Script must be run from': 'Script must be run from',
+			'Reports Overview': 'Reports Overview',
+			Help: 'Help',
+		},
+		pt_BR: {
+			'Farming Efficiency Calculator': 'Calculadora Eficiência de Saque',
+			'Efficiency:': 'Eficiência:',
+			'Total Looted:': 'Total Saqueado:',
+			'Total Estimated:': 'Total Estimado:',
+			'Villages Looted:': 'Aldeias Saqueadas:',
+			'Looted/Village:': 'Saqueado/Aldeia',
+			'Total Wood:': 'Total de Madeira:',
+			'Total Clay:': 'Total de Argila:',
+			'Total Iron:': 'Total de Ferro',
+			'Script must be run from': 'O script deve ser usado em',
+			'Reports Overview': 'Relatórios/Ataques',
+			Help: 'Ajuda',
+		},
+	};
+
+	return translations[gameLocale][string];
 }
 
 // Extend the Array prototype with an asyncForEach method
