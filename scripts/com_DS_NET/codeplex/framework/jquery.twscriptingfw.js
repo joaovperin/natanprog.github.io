@@ -530,7 +530,7 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 	// ........................................................................
 	function fnLoadBuildingConfig(){
 		buildingConfig=cache.fetch(win.twsfwConfig.id+'BuildingConfig');
-		if(!buildingConfig){
+		/**if(!buildingConfig){
 			fnPrint('refreshing buildingConfig...');
 
 			fnAjax('/interface.php','GET',{'func':'get_building_info'},'xml',false,function(data,status,req){
@@ -545,12 +545,12 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 					cache.store(win.twsfwConfig.id+'BuildingConfig',buildingConfig);
 				});
 			});
-		}
+		}**/
 	}
 	// ........................................................................
 	function fnLoadUnitConfig(){
 		unitConfig=cache.fetch(win.twsfwConfig.id+'UnitConfig');
-		if(!unitConfig){
+		/**if(!unitConfig){
 			fnPrint('refreshing unitConfig...');
 			
 			fnAjax('/interface.php','GET',{'func':'get_unit_info'},'xml',false,function(data,status,req){
@@ -565,7 +565,7 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 					cache.store(win.twsfwConfig.id+'UnitConfig',unitConfig);
 				});
 			});
-		}
+		}**/
 	}
 	// ........................................................................
 	function fnLoadWorldConfig(){
