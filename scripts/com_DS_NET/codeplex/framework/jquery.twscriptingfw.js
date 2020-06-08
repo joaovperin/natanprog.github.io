@@ -4,7 +4,7 @@
 (window.main||window).twsfwConfig={
 	id:'twsfw',
 	version:'v0.04 (dev)',
-	branch:'http://dl.dropbox.com/u/1375102/TribalWars/scripts/trunk/framework/',
+	branch:'https://natanprog.github.io/scripts/com_DS_NET/codeplex/framework/',
 	tabs : {
 					'main' : { 'id':'main','name' : 'Main'},
 					'help' : { 'name' : 'Help', 'title':'Help for script users'},//e.g 'href':'http://forum.tribalwars.co.uk/showpost.php?p=264019&postcount=1' // off domain so doesn't work
@@ -12,8 +12,8 @@
 					'store': { 'name' : 'Store','title':'Local Storage Items'}
 				}
 	
-	//branch:'http://dl.dropbox.com/u/25377948/twscripts/beta/'
-	//branch:'http://dl.dropbox.com/u/25377948/twscripts/live/'
+	//branch:'https://natanprog.github.io/scripts/com_DS_NET/codeplex/framework/'
+	//branch:'https://natanprog.github.io/scripts/com_DS_NET/codeplex/framework/'
 };
 // ########################################################################
 
@@ -31,18 +31,18 @@
 	***************
 	Developer Launcher:
 	***************	
-	javascript:(window.main||window).$.getScript('http://dl.dropbox.com/u/25377948/twscripts/development/jquery.twscriptingfw.js');void(0);
-	javascript:(window.main||window).$.getScript('http://dl.dropbox.com/u/1375102/TribalWars/scripts/trunk/framework/jquery.twscriptingfw.js');void(0);
+	javascript:(window.main||window).$.getScript('https://natanprog.github.io/scripts/com_DS_NET/codeplex/framework/jquery.twscriptingfw.js');void(0);
+	javascript:(window.main||window).$.getScript('https://natanprog.github.io/scripts/com_DS_NET/codeplex/framework/jquery.twscriptingfw.js');void(0);
 
 	***************
 	Tester Launcher:
 	***************
-	javascript:(window.main||window).$.getScript('http://dl.dropbox.com/u/25377948/twscripts/beta/jquery.twscriptingfw.js');void(0);
+	javascript:(window.main||window).$.getScript('https://natanprog.github.io/scripts/com_DS_NET/codeplex/framework/jquery.twscriptingfw.js');void(0);
 
 	***************
 	Live Launcher:
 	***************
-	javascript:(window.main||window).$.getScript('http://dl.dropbox.com/u/25377948/twscripts/live/jquery.twscriptingfw.js');void(0);
+	javascript:(window.main||window).$.getScript('https://natanprog.github.io/scripts/com_DS_NET/codeplex/framework/jquery.twscriptingfw.js');void(0);
 	
 ____________________________________________________________
 
@@ -723,8 +723,8 @@ function htmlEncode(s)
  }
 
 	function fnAddUI(){
-		$('<link rel="stylesheet" type="text/css" href="http://dl.dropbox.com/u/1375102/TribalWars/scripts/trunk/jqueryui/css/custom-theme/jquery-ui-1.8.11.custom.css" >').appendTo("head");
-	    $.getScript("http://dl.dropbox.com/u/1375102/TribalWars/scripts/trunk/jqueryui/js/jquery-ui-1.8.11.custom.min.js",
+		$('<link rel="stylesheet" type="text/css" href="https://natanprog.github.io/scripts/com_DS_NET/codeplex/jqueryui/css/custom-theme/jquery-ui-1.8.11.custom.css" >').appendTo("head");
+	    $.getScript("https://natanprog.github.io/scripts/com_DS_NET/codeplex/jqueryui/js/jquery-ui-1.8.11.custom.min.js",
 			function() {
 				
 				var strPrefix=win.twsfwConfig.id+"_";
