@@ -16,6 +16,10 @@ var langShinko={ "en_DK": {
     "el_GR":{
     "player": "Παίκτης:",
     "coord": "Συντεταγμένες:"
+    },
+    "pt_BR": {
+    "player": "Jogador:",
+    "coord": "Coordenadas:"
     }
   }
 
