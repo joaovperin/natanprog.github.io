@@ -22,7 +22,7 @@ ____________________________________________________________
 
 var strVersion = 'v8.0';
 
-var unitDesc = {
+/*var unitDesc = {
     spear: 'Spear fighters',
     sword: 'Swordsmen',
     axe: 'Axemen',
@@ -38,6 +38,24 @@ var unitDesc = {
     militia: 'Militia',
     offense: 'Offensive',
     defense: 'Defensive',
+};*/
+
+var unitDesc = {
+    spear: 'Lanceiro',
+    sword: 'Espadachim',
+    axe: 'Bárbaro',
+    archer: 'Arqueiro',
+    spy: 'Explorador',
+    light: 'Cavalaria leve',
+    marcher: 'Arqueiro a cavalo',
+    heavy: 'Cavalaria pesada',
+    ram: 'Aríete',
+    catapult: 'Catapulta',
+    knight: 'Paladino',
+    snob: 'Nobre',
+    militia: 'Milícia',
+    offense: 'Ofensiva',
+    defense: 'Defensiva',
 };
 
 if (typeof worldConfig == 'undefined') {
