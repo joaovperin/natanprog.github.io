@@ -21,24 +21,43 @@ ____________________________________________________________
 */
 
 var strVersion = 'v8.0';
-
-var unitDesc = {
-    spear: 'Spear fighters',
-    sword: 'Swordsmen',
-    axe: 'Axemen',
-    archer: 'Archers',
-    spy: 'Scouts',
-    light: 'Light cavalry',
-    marcher: 'Mounted archers',
-    heavy: 'Heavy cavalry',
-    ram: 'Rams',
-    catapult: 'Catapults',
-    knight: 'Paladin',
-    snob: 'Noblemen',
-    militia: 'Militia',
-    offense: 'Offensive',
-    defense: 'Defensive',
-};
+if (game_data.locale == "pt_BR" || game_data.market == "br") {
+    var unitDesc = {
+        spear: 'Lanceiros',
+        sword: 'Espadachins',
+        axe: 'Bárbaros',
+        archer: 'Arqueiros',
+        spy: 'Exploradores',
+        light: 'Cavalaria leve',
+        marcher: 'Arqueiros a cavalo',
+        heavy: 'Cavalaria pesada',
+        ram: 'Aríetes',
+        catapult: 'Catapultas',
+        knight: 'Paladino',
+        snob: 'Nobres',
+        militia: 'Milícia',
+        offense: 'Offensive',
+        defense: 'Defensive',
+    };
+} else {
+    var unitDesc = {
+        spear: 'Spear fighters',
+        sword: 'Swordsmen',
+        axe: 'Axemen',
+        archer: 'Archers',
+        spy: 'Scouts',
+        light: 'Light cavalry',
+        marcher: 'Mounted archers',
+        heavy: 'Heavy cavalry',
+        ram: 'Rams',
+        catapult: 'Catapults',
+        knight: 'Paladin',
+        snob: 'Noblemen',
+        militia: 'Militia',
+        offense: 'Offensive',
+        defense: 'Defensive',
+    };
+}
 
 if (typeof worldConfig == 'undefined') {
     worldConfig = fnCreateWorldConfig();
