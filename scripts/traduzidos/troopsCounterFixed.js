@@ -604,7 +604,7 @@ function fnCalculateTroopCount() {
 
     var docSource = '';
     docSource +=
-        '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">\n';
+        '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "https://www.w3.org/TR/html4/strict.dtd">\n';
     docSource += '<html><head>';
     docSource += '<script type="text/javascript">';
     docSource += 'function fnShowCoords(id,description){';
@@ -688,7 +688,7 @@ function fnCalculateTroopCount() {
             docSource +=
                 '<tr class="' +
                 (count++ % 2 ? 'row_b' : 'row_a') +
-                '"><td><img src="http://' +
+                '"><td><img src="https://' +
                 location.hostname +
                 '/graphic/unit/unit_' +
                 offense[key] +
@@ -713,7 +713,7 @@ function fnCalculateTroopCount() {
             docSource +=
                 '<tr class="' +
                 (count++ % 2 ? 'row_b' : 'row_a') +
-                '"><td><img src="http://' +
+                '"><td><img src="https://' +
                 location.hostname +
                 '/graphic/unit/unit_' +
                 defense[key] +
@@ -745,7 +745,7 @@ function fnCalculateTroopCount() {
                 docSource +=
                     '<tr class="' +
                     (count++ % 2 ? 'row_b' : 'row_a') +
-                    '"><td><img src="http://' +
+                    '"><td><img src="https://' +
                     location.hostname +
                     '/graphic/unit/unit_' +
                     unit +
