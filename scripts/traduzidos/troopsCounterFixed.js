@@ -86,7 +86,7 @@ function fnExecuteScript() {
 
 function fnTranslate(id) {
     var translation = {
-        en: [
+        "en": [
             'Full Train Nukes',
             'Full Defense Trains',
             'Other Nobles',
@@ -116,7 +116,7 @@ function fnTranslate(id) {
             'Total Units',
             'Co-ordinates',
         ],
-        br: [
+        "br": [
             'NT em aldeia de ataque',
             'NT em aldeia de defesa',
             'Outros Nobres',
