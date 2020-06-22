@@ -1,0 +1,1 @@
+﻿var text = document.getElementById("message").value; text = text.replace(/report/g, "report_display"); document.getElementById("message").value = text;
