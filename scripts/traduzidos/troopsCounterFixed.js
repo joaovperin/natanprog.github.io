@@ -117,14 +117,49 @@ function fnTranslate(id) {
             'Total Units',
             'Co-ordinates',
         ],
+        br: [
+            'NT em aldeia de ataque',
+            'NT em aldeia de defesa',
+            'Outros Nobres',
+            'Ataque Completo',
+            'Ataque em 3/4',
+            'Ataque em 1/2',
+            'Ataque em 1/4',
+            'Ataque Full com Catapulta',
+            'Defesa Completa',
+            'Defesa em 3/4',
+            'Defesa em 1/2',
+            'Defesa em 1/4',
+            'Espionagem Completa',
+            'Espionagem em 3/4',
+            'Espionagem em 1/2',
+            'Espionagem em 1/4',
+            'Outros',
+            'Contador de Tropas',
+            'Aldeias de Noblagem',
+            'Aldeias de Ataque',
+            'Aldeias de Defesa',
+            'Aldeias de Espionagem',
+            'Outros Tipos de Aldeias',
+            'Tropas Ofensivas',
+            'Tropas Defensivas',
+            'Outras Unidades',
+            'Total de Tropas',
+            'Coordenadas',
+        ],
     };
 
-    /* Default to English "en". */
+    /* Default to English "en"
     var lang = typeof (translation[game_data.market] == 'undefined')
         ? 'en'
         : game_data.market;
     if (typeof translation[lang][id] == 'undefined') {
         return '';
+    }*/
+    if (game_data.locale == "pt_BR" || game_data.market == "br") {
+        var lang = 'br';
+    } else {
+        var lang = 'en';
     }
 
     return translation[lang][id];
