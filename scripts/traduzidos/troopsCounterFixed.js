@@ -84,7 +84,6 @@ function fnExecuteScript() {
     }
 }
 
-debugger;
 function fnTranslate(id) {
     var translation = {
         en: [
@@ -150,7 +149,7 @@ function fnTranslate(id) {
     };
 
     /* Default to English "en". */
-    var lang = typeof (translation[game_data.market] == 'undefined')
+    var lang = translation[game_data.market] == 'undefined'
         ? 'en'
         : game_data.market;
     if (typeof translation[lang][id] == 'undefined') {
