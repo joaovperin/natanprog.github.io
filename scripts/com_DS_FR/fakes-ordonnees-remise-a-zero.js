@@ -1,0 +1,1 @@
+﻿javascript: cookie_date=new Date(2099,11,11); document.cookie ='farm=0;expires='+cookie_date.toGMTString(); end();
