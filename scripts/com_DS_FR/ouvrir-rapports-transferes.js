@@ -1,0 +1,2 @@
+if (game_data.screen == 'report' ) { var links = $('.quickedit-label:contains(Accepter les rapports)').parent();links.each(function() {window.open($(this).attr('href'));}); }  else {
+		UI.ErrorMessage("Ce script doit être lancé depuis les rapports."); void(0); }
