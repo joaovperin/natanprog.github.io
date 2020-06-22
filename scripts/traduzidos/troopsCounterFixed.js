@@ -22,7 +22,7 @@ ____________________________________________________________
 
 var strVersion = 'v8.0';
 
-/*var unitDesc = {
+var unitDesc = {
     spear: 'Spear fighters',
     sword: 'Swordsmen',
     axe: 'Axemen',
@@ -36,24 +36,6 @@ var strVersion = 'v8.0';
     knight: 'Paladin',
     snob: 'Noblemen',
     militia: 'Militia',
-    offense: 'Offensive',
-    defense: 'Defensive',
-};*/
-
-var unitDesc = {
-    spear: 'Lanceiros',
-    sword: 'Espadachins',
-    axe: 'Bárbaros',
-    archer: 'Arqueiros',
-    spy: 'Exploradores',
-    light: 'Cavalaria leve',
-    marcher: 'Arqueiros a cavalo',
-    heavy: 'Cavalaria pesada',
-    ram: 'Aríetes',
-    catapult: 'Catapultas',
-    knight: 'Paladino',
-    snob: 'Nobres',
-    militia: 'Milícia',
     offense: 'Offensive',
     defense: 'Defensive',
 };
@@ -116,40 +98,10 @@ function fnTranslate(id) {
             'Total Units',
             'Co-ordinates',
         ],
-        br: [
-            'NT em aldeia de ataque',
-            'NT em aldeia de defesa',
-            'Outros Nobres',
-            'Ataque Completo',
-            'Ataque em 3/4',
-            'Ataque em 1/2',
-            'Ataque em 1/4',
-            'Ataque Full com Catapulta',
-            'Defesa Completa',
-            'Defesa em 3/4',
-            'Defesa em 1/2',
-            'Defesa em 1/4',
-            'Espionagem Completa',
-            'Espionagem em 3/4',
-            'Espionagem em 1/2',
-            'Espionagem em 1/4',
-            'Outros',
-            'Contador de Tropas',
-            'Aldeias de Noblagem',
-            'Aldeias de Ataque',
-            'Aldeias de Defesa',
-            'Aldeias de Espionagem',
-            'Outros Tipos de Aldeias',
-            'Tropas Ofensivas',
-            'Tropas Defensivas',
-            'Outras Unidades',
-            'Total de Tropas',
-            'Coordenadas',
-        ],
     };
 
     /* Default to English "en". */
-    var lang = translation[game_data.market] != ('en' || 'br')
+    var lang = typeof (translation[game_data.market] == 'undefined')
         ? 'en'
         : game_data.market;
     if (typeof translation[lang][id] == 'undefined') {
@@ -296,6 +248,11 @@ function fnCriteriaToStr(criteria) {
 }
 
 function fnCalculateTroopCount() {
+    const serverTime = jQuery('#serverTime').text();
+    const serverDate = jQuery('#serverDate').text();
+
+    const serverDateTime = `<b>Server Time</b>: ${serverTime} ${serverDate}<br><br>`;
+
     var maxGroups = 17;
     var outputSummary = {
         'Full Train Nuke': {
@@ -604,7 +561,7 @@ function fnCalculateTroopCount() {
 
     var docSource = '';
     docSource +=
-        '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "https://www.w3.org/TR/html4/strict.dtd">\n';
+        '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">\n';
     docSource += '<html><head>';
     docSource += '<script type="text/javascript">';
     docSource += 'function fnShowCoords(id,description){';
@@ -637,6 +594,7 @@ function fnCalculateTroopCount() {
         fnTranslate(curGroup++) +
         '<sup><span style="font-size:small;">' +
         '</span></sup></h2>';
+    docSource += `${serverDateTime}`;
     docSource += '<table class="not-draggable">';
     docSource +=
         '<tr><td width="450" valign="top"><table class="vis" width="100%">';
@@ -688,7 +646,7 @@ function fnCalculateTroopCount() {
             docSource +=
                 '<tr class="' +
                 (count++ % 2 ? 'row_b' : 'row_a') +
-                '"><td><img src="https://' +
+                '"><td><img src="http://' +
                 location.hostname +
                 '/graphic/unit/unit_' +
                 offense[key] +
@@ -713,7 +671,7 @@ function fnCalculateTroopCount() {
             docSource +=
                 '<tr class="' +
                 (count++ % 2 ? 'row_b' : 'row_a') +
-                '"><td><img src="https://' +
+                '"><td><img src="http://' +
                 location.hostname +
                 '/graphic/unit/unit_' +
                 defense[key] +
@@ -745,7 +703,7 @@ function fnCalculateTroopCount() {
                 docSource +=
                     '<tr class="' +
                     (count++ % 2 ? 'row_b' : 'row_a') +
-                    '"><td><img src="https://' +
+                    '"><td><img src="http://' +
                     location.hostname +
                     '/graphic/unit/unit_' +
                     unit +
