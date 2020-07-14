@@ -1187,6 +1187,85 @@
             return br;
         })();
 
+        translations.gr = (() => {
+            var gr = {};
+
+            gr[INTL.T_ALL] = 'Όλα';
+            gr[INTL.T_ALL_SNIPES] = 'Όλα τα snipe';
+            gr[INTL.T_BB_CODE] = 'BB Code';
+            gr[INTL.T_BY_DST_VILLA] = 'Χωριό στόχος';
+            gr[INTL.T_BY_SRC_VILLA] = 'Χωριό προέλευσης';
+            gr[INTL.T_COMPACT_MODE] = 'Συμπαγής έκδοση';
+            gr[INTL.T_LANDS_AT] = 'Ώρα άφιξης';
+            gr[INTL.T_LAUNCH_TIME] = 'Φόρτωση';
+            gr[INTL.T_LOADING_ENHANCER] = 'Φόρτωση βελτιωμένου σημειωματαρίου';
+            gr[INTL.T_LOADING_SCRIPT] = 'Φόρτωση Script'
+            gr[INTL.T_MAKE_SNIPES_CHECK_SIGILS] = 'Δημιουργία snipe και έλεγχος σημαιών';
+            gr[INTL.T_NO_INCS_SELECTED] = 'Δεν έχουν επιλεχθεί εισερχόμενες!';
+            gr[INTL.T_RUN_ON_INCOMINGS] = "Το script τρέχει απο τη σελίδα εισερχομένων. Ανακατεύθυνση...";
+            gr[INTL.T_SNIPE_TIME_RANGE] = 'Snipes ανάμεσα στις {{currentTime}} και στις {{endTime}}';
+            gr[INTL.T_SNIPES_FROM_SRC] = 'Snipes απο {{source}}';
+            gr[INTL.T_SNIPES_TO_DST] = 'Snipes στο {{target}}';
+            gr[INTL.T_TARGET] = 'Στόχος';
+            gr[INTL.T_TARGET_VILLA] = 'Χωριό στόχος';
+            gr[INTL.T_SOURCE] = 'Προέλευση';
+            gr[INTL.T_SOURCE_VILLA] = 'Χωριό προέλευσης';
+            gr[INTL.T_TROOP_REQ] = 'Ταχ. μονάδας';
+            gr[INTL.T_TROOPS] = 'Στρατεύματα';
+            gr[INTL.T_USE_TROOP_ICONS] = 'Χρήση εικονιδίων στρατευμάτων';
+
+            //  IN-GAME TEXT - MUST MATCH EXACTLY
+            gr[INTL.T_INCOMING_SUPPORT_BUFF] = 'Η υποστήριξη σε αυτό το χωριό θα ταξιδέψει {{perc}}% γρηγορότερα';
+            gr[INTL.T_TODAY_AT] = 'Σήμερα στις {{time}}';
+            gr[INTL.T_TOMORROW_AT] = 'Αύριο στις {{time}}';
+            gr[INTL.T_ON_AT] = 'Την {{date}} στις {{time}}';
+
+            gr[INTL.T_OPTIONS] = 'Ρυθμίσεις';
+            gr[INTL.T_OPTIONS_SNIPE] = 'Ρυθμίσεις snipe';
+            gr[INTL.T_DISPLAY] = 'Εμφάνιση';
+            gr[INTL.T_SNIPE] = 'Snipe';
+            gr[INTL.T_MINIMUM_SNIPE_DEF] = 'Ελάχιστες άμυνες Snipe';
+            gr[INTL.T_USE_OFFENSIVE_SNIPES] = 'Snipe με επιθετικά';
+            gr[INTL.T_MAX_LAUNCH_TIME] = 'Μέγιστη ωρα που θα ξεκινάει το Snipe';
+            gr[INTL.T_NUM_SNIPES_MADE] = '{{count}} snipe έγιναν';
+            gr[INTL.T_REFRESH_1] = 'Αυτο το script δεν θα ανανεωθεί αν επιλέξεις/ξε-επιλέξεις εισερχόμενες επιθέσεις κατω!';
+            gr[INTL.T_REFRESH_2] = 'Τρέξε το script ξανα για να ανανεώσεις με τις νεες επιλογές.';
+
+            gr[INTL.T_ANTI_INFANTRY] = 'αντι-πεζικό';
+            gr[INTL.T_ANTI_CAVALRY] = 'αντι-ιππικό';
+            gr[INTL.T_ANTI_ARCHER] = 'αντι-τοξότες';
+
+            gr[INTL.M_TROOP_COMMON_NAMES] = [
+                'Δόρυ',
+                'Ξίφος',
+                'Τσεκούρι',
+                'Τόξο',
+                'Ανιχνευτής',
+                'Ελαφρύ Ιππ',
+                'Έφιππος Τοξ',
+                'Βαρύ Ιππ.',
+                'Κριός',
+                'Καταπέλτης',
+                'Paladin',
+                'Αριστοκράτης',
+            ];
+
+            gr[INTL.M_TROOP_SHORTHAND_NAMES] = [
+                'Δόρυ',
+                'Ξίφος',
+                'aΤσεκxe',
+                'Τοξ',
+                'Αν',
+                'LC',
+                'Εφ',
+                'Βαρύ',
+                'Κριος',
+                'Cat',
+                'Pala',
+                'Άριστος',
+            ];
+        })();
+
         function translate(messageCode, args) {
             // Detect 'RAW' requests for translation debugging
             if (args && args == 'RAW') {
