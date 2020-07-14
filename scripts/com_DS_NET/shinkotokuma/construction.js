@@ -2,15 +2,32 @@ javascript:
 if (window.location.href.indexOf('overview_villages&mode=buildings') < 0) {
     window.location.assign(game_data.link_base_pure + "overview_villages&mode=buildings");
 }
-var langShinko={ "en_DK": {
-    "today": "today",
-    "tomorrow": "tomorrow"
+var langShinko = {
+    "en_DK": {
+        "today": "today",
+        "tomorrow": "tomorrow"
     },
     "it_IT": {
-    "today": "oggi",
-    "tomorrow": "domani"
-    }
-  }
+        "today": "oggi",
+        "tomorrow": "domani"
+    },
+    "en_GB": {
+        "today": "today",
+        "tomorrow": "tomorrow"
+    },
+    "en_US": {
+        "today": "today",
+        "tomorrow": "tomorrow"
+    },
+    "nl_NL": {
+        "today": "vandaag",
+        "tomorrow": "morgen"
+    },
+    "pt_PT": {
+        "today": "hoje",
+        "tomorrow": "amanhã"
+    },
+}
 var underConstruction = $(".order.nodrag");
 var timeComplete = [];
 var todayPattern = new RegExp(window.lang.aea2b0aa9ae1534226518faaefffdaad.replace('%s', '([\\d\.:]+)'));
@@ -52,16 +69,31 @@ html = `<div id="constructionTime" class="vis" border=0><table id="table" width=
 </tr><tr><th width="70%" style="text-align:center">Village</th>
 <th width="30%" style="text-align:center">Time left on current building</th></tr>`;
 for (var i = 0; i < finalDates.length; i++) {
-    html += `<tr><td><a href="${underConstruction[finalDates[i].index].parentElement.parentElement.parentElement.children[2].children[0].children[0].children[0].href}">${underConstruction[finalDates[i].index].parentElement.parentElement.parentElement.children[2].innerText}</a></td><td align="right">${Math.round((finalDates[i].date - serverDate) / 1000 / 60)} minutes</td></tr>`
+    timeRemaining = timeConvert(Math.round((finalDates[i].date - serverDate) / 1000 / 60));
+    html += `<tr><td><a href="${underConstruction[finalDates[i].index].parentElement.parentElement.parentElement.children[2].children[0].children[0].children[0].href}">${underConstruction[finalDates[i].index].parentElement.parentElement.parentElement.children[2].innerText}</a></td><td align="right" data-time="${Math.round((finalDates[i].date - serverDate) / 1000 / 60)}">${timeRemaining}</td></tr>`
 }
 html += "</table></div>"
 Dialog.show("content", html);
 
 for (var i = 2; i < $("#table tr").length; i++) {
-    if ($("#table tr")[i].children[1].innerText.match(/(\d+)/)[1] <= 3) {
+    if ($($("#table tr")[i].children[1]).attr("data-time") <= 3) {
         $($("#table tr")[i]).children('td, th').css('background-color', 'lightgreen')
     }
-    if ($("#table tr")[i].children[1].innerText.match(/(\d+)/)[1] > 3 && $("#table tr")[i].children[1].innerText.match(/(\d+)/)[1] <= 10  ){
+    if ($($("#table tr")[i].children[1]).attr("data-time") > 3 && $($("#table tr")[i].children[1]).attr("data-time") <= 10) {
         $($("#table tr")[i]).children('td, th').css('background-color', 'yellow')
     }
+}
+
+function timeConvert(n) {
+    var num = n;
+    var hours = (num / 60);
+    var rhours = Math.floor(hours);
+    var minutes = (hours - rhours) * 60;
+    var rminutes = Math.round(minutes);
+	if (rhours != 0) {
+		return rhours + "h" + rminutes + "m";
+	}
+	else {
+		return rminutes + "m";
+	}
 }
