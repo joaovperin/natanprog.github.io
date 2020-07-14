@@ -1,4 +1,4 @@
-javascript:
+//javascript:
 /*var allowed = new Array();
 allowed['spear'] = true;
 allowed['sword'] = true;
