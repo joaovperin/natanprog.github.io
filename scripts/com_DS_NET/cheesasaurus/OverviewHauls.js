@@ -41,7 +41,7 @@
 
         window.TwCheese = {
             ROOT: 'https://cheesasaurus.github.io/twcheese',
-            version: 'v1.8-41-ga02b337',
+            version: 'v1.9-5-gdfbf4da',
             tools: {},
             lastToolUsedId: null,
 
@@ -2843,6 +2843,7 @@
          */
         function parseArrival(text, market) {    
             switch (market) {
+                case 'br': return parseArrivalBrazilianPortuguese(text);
                 case 'cz': return parseArrivalCzech(text);
                 case 'pt': return parseArrivalPortuguese(text);        
             }
@@ -2851,7 +2852,7 @@
         
         function parseArrivalEnglish(text) {
             // e.g. "Jun 12, 2019  15:36:23:000"
-            let expr = /(\D+) (\d+), (\d+)  (\d+):(\d+):(\d+):?(\d+)?/;
+            let expr = /(\S+) (\d+), (\d+)  (\d+):(\d+):(\d+):?(\d+)?/;
             let [, monthName, day, year, hours, minutes, seconds, millis] = text.match(expr);    
             let month = TwCheeseDate_TwCheeseDate.monthNumber(monthName);
             return TwCheeseDate_TwCheeseDate.newServerDate(year, month, day, hours, minutes, seconds, millis || 0);
@@ -2870,6 +2871,14 @@
             let expr = /(\d+)\/(\D+)\/(\d+) \((\d+):(\d+):(\d+)\):?(\d+)?/;
             let [, day, monthName, year, hours, minutes, seconds, millis] = text.match(expr);
             let month = TwCheeseDate_TwCheeseDate.monthNumber(monthName);
+            return TwCheeseDate_TwCheeseDate.newServerDate(year, month, day, hours, minutes, seconds, millis || 0);
+        }
+        
+        function parseArrivalBrazilianPortuguese(text) {
+            // e.g. "mai 20, 2020  11:54:33:503"
+            let expr = /(\S+) (\d+), (\d+)  (\d+):(\d+):(\d+):?(\d+)?/;
+            let [, monthName, day, year, hours, minutes, seconds, millis] = text.match(expr);
+            let month = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'].indexOf(monthName.toLowerCase());
             return TwCheeseDate_TwCheeseDate.newServerDate(year, month, day, hours, minutes, seconds, millis || 0);
         }
         
