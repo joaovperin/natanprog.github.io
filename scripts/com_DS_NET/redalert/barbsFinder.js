@@ -1,21 +1,22 @@
 /*
  * Script Name: Barbs Finder
- * Version: v1.0
- * Last Updated: 2020-05-25
+ * Version: v1.3.2
+ * Last Updated: 2020-06-26
  * Author: RedAlert
- * Author URL: https://twtools.ga/
+ * Author URL: https://twscripts.ga/
  * Author Contact: RedAlert#9859 (Discord)
  * Approved: t13981993
- * Approved Date: 2020-05-28
+ * Approved Date: 2020-05-27
  * Mod: JawJaw
  */
 
 var scriptData = {
-	name: 'Barbs Finder',
-	version: 'v1.0',
-	author: 'RedAlert',
-	authorUrl: 'https://twtools.ga/',
-	helpLink: '#',
+    name: 'Barbs Finder',
+    version: 'v1.3.2',
+    author: 'RedAlert',
+    authorUrl: 'https://twscripts.ga/',
+    helpLink:
+        'https://forum.tribalwars.net/index.php?threads/barb-finder-with-filtering.285289/',
 };
 
 // User Input
@@ -30,59 +31,138 @@ var TIME_INTERVAL = 60 * 60 * 1000; // fetch data every hour
 var villages = [];
 var barbarians = [];
 
+// Translations
+var translations = {
+    en_DK: {
+        'Barbs Finder': 'Barbs Finder',
+        'Min Points:': 'Min Points:',
+        'Max Points:': 'Max Points:',
+        'Radius:': 'Radius:',
+        'Barbs found:': 'Barbs found:',
+        'Coordinates:': 'Coordinates:',
+        'Error while fetching "village.txt"!':
+            'Error while fetching "village.txt"!',
+        Coords: 'Coords',
+        Points: 'Points',
+        'Dist.': 'Dist.',
+        Attack: 'Attack',
+        Filter: 'Filter',
+        Reset: 'Reset',
+        'No barbarian villages found!': 'No barbarian villages found!',
+        'Current Village:': 'Current Village:',
+        'Sequential Scout Script:': 'Sequential Scout Script:',
+        Help: 'Help',
+    },
+    en_US: {
+        'Barbs Finder': 'Barbs Finder',
+        'Min Points:': 'Min Points:',
+        'Max Points:': 'Max Points:',
+        'Radius:': 'Radius:',
+        'Barbs found:': 'Barbs found:',
+        'Coordinates:': 'Coordinates:',
+        'Error while fetching "village.txt"!':
+            'Error while fetching "village.txt"!',
+        Coords: 'Coords',
+        Points: 'Points',
+        'Dist.': 'Dist.',
+        Attack: 'Attack',
+        Filter: 'Filter',
+        Reset: 'Reset',
+        'No barbarian villages found!': 'No barbarian villages found!',
+        'Current Village:': 'Current Village:',
+        'Sequential Scout Script:': 'Sequential Scout Script:',
+        Help: 'Help',
+    },
+    sk_SK: {
+        'Barbs Finder': 'Hľadač barbariek',
+        'Min Points:': 'Min bodov:',
+        'Max Points:': 'Max bodov:',
+        'Radius:': 'Vzdialenosť:',
+        'Barbs found:': 'Nájdené barbarky:',
+        'Coordinates:': 'Súradnice:',
+        'Error while fetching "village.txt"!':
+            'Chyba pri načítaní "village.txt"!',
+        Coords: 'Súradnice',
+        Points: 'Body',
+        'Dist.': 'Vzdial.',
+        Attack: 'Útok',
+        Filter: 'Filter',
+        Reset: 'Reset',
+        'No barbarian villages found!':
+            'Neboli nájdené žiadne dediny barbarov!',
+        'Current Village:': 'Súčasná dedina:',
+        'Sequential Scout Script:': 'Sequential Scout Script:',
+        Help: 'Pomoc',
+    },
+};
+
 // Init Debug
 initDebug();
 
+// Init Translations Notice
+initTranslationsNotice();
+
 // Auto-update localStorage villages list
 if (localStorage.getItem(TIME_INTERVAL) != null) {
-	var mapVillageTime = parseInt(localStorage.getItem(VILLAGE_TIME));
-	if (Date.parse(new Date()) >= mapVillageTime + TIME_INTERVAL) {
-		// hour has passed, refetch village.txt
-		fetchVillagesData();
-	} else {
-		// hour has not passed, work with village list from localStorage
-		var data = localStorage.getItem(VILLAGES_LIST);
-		villages = CSVToArray(data);
-		init();
-	}
+    var mapVillageTime = parseInt(localStorage.getItem(VILLAGE_TIME));
+    if (Date.parse(new Date()) >= mapVillageTime + TIME_INTERVAL) {
+        // hour has passed, refetch village.txt
+        fetchVillagesData();
+    } else {
+        // hour has not passed, work with village list from localStorage
+        var data = localStorage.getItem(VILLAGES_LIST);
+        villages = CSVToArray(data);
+        init();
+    }
 } else {
-	// Fetch village.txt
-	fetchVillagesData();
+    // Fetch village.txt
+    fetchVillagesData();
 }
 
 // Fetch 'village.txt' file
 function fetchVillagesData() {
-	$.get('map/village.txt', function (data) {
-		villages = CSVToArray(data);
-		localStorage.setItem(TIME_INTERVAL, Date.parse(new Date()));
-		localStorage.setItem(VILLAGES_LIST, data);
-	})
-		.done(function () {
-			init();
-		})
-		.fail(function (error) {
-			console.error(`${scriptInfo()} Error:`, error);
-			UI.ErrorMessage('Error while fetching "village.txt"!', 4000);
-		});
+    $.get('map/village.txt', function (data) {
+        villages = CSVToArray(data);
+        localStorage.setItem(VILLAGE_TIME, Date.parse(new Date()));
+        localStorage.setItem(VILLAGES_LIST, data);
+    })
+        .done(function () {
+            init();
+        })
+        .fail(function (error) {
+            console.error(`${scriptInfo()} Error:`, error);
+            UI.ErrorMessage(
+                `${tt('Error while fetching "village.txt"!')}`,
+                4000
+            );
+        });
 }
 
 // Initialize Script
 function init() {
-	// Filter out only Barbarian villages
-	findBarbarianVillages();
-	// Show popup
-	var content = `
+    // Filter out only Barbarian villages
+    findBarbarianVillages();
+    // Show popup
+    var content = `
+		<div class="ra-mb15">
+			<strong>${tt('Current Village:')}</strong>
+			<a href="/game.php?screen=info_village&id=${
+                game_data.village.id
+            }" target="_blank" rel="noopener noreferrer">
+				${game_data.village.name}
+			</a>
+		</div>
 		<div class="ra-flex ra-mb10">
 			<div class="ra-flex-4">
-				<label for="minPoints" class="ra-fw600"">Min Points</label>
+				<label for="minPoints" class="ra-fw600"">${tt('Min Points:')}</label>
 				<input type="text" id="minPoints" class="ra-form-control" value="26">
 			</div>
 			<div class="ra-flex-4">
-				<label for="maxPoints" class="ra-fw600"">Max Points</label>
+				<label for="maxPoints" class="ra-fw600"">${tt('Max Points:')}</label>
 				<input type="text" id="maxPoints" class="ra-form-control" value="12154">
 			</div>
 			<div class="ra-flex-4">
-				<label for="radius" class="ra-fw600">Radius</label>
+				<label for="radius" class="ra-fw600">${tt('Radius:')}</label>
 				<select id="radius_choser" class="ra-form-control">
 					<option value="10">10</option>
 					<option value="20">20</option>
@@ -102,115 +182,132 @@ function init() {
 				</select>
 			</div>
 		</div>
-		<a href="javascript:void(0);" onClick="filterBarbs();" class="btn btn-confirm-yes">Filter</a>
-		<a href="javascript:void(0);" onClick="resetFilters();" class="btn btn-confirm-no">Reset</a>
-		<p class="ra-fs12"><strong>Barbs found:</strong> <span id="barbsCount">0</span></p>
+		<a href="javascript:void(0);" onClick="filterBarbs();" class="btn btn-confirm-yes">
+			${tt('Filter')}
+		</a>
+		<a href="javascript:void(0);" onClick="resetFilters();" class="btn btn-confirm-no">
+			${tt('Reset')}
+		</a>
+		<p class="ra-fs12">
+			<strong>${tt('Barbs found:')}</strong>
+			<span id="barbsCount">0</span>
+		</p>
 		<div class="ra-mb10">
-			<label class="ra-fw600" for="barbCoordsList">Coordinates:</label>
+			<label class="ra-fw600" for="barbCoordsList">${tt('Coordinates:')}</label>
 			<textarea id="barbCoordsList" class="ra-textarea" readonly></textarea>
+        </div>
+        <div class="ra-mb10">
+			<label class="ra-fw600" for="barbScoutScript">${tt(
+                'Sequential Scout Script:'
+            )}</label>
+			<textarea id="barbScoutScript" class="ra-textarea" readonly></textarea>
 		</div>
-		<div id="barbariansTable" style="display:none;max-height:300px;overflow-y:auto;margin-bottom:8px;"></div>
+		<div id="barbariansTable" style="display:none;max-height:240px;overflow-y:auto;margin-bottom:8px;"></div>
 		<div id="noBarbariansFound" style="display:none;">
-			<p><strong>No barbarian villages found!</strong>
+			<p><strong>${tt('No barbarian villages found!')}</strong>
 		</div>
 	`;
 
-	const popupContent = preparePopupContent(content);
-	Dialog.show('content', popupContent);
+    const popupContent = preparePopupContent(content);
+    Dialog.show('content', popupContent);
 }
 
 // Populate villages list
 function findBarbarianVillages() {
-	villages.forEach((village) => {
-		if (village[4] == '0' && village[6] == '0') {
-			barbarians.push(village);
-		}
-	});
+    villages.forEach((village) => {
+        if (village[4] == '0') {
+            barbarians.push(village);
+        }
+    });
 
-	if (DEBUG) {
-		console.debug(`${scriptInfo()} Barbarian Villages:`, barbarians);
-	}
+    if (DEBUG) {
+        console.debug(`${scriptInfo()} Barbarian Villages:`, barbarians);
+    }
 }
 
 // Filter Barbarians
 function filterBarbs() {
-	var minPoints = parseInt($('#minPoints').val().trim());
-	var maxPoints = parseInt($('#maxPoints').val().trim());
-	var radius = parseInt($('#radius_choser').val());
+    var minPoints = parseInt($('#minPoints').val().trim());
+    var maxPoints = parseInt($('#maxPoints').val().trim());
+    var radius = parseInt($('#radius_choser').val());
 
-	if (DEBUG) {
-		console.debug(`${scriptInfo()} Minimum Points:`, minPoints);
-		console.debug(`${scriptInfo()} Maximum Points:`, maxPoints);
-	}
+    if (DEBUG) {
+        console.debug(`${scriptInfo()} Minimum Points:`, minPoints);
+        console.debug(`${scriptInfo()} Maximum Points:`, maxPoints);
+    }
 
-	// Filter by min and max points
-	const filteredBarbs = barbarians.filter((barbarian) => {
-		return barbarian[5] >= minPoints && barbarian[5] <= maxPoints;
-	});
+    // Filter by min and max points
+    const filteredBarbs = barbarians.filter((barbarian) => {
+        return barbarian[5] >= minPoints && barbarian[5] <= maxPoints;
+    });
 
-	// Filter by radius
-	const filteredByRadiusBarbs = filteredBarbs.filter((barbarian) => {
-		var distance = calcDistanceFromCurrentVillage(barbarian);
-		if (distance <= radius) {
-			return barbarian;
-		}
-	});
+    // Filter by radius
+    const filteredByRadiusBarbs = filteredBarbs.filter((barbarian) => {
+        var distance = calcDistanceFromCurrentVillage(barbarian);
+        if (distance <= radius) {
+            return barbarian;
+        }
+    });
 
-	updateUI(filteredByRadiusBarbs);
+    updateUI(filteredByRadiusBarbs);
 }
 
 // Reset Filters
 function resetFilters() {
-	$('#minPoints').val(26);
-	$('#maxPoints').val(12154);
-	$('#radius_choser').val('20');
-	$('#barbsCount').text('0');
-	$('#barbCoordsList').text('');
-	$('#barbariansTable').hide();
-	$('#barbariansTable').html('');
+    $('#minPoints').val(26);
+    $('#maxPoints').val(12154);
+    $('#radius_choser').val('20');
+    $('#barbsCount').text('0');
+    $('#barbCoordsList').text('');
+    $('#barbScoutScript').val('');
+    $('#barbariansTable').hide();
+    $('#barbariansTable').html('');
 }
 
 // Update UI
 function updateUI(barbs) {
-	if (barbs.length > 0) {
-		var barbariansCoordsArray = getVillageCoord(barbs);
-		var barbariansCount = barbariansCoordsArray.length;
+    if (barbs.length > 0) {
+        var barbariansCoordsArray = getVillageCoord(barbs);
+        var barbariansCount = barbariansCoordsArray.length;
 
-		var barbariansCoordsList = barbariansCoordsArray.join(' ');
+        var barbariansCoordsList = barbariansCoordsArray.join(' ');
 
-		var tableContent = generateBarbariansTable(barbs);
+        var scoutScript = generateScoutScript(barbariansCoordsList);
 
-		$('#barbsCount').text(barbariansCount);
-		$('#barbCoordsList').text(barbariansCoordsList);
-		$('#barbariansTable').show();
-		$('#barbariansTable').html(tableContent);
-	} else {
-		resetFilters();
-		$('#noBarbariansFound').fadeIn(200);
-		setTimeout(function () {
-			$('#noBarbariansFound').fadeOut(200);
-		}, 4000);
-	}
+        var tableContent = generateBarbariansTable(barbs);
+
+        $('#barbsCount').text(barbariansCount);
+        $('#barbCoordsList').text(barbariansCoordsList);
+        $('#barbScoutScript').val(scoutScript);
+        $('#barbariansTable').show();
+        $('#barbariansTable').html(tableContent);
+    } else {
+        resetFilters();
+        $('#noBarbariansFound').fadeIn(200);
+        setTimeout(function () {
+            $('#noBarbariansFound').fadeOut(200);
+        }, 4000);
+    }
 }
 
 // Generate Table
 function generateBarbariansTable(barbs) {
-	if (barbs.length < 1) return;
+    if (barbs.length < 1) return;
 
-	var barbariansWithDistance = [];
+    var barbariansWithDistance = [];
 
-	barbs.forEach((barb) => {
-		var distance = calcDistanceFromCurrentVillage(barb);
-		barbariansWithDistance.push([...barb, distance]);
-	});
+    barbs.forEach((barb) => {
+        var distance = calcDistanceFromCurrentVillage(barb);
+        barbariansWithDistance.push([...barb, distance]);
+    });
 
-	barbariansWithDistance.sort((a, b) => {
-		return a[7] - b[7];
-	});
+    barbariansWithDistance.sort((a, b) => {
+        return a[7] - b[7];
+    });
 
-	var tableRows = generateTableRows(barbariansWithDistance);
+    var tableRows = generateTableRows(barbariansWithDistance);
 
-	var tableContent = `
+    var tableContent = `
 		<table class="vis overview_table ra-table" width="100%">
 			<thead>
 				<tr>
@@ -221,16 +318,16 @@ function generateBarbariansTable(barbs) {
 						K
 					</th>
 					<th>
-						Coords
+						${tt('Coords')}
 					</th>
 					<th>
-						Points
+						${tt('Points')}
 					</td>
 					<th>
-						Dist.
+						${tt('Dist.')}
 					</th>
 					<th>
-						Attack
+						${tt('Attack')}
 					</th>
 				</tr>
 			</thead>
@@ -240,17 +337,17 @@ function generateBarbariansTable(barbs) {
 		</table>
 	`;
 
-	return tableContent;
+    return tableContent;
 }
 
 // Generate Table Rows
 function generateTableRows(barbs) {
-	var renderTableRows = '';
+    var renderTableRows = '';
 
-	barbs.forEach((barb, index) => {
-		index++;
-		var continent = barb[3].charAt(0) + barb[2].charAt(0);
-		renderTableRows += `
+    barbs.forEach((barb, index) => {
+        index++;
+        var continent = barb[3].charAt(0) + barb[2].charAt(0);
+        renderTableRows += `
 			<tr>
 				<td class="ra-tac">
 					${index}
@@ -260,8 +357,8 @@ function generateTableRows(barbs) {
 				</td>
 				<td class="ra-tac">
 					<a href="game.php?screen=info_village&id=${
-						barb[0]
-					}" target="_blank" rel="noopener noreferrer">
+                        barb[0]
+                    }" target="_blank" rel="noopener noreferrer">
 						${barb[2]}|${barb[3]}
 					</a>
 				</td>
@@ -269,94 +366,111 @@ function generateTableRows(barbs) {
 				<td class="ra-tac">${barb[7]}</td>
 				<td class="ra-tac">
 					<a href="/game.php?screen=place&target=${
-						barb[0]
-					}" target="_blank" rel="noopener noreferrer" class="btn">
-						Attack
+                        barb[0]
+                    }" target="_blank" rel="noopener noreferrer" class="btn">
+						${tt('Attack')}
 					</a>
 				</td>
 			</tr>
 		`;
-	});
+    });
 
-	return renderTableRows;
+    return renderTableRows;
+}
+
+// Helper: Scout Script Generator
+function generateScoutScript(barbsList) {
+    return `javascript:coords='${barbsList}';var doc=document;if(window.frames.length>0 && window.main!=null)doc=window.main.document;url=doc.URL;if(url.indexOf('screen=place')==-1)alert('Use the script in the rally point page!');coords=coords.split(' ');index=0;farmcookie=document.cookie.match('(^|;) ?farm=([^;]*)(;|$)');if(farmcookie!=null)index=parseInt(farmcookie[2]);if(index>=coords.length)alert('All villages were extracted, now start from the first!');if(index>=coords.length)index=0;coords=coords[index];coords=coords.split('|');index=index+1;cookie_date=new Date(2021,3,27);document.cookie ='farm='+index+';expires='+cookie_date.toGMTString();doc.forms[0].x.value=coords[0];doc.forms[0].y.value=coords[1];$('#place_target').find('input').val(coords[0]+'|'+coords[1]);doc.forms[0].spy.value=1;`;
 }
 
 // Helper: Calculate distance between current and a given village
 function calcDistanceFromCurrentVillage(village) {
-	var x1 = game_data.village.x,
-		y1 = game_data.village.y,
-		x2 = village[2],
-		y2 = village[3];
-	//calculate distance from current village
-	var a = x1 - x2;
-	var b = y1 - y2;
-	var distance = Math.round(Math.hypot(a, b));
-	return distance;
+    var x1 = game_data.village.x,
+        y1 = game_data.village.y,
+        x2 = village[2],
+        y2 = village[3];
+    //calculate distance from current village
+    var a = x1 - x2;
+    var b = y1 - y2;
+    var distance = Math.round(Math.hypot(a, b));
+    return distance;
 }
 
 // Helper: Get Villages Coords Array
 function getVillageCoord(villages) {
-	var villageCoords = [];
-	villages.forEach((village) => {
-		villageCoords.push(village[2] + '|' + village[3]);
-	});
-	return villageCoords;
+    var villageCoords = [];
+    villages.forEach((village) => {
+        villageCoords.push(village[2] + '|' + village[3]);
+    });
+    return villageCoords;
 }
 
 // Helper: Format as number
 function formatAsNumber(number) {
-	return parseInt(number).toLocaleString('de');
+    return parseInt(number).toLocaleString('de');
 }
 
 //Helper: Convert CSV data into Array
 function CSVToArray(strData, strDelimiter) {
-	strDelimiter = strDelimiter || ',';
-	var objPattern = new RegExp(
-		'(\\' +
-			strDelimiter +
-			'|\\r?\\n|\\r|^)' +
-			'(?:"([^"]*(?:""[^"]*)*)"|' +
-			'([^"\\' +
-			strDelimiter +
-			'\\r\\n]*))',
-		'gi'
-	);
-	var arrData = [[]];
-	var arrMatches = null;
-	while ((arrMatches = objPattern.exec(strData))) {
-		var strMatchedDelimiter = arrMatches[1];
-		if (
-			strMatchedDelimiter.length &&
-			strMatchedDelimiter !== strDelimiter
-		) {
-			arrData.push([]);
-		}
-		var strMatchedValue;
+    strDelimiter = strDelimiter || ',';
+    var objPattern = new RegExp(
+        '(\\' +
+            strDelimiter +
+            '|\\r?\\n|\\r|^)' +
+            '(?:"([^"]*(?:""[^"]*)*)"|' +
+            '([^"\\' +
+            strDelimiter +
+            '\\r\\n]*))',
+        'gi'
+    );
+    var arrData = [[]];
+    var arrMatches = null;
+    while ((arrMatches = objPattern.exec(strData))) {
+        var strMatchedDelimiter = arrMatches[1];
+        if (
+            strMatchedDelimiter.length &&
+            strMatchedDelimiter !== strDelimiter
+        ) {
+            arrData.push([]);
+        }
+        var strMatchedValue;
 
-		if (arrMatches[2]) {
-			strMatchedValue = arrMatches[2].replace(new RegExp('""', 'g'), '"');
-		} else {
-			strMatchedValue = arrMatches[3];
-		}
-		arrData[arrData.length - 1].push(strMatchedValue);
-	}
-	return arrData;
+        if (arrMatches[2]) {
+            strMatchedValue = arrMatches[2].replace(new RegExp('""', 'g'), '"');
+        } else {
+            strMatchedValue = arrMatches[3];
+        }
+        arrData[arrData.length - 1].push(strMatchedValue);
+    }
+    return arrData;
 }
 
 // Helper: Generates script info
 function scriptInfo() {
-	return `[${scriptData.name} ${scriptData.version}]`;
+    return `[${scriptData.name} ${scriptData.version}]`;
 }
 
 // Helper: Prepare Popup Content
 function preparePopupContent(
-	popupBody,
-	minWidth = '340px',
-	maxWidth = '360px'
+    popupBody,
+    minWidth = '340px',
+    maxWidth = '360px'
 ) {
-	const popupHeader = `<h3 class="ra-fs18 ra-fw600">${scriptData.name}</h3><div class="ra-body">`;
-	const popupFooter = `</div><small><strong>${scriptData.name} ${scriptData.version}</strong> by <a href="${scriptData.authorUrl}" target="_blank" rel="noreferrer noopener">${scriptData.author}</a> - <a href="${scriptData.helpLink}" target="_blank" rel="noreferrer noopener">Help</a></small>`;
-	const popupStyle = `
+    const popupHeader = `
+		<h3 class="ra-fs18 ra-fw600">
+			${tt(scriptData.name)}
+		</h3>
+		<div class="ra-body">`;
+    const popupFooter = `</div><small><strong>${tt(scriptData.name)} ${
+        scriptData.version
+    }</strong> - <a href="${
+        scriptData.authorUrl
+    }" target="_blank" rel="noreferrer noopener">${
+        scriptData.author
+    }</a> - <a href="${
+        scriptData.helpLink
+    }" target="_blank" rel="noreferrer noopener">${tt('Help')}</a></small>`;
+    const popupStyle = `
 		<style>
 			.popup_box_content { overflow-y: hidden; }
 			.ra-body { width: 100%; min-width: ${minWidth}; max-width: ${maxWidth}; box-sizing: border-box; }
@@ -381,26 +495,53 @@ function preparePopupContent(
 		</style>
 	`;
 
-	let popupContent = `
+    let popupContent = `
 		${popupHeader}
 		${popupBody}
 		${popupFooter}
 		${popupStyle}
 	`;
 
-	return popupContent;
+    return popupContent;
 }
 
 // Helper: Prints universal debug information
 function initDebug() {
-	console.debug(`${scriptInfo()} It works 🚀!`);
-	console.debug(`${scriptInfo()} HELP:`, scriptData.helpLink);
-	if (DEBUG) {
-		console.debug(`${scriptInfo()} Market:`, game_data.market);
-		console.debug(`${scriptInfo()} World:`, game_data.world);
-		console.debug(`${scriptInfo()} Screen:`, game_data.screen);
-		console.debug(`${scriptInfo()} Game Version:`, game_data.majorVersion);
-		console.debug(`${scriptInfo()} Game Build:`, game_data.version);
-		console.debug(`${scriptInfo()} Locale:`, game_data.locale);
-	}
+    console.debug(`${scriptInfo()} It works 🚀!`);
+    console.debug(`${scriptInfo()} HELP:`, scriptData.helpLink);
+    if (DEBUG) {
+        console.debug(`${scriptInfo()} Market:`, game_data.market);
+        console.debug(`${scriptInfo()} World:`, game_data.world);
+        console.debug(`${scriptInfo()} Screen:`, game_data.screen);
+        console.debug(`${scriptInfo()} Game Version:`, game_data.majorVersion);
+        console.debug(`${scriptInfo()} Game Build:`, game_data.version);
+        console.debug(`${scriptInfo()} Locale:`, game_data.locale);
+        console.debug(
+            `${scriptInfo()} Premium:`,
+            game_data.features.Premium.active
+        );
+    }
+}
+
+// Helper: Text Translator
+function tt(string) {
+    const gameLocale = game_data.locale;
+
+    if (translations[gameLocale] !== undefined) {
+        return translations[gameLocale][string];
+    } else {
+        return translations['en_DK'][string];
+    }
+}
+
+// Helper: Translations Notice
+function initTranslationsNotice() {
+    const gameLocale = game_data.locale;
+
+    if (translations[gameLocale] === undefined) {
+        UI.ErrorMessage(
+            `No translation found for <b>${gameLocale}</b>. <a href="${scriptData.helpLink}" class="btn" target="_blank" rel="noreferrer noopener">Add Yours</a> by replying to the thread.`,
+            4000
+        );
+    }
 }
