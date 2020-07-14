@@ -86,12 +86,27 @@ var langShinko = {
         "Sold": "verkauft",
         "giftTo": "to: ",
         "giftFrom": "from: "
-    }
+    },
+    "sv_SE": {
+        "Purchase": "Köp", //bought pp, 3rd cell
+        "Premium Exchange": "PremiumBörsen", //purchases from exchange 3rd cell
+        "Points redeemed": "Utlösta Poäng", //reduction building time or account manager/premium account/LA or events, 3rd cell
+        "Transfer": "Överför", //sold to pp exchange 3rd cell
+        "Sold": "Sålda", //text in the last cell when selling res to pp exchange last cell
+        "giftTo": "to: ", //gift to last cell
+        "giftFrom": "from: " //gift from last cell
+    },
 
 }
 var worldDataBase = {};
 
-baseURL = "/game.php?&screen=premium&mode=log&page=";
+if (game_data.player.sitter > 0) {  
+    baseURL = "/game.php?t=${game_data.player.id}&screen=premium&mode=log&page=";
+}
+else {
+    baseURL = "/game.php?&screen=premium&mode=log&page=";
+}
+
 amountOfPages = parseInt($(".paged-nav-item")[$(".paged-nav-item").length - 1].href.match(/page=(\d+)/)[1]);
 $("#contentContainer").eq(0).prepend(`
 <div id="progressbar" style="width: 100%;
@@ -176,7 +191,7 @@ $.getAll(URLs,
 
             // buying
             if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Purchase"]) > -1) {
-                console.log("Found a purchase!");
+                //console.log("Found a purchase!");
                 if (typeof worldDataBase[tempRows[j + 2].children[1].innerText] == "undefined") {
                     worldDataBase[tempRows[j + 2].children[1].innerText] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
                 }
@@ -187,7 +202,7 @@ $.getAll(URLs,
             }
             // spending
             if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Premium Exchange"]) > -1 || tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Points redeemed"]) > -1) {
-                console.log("Found a spending!");
+                //console.log("Found a spending!");
                 totalSpent += parseInt(tempRows[j + 2].children[3].innerText);
                 if (typeof worldDataBase[tempRows[j + 2].children[1].innerText] == "undefined") {
                     worldDataBase[tempRows[j + 2].children[1].innerText] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
@@ -197,7 +212,7 @@ $.getAll(URLs,
             }
             //pp farm
             if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Transfer"]) > -1 && (tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["Sold"]) > -1 || tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["Premium Exchange"]) > -1)) {
-                console.log("Found a pp farm!");
+                //console.log("Found a pp farm!");
                 if (typeof worldDataBase[tempRows[j + 2].children[1].innerText] == "undefined") {
                     worldDataBase[tempRows[j + 2].children[1].innerText] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
                 }
@@ -207,14 +222,14 @@ $.getAll(URLs,
             }
             // gifted to others
             if (tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["giftTo"]) == 0) {
-                console.log("Found a gift sent!");
+                //console.log("Found a gift sent!");
                 giftTo.push({ "Date": tempRows[j + 2].children[0].innerText, "World": tempRows[j + 2].children[1].innerText, "Transaction": tempRows[j + 2].children[2].innerText, "Amount": tempRows[j + 2].children[3].innerText, "newTotal": tempRows[j + 2].children[4].innerText, "moreInformation": tempRows[j + 2].children[5].innerText })
                 totalGiftsSent += -parseInt(tempRows[j + 2].children[3].innerText);
                 thisPageAmount++;
             }
             // gifts received
             if (tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["giftFrom"]) > -1) {
-                console.log("Found a gift received!");
+                //console.log("Found a gift received!");
                 giftFrom.push({ "Date": tempRows[j + 2].children[0].innerText, "World": tempRows[j + 2].children[1].innerText, "Transaction": tempRows[j + 2].children[2].innerText, "Amount": tempRows[j + 2].children[3].innerText, "newTotal": tempRows[j + 2].children[4].innerText, "moreInformation": tempRows[j + 2].children[5].innerText })
                 totalGiftsReceived += parseInt(tempRows[j + 2].children[3].innerText);
                 thisPageAmount++;
@@ -229,8 +244,8 @@ $.getAll(URLs,
         }
     },
     () => {
-        console.log("Total bought: " + totalBought);
-        console.table(purchases);
+        //console.log("Total bought: " + totalBought);
+        //console.table(purchases);
         html = `
         <tr>
             <th colspan=4>
