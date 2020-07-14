@@ -107,7 +107,7 @@ else {
     <hr>
     <center><img class="tooltip-delayed"
        title="<font color=darkgreen>Sophie -Shinko to Kuma-</font>"
-       src="https://dl.dropboxusercontent.com/s/0do4be4rzef4j30/sophie2.gif"
+       src="https://dl.dropboxusercontent.com/s/bxoyga8wa6yuuz4/sophie2.gif"
        style="cursor:help; position: relative"></center>
     <br>
     <center>
