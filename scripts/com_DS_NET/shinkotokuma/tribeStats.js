@@ -25,6 +25,16 @@ switch (game_data.locale) {
             "Combined": "Combinado"
         }
         break;
+    case "es_ES":
+        langShinko = {
+            "ODA": "ODA",
+            "ODD": "ODD",
+            "ODS": "ODS",
+            "Loot": "Saqueado",
+            "Gathered": "Recolectado",
+            "Combined": "Combinado"
+        }
+        break;
     default:
         langShinko = {
             "ODA": "ODA",
@@ -52,7 +62,7 @@ if (window.location.href.indexOf('&screen=info_ally') > -1) {
     columnName = 0;
     rows = $($("table .vis")[2]).find('tr');
 }
-if (window.location.href.indexOf('screen=ranking&mode=player') > -1 || (window.location.href.indexOf('screen=ranking') > -1 && window.location.href.indexOf('&mode') == -1)) {
+if ((window.location.href.indexOf('screen=ranking&mode=player') > -1 || window.location.href.indexOf('screen=ranking&mode=con_player') > -1) || (window.location.href.indexOf('screen=ranking') > -1 && window.location.href.indexOf('&mode') == -1)) {
     //any player
     tribeTable = ".vis:eq(1)";
     rowStart = 1;
@@ -241,7 +251,7 @@ $.getAll(linksODA, (i, data) => {
                                     () => {
                                         for (var o = rowStart; o < gatheredperPlayer.length + rowStart; o++) {
                                             $(tribeTable + " tr").eq(o).append("<td title=" + gatheredperPlayer[o - rowStart][1] + ">" + gatheredperPlayer[o - rowStart][0] + "</td>")
-                                            $(tribeTable + " tr").eq(o).append("<td>" + (parseInt(gatheredperPlayer[o - rowStart][0].replace(".", "")) + parseInt(lootperPlayer[o - rowStart][0].replace(".", ""))) + "</td>")
+                                            $(tribeTable + " tr").eq(o).append("<td>" + numberWithCommas(parseInt(gatheredperPlayer[o - rowStart][0].split(".").join("")) + parseInt(lootperPlayer[o - rowStart][0].split(".").join(""))) + "</td>")
                                         }
 
                                         $("#progress").remove();
@@ -371,4 +381,13 @@ function createBB(tableID, rowStart) {
     }
 
     BBTable += "[/table]"
+}
+
+function numberWithCommas(x) {
+    // add . to make numbers more readable
+    x = x.toString();
+    var pattern = /(-?\d+)(\d{3})/;
+    while (pattern.test(x))
+        x = x.replace(pattern, "$1.$2");
+    return x;
 }
