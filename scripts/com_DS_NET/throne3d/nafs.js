@@ -1,17 +1,34 @@
-var serverTimezones = {"en" : " GMT+0100", "zz" : " GMT+0200", "no" : " GMT+0200"};
-var resourceSp = [0, 30, 35, 41, 47, 55, 64, 74, 86, 100, 117, 136, 158, 184, 214, 249, 289, 337, 391, 455, 530, 616, 717, 833, 
-                    969, 1127, 1311, 1525, 1774, 2063, 2400];
-var warehouseC = [0, 1000, 1229, 1512, 1859, 2285, 2810, 3454, 4247, 5222, 6420, 7893, 9705, 11932, 14670, 18037, 22177, 27266, 
-                    33523, 41217, 50675, 62305, 76604, 94184, 115798, 142373, 175047, 215219, 264611, 325337, 400000];
-var carry = {"spear": 25, "sword": 15, "axe": 10, "archer": 10, "scout": 0, "lc": 80, "ma": 50, "hc": 50, "ram": 0, "cat": 0, "paladin": 100}
-var speed = {"spear": 18, "sword": 22, "axe": 18, "archer": 18, "scout": 9, "lc": 10, "ma": 10, "hc": 11, "ram": 30, "cat": 30}
+/*Global save of a file.*/
+/*jshint -W004 */
 var xmlConfig;
-/*HQ (1), Barracks (0), Stable (0), Workshop (0), Church (0), Academy (0), Smithy (0), Rally Point (0), Statue (0), Market (0), 
-    Timber Camp (leave), Clay Pit (leave), Iron Mine (leave), Farm (1), Warehouse (leave), Hiding Place (impossible), Wall (0)*/
-var ramsRequired = [0, 2, 4, 7, 10, 14, 19, 24, 30, 37, 45, 55, 65, 77, 91, 106, 124, 143, 166, 191, 219];
-var ramsMin = [0, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 6, 6];
-var catsRequiredTo = [
-    /*From [0,1,2, 3, 4, 5, 6, 7, 8, 9,10,11,12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,  29,  30]*/
+
+/*
+Changelog:
+2018-08-11 2.0.1:
+- Fix typo in catapult calculation
+2015-10-16 2.0:
+- Re-organised all the code.
+*/
+
+/*The standard data.*/
+var serverTimezones = {"en" : " GMT+0000", "zz" : " GMT+0100", "no" : " GMT+0100"};
+var resourceRates = [0, 30, 35, 41, 47, 55, 64, 74, 86, 100, 117, 136, 158, 184, 214, 249, 289, 337, 391, 455, 530, 616, 717, 833, 969, 1127, 1311, 1525, 1774, 2063, 2400];
+var warehouseCapacity = [0, 1000, 1229, 1512, 1859, 2285, 2810, 3454, 4247, 5222, 6420, 7893, 9705, 11932, 14670, 18037, 22177, 27266, 33523, 41217, 50675, 62305, 76604, 94184, 115798, 142373, 175047, 215219, 264611, 325337, 400000];
+var unitCarry = {"spear": 25, "sword": 15, "axe": 10, "archer": 10, "spy": 0, "light": 80, "marcher": 50, "heavy": 50, "ram": 0, "catapult": 0, "knight": 100};
+var unitSpeed = {"spear": 18, "sword": 22, "axe": 18, "archer": 18, "spy": 9, "light": 10, "marcher": 10, "heavy": 11, "ram": 30, "catapult": 30};
+
+var speedGroups = [["spy", "light", "marcher", "heavy"], ["spear", "sword", "axe", "archer"], ["ram", "catapult"]];
+var slowestSpeedofGroups = [11, 22, 30];
+
+var troopList = ["spear", "sword", "axe", "archer", "spy", "light", "marcher", "heavy", "ram", "catapult", "knight"]; /*Ignore snob*/
+var commonTroopNames = [["spearman", "spear"], ["swordman", "sword"], ["axeman", "axe"], ["scout", "spy"], ["lc", "light"], ["light cavalry", "light"], ["ma", "marcher"], ["mounted archer", "marcher"], ["heavy cavalry", "heavy"], ["hc", "heavy"], ["cat", "catapult"], ["paladin", "knight"]];
+
+var ramsRequired = [0, 2, 4, 7, 10, 14, 19, 24, 30, 37, 45, 55, 65, 77, 91, 106, 124, 143, 166, 191, 219]; /* to break a wall at [i] level to 0.*/
+var ramsMin = [0, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 6, 6]; /*to break a wall at [i] level by 1 level*/
+var catsRequiredToBreak = [
+    /*[0,30] = from 30 to 0*/
+    /*From:[0,1,2, 3, 4, 5, 6, 7, 8, 9,10,11,12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,  29,  30]*/
+    /*To:*/
     /* 0*/ [0,2,6,10,15,21,28,36,45,56,68,82,98,115,136,159,185,215,248,286,328,376,430,490,558,634,720,815,922,1041,1175],
     /* 1*/ [0,0,2, 6,11,17,23,31,39,49,61,74,89,106,126,148,173,202,234,270,312,358,410,469,534,508,691,784,888,1005,1135],
     /* 2*/ [0,0,0, 2, 7,12,18,25,33,43,54,66,81, 97,116,137,161,189,220,255,295,340,390,447,511,583,663,754,855, 968,1095],
@@ -44,9 +61,9 @@ var catsRequiredTo = [
     /*29*/ [0,0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,   0,  20],
     /*30*/ [0,0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,   0,   0]
 ];
-var catsMin = [0,2,2,2,3,3,3,3,3,4,4,4,5,5,6,6,6,7,8,8,9,10,10,11,12,13,15,16,17,19,20];
-var months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
-var _a = {
+var catsMin = [0,2,2,2,3,3,3,3,3,4,4,4,5,5,6,6,6,7,8,8,9,10,10,11,12,13,15,16,17,19,20]; /*to break a building at level [i] by 1*/
+var months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]; /*To get UTC-ize dates!*/
+var _a = { /*translations. Duh*/
     "en" : {
         "Headquarters" : "Headquarters",
         "Barracks" : "Barracks",
@@ -93,10 +110,10 @@ var _a = {
         "oct" : "Oct",
         "nov" : "Nov",
         "dec" : "Dec",
-		"Coordinates" : "Coordinates",
-		"Tribe" : "Tribe",
-		"Actions" : "Actions",
-		"Defender" : "Defender"
+        "Coordinates" : "Coordinates",
+        "Tribe" : "Tribe",
+        "Actions" : "Actions",
+        "Defender" : "Defender"
     },
     "no" : {
         "Headquarters" : "Hovedkvarter",
@@ -144,104 +161,77 @@ var _a = {
         "oct" : "Okt",
         "nov" : "Nov",
         "dec" : "Des",
-		"Coordinates" : "Koordinater",
-		"Tribe" : "Stamme",
-		"Actions" : "Handlinger",
-		"Defender" : "Forsvarer"
+        "Coordinates" : "Koordinater",
+        "Tribe" : "Stamme",
+        "Actions" : "Handlinger",
+        "Defender" : "Forsvarer"
     }
 };
-var worldLetters = window.location.host.split(/\W+/)[0].substring(0, 2);
-var lang = (localStorage && localStorage.twstuffz && JSON.parse(localStorage.twstuffz)["settings"] && JSON.parse(localStorage.twstuffz)["settings"]["lang"]) || (_a[worldLetters] && worldLetters) || "en";
-var catables = [
-    {"name" : _("Farm"), "deloc" : "farm", "lowest" : (getSetting("catFarmToZero", false) ? 1 : 12), "select" : "farm"},
-    {"name" : _("Headquarters"), "deloc" : "hq", "lowest" : 1, "select" : "main"},
-    {"name" : _("Barracks"), "deloc" : "barracks", "lowest" : 0, "select" : "barracks"},
-    {"name" : _("Stable"), "deloc" : "stable", "lowest" : 0, "select" : "stable"},
-    {"name" : _("Workshop"), "deloc" : "workshop", "lowest" : 0, "select" : "garage"},
-    {"name" : _("Academy"), "deloc" : "academy", "lowest" : 0, "select" : "snob"},
-    {"name" : _("Smithy"), "deloc" : "smithy", "lowest" : 0, "select" : "smith"},
-    {"name" : _("Rally point"), "deloc" : "rally", "lowest" : 0, "select" : "place"},
-    {"name" : _("Statue"), "deloc" : "statue", "lowest" : 0, "select" : "statue"},
-    {"name" : _("Market"), "deloc" : "market", "lowest" : 0, "select" : "market"}
-];
 
-function _(thing){
-    return (_a[lang] && _a[lang][thing]) || (_a["en"] && _a["en"][thing]) || thing;
+/*The two letter acronym (typically) for the world. e.g. en, zz, no, de.*/
+var worldLetters = window.location.host.split(/\W+/)[0].substring(0, 2);
+
+/*Temporary local copy.*/
+var settings;
+
+/*Fetch local storage*/
+function getLocalStorage() {
+    if (!localStorage){ alert("Local storage doesn't seem to be enabled. NAFS won't function without it!"); throw "Whoops. Local storage isn't enabled, apparently."; }
+    if (!localStorage.NAFSData) localStorage.NAFSData = '{"villages":{}, "settings":{}}';
+    if (typeof settings === "undefined") settings = JSON.parse(localStorage.NAFSData);
+    return settings;
 }
 
-/*
-Changelog:
-2014-08-27, 1.0.7:
--Allows changing of minimum wall level required to send rams.
+/*Save local storage*/
+function setLocalStorage(data){
+    if (typeof data === "undefined") data = settings;
+    localStorage.NAFSData = JSON.stringify(data);
+}
 
-2014-08-19, 1.0.6:
--New option to prevent import of reports with a player as the defender
--Truly fixed the localization thing (and the stupid page thing - beta has changed that village overview page YET AGAIN)
+/*Fetch the language from the localStorage settings.*/
+function getCurrentLang() {
+    return getSetting("lang", _a[worldLetters] && worldLetters || "en");
+    /*Return the "lang" setting, or else if there's a translation for the current world's code, return that, or else "en".*/
+}
 
-2014-08-19, 1.0.5c:
--Fixed localizations (duh. forgot to add it for "Coordinates" >_>)
+/*Return the localised version.*/
+function _(translateID){
+    return (typeof _a[getCurrentLang()] !== "undefined" && _a[getCurrentLang()][translateID]) || translateID;
+    /*If there are translations for the current language, and there exists a translation for this thing, use that. Else, return the translation's ID.*/
+}
 
-2014-08-19, 1.0.5b:
--Fixed it to work with the new report layout (oops?)
--Fixed it to work with the new village overview layout (hopefully?)
+/*HQ (1), Barracks (0), Stable (0), Workshop (0), Church (0), Academy (0), Smithy (0), Rally Point (0), Statue (0), Market (0), Timber Camp (leave), Clay Pit (leave), Iron Mine (leave), Farm (1), Warehouse (leave), Hiding Place (impossible), Wall (0)*/
+var catables = [
+    {"name" : _("Farm"), "lowest" : (getSetting("catFarmToZero", false) ? 1 : 12), "id" : "farm"},
+    {"name" : _("Headquarters"), "lowest" : 1, "id" : "main"},
+    {"name" : _("Barracks"), "lowest" : 0, "id" : "barracks"},
+    {"name" : _("Stable"), "lowest" : 0, "id" : "stable"},
+    {"name" : _("Workshop"), "lowest" : 0, "id" : "garage"},
+    {"name" : _("Academy"), "lowest" : 0, "id" : "snob"},
+    {"name" : _("Smithy"), "lowest" : 0, "id" : "smith"},
+    {"name" : _("Rally point"), "lowest" : 0, "id" : "place"},
+    {"name" : _("Statue"), "lowest" : 0, "id" : "statue"},
+    {"name" : _("Market"), "lowest" : 0, "id" : "market"}
+];
 
-2014-08-15, 1.0.5a:
--Allows more troop variety...
-
-2014-08-01, 1.0.5:
--Now allows the choice of axes or spears (or whichever is available) for catapulting.
--Now allows the choice of spears, swords, axes, LC and mounted archers for regular farming.
-
-2014-07-28, 1.0.4b:
--Fixed a bug relating to ignorance of the "ram" config...
-
-2014-06-29, 1.0.4a:
--Fixed a bug relating to an attack having no millisecond value in the date...
-
-2014-06-28, 1.0.4:
--Modified how it handles dates... made it work on Opera with weird months and stuuf (stupid non-locale handling... y u no follo Chrome? D:<)
-
-2014-06-24, 1.0.3:
--Slight change to method of retrieving resources in village (might have ignored thousands previously? o.o)
-
-2014-06-14, 1.0.2:
--Catapults farm to level 12 now... (Configurable)
--Slight change in the handling of "catsRequiredTo[one/zero]" - now a double array [to][from] instead of To(One/Zero)[from]...
-
-2014-06-14, 1.0.1:
--Allow setting the number of scouts to send
-
-2014-06-07, 1.0.0:
--First release! (Kinda already been released to some people though... and will be released more...)
--Since last version (betas, duh), will now disable banned villages, villages that are too large to be attacked (if on a world with the 140% rule thingy)
--Also has a config script!
-
-*/
+var buildingList = ["barracks", "rally", "stable", "garage", "snob", "smith", "statue", "market", "main", "farm", "wall"];
 
 function getQuery(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
         results = regex.exec(location.search);
-    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
 function getQueryFromHaystack(haystack, name){
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
         results = regex.exec(haystack);
-    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-function getLocalCoords() {
-    return $("#menu_row2").text().split("(")[1].split(")")[0].split("|");
-}
-
-function getLocalName() {
-    return $("#menu_row2 a.nowrap").text();
-}
-
-function getXML(){
-    if (xmlConfig === undefined){
+function getXML() {
+    if (typeof xmlConfig === "undefined"){
         if (window.XMLHttpRequest){
             xmlhttp = new XMLHttpRequest();
         } else {
@@ -254,233 +244,228 @@ function getXML(){
     return xmlConfig;
 }
 
-function getWorldSpeed(){
+function getWorldSpeed() {
     return parseFloat(getXML().getElementsByTagName("speed")[0].childNodes[0].nodeValue);
 }
 
-function getUnitSpeed(){
+function getUnitSpeed() {
     return parseFloat(getXML().getElementsByTagName("unit_speed")[0].childNodes[0].nodeValue);
 }
 
-var settings;
+function getLocalCoords() {
+    var temp = $("#menu_row2 b.nowrap").text();
+    temp = splitOutCoords(temp, true);
+    temp = temp.split("|").length > 1 && temp.split("|");
+    /*Split "VillName (XXX|YYY) into ("XXX","YYY")*/
+    return temp;
+}
 
-/*Settings change: javascript:void(jQuery.getScript('http://pastebin.com/raw.php?i=Vx28j5bu'));
- *javascript:
- */
- 
-function changeConfig(){
-    function clearDisabledFarms(where){
-        if (!localStorage) return false;
-        if (!localStorage["twstuffz"]) localStorage["twstuffz"] = "{}";
-        var twStuffz = JSON.parse(localStorage["twstuffz"]);
-        
-        if (typeof where === "undefined"){
-            for (place in twStuffz){
-                if (place.indexOf(",") !== -1){
-                    clearDisabledFarms(place);
+function getLocalName() {
+    return $("#menu_row2 a.nowrap").text().trim();
+}
+
+/*Fetch a setting from the localStorage*/
+function getSetting(name, def){
+    var nafsData = getLocalStorage();
+    if (typeof nafsData.settings !== "undefined" && typeof nafsData.settings[name] !== "undefined") {
+        var tempData = nafsData.settings[name];
+        if (tempData === "true") tempData = true;
+        if (tempData === "false") tempData = false;
+        return tempData;
+    }  /*If settings exist, and setting exists, return it (slightly modified).*/
+    return def; /*Else, return default.*/
+}
+
+/*Save a setting to the localStorage*/
+function setSetting(name, val){
+    var nafsData = getLocalStorage();
+    if (typeof nafsData.settings === "undefined") nafsData.settings = {};
+
+    if (val === "true") val = true;
+    if (val === "false") val = false;
+
+    nafsData.settings[name] = val;
+    setLocalStorage(nafsData);
+
+    return true;
+}
+
+function objectifySetting(settingValues, settingKeys) {
+    var nafsData = getLocalStorage();
+    if (!nafsData.settings) nafsData.settings = {};
+    var settingName;
+
+    if (typeof settingValues === "string") {
+        settingName = settingValues;
+        settingValues = nafsData.settings[settingValues];
+    }
+    if (typeof settingValues === "undefined") return false;
+
+    if (typeof settingKeys === "undefined") settingKeys = nafsData.settings[settingName + "Key"];
+    else if (typeof settingKeys === "string") {
+        var settingKeyName = settingKeys;
+        settingKeys = nafsData.settings[settingKeys];
+    }
+
+    if (typeof settingKeys === "undefined") return false;
+
+    if (typeof settingKeys === "string") settingKeys = settingKeys.split(",");
+    if (typeof settingValues === "string") settingValues = settingValues.split(",");
+
+    var settingsObject = {};
+    for (var settingKeyIndex in settingKeys) {
+        settingsObject[settingKeys[settingKeyIndex]] = settingValues[settingKeyIndex];
+    }
+
+    return settingsObject;
+}
+
+function objectifyTroopSettings(settingValues, settingKeys) {
+    var objectedSettings = objectifySetting(settingValues, settingKeys);
+    for (var settingKey in objectedSettings){
+        objectedSettings[settingKey] = parseInt(objectedSettings[settingKey]);
+        if (fixTroopName(settingKey) && fixTroopName(settingKey) !== settingKey) {
+            objectedSettings[fixTroopName(settingKey)] = parseInt(objectedSettings[settingKey]);
+            delete objectedSettings[settingKey];
+        }
+    }
+    return objectedSettings;
+}
+
+function changeConfig() {
+    /*
+    Config Data:
+    {rescout {minScout, hoursToRescout, hoursToStale}, farm {minFarmTroops (,), maxFarmTroops (,), leaveFarmTroops (,)}, shape {catapult {catFarmToZero}, [catapultWalls, ram] {minWallLevel}, minShapeTroops (,), maxShapeTroops (,), leaveShapeTroops (,)}, playerImport}
+    */
+    function clearDisabledFarms(coords) {
+        var nafsData = getLocalStorage();
+
+        if (typeof coords === "undefined") {
+            for (var villageIndex in nafsData.villages) {
+                if (villageIndex.indexOf("|") !== -1) {
+                    clearDisabledFarms(villageIndex);
                 }
             }
         } else {
-            if (place.indexOf(",") !== -1 && twStuffz[place]){
-                vil = twStuffz[place];
-                for (i=0; i<vil.length; i++){
-                    if (vil[i].disabled){
-                        vil.splice(i, 1);
+            if (coords.indexOf("|") !== -1 && typeof nafsData.villages[coords] !== "undefined") {
+                var village = nafsData.villages[coords];
+                for (var i=0; i < village.length; i++){
+                    if (village[i].disabled) {
+                        village.splice(i, 1);
                         i--;
                     }
                 }
-                localStorage["twstuffz"] = JSON.stringify(twStuffz);
+                nafsData.villages[coords] = village;
             }
         }
+
+        setLocalStorage(nafsData);
     }
-    function getSetting(index, defaul){
-        if (!localStorage) return false;
-        if (!localStorage["twstuffz"]) localStorage["twstuffz"] = "{}";
-        var twStuffz = JSON.parse(localStorage["twstuffz"]);
-        if (!twStuffz.settings) twStuffz.settings = {};
-        if (typeof twStuffz.settings[index] === "undefined"){
-            twStuffz.settings[index] = defaul;
-            localStorage["twstuffz"] = JSON.stringify(twStuffz);
-        }
-        if (twStuffz.settings[index] === "true") return true;
-        if (twStuffz.settings[index] === "false") return false;
-        return twStuffz.settings[index];
-    }
-    function changeSetting(index, value){
-        if (!localStorage) return false;
-        if (!localStorage["twstuffz"]) localStorage["twstuffz"] = "{}";
-        var twStuffz = JSON.parse(localStorage["twstuffz"]);
-        if (!twStuffz.settings) twStuffz.settings = {};
-        
-        if (value === "true") value = true;
-        if (value === "false") value = false;
-        
-        twStuffz.settings[index] = value;
-        localStorage["twstuffz"] = JSON.stringify(twStuffz);
-        return true;
-    }
+
     alert("We will now change the settings of this farming script! Please do not CANCEL, nor type in random stuff, as you will have to redo this!");
-    changeSetting("rescout", prompt("Should we re-scout farms with old/stale reports? (true/false)", getSetting("rescout", true)) == "true");
-    changeSetting("farm", prompt("Should we farm villages? (true/false)", getSetting("farm", true)) == "true");
-    if (getSetting("rescout", true) == true) changeSetting("minScout", parseInt(prompt("How many scouts to send at a minimum per attack?", getSetting("minScout", 1))));
-    if (getSetting("farm", true) == true) changeSetting("minLC", parseInt(prompt("How many troops to send at a minimum per farming attack?", getSetting("minLC", 6))));
-    if (getSetting("farm", true) == true) {
-        var farmWith = prompt("Which troops should we farm with? (spear, sword, axe, archer, lc, ma, hc - separate by commas, no spaces)", 
-                                getSetting("farmWith", "lc"));
-        var farmWiths = farmWith.replace(/\s+/g, "").split(",");
-        farmWiths.forEach(function(element, index, array){ 
-            if (["spear", "sword", "axe", "archer", "lc", "ma", "hc"].indexOf(element.toLowerCase().replace(/[sS]$/, "")) === -1){
-                alert("Invalid unit type: " + element.toLowerCase());
-            } else {
-                array[index] = element.toLowerCase().replace(/[sS]$/, "");
-            }
-        });
-        changeSetting("farmWith", farmWiths.join(","));
+
+    setSetting("rescout", prompt("Should we re-scout farms with old/stale reports? (If you disable this, automatic values will likely be wrong!) (true/false)", getSetting("rescout", true)) == "true");
+
+    if (getSetting("rescout", true) === true) setSetting("minScout", parseInt(prompt("How many scouts to send at a minimum per attack?", getSetting("minScout", 1))));
+
+    if (getSetting("rescout", true) === true) setSetting("hoursToRescout", parseInt(prompt("How many hours until a report 'expires' and may no longer be used for data? You will want to adjust this based on the world speed.", getSetting("hoursToRescout", 36))));
+
+    if (getSetting("rescout", true) === true) setSetting("hoursToStale", parseInt(prompt("How many hours until a report becomes 'stale' and /may/ be rescouted? You will want to adjust this based on the world speed.", getSetting("hoursToStale", 10))));
+
+    setSetting("farm", prompt("Should we farm villages? (true/false)", getSetting("farm", true)) == "true");
+
+    if (getSetting("farm", true) === true) {
+        setSetting("minFarmTroops", prompt("If the troop is used, how many of each troop should be sent at a minimum per farming attack? (spear, sword, axe, archer, lc, ma, hc, paladin - separate by commas, no spaces)", getSetting("minFarmTroops", "0,0,0,0,5,0,0,0")));
+        setSetting("minFarmTroopsKey", "spear,sword,axe,archer,lc,ma,hc,paladin");
+
+        setSetting("maxFarmTroops", prompt("If the troop is used, how many of each troop should be sent at a maximum per farming attack? (spear, sword, axe, archer, lc, ma, hc, paladin - separate by commas, no spaces; -1 means no limit, 0 disables the troop)", getSetting("maxFarmTroops", "0,0,0,0,-1,0,0,0")));
+        setSetting("maxFarmTroopsKey", "spear,sword,axe,archer,lc,ma,hc,paladin");
+
+        setSetting("leaveFarmTroops", prompt("How many troops to leave, at a minimum, within the village? (spear, sword, axe, archer, scout, lc, ma, hc, paladin - separate by commas, no spaces)", getSetting("leaveFarmTroops", "0,0,0,0,0,0,0,0,0")));
+        setSetting("leaveFarmTroopsKey", "spear,sword,axe,archer,scout,lc,ma,hc,paladin");
     }
-    changeSetting("hoursToRescout", parseInt(prompt("How many hours until a report expires? (Affected by world speed)", getSetting("hoursToRescout", 36))));
-    if (getSetting("rescout", true) == true) changeSetting("hoursToStale", parseInt(prompt("How many hours until a report becomes 'stale' and may be rescouted? (Affected by world speed)", getSetting("hoursToStale", 10))));
-    changeSetting("catapult", prompt("Should we use catapults to shape farms? (true/false)", getSetting("catapult", true)) == "true");
-    if (getSetting("catapult", true) == true) changeSetting("catFarmToZero", prompt("Should we catapult farms to zero? (Otherwise about level 12 - true/false)", getSetting("catFarmToZero", false)) == "true")
-    changeSetting("ram", prompt("Should we use rams to knock down farm walls? (true/false)", getSetting("ram", true)) == "true");
-    changeSetting("minWallRam", parseInt(prompt("What should the minimum wall level required to send rams be?", getSetting("minWallRam", 1))));
-    if (getSetting("catapult", true) == true || getSetting("ram", true) == true){
-        var shapeAlong = prompt("Which troops should we send along with catapults/rams? (spear, sword, axe, archer, lc, ma, hc - separate by commas, no spaces)", 
-                                getSetting("shapeAlong", "axe"));
-        var shapeAlongs = shapeAlong.replace(/\s+/g, "").split(",");
-        shapeAlongs.forEach(function(element, index, array){ 
-            if (["spear", "sword", "axe", "archer", "lc", "ma", "hc"].indexOf(element.toLowerCase().replace(/[sS]$/, "")) === -1){
-                alert("Invalid unit type: " + element.toLowerCase());
-            } else {
-                array[index] = element.toLowerCase().replace(/[sS]$/, "");
-            }
-        });
-        changeSetting("shapeAlong", shapeAlongs.join(","));
+
+    setSetting("shape", prompt("Should we knock down walls and/or shape villages?", getSetting("shape", true)) == "true");
+
+    if (getSetting("shape", true) === true) {
+        setSetting("catapult", prompt("Should we use catapults to shape villages? (true/false)", getSetting("catapult", true)) == "true");
+
+        if (getSetting("catapult", true) === true)
+            setSetting("catFarmToZero", prompt("Should we catapult farms to zero? (Otherwise about level 12 - true/false)", getSetting("catFarmToZero", false)) == "true");
+
+        setSetting("catapultWalls", prompt("Should we use catapults to knock down walls (after rams)? (true/false)", getSetting("catapultWalls", true)) == "true");
+
+        setSetting("ram", prompt("Should we use rams to knock down farm walls? (true/false)", getSetting("ram", true)) == "true");
+
+        if (getSetting("catapultWalls", true) || getSetting("ram", true)) setSetting("minWallLevel", parseInt(prompt("What should the minimum wall level required to send rams (or catapults, if applicable) be?", getSetting("minWallLevel", 1))));
     }
-    if (getSetting("ram", true) == true || getSetting("catapult", true) == true) changeSetting("minAxe", parseInt(prompt("How many troops to send at a minimum along with catapults per shaping attack?", getSetting("minAxe", 25))));
-	changeSetting("playerimport", prompt("Should we import reports with players as the defenders? (true/false)", getSetting("playerimport", true)) == "true");
+
+    if (getSetting("shape", true) === true && (getSetting("catapult", true) === true || getSetting("ram", true) === true)){
+        setSetting("minShapeTroops", prompt("If the troop is used, how many of each should be sent at a minimum per shaping attack? (spear, sword, axe, archer, lc, ma, hc, ram, catapult, paladin - separate by commas, no spaces)", getSetting("minShapeTroops", "50,50,50,50,0,0,0,2,2,0")));
+        setSetting("minShapeTroopsKey", "spear,sword,axe,archer,lc,ma,hc,ram,catapult,paladin");
+
+        setSetting("maxShapeTroops", prompt("If the troop is used, how many of each should be sent at a maximum per shaping attack? (spear, sword, axe, archer, lc, ma, hc, ram, catapult, paladin - separate by commas, no spaces; -1 means no limit, 0 disables the troop)", getSetting("maxShapeTroops", "100,100,100,100,0,0,0,-1,-1,0")));
+        setSetting("maxShapeTroopsKey", "spear,sword,axe,archer,lc,ma,hc,ram,catapult,paladin");
+
+        setSetting("leaveShapeTroops", prompt("How many troops to leave, at a minimum, within the village after shaping attacks? (spear, sword, axe, archer, scout, lc, ma, hc, ram, catapult, paladin - separate by commas, no spaces)", getSetting("leaveShapeTroops", "50,50,50,50,5,0,0,0,0,0,0")));
+        setSetting("leaveShapeTroopsKey", "spear,sword,axe,archer,scout,lc,ma,ha,ram,catapult,paladin");
+    }
+
+    setSetting("playerImport", prompt("Should we import reports with players as the defenders? (true/false)", getSetting("playerImport", true)) == "true");
+
     if (prompt("Clear disabled villages from the farm list? (true/false)", "false") == "true") clearDisabledFarms();
 }
 
-function getSetting(index, defaul){
-    if ((index === "hoursToRescout" || index === "hoursToStale") && !getSetting("rescout", true)){
-        return 300000;
-    }
-    if (!settings){
-        if (!localStorage) return false;
-        if (!localStorage["twstuffz"]) localStorage["twstuffz"] = "{}";
-        var twStuffz = JSON.parse(localStorage["twstuffz"]);
-        if (!twStuffz.settings) twStuffz.settings = {};
-        settings = twStuffz.settings;
-    }
-    if (typeof settings[index] === "undefined"){
-        if (!localStorage) return false;
-        if (!localStorage["twstuffz"]) localStorage["twstuffz"] = "{}";
-        var twStuffz = JSON.parse(localStorage["twstuffz"]);
-        if (!twStuffz.settings) twStuffz.settings = {};
-        twStuffz.settings[index] = defaul;
-        settings[index] = defaul;
-        localStorage["twstuffz"] = JSON.stringify(twStuffz);
-    }
-    if (settings[index] === "true") return true;
-    if (settings[index] === "false") return false;
-    return settings[index];
-}
-
-/*
-function changeSetting(index, value){
-    if (!localStorage) return false;
-    if (!localStorage["twstuffz"]) localStorage["twstuffz"] = "{}";
-    var twStuffz = JSON.parse(localStorage["twstuffz"]);
-    if (!twStuffz.settings) twStuffz.settings = {};
-    twStuffz.settings[index] = value;
-    localStorage["twstuffz"] = JSON.stringify(twStuffz);
-    return true;
-}
-*/
-
-function changeSetting(index, value){
-    if (!localStorage) return false;
-    if (!localStorage["twstuffz"]) localStorage["twstuffz"] = "{}";
-    var twStuffz = JSON.parse(localStorage["twstuffz"]);
-    if (!twStuffz.settings) twStuffz.settings = {};
-    
-    if (value === "true") value = true;
-    if (value === "false") value = false;
-    
-    twStuffz.settings[index] = value;
-    localStorage["twstuffz"] = JSON.stringify(twStuffz);
-    /*twstuffs {
-        settings : {
-            rescout: true(/false),
-            farm: true(/false),
-            minLC: 6,
-            minAxe: 25,
-            hoursToRescout: 36,
-            hoursToStale: 10,
-            catapult: true(/false),
-            ram: true(/false),
-            ...
-        },
-        xxx|yyy : [ ... ]
-    }
-    */
-    settings[index] = value;
-    return true;
-}
-
 function addReport(reportID, localCoords, vilCoords, wood, clay, iron, battleTime, buildings){
-    if (!localStorage) return false;
-    if (!localStorage["twstuffz"]) localStorage["twstuffz"] = "{}";
-    var twStuffz = JSON.parse(localStorage["twstuffz"]);
-    if (!twStuffz[localCoords]) twStuffz[localCoords] = [];
+    if (typeof vilCoords === "object") vilCoords = vilCoords[0] + "|" + vilCoords[1];
+    if (typeof localCoords === "object") localCoords = localCoords[0] + "|" + localCoords[1];
+    var nafsData = getLocalStorage();
+    if (!nafsData.villages) nafsData.villages = {};
+    if (!nafsData.villages[localCoords]) nafsData.villages[localCoords] = [];
+
+
     var vilIndex;
-    twStuffz[localCoords].forEach(function(element, index) {
-        if (element.coords === (vilCoords[0] + "|" + vilCoords[1])) vilIndex = index;
+    nafsData.villages[localCoords].forEach(function(element, index) {
+        if (element.coords === vilCoords) vilIndex = index;
     });
+
     if (typeof vilIndex === "undefined"){
-        vilIndex = twStuffz[localCoords].push({
-            coords: (vilCoords[0] + "|" + vilCoords[1]),
+        vilIndex = nafsData.villages[localCoords].push({
+            coords: vilCoords,
             disabled: false,
-            distance: (Math.floor(Math.sqrt(Math.pow(vilCoords[0]-localCoords[0],2)+Math.pow(vilCoords[1]-localCoords[1],2))*100)/100),
+            distance: (Math.floor(Math.sqrt(Math.pow(parseInt(vilCoords.split("|")[0])-localCoords.split("|")[0],2)+Math.pow(parseInt(vilCoords.split("|")[1])-localCoords.split("|")[1],2))*100)/100),
             reports: [ ]
         });
-        twStuffz[localCoords].sort(function(a, b){
+        nafsData.villages[localCoords].sort(function(a, b){
             return a.distance - b.distance;
         });
+        nafsData.villages[localCoords].forEach(function(element, index) {
+            if (element.coords === vilCoords) vilIndex = index;
+        });
     }
-    
-    var vilIndex = undefined;
-    twStuffz[localCoords].forEach(function(element, index) {
-        if (element.coords === (vilCoords[0] + "|" + vilCoords[1])) vilIndex = index;
+
+    if (typeof vilIndex === "undefined"){
+        /*Something has gone wrong! Not there even after we created it!*/
+        throw "Something has gone seriously wrong. Pushing an item to an array didn't result in said item being in said array. Since when? Broken Javascript?";
+    }
+
+    if (nafsData.villages[localCoords][vilIndex].disabled){
+        return "Disabled";
+    }
+
+    buildingList.forEach(function(element, index){
+        if (typeof buildings[element] === "undefined") buildings[element] = 0;
     });
-    
-    if (typeof vilIndex === "undefined"){ /*Something has gone wrong! Not there even after we created it; wut?*/
-        console.log("just created, no exist. wut.");
-        return false;
-    }
-    
-    if (twStuffz[localCoords][vilIndex].disabled){
-        return false;
-    }
-    
-    if (typeof buildings["barracks"] === "undefined") buildings["barracks"] = 0;
-    if (typeof buildings["rally"] === "undefined") buildings["rally"] = 0;
-    if (typeof buildings["stable"] === "undefined") buildings["stable"] = 0;
-    if (typeof buildings["workshop"] === "undefined") buildings["workshop"] = 0;
-    if (typeof buildings["academy"] === "undefined") buildings["academy"] = 0;
-    if (typeof buildings["smithy"] === "undefined") buildings["smithy"] = 0;
-    if (typeof buildings["statue"] === "undefined") buildings["statue"] = 0;
-    if (typeof buildings["market"] === "undefined") buildings["market"] = 0;
-    if (typeof buildings["hq"] === "undefined") buildings["hq"] = 0;
-    if (typeof buildings["farm"] === "undefined") buildings["farm"] = 0;
-    if (typeof buildings["wall"] === "undefined") buildings["wall"] = 0;
-    
+
     battleTime = Number(battleTime);
-    var exists = false;
-    twStuffz[localCoords][vilIndex]["reports"].forEach(function(element){
-        if (element["reportID"] === reportID) exists = true;
+    var reportIndex = false;
+    nafsData.villages[localCoords][vilIndex].reports.forEach(function(element, index) {
+        if (element.reportID === reportID) reportIndex = index;
     });
-    if (!exists) twStuffz[localCoords][vilIndex]["reports"].push({
+
+    if (reportIndex) return "Report already imported.";
+
+    nafsData.villages[localCoords][vilIndex].reports.push({
         "reportID" : reportID,
         "battleTime" : battleTime,
         "wood" : wood,
@@ -488,360 +473,470 @@ function addReport(reportID, localCoords, vilCoords, wood, clay, iron, battleTim
         "iron" : iron,
         "buildings" : buildings
     });
-    
-    twStuffz[localCoords][vilIndex]["reports"].sort(function(a, b) {
-        return b["battleTime"] - a["battleTime"];
+
+    nafsData.villages[localCoords][vilIndex].reports.sort(function(a, b) {
+        return b.battleTime - a.battleTime;
     });
-    
-    while (twStuffz[localCoords][vilIndex]["reports"].length > 1) { twStuffz[localCoords][vilIndex]["reports"].pop() };
-    
-    localStorage["twstuffz"] = JSON.stringify(twStuffz);
+
+    /*If we have more than one report in the list, delete the others. (o.e?)*/
+    while (nafsData.villages[localCoords][vilIndex].reports.length > 1) {
+        nafsData.villages[localCoords][vilIndex].reports.pop();
+    }
+
+    setLocalStorage(nafsData);
     return true;
 }
 
-function insertUnits(troops, minTroops){
-    if (getQuery("screen") !== "place"){
-        console.log("Wrong screen. Should be at rally point.");
-        return false;
+function fixTroopName(troopName) {
+    troopName = troopName.toLowerCase().trim();
+    for (var troopNameID in commonTroopNames){
+        if (troopName.indexOf(commonTroopNames[troopNameID][0].toLowerCase().trim()) !== -1) {
+            troopName = commonTroopNames[troopNameID][1];
+        }
     }
-    if (typeof minTroops === "undefined") minTroops = {};
-    
-    if (troops["scout"]) troops["spy"] = troops["scout"];
-    if (minTroops["scout"]) minTroops["spy"] = minTroops["scout"];
-    if (troops["lc"]) troops["light"] = troops["lc"];
-    if (minTroops["lc"]) troops["light"] = troops["lc"];
-    
-    var maxSpy = parseInt($("#unit_input_spy").parent("td").text().split("(")[1].split(")")[0]),
-        maxSpear = parseInt($("#unit_input_spear").parent("td").text().split("(")[1].split(")")[0]),
-        maxSword = parseInt($("#unit_input_sword").parent("td").text().split("(")[1].split(")")[0]),
-        maxAxe = parseInt($("#unit_input_axe").parent("td").text().split("(")[1].split(")")[0]),
-        maxArcher = $("#unit_input_archer").length > 0 ? parseInt($("#unit_input_archer").parent("td").text().split("(")[1].split(")")[0]) : 0,
-        maxLight = parseInt($("#unit_input_light").parent("td").text().split("(")[1].split(")")[0]),
-        maxMA = $("#unit_input_marcher").length > 0 ? parseInt($("#unit_input_marcher").parent("td").text().split("(")[1].split(")")[0]) : 0,
-        maxHeavy = parseInt($("#unit_input_heavy").parent("td").text().split("(")[1].split(")")[0]),
-        maxRam = parseInt($("#unit_input_ram").parent("td").text().split("(")[1].split(")")[0]),
-        maxCatapult = parseInt($("#unit_input_catapult").parent("td").text().split("(")[1].split(")")[0]);
-    
-    var doneGood = true;
-    
-    $("#unit_input_archer").length < 1 && delete troops["archer"] && delete minTroops["archer"];
-    $("#unit_input_marcher").length < 1 && delete troops["ma"] && delete minTroops["ma"];
-    
-    if ((minTroops["spy"] && minTroops["spy"] > maxSpy) || (!minTroops["spy"] && troops["spy"] && troops["spy"] > maxSpy)) doneGood = false;
-    if ((minTroops["spear"] && minTroops["spear"] > maxSpear) || (!minTroops["spear"] && troops["spear"] && troops["spear"] > maxSpear)) doneGood = false;
-    if ((minTroops["sword"] && minTroops["sword"] > maxSword) || (!minTroops["sword"] && troops["sword"] && troops["sword"] > maxSword)) doneGood = false;
-    if ((minTroops["axe"] && minTroops["axe"] > maxAxe) || (!minTroops["axe"] && troops["axe"] && troops["axe"] > maxAxe)) doneGood = false;
-    if ((minTroops["archer"] && minTroops["archer"] > maxArcher) || (!minTroops["archer"] && troops["archer"] && troops["archer"] > maxArcher)) doneGood = false;
-    if ((minTroops["light"] && minTroops["light"] > maxLight) || (!minTroops["light"] && troops["light"] && troops["light"] > maxLight)) doneGood = false;
-    if ((minTroops["ma"] && minTroops["ma"] > maxMA) || (!minTroops["ma"] && troops["ma"] && troops["ma"] > maxMA)) doneGood = false;
-    if ((minTroops["heavy"] && minTroops["heavy"] > maxHeavy) || (!minTroops["heavy"] && troops["heavy"] && troops["heavy"] > maxHeavy)) doneGood = false;
-    if ((minTroops["ram"] && minTroops["ram"] > maxRam) || (!minTroops["ram"] && troops["ram"] && troops["ram"] > maxRam)) doneGood = false;
-    if ((minTroops["catapult"] && minTroops["catapult"] > maxCatapult) || (!minTroops["catapult"] && troops["catapult"] && troops["catapult"] > maxCatapult)) doneGood = false;
-    
-    if (doneGood){
-        troops["spy"] && $("#unit_input_spy").val((troops["spy"] <= maxSpy) ? troops["spy"] : maxSpy);
-        troops["spear"] && $("#unit_input_spear").val((troops["spear"] <= maxSpear) ? troops["spear"] : maxSpear);
-        troops["sword"] && $("#unit_input_sword").val((troops["sword"] <= maxSword) ? troops["sword"] : maxSword);
-        troops["axe"] && $("#unit_input_axe").val((troops["axe"] <= maxAxe) ? troops["axe"] : maxAxe);
-        troops["archer"] && $("#unit_input_archer").val((troops["archer"] <= maxArcher) ? troops["archer"] : maxArcher);
-        troops["light"] && $("#unit_input_light").val((troops["light"] <= maxLight) ? troops["light"] : maxLight);
-        troops["ma"] && $("#unit_input_marcher").val((troops["ma"] <= maxMA) ? troops["ma"] : maxMA);
-        troops["heavy"] && $("#unit_input_heavy").val((troops["heavy"] <= maxHeavy) ? troops["heavy"] : maxHeavy);
-        troops["ram"] && $("#unit_input_ram").val((troops["ram"] <= maxRam) ? troops["ram"] : maxRam);
-        troops["catapult"] && $("#unit_input_catapult").val((troops["catapult"] <= maxCatapult) ? troops["catapult"] : maxCatapult);
-    }
-    
-    (!doneGood || !troops["spy"]) && $("#unit_input_spy").val() !== "" && $("#unit_input_spy").val("");
-    (!doneGood || !troops["spear"]) && $("#unit_input_spear").val() !== "" && $("#unit_input_spear").val("");
-    (!doneGood || !troops["sword"]) && $("#unit_input_sword").val() !== "" && $("#unit_input_sword").val("");
-    (!doneGood || !troops["axe"]) && $("#unit_input_axe").val() !== "" && $("#unit_input_axe").val("");
-    (!doneGood || !troops["archer"]) && $("#unit_input_archer").val() !== "" && $("#unit_input_archer").val("");
-    (!doneGood || !troops["light"]) && $("#unit_input_light").val() !== "" && $("#unit_input_light").val("");
-    (!doneGood || !troops["ma"]) && $("#unit_input_marcher").val() !== "" && $("#unit_input_marcher").val("");
-    (!doneGood || !troops["heavy"]) && $("#unit_input_heavy").val() !== "" && $("#unit_input_heavy").val("");
-    (!doneGood || !troops["ram"]) && $("#unit_input_ram").val() !== "" && $("#unit_input_ram").val("");
-    (!doneGood || !troops["catapult"]) && $("#unit_input_catapult").val() !== "" && $("#unit_input_catapult").val("");
-    
-    return doneGood;
+    return troopName;
 }
 
-function def(){
-    if (!localStorage){ alert("ERROR: You don't have LocalStorage! Please update to a newer browser - this script won't work for you."); return; }
-    if (getQuery("screen") === "report"){
-        if (getQuery("view") === "" && (getQuery("mode") === "all" || getQuery("mode") === "")) {
-            if ($("#twswarning").length === 0)
-                $("#report_list").before($("<span id='twswarning' style='color:#F00;font-weight:bold;'>" + _("Please run this from the 'attacks' menu!") + "</span>"));
-        } else if (getQuery("view") === "" && getQuery("mode") === "attack"){
-            /*We're on the report screen.*/
-            $("#report_list tbody tr:has(img) .quickedit-content").each(function(index){
-                /*var name = this.innerText.split("(")[1].split(")")[0];
-                if (name !== getLocalName()) //not from this village
-                    return;*/
-                var coords = $(this).text().trim().split("(")[2].split(")")[0].split("|");
-                var localCoords = getLocalCoords();
-                /*this.innerHTML += " - " + (Math.round(Math.sqrt(Math.pow(coords[0] - localCoords[0], 2) + Math.pow(coords[1] - localCoords[1], 2)) * 100) / 100);*/
-                var a = jQuery.ajax($("a", $(this)).attr("href"), {type: "GET", dataType:"html", async:false});
-                var b = a.responseText;
-                var c = $("<div></div>");
-                c.get(0).id = "TWSReportThing";
-                c.html(b);
-                if (doReport(c, getQueryFromHaystack($("a", $(this)).attr("href"), "view"))){
-                    this.innerHTML += " - " + _("SAVED");
-                    $("input[type='checkbox']", $(this).parent().parent().parent()).prop("checked", true);
-                } else {
-                    this.innerHTML += " - " + _("NOT SAVED");
-                }
-            });
-        } else {
-            doReport(document, getQuery("view"));
-        }
-    //$("#units_form").length === 0 : we r not on regular rally page.
-    //$("#units_form").length >= 1  : we r on regular rally page.
-    } else if (getQuery("screen") === "place" && $("#units_form").length === 0){
-        var twStuffz = localStorage && localStorage.twstuffz && JSON.parse(localStorage.twstuffz);
-        var localCoords = getLocalCoords();
-        var twStuffzLocal = twStuffz && twStuffz[localCoords];
-        if (!twStuffzLocal){
-            console && console.log && console.log("Go import some reports fgs >.>");
-        } else {
-            var vilCoords = $(".village_anchor").text().split("(")[1].split(")")[0].split("|");
-            var vilIndex;
-            twStuffzLocal.forEach(function(element, index) {
-                if (element.coords === (vilCoords[0] + "|" + vilCoords[1])) vilIndex = index;
-            });
-            if (typeof vilIndex === "undefined"){
-                console && console.log && console.log("Go import some reports for this village fgs >.>");
-            } else {
-                var villageDat = twStuffzLocal[vilIndex]
-                var latestReport = villageDat && villageDat["reports"] && villageDat["reports"][0];
-                if (latestReport){
-                    var catThing;
-                    catables.forEach(function(element, index, array){ 
-                        if (catThing) return; 
-                        if (latestReport 
-                          && latestReport["buildings"] 
-                          && latestReport["buildings"][element.deloc] 
-                          && latestReport["buildings"][element.deloc] > element.lowest) {
-                            element.current = latestReport["buildings"][element.deloc];
-                            catThing = element;
-                        }
-                    });
-                    if (catThing){
-                        $("select[name='building']").val(catThing.select);
-                        $("select[name='building']").after($("#catThingy").get(0) || $("<span id='catThingy' style='color:#0A0;'>" + _("Changed") + "</span>").get(0));
-                        
+function getMaxTroops() {
+    if (getQuery("screen") !== "place"){
+        console.log("Wrong screen. Should be at rally point.");
+        return "Wrong screen.";
+    }
+
+    var troopCounts = {};
+    for (var troopID in troopList) {
+        var troopInput = $("#unit_input_" + troopList[troopID]);
+        if (troopInput.length > 0) {
+            var parentText = troopInput.parent().text();
+            var meaningful = false;
+            if (parentText.split("(").length > 1){
+                parentText = parentText.split("(")[1];
+                if (parentText.split(")").length > 1) {
+                    parentText = parentText.split(")")[0];
+                    if (parseInt(parentText).toString() == parentText){
+                        troopCounts[troopList[troopID]] = parseInt(parentText);
+                        meaningful = true;
                     }
-                    $("#troop_confirm_go").focus();
                 }
             }
+            if (!meaningful){
+                console.log("Something seems to be wrong with the max number of " + troopList[troopID] + ".");
+            }
         }
-    //$("#units_form").length === 0 : we r not on regular rally page.
-    //$("#units_form").length >= 1  : we r on regular rally page.
-    } else if (getQuery("screen") === "place" && $("#units_form").length >= 1){
-        var linke = ($("#twstuffzerror").length >= 1) ? $("#twstuffzerror") : $("<span id='twstuffzerror'>ERROR_MSG</span>").css("color", "#F00");
-        linke.css("display", "none");
-        $($("#units_form table").get(0)).before(linke);
-        (function(){
-            var twStuffz = localStorage && localStorage["twstuffz"] && JSON.parse(localStorage["twstuffz"]);
-            var twStuffzLocal = twStuffz && twStuffz[getLocalCoords()];
-            if (!twStuffzLocal){
-                linke.text(_("Are you sure you've imported some reports?")).css("display", "block");
-            } else {
-                var errorBoxText = $(".error_box").text().trim();
-                if (errorBoxText.indexOf("can only attack each other when the bigger player's points") !== -1
-                    || errorBoxText.indexOf("has been banned and cannot be attacked") !== -1){
-                    //Go disable teh village. - banned or too large/small.
-                    var vilCoords = $(".village-name").length >= 1 && $(".village-name").text().trim().split("(")[1].split(")")[0];
+    }
+    return troopCounts;
+}
+
+function getMaxTroop(troopName) {
+    return getMaxTroops()[fixTroopName(troopName)];
+}
+
+function errorBox(msg){
+    if (getQuery("screen") === "place" && ($("#units_form").length > 0 || $("#command-data-form").length > 0)) {
+        /*Regular rally page.*/
+        if ($("#nafserror").length > 0) {
+            $("#nafserror").text($("#nafserror").text() + "\n" + msg);
+        } else {
+            var errorBo = $("<span id='nafserror'></span>").css("color", "#F00");
+            errorBo.text(msg);
+            $($("#units_form table, #command-data-form table").get(0)).before(errorBo);
+        }
+    } else if (getQuery("screen") === "report" && getQuery("view") === "") {
+        var warning = ($("#nafswarning").length > 0 ? $("#nafswarning") : $("<span id='nafswarning'>")).css({"color":"#F00","font-weight":"bold"}).text(msg);
+        $("#report_list").before(warning);
+    }
+}
+
+function splitOutCoords(str, num, removeBrackets){
+    str = str.trim();
+    if (typeof num === "boolean"){
+        if (typeof removeBrackets === "undefined") {
+            removeBrackets = num;
+            num = undefined;
+        } else if (typeof removeBrackets === "number"){
+            temp = removeBrackets;
+            removeBrackets = num;
+            num = temp;
+        }
+    }
+    if (typeof num === "undefined") num = 1;
+
+    if (typeof removeBrackets === "undefined") removeBrackets = false;
+    num = parseInt(num);
+
+    var results = str.match(/\((\d{2}|\d{3})\|(\d{2}|\d{3})\)/g);
+    if (typeof results !== "object") return false;
+
+    var index = num > 0 ? num-1 : num === 0 ? 0 : results.length+num;
+    if (0 <= index && index < results.length)
+        return removeBrackets ? results[index].split("(")[1].split(")")[0] : results[index];
+    else return false;
+}
+
+function insertTroops(troops) {
+    $("[id*='unit_input_']").val("");
+    for (var troop in troops) {
+        var troopName = "";
+        for (var troopID in troopList) {
+            if (fixTroopName(troop) === troopList[troopID]) {
+                troopName = troopList[troopID];
+            }
+        }
+        $("#unit_input_" + troopName).val(troops[troop]);
+    }
+}
+
+function targetVil(vilCoords){
+    if (vilCoords.indexOf(")") !== -1) vilCoords = vilCoords.match(/(\d{2}|\d{3})\|(\d{2}|\d{3})/g)[0];
+    $("#inputx").val(vilCoords.split("|")[0]);
+    $("#inputy").val(vilCoords.split("|")[1]);
+    $("#unit_input_spear").focus();
+}
+
+function def() {
+    var nafsData = getLocalStorage();
+    var localCoords = getLocalCoords();
+    var localData = nafsData.villages[localCoords] || nafsData.villages[localCoords[0] + "|" + localCoords[1]];
+
+    /*Assume we're not gonna try AJAX-ing a report list page. It probably wouldn't be sensible, if the user wants any feedback.*/
+    if (getQuery("screen") === "report"){
+        if (getQuery("view") === "" && getQuery("mode") === "attack") {
+            /*Report: Attack menu*/
+            $("#report_list tr:has(td) .quickedit-content").each(function(index, element){
+                var reportURL = $("a", this);
+                if (reportURL.length < 1) {
+                    /*This report has no URL. Woo?*/
+                    this.innerHTML += " - no report URL";
+                } else {
+                    reportURL = reportURL.attr("href");
+                    var reportElement = this;
+
+                    var ajx = jQuery.ajax(reportURL,
+                        {type: "GET",
+                        dataType: "html",
+                        async: true,
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            reportElement.innerHTML += " - report failed to load (see console for more info)";
+                            console.log("Report failed to load via AJAX. Status: " + textStatus + "; error: " + errorThrown);
+                        },
+                        success: function(responseData, textStatus, jqXHR) {
+                            var fakeDOM = $("<div>");
+                            fakeDOM.get(0).class = "NAFSReportDOM";
+                            fakeDOM.html(responseData);
+
+                            var progressReport = processReport(fakeDOM, getQueryFromHaystack(reportURL, "view"));
+
+                            if (progressReport === true) {
+                                reportElement.innerHTML += " - " + _("Saved");
+
+                                var reportCheckbox = $("input[type='checkbox']", $(reportElement).parents("#report_list tr"));
+                                if (reportCheckbox.length === 1) {
+                                    reportCheckbox.prop("checked", true);
+                                } else {
+                                    console.log("Couldn't check box of element " + index);
+                                }
+                            } else {
+                                reportElement.innerHTML += " - " + progressReport;
+                            }
+                            /*Cleanup*/
+                            fakeDOM.html("");
+                        }
+                    });
+                }
+            });
+        } else if (getQuery("view") !== "") {
+            /*We're on an individual report!*/
+            processReport(document, getQuery("view"));
+        } else if (getQuery("view") === "" && (getQuery("mode") === "all" || getQuery("mode") === "")) {
+            errorBox(_("Please run this from the 'attacks' menu!"));
+        }
+    } else if (getQuery("screen") === "place" && $("#units_form").length === 0 && $("#command-data-form").length === 0) {
+        /*Rally confirm page.*/
+        if (!localData) {
+            errorBox(_("Are you sure you've imported some reports?"));
+            return;
+        }
+
+        var targetCoords = splitOutCoords($(".village_anchor").text(), true);
+        var vilIndex;
+        localData.forEach(function(element, index) {
+            if (element.coords === targetCoords) vilIndex = index;
+        });
+        if (typeof vilIndex === "undefined") {
+            errorBox(_("Are you sure this village is in the NAFS list?"));
+            $("#troop_confirm_go").focus();
+            return;
+        }
+        var nafsLocalData = localData;
+        var targetVillage = nafsLocalData[vilIndex];
+        var latestReport = targetVillage && targetVillage.reports && targetVillage.reports[0];
+        if (latestReport) {
+            var catTarget;
+            catables.forEach(function(element, index) {
+                if (catTarget) return;
+                if (latestReport.buildings && latestReport.buildings[element.id] && latestReport.buildings[element.id] > element.lowest) {
+                    catTarget = element.id;
+                }
+            });
+            if (catTarget) {
+                $("select[name='building']").val(catTarget);
+                $("select[name='building']").after($("#nafsMsg") || $("<span id='nafsMsg' style='color:#0A0;'>" + _("Changed") + "</span>"));
+            }
+        }
+        $("#troop_confirm_go").focus();
+    } else if (getQuery("screen") === "place" && ($("#units_form").length > 0 || $("#command-data-form").length > 0)) {
+        /*Rally page.*/
+        if (!localData) {
+            errorBox(_("Are you sure you've imported some reports?"));
+            return;
+        }
+
+        var errorBo = $(".error_box");
+        if (errorBo.length > 0) {
+            if (errorBo.text().trim().indexOf("can only attack each other when the bigger player's") !== -1 || errorBo.text().trim().indexOf("has been banned and cannot be attacked") !== -1) {
+                var vilCoords = $(".village-name");
+                var coordsFound = false;
+                if (vilCoords.length > 0) {
+                    vilCoords = splitOutCoords(vilCoords.text(), true);
                     if (vilCoords){
-                        var twStuffz = localStorage && localStorage["twstuffz"] && JSON.parse(localStorage["twstuffz"]);
-                        var twStuffzLocal = twStuffz && twStuffz[getLocalCoords()];
                         var vilIndex;
-                        twStuffzLocal.forEach(function(element, index) {
+                        localData.forEach(function(element, index) {
                             if (element.coords === vilCoords) vilIndex = index;
                         });
-                        twStuffz[getLocalCoords()][vilIndex].disabled = true;
-                        localStorage.twstuffz = JSON.stringify(twStuffz);
-                        $(".error_box").html("Previous farm disabled... (Please <a href='" + window.location.href.replace("&try=confirm", "").replace(/\&target\=\d*/, "") + "'>reopen rally point</a>)");
-                    }
-                } else {
-                    linke.css("display", "none").text("ERROR_MSG");
-                    /* First check for things to (catapult and) ram. Reports expire in 36 hours / world speed.*/
-                    var troopsEntered = false;
-                    twStuffzLocal.forEach(function(element, index, array){
-                        if (troopsEntered) return false;
-                        var alreadyAttacking = false;
-                        $(".quickedit-content span").each(function(){
-                            if ($(this).text().trim().indexOf(_("Attack on")) !== -1 && $(this).text().trim().split("(")[1].split(")")[0] === element.coords)
-                                alreadyAttacking = true;
-                        });
-        /*Wall (0), HQ (1), Barracks (0), Stable (0), Workshop (0), Church (0), Academy (0), Smithy (0), Rally Point (0), Statue (0), Market (0), 
-        Timber Camp (leave), Clay Pit (leave), Iron Mine (leave), Farm (1), Warehouse (leave), Hiding Place (impossible)*/
-                        if (!alreadyAttacking && !element["disabled"]){
-                            var latestReport = element && element["reports"] && element["reports"][0];
-                            var shouldCat = getSetting("catapult", true);
-                            var shouldRam = getSetting("ram", true);
-                            var wall = (shouldRam) ? latestReport && latestReport["buildings"] && latestReport["buildings"]["wall"] : 0;
-                            if (!shouldCat && !shouldRam) return;
-							var catThing;
-                            if (shouldCat) catables.forEach(function(element, index, array){ 
-                                if (catThing) return; 
-                                if (latestReport 
-                                  && latestReport["buildings"] 
-                                  && latestReport["buildings"][element.deloc] 
-                                  && latestReport["buildings"][element.deloc] > element.lowest) {
-                                    element.current = latestReport["buildings"][element.deloc];
-                                    catThing = element;
-                                }
-                            });
-                            if (latestReport && (Number(new Date()) - latestReport.battleTime) < ((getSetting("hoursToRescout", 36) * 60 * 60 * 1000) / getWorldSpeed())
-                                  && latestReport["buildings"] && (latestReport["buildings"]["wall"] > getSetting("minWallRam", 1) || catThing)){
-                                var units = {spy:getSetting("minScout", 1)};
-                                var shapeAlong = getSetting("farmAlong", "axe").split(",");
-                                if (wall >= getSetting("minWallRam", 1)) units["ram"] = ramsRequired[wall];
-                                if (catThing) units["catapult"] = catsRequiredTo[catThing.lowest][catThing.current];
-                                var minUnits = {spy:getSetting("minScout", 1)};
-                                if (wall >= getSetting("minWallRam", 1)) minUnits["ram"] = ramsMin[wall];
-                                if (catThing) minUnits["catapult"] = catsMin[catThing.current];
-                                
-                                for (var i=0; i<shapeAlong.length; i++){
-                                    if (troopsEntered) break;
-                                    units[shapeAlong[i]] = getSetting("minAxe", 25);
-                                    minUnits[shapeAlong[i]] = getSetting("minAxe", 25);
-                                    
-                                    if (insertUnits(units, minUnits)){
-                                        $("#inputx").val(element.coords.split("|")[0]); 
-                                        $("#inputy").val(element.coords.split("|")[1]);
-                                        
-                                        $('#unit_input_spear').focus();
-                                        troopsEntered = true;
-                                    } else {
-                                        if (catThing){
-                                            delete units.ram;
-                                            delete minUnits.ram;
-                                        }
-                                        if (insertUnits(units, minUnits)){
-                                            $("#inputx").val(element.coords.split("|")[0]); 
-                                            $("#inputy").val(element.coords.split("|")[1]);
-                                            
-                                            $('#unit_input_spear').focus();
-                                            troopsEntered = true;
-                                        } else {
-                                            if (wall > 0){
-                                                units.ram = ramsRequired[wall];
-                                                minUnits.ram = ramsMin[wall];
-                                                delete units.catapult;
-                                                delete minUnits.catapult;
-                                                if (insertUnits(units, minUnits)){
-                                                    $("#inputx").val(element.coords.split("|")[0]); 
-                                                    $("#inputy").val(element.coords.split("|")[1]);
-                                                    
-                                                    $('#unit_input_spear').focus();
-                                                    troopsEntered = true;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            } /*else continue as if village no existo*/
-                        } /*else continue as if village no existo.*/
-                    });
-                    /*Let's check for things to just... y'know... farm via LC. Reports expire in 36 hours / world speed.*/
-                    if (getSetting("farm", true))
-                    twStuffzLocal.forEach(function(element, index, array){
-                        if (troopsEntered) return false;
-                        var alreadyAttacking = false;
-                        $(".quickedit-content span").each(function(){
-                            if ($(this).text().trim().indexOf(_("Attack on")) !== -1 && $(this).text().trim().split("(")[1].split(")")[0] === element.coords)
-                                alreadyAttacking = true;
-                        });
-                        if (!alreadyAttacking && !element["disabled"]){
-                            var latestReport = element && element["reports"] && element["reports"][0];
-                            if (latestReport && (Number(new Date()) - latestReport.battleTime) < ((getSetting("hoursToRescout", 36) * 60 * 60 * 1000) / getWorldSpeed())){
-                                var wood = latestReport.wood,
-                                    clay = latestReport.clay,
-                                    iron = latestReport.iron;
-                                var woodCamp = latestReport.buildings.woodcamp,
-                                    clayCamp = latestReport.buildings.claycamp,
-                                    ironCamp = latestReport.buildings.ironcamp,
-                                    warehouse = latestReport.buildings.warehouse;
-                                var hoursAgo = (Number(new Date()) - latestReport.battleTime) / 60 / 60 / 1000;
-                                var wood2 = wood + (resourceSp[woodCamp] * hoursAgo * getWorldSpeed()),
-                                    clay2 = clay + (resourceSp[clayCamp] * hoursAgo * getWorldSpeed()),
-                                    iron2 = iron + (resourceSp[ironCamp] * hoursAgo * getWorldSpeed());
-                                wood2 = (wood2 > warehouseC[warehouse]) ? warehouseC[warehouse] : wood2;
-                                clay2 = (clay2 > warehouseC[warehouse]) ? warehouseC[warehouse] : clay2;
-                                iron2 = (iron2 > warehouseC[warehouse]) ? warehouseC[warehouse] : iron2;
-                                var distance = element.distance;
-                                var farmWith = getSetting("farmWith", "lc").split(",");
-                                for (var i=0; i<farmWith.length; i++){
-                                    if (troopsEntered) break;
-                                    var hours = distance * (speed[farmWith[i]] / getUnitSpeed()) / 60;
-                                    var wood3 = wood2 + (resourceSp[woodCamp] * hours * getWorldSpeed()),
-                                        clay3 = clay2 + (resourceSp[clayCamp] * hours * getWorldSpeed()),
-                                        iron3 = iron2 + (resourceSp[ironCamp] * hours * getWorldSpeed());
-                                    wood3 = (wood3 > warehouseC[warehouse]) ? warehouseC[warehouse] : wood3;
-                                    clay3 = (clay3 > warehouseC[warehouse]) ? warehouseC[warehouse] : clay3;
-                                    iron3 = (iron3 > warehouseC[warehouse]) ? warehouseC[warehouse] : iron3;
-                                    if ((wood3 + clay3 + iron3) / carry[farmWith[i]] + 0.25 >= getSetting("minLC", 6)){
-                                        var units = {spy:getSetting("minScout", 1)},
-                                            minUnits = {spy:getSetting("minScout", 1)};
-                                        minUnits[farmWith[i]] = getSetting("minLC", 6);
-                                        units[farmWith[i]] = Math.floor((wood3 + clay3 + iron3) / carry[farmWith[i]] + 0.25);
-                                        if (insertUnits(units, minUnits)){
-                                            $("#inputx").val(element.coords.split("|")[0]); 
-                                            $("#inputy").val(element.coords.split("|")[1]);
-                                            
-                                            $('#unit_input_spear').focus();
-                                            troopsEntered = true;
-                                        }
-                                    }
-                                }
-                                
-                                
-                            }
+                        if (typeof vilIndex !== "undefined") {
+                            coordsFound = true;
+                            localData[vilIndex].disabled = true;
+                            $(".error_box").html("Previous farm disabled. Please <a href='" + window.location.href.replace("&try=confirm", "") .replace(/\&target\=\d*/, "") + "'>reopen the rally point</a>)");
                         }
-                    });
-                    /*Okay. Nothing left under current report expiration. Time to re-scout dem viwwagez (that are over 10 hours / world speed old).*/
-                    if (getSetting("rescout", true))
-                    twStuffzLocal.forEach(function(element, index, array){
-                        if (troopsEntered) return false;
-                        var alreadyAttacking = false;
-                        $(".quickedit-content span").each(function(){
-                            if ($(this).text().trim().indexOf(_("Attack on")) !== -1 && $(this).text().trim().split("(")[1].split(")")[0] === element.coords)
-                                alreadyAttacking = true;
-                        });
-                        if (!alreadyAttacking && !element["disabled"]){
-                            var latestReport = element && element["reports"] && element["reports"][0];
-                            if ((latestReport && (Number(new Date()) - latestReport.battleTime) > ((getSetting("hoursToStale", 10) * 60 * 60 * 1000) / getWorldSpeed())) || !latestReport){
-                                if (insertUnits({spy:getSetting("minScout", 1)})){
-                                    $("#inputx").val(element.coords.split("|")[0]); 
-                                    $("#inputy").val(element.coords.split("|")[1]);
-                                    
-                                    $('#unit_input_spear').focus();
-                                    troopsEntered = true;
-                                }
-                            }
-                        }
-                    });
-                    
-                    if (!troopsEntered) { 
-                        linke.text(_("No villages left to attack! Either add more villages, or wait for the attacks to complete.")).css("display", "block"); 
                     }
                 }
+                if (!coordsFound) {
+                    errorBox("Unable to disable village. Is it in the NAFS list?");
+                }
             }
-        })();
+        } else {
+            var troopsEntered = false;
+
+            var rescout = getSetting("rescout", true);
+            var minScout = getSetting("minScout", 1);
+            var hoursToRescout = getSetting("hoursToRescout", 36);
+            var hoursToStale = getSetting("hoursToStale", 12); /*?*/
+
+            var farm = getSetting("farm", true);
+            var minFarmTroops = objectifyTroopSettings("minFarmTroops");
+            var maxFarmTroops = objectifyTroopSettings("maxFarmTroops");
+            var leaveFarmTroops = objectifyTroopSettings("leaveFarmTroops");
+
+            var shape = getSetting("shape", true);
+            var catapult = getSetting("catapult", true);
+            var catFarmToZero = getSetting("catFarmToZero", false);
+            var catapultWalls = getSetting("catapultWalls", true);
+            var ramWalls = getSetting("ram", true);
+            var minWallLevel = getSetting("minWallLevel", 1);
+            var minShapeTroops = objectifyTroopSettings("minShapeTroops");
+            var maxShapeTroops = objectifyTroopSettings("maxShapeTroops");
+            var leaveShapeTroops = objectifyTroopSettings("leaveShapeTroops");
+
+            var troopsEntered = false;
+
+            localData.forEach(function(element, index, array) {
+                if (troopsEntered) return false;
+                var alreadyAttacking = false;
+                $(".quickedit-content span").each(function() {
+                    if ($(this).text().indexOf(_("Attack on")) !== -1 && splitOutCoords($(this).text(), true) === element.coords) alreadyAttacking = true;
+                });
+                if (!alreadyAttacking && !element.disabled) {
+                    var latestReport = element.reports && element.reports[0];
+                    if (!latestReport) return false;
+                    var targetCoords = element.coords;
+/*{rescout {minScout, hoursToRescout, hoursToStale}, farm {minFarmTroops (sp,sw,ax,ar,lc,ma,hc), maxFarmTroops (sp,sw,ax,ar,lc,ma,hc), leaveFarmTroops (sp,sw,ax,ar,sc,lc,ma,hc,pa)}, shape {catapult {catFarmToZero}, [catapultWalls, ram] {minWallLevel}, minShapeTroops (sp,sw,ax,ar,lc,ma,hc,pa), maxShapeTroops (sp,sw,ax,ar,lc,ma,hc,pa), leaveShapeTroops (sp,sw,ax,ar,sc,lc,ma,hc,pa)}, playerImport}*/
+
+                    var minimumAchieved = false;
+                    var troops = {spy: minScout};
+                    /*Shaping is allowed, we have building data, and either we're not rescouting or it's under the hours to rescout value.*/
+                    if (shape && latestReport.buildings && (!rescout || (Number(new Date()) - latestReport.battleTime) <= hoursToRescout * 60 * 60 * 1000) && getMaxTroop("spy") > leaveShapeTroops.spy) {
+                        var wallLevel = latestReport.buildings.wall;
+
+                        if ((ramWalls || catapultWalls) && wallLevel && wallLevel >= minWallLevel) {
+                            /*We're ramming or catting walls. We have a wall that's greater than or equal to the minimum level.*/
+                            for (var speedGroupID = speedGroups.length-1; speedGroupID>=0; speedGroupID--) {
+                                /*Group 0 is the fasters, therefore this goes slowest first.*/
+                                for (var unitID in speedGroups[speedGroupID]){
+                                    if (minimumAchieved) break;
+
+                                    var unit = speedGroups[speedGroupID][unitID];
+                                    if (unitCarry[fixTroopName(unit)] === 0) continue;
+                                    var troopCount = Math.min(getMaxTroop(unit) - leaveShapeTroops[unit], maxShapeTroops[unit] === -1 ? getMaxTroop(unit) : maxShapeTroops[unit]);
+                                    if (troopCount >= minShapeTroops[unit] && troopCount > 0) {
+                                        minimumAchieved = true;
+                                        troops[unit] = troopCount;
+                                    }
+                                }
+                            }
+
+                            if (minimumAchieved) {
+                                if (ramWalls && getMaxTroop("ram") - leaveShapeTroops.ram >= minShapeTroops.ram && getMaxTroop("ram") - leaveShapeTroops.ram >= ramsMin[wallLevel]) {
+                                    /*Ram walls, and we have enough to fulfill the min criteria (user-set and to take a wall)*/
+                                    var ramCount = Math.min(ramsRequired[wallLevel], getMaxTroop("ram") - leaveShapeTroops.ram, maxShapeTroops.ram === -1 ? getMaxTroop("ram") : maxShapeTroops.ram);
+                                    if (ramCount >= ramsMin[wallLevel] && ramCount >= minShapeTroops.ram && ramCount > 0) {
+                                        /*Enough for minimum. Enough for leaving. Under the max. Ready to ram with these rams.*/
+                                        if (ramCount < ramsRequired[wallLevel]) {
+                                            /*We should really use catapults to supplement this... Oh well.*/
+                                        }
+
+                                        troops.ram = ramCount;
+
+                                        console.log("Ram wall shaping! Village " + targetCoords);
+                                        insertTroops(troops);
+                                        targetVil(targetCoords);
+
+                                        troopsEntered = true;
+                                        return false;
+                                    }
+                                }
+                                if (catapultWalls && getMaxTroop("catapult") - leaveShapeTroops.catapult >= minShapeTroops.catapult && getMaxTroop("catapult") - leaveShapeTroops.catapult >= catsMin[wallLevel]) {
+                                    var catCount = Math.min(catsRequiredToBreak[0][wallLevel], getMaxTroop("catapult") - leaveShapeTroops.catapult, maxShapeTroops.catapult === -1 ? getMaxTroop("catapult") : maxShapeTroops.catapult);
+                                    if (catCount >= catsMin[wallLevel] && catCount >= minShapeTroops.catapult && catCount > 0) {
+                                        /*Enough for minimum. Enough for leaving. Under the max. Ready to ram with these rams.*/
+                                        /*For now we'll just deal with cats and rams separately, m'kay? Rams take priority.*/
+
+                                        troops.catapult = catCount;
+
+                                        console.log("Catapult wall shaping! Village " + targetCoords);
+                                        insertTroops(troops);
+                                        targetVil(targetCoords);
+
+                                        troopsEntered = true;
+                                        return false;
+                                    }
+                                }
+                            }
+                        }
+
+                        minimumAchieved = false;
+                        troops = {spy: minScout};
+                        if (catapult) {
+                            for (var speedGroupID = speedGroups.length-1; speedGroupID>=0; speedGroupID--) {
+                                /*Group 0 is the fasters, therefore this goes slowest first.*/
+                                for (var unitID in speedGroups[speedGroupID]){
+                                    if (minimumAchieved) break;
+
+                                    var unit = speedGroups[speedGroupID][unitID];
+                                    var troopCount = Math.min(getMaxTroop(unit) - leaveShapeTroops[unit], maxShapeTroops[unit] === -1 ? getMaxTroop(unit) : maxShapeTroops[unit]);
+                                    if (troopCount >= minShapeTroops[unit] && troopCount > 0) {
+                                        minimumAchieved = true;
+                                        troops[unit] = troopCount;
+                                    }
+                                }
+                            }
+
+                            if (minimumAchieved) {
+                                var catTarget;
+                                var catTargetLevel;
+                                var catTargetMin;
+                                catables.forEach(function(element, index) {
+                                    if (catTarget) return false;
+                                    if (latestReport.buildings[element.id] && latestReport.buildings[element.id] > element.lowest) {
+                                        catTarget = element.id;
+                                        catTargetLevel = latestReport.buildings[element.id];
+                                        catTargetMin = element.lowest;
+                                    }
+                                });
+
+                                /*catapultWalls && getMaxTroop("catapult") - leaveShapeTroops.catapult >= minShapeTroops.catapult && getMaxTroop("catapult") - leaveShapeTroops.catapult >= catsMin[wallLevel]) {
+                                    var catCount = Math.min(catsRequiredToBreak[0][wallLevel], getMaxTroop("catapult") - leaveShapeTroops.catapult, maxShapeTroops.catapult === -1 ? getMaxTroop("catapult") : maxShapeTroops.catapult);
+                                    if (catCount >= catsMin[wallLevel] && catCount >= minShapeTroops.catapult) {*/
+                                if (getMaxTroop("catapult") - leaveShapeTroops.catapult >= minShapeTroops.catapult && getMaxTroop("catapult") - leaveShapeTroops.catapult >= catsMin[catTargetLevel]) {
+                                    var catCount = Math.min(catsRequiredToBreak[catTargetMin][catTargetLevel], getMaxTroop("catapult") - leaveShapeTroops.catapult, maxShapeTroops.catapult === -1 ? getMaxTroops("catapult") : maxShapeTroops.catapult);
+                                    if (catCount >= catsMin[catTargetLevel] && catCount >= minShapeTroops.catapult && catCount > 0) {
+                                        troops.catapult = catCount;
+
+                                        console.log("Catapult shaping! Village " + targetCoords);
+                                        insertTroops(troops);
+                                        targetVil(targetCoords);
+
+                                        troopsEntered = true;
+                                        return false;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    minimumAchieved = false;
+                    troops = {spy: minScout};
+                    if (farm && (!rescout || (Number(new Date()) - latestReport.battleTime) <= hoursToRescout * 60 * 60 * 1000) && getMaxTroop("spy") > leaveShapeTroops.spy) {
+                        var hoursAgo = (Number(new Date()) - latestReport.battleTime) / 60 / 60 / 1000;
+                        var origWood = latestReport.wood,
+                            origClay = latestReport.clay,
+                            origIron = latestReport.iron;
+                        var woodCamp = latestReport.buildings.woodcamp,
+                            clayCamp = latestReport.buildings.claycamp,
+                            ironCamp = latestReport.buildings.ironcamp,
+                            warehouse = latestReport.buildings.warehouse;
+                        var currWood = Math.min(origWood + (resourceRates[woodCamp] * hoursAgo * getWorldSpeed()), warehouseCapacity[warehouse]),
+                            currClay = Math.min(origClay + (resourceRates[clayCamp] * hoursAgo * getWorldSpeed()), warehouseCapacity[warehouse]),
+                            currIron = Math.min(origIron + (resourceRates[ironCamp] * hoursAgo * getWorldSpeed()), warehouseCapacity[warehouse]);
+
+                        var distance = element.distance;
+
+                        var sendingTroops = false;
+                        for (var speedGroupID = 0; speedGroupID<speedGroups.length; speedGroupID++) {
+                            /*Group 0 is the fasters, therefore this goes fastest first.*/
+                            var slowestSpeedofGroup = slowestSpeedofGroups[speedGroupID];
+                            var hours = distance * (slowestSpeedofGroup / getUnitSpeed()) / 60;
+                            var newWood = currWood + (resourceRates[woodCamp] * hours * getWorldSpeed()),
+                                newClay = currClay + (resourceRates[clayCamp] * hours * getWorldSpeed()),
+                                newIron = currIron + (resourceRates[ironCamp] * hours * getWorldSpeed());
+                            var possibleHaul = newWood + newClay + newIron;
+                            for (var unitID in speedGroups[speedGroupID]){
+                                var unit = speedGroups[speedGroupID][unitID];
+                                var troopCount = Math.min(getMaxTroop(unit) - leaveFarmTroops[unit], maxFarmTroops[unit] === -1 ? getMaxTroop(unit) : maxFarmTroops[unit], Math.ceil(possibleHaul / unitCarry[unit]));
+                                if (troopCount >= minFarmTroops[unit] && troopCount > 0) {
+                                    possibleHaul -= unitCarry[unit] * troopCount;
+                                    sendingTroops = true;
+                                    troops[unit] = troopCount;
+                                }
+                            }
+                            if (sendingTroops) break;
+                        }
+
+                        if (sendingTroops) {
+                            console.log("Farming! Village " + targetCoords);
+                            insertTroops(troops);
+                            targetVil(targetCoords);
+
+                            troopsEntered = true;
+                            return false;
+                        }
+                    }
+
+                    minimumAchieved = false; /*Unnecessary, but oh well.*/
+                    troops = {spy: minScout};
+                    if (rescout && (Number(new Date()) - latestReport.battleTime) > hoursToRescout * 60 * 60 * 1000 && getMaxTroop("spy") > leaveShapeTroops.spy) {
+                        /*It's time to rescout. We also have at least 1 scout "available".*/
+                        console.log("Rescouting! Village " + targetCoords);
+                        insertTroops(troops);
+                        targetVil(targetCoords);
+
+                        troopsEntered = true;
+                        return false;
+                    }
+                }
+                if (index === array.length - 1) {
+                    errorBox(_("No villages left to attack! Either add more villages, or wait for the attacks to complete."));
+                }
+            });
+        }
     } else if (getQuery("screen") === "info_village"){
+        /*Probably incomplete! FIX IT TOMORROW! TODO: Fix this better tomorrow!!!!*/
         var vilTable = $("#content_value table table[width='100%']");
         var vilCoords = $("tr:contains('" + _("Coordinates") + "')", vilTable).text().split(":")[1].split("|");
         var localCoords = getLocalCoords();
-        var tribe = $("tr:contains('" + _("Tribe") + "')", vilTable)
-        
-        if (!localStorage) return false;
-        if (!localStorage["twstuffz"]) localStorage["twstuffz"] = "{}";
-        var twStuffz = JSON.parse(localStorage["twstuffz"]);
-        if (!twStuffz[localCoords]) twStuffz[localCoords] = [];
+        var tribe = $("tr:contains('" + _("Tribe") + "')", vilTable);
+
         var vilIndex;
-        twStuffz[localCoords].forEach(function(element, index) {
+        localData.forEach(function(element, index) {
             if (element.coords === (vilCoords[0] + "|" + vilCoords[1])) vilIndex = index;
         });
         var clickText = "";
@@ -849,7 +944,7 @@ function def(){
         if (typeof vilIndex === "undefined"){
             clickText = _("Add to farm list for ") + getLocalName();
             type = -1;
-        } else if (twStuffz[localCoords][vilIndex].disabled){
+        } else if (localData[vilIndex].disabled){
             clickText = _("Enable farm for ") + getLocalName();
             type = 1;
         } else {
@@ -858,61 +953,65 @@ function def(){
         }
         var thingy = $("<tr><td colspan='2'></td></tr>");
         var thingy2 = $("<tr><td colspan='2'></td></tr>").css("display", "none");
-        $("td", thingy).append($("<a style='cursor:pointer;'>» " + clickText + "</a>").on("click", function(){
-            if (!localStorage) return false;
-            if (!localStorage["twstuffz"]) localStorage["twstuffz"] = "{}";
-            var twStuffz = JSON.parse(localStorage["twstuffz"]);
-            if (!twStuffz[localCoords]) twStuffz[localCoords] = [];
+        $("td", thingy).append($("<a style='cursor:pointer;'>» " + clickText + "</a>").on("click", function() {
+            var nafsData = getLocalStorage();
             if (type === -1){
-                vilIndex = twStuffz[localCoords].push({
+                vilIndex = localData.push({
                     coords: (vilCoords[0] + "|" + vilCoords[1]),
                     disabled: false,
                     distance: (Math.floor(Math.sqrt(Math.pow(vilCoords[0]-localCoords[0],2)+Math.pow(vilCoords[1]-localCoords[1],2))*100)/100),
                     reports: [ ]
                 });
-                twStuffz[localCoords].sort(function(a, b){
+                localData.sort(function(a, b){
                     return a.distance - b.distance;
                 });
                 $("td", thingy2).text(_("Added"));
             } else {
                 var vilIndex;
-                twStuffz[localCoords].forEach(function(element, index) {
+                localData.forEach(function(element, index) {
                     if (element.coords === (vilCoords[0] + "|" + vilCoords[1])) vilIndex = index;
                 });
                 if (type === 0){
-                    twStuffz[localCoords][vilIndex].disabled = true;
+                    localData[vilIndex].disabled = true;
                     $("td", thingy2).text(_("Disabled"));
                 } else {
-                    twStuffz[localCoords][vilIndex].disabled = false;
+                    localData[vilIndex].disabled = false;
                     $("td", thingy2).text(_("Enabled"));
                 }
             }
-            localStorage["twstuffz"] = JSON.stringify(twStuffz);
+            setLocalStorage(nafsData);
             thingy.css("display", "none");
             thingy2.css("display", "");
         }));
-		($("tr:contains('" + _("Actions") + "')", vilTable).length > 0 ? $("tr:contains('" + _("Actions") + "')", vilTable) : tribe).after(thingy).after(thingy2);
+        ($("tr:contains('" + _("Actions") + "')", vilTable).length > 0 ? $("tr:contains('" + _("Actions") + "')", vilTable) : tribe).after(thingy).after(thingy2);
     }
+    setLocalStorage(nafsData);
 }
 
+/*Returns either a boolean ("It went well!") or a message of what went wrong.*/
 /*Returns: WENTWELL (boolean) - used to decide whether to add "SAVED" onto the end or not...*/
-function doReport(doc, reportID){
+function processReport(doc, reportID){
     /*We're on *a* report screen.*/
     var espionage = $("#attack_spy_resources, #attack_spy_buildings_left", doc);
     if (espionage.length >= 1) {
-		/* NEW REPORT STYUHL */
-        var repTable = espionage.parent().parent().parent();
-		var defender = $("#attack_info_def th:not(:contains('" + _("Defender") + "'))", repTable);
-		if (!getSetting("playerimport", true) && defender.length >= 1 && !defender.text().match("---")){
-			var linkd = $("<span>" + _("Saved") + "</span>");
-			repTable.parent().before(linkd);
-			linkd.text("Defender seems to be a player, and config says not to import - not saved");
-			console && console.log && console.log("Not saved a report! - Player as defender, config says no.");
-			return false;
-		}
-		
+        /* NEW REPORT STYUHL */
+        var repTable = espionage.closest("tbody");
+        var defender = $("#attack_info_def th:not(:contains('" + _("Defender") + "'))", repTable);
+        if (!getSetting("playerImport", true) && defender.length >= 1 && !defender.text().match("---")){
+            var linkd = $("<span>" + _("Saved") + "</span>");
+            repTable.parent().before(linkd);
+            linkd.text("Defender seems to be a player, and config says not to import - not saved");
+            return "The defender appears to be a player.";
+        }
+
+        var attackerVillage = $("#attack_info_att th:not(:contains('" + _("Attacker") + "'))", repTable).closest("tbody").find("tr:contains('Origin') td:not(:contains('Origin'))");
+        var localCoords = splitOutCoords(attackerVillage.text(), true).split("|");
+
+        var defenderVillage = $("#attack_info_def th:not(:contains('" + _("Defender") + "'))", repTable).closest("tbody").find("tr:contains('Destination') td:not(:contains('Destination'))");
+        var vilCoords = splitOutCoords(defenderVillage.text(), true).split("|");
+
         var resources = $("#attack_spy_resources td", repTable);
-        var resz = resources.text().trim().split("  ");
+        var resz = resources.text().trim().split(/\s+/);
         if (resources.get(0).innerHTML.indexOf("wood") === -1){
             resz.unshift("0");
         }
@@ -947,7 +1046,7 @@ function doReport(doc, reportID){
         offsetz[2] = offsets.substring(3, 5);
         var offset = ((offsetz[0] === "+") ? -1 : 1) * (parseInt(offsetz[1])*60 + parseInt(offsetz[2]));
         minute += offset;
-        
+
         var day = new Date();
         day.setUTCFullYear(year);
         day.setUTCMonth(month-1);
@@ -955,116 +1054,89 @@ function doReport(doc, reportID){
         day.setUTCHours(hour);
         day.setUTCMinutes(minute);
         day.setUTCSeconds(second);
-        
+
         var battleTime = day;
         var buildings;
+        var woodCamp, clayCamp, ironCamp, warehouse;
         if ($("#attack_spy_building_data", repTable).length >= 1){
-			buildings = JSON.parse($("#attack_spy_building_data", repTable).val());
-			var woodCamp, clayCamp, ironCamp, warehouse;
-			buildings.forEach(function(element, index, array){
-				if (element.id === "wood") woodCamp = parseInt(element.level);
-				if (element.id === "stone") clayCamp = parseInt(element.level);
-				if (element.id === "iron") ironCamp = parseInt(element.level);
-				if (element.id === "storage") warehouse = parseInt(element.level);
-				if (element.id === "wall") wall = parseInt(element.level);
-			});
+            buildings = JSON.parse($("#attack_spy_building_data", repTable).val());
+            buildings.forEach(function(element, index, array){
+                if (element.id === "wood") woodCamp = parseInt(element.level);
+                if (element.id === "stone") clayCamp = parseInt(element.level);
+                if (element.id === "iron") ironCamp = parseInt(element.level);
+                if (element.id === "storage") warehouse = parseInt(element.level);
+                if (element.id === "wall") wall = parseInt(element.level);
+            });
             woodCamp = (isNaN(woodCamp)) ? 0 : woodCamp;
             clayCamp = (isNaN(clayCamp)) ? 0 : clayCamp;
             ironCamp = (isNaN(ironCamp)) ? 0 : ironCamp;
             warehouse = (isNaN(warehouse)) ? 0 : warehouse;
             wall = (isNaN(wall)) ? 0 : wall;
         } else {
-            var woodCamp = 5,
-                clayCamp = 5,
-                ironCamp = 5,
-                warehouse = 10,
-                wall = 0;
+            woodCamp = 5;
+            clayCamp = 5;
+            ironCamp = 5;
+            warehouse = 10;
+            wall = 0;
         }
-        var hoursAgo = (new Date() - battleTime) / 60 / 60 / 1000;
-        var wood2 = wood + (resourceSp[woodCamp] * hoursAgo * getWorldSpeed()),
-            clay2 = clay + (resourceSp[clayCamp] * hoursAgo * getWorldSpeed()),
-            iron2 = iron + (resourceSp[ironCamp] * hoursAgo * getWorldSpeed());
-        wood2 = (wood2 > warehouseC[warehouse]) ? warehouseC[warehouse] : wood2;
-        clay2 = (clay2 > warehouseC[warehouse]) ? warehouseC[warehouse] : clay2;
-        iron2 = (iron2 > warehouseC[warehouse]) ? warehouseC[warehouse] : iron2;
-        
-        var vilCoords = $($("#attack_info_def span a", repTable).get(0)).text().split("(")[1].split(")")[0].split("|"),
-            localCoords = $($("#attack_info_att span a", repTable).get(0)).text().split("(")[1].split(")")[0].split("|"),
-            distance = Math.round(Math.sqrt(Math.pow(vilCoords[0] - localCoords[0], 2) + Math.pow(vilCoords[1] - localCoords[1], 2)) * 100) / 100,
-            hours = distance * (speed.lc / getUnitSpeed()) / 60;
-        var wood3 = wood2 + (resourceSp[woodCamp] * hours * getWorldSpeed()),
-            clay3 = clay2 + (resourceSp[clayCamp] * hours * getWorldSpeed()),
-            iron3 = iron2 + (resourceSp[ironCamp] * hours * getWorldSpeed());
-        wood3 = (wood3 > warehouseC[warehouse]) ? warehouseC[warehouse] : wood3;
-        clay3 = (clay3 > warehouseC[warehouse]) ? warehouseC[warehouse] : clay3;
-        iron3 = (iron3 > warehouseC[warehouse]) ? warehouseC[warehouse] : iron3;
         var buildz = {};
-        buildz["woodcamp"] = woodCamp;
-        buildz["claycamp"] = clayCamp;
-        buildz["ironcamp"] = ironCamp;
-        buildz["warehouse"] = warehouse;
-        buildz["wall"] = wall;
-		
-		if (buildings) {
-			buildings.forEach(function(element, index, array){
-				if (element.id === "barracks") buildz.barracks = parseInt(element.level);
-				if (element.id === "place") buildz.rally = parseInt(element.level);
-				if (element.id === "stable") buildz.stable = parseInt(element.level);
-				if (element.id === "garage") buildz.workshop = parseInt(element.level);
-				if (element.id === "snob") buildz.academy = parseInt(element.level);
-				if (element.id === "smith") buildz.smithy = parseInt(element.level);
-				if (element.id === "statue") buildz.statue = parseInt(element.level);
-				if (element.id === "market") buildz.market = parseInt(element.level);
-				if (element.id === "main") buildz.hq = parseInt(element.level);
-				if (element.id === "farm") buildz.farm = parseInt(element.level);
-			});
-		}
-		
-		buildz.barracks = buildz.barracks || 0;
-		buildz.rally = buildz.rally || 0;
-		buildz.stable = buildz.stable || 0;
-		buildz.workshop = buildz.workshop || 0;
-		buildz.academy = buildz.academy || 0;
-		buildz.smithy = buildz.smithy || 0;
-		buildz.statue = buildz.statue || 0;
-		buildz.market = buildz.market || 0;
-		buildz.hq = buildz.hq || 0;
-		buildz.farm = buildz.farm || 0;
-		
+        buildz.woodcamp = woodCamp;
+        buildz.claycamp = clayCamp;
+        buildz.ironcamp = ironCamp;
+        buildz.warehouse = warehouse;
+        buildz.wall = wall;
+
+        if (buildings) {
+            buildings.forEach(function(element, index, array){
+                buildz[element.id] = parseInt(element.level);
+            });
+        }
+
+        buildz.barracks = buildz.barracks || 0;
+        buildz.place = buildz.place || 0;
+        buildz.stable = buildz.stable || 0;
+        buildz.garage = buildz.garage || 0;
+        buildz.snob = buildz.snob || 0;
+        buildz.smith = buildz.smith || 0;
+        buildz.statue = buildz.statue || 0;
+        buildz.market = buildz.market || 0;
+        buildz.main = buildz.main || 0;
+        buildz.farm = buildz.farm || 0;
+
         var linkd = $("<span>" + _("Saved") + "</span>");
         linkd.css("display", "none");
-        
+
         repTable.parent().before(linkd);
-        var wentWell = false;
-        (function(){
-            if (addReport(parseInt(reportID), localCoords, vilCoords, wood, clay, iron, battleTime, buildz)){
-                linkd.text(_("Saved"));
-                linkd.css("display", "block").css("color", "");
-                console && console.log && console.log("Saved a report! - " + localCoords[0] + "|" + localCoords[1] + " - " + vilCoords[0] + "|" + vilCoords[1] + " - " + parseInt(reportID));
-                wentWell = true;
-            } else {
-                linkd.text("Oops! There was an error.");
-                linkd.css("display", "block").css("color", "#F00");
-                console && console.log && console.log("Error with a report! - " + localCoords[0] + "|" + localCoords[1] + " - " + vilCoords[0] + "|" + vilCoords[1] + " - " + parseInt(reportID));
-            }
-        })();
-        
-        var lcA1 = Math.floor((wood + clay + iron) / carry.lc + 0.25),
-            lcA2 = Math.floor((wood2 + clay2 + iron2) / carry.lc + 0.25),
-            lcA3 = Math.floor((wood3 + clay3 + iron3) / carry.lc + 0.25);
+        var progress = addReport(parseInt(reportID), localCoords, vilCoords, wood, clay, iron, battleTime, buildz);
+        if (progress === true){
+            linkd.text(_("Saved"));
+            linkd.css("display", "block").css("color", "");
+            console.log("Saved a report! - " + localCoords[0] + "|" + localCoords[1] + " - " + vilCoords[0] + "|" + vilCoords[1] + " - " + parseInt(reportID));
+            return true;
+        } else {
+            linkd.text("Oops! There was an error.");
+            linkd.css("display", "block").css("color", "#F00");
+            console.log("Error with a report! - " + localCoords[0] + "|" + localCoords[1] + " - " + vilCoords[0] + "|" + vilCoords[1] + " - " + parseInt(reportID));
+            return progress;
+        }
     } else if ($("#attack_spy", doc).length >= 1) {
-		/*OLD STYLE *BLERGH* */
-		var espionage = $("#attack_spy", doc);
+        /*OLD STYLE *BLERGH* */
+        var espionage = $("#attack_spy", doc);
         var repTable = espionage.parent().parent().parent();
-		var defender = $("#attack_info_def th:not(:contains('" + _("Defender") + "'))", repTable);
-		if (!getSetting("playerimport", true) && defender.length >= 1 && !defender.text().match("---")){
-			var linkd = $("<span>" + _("Saved") + "</span>");
-			repTable.parent().before(linkd);
-			linkd.text("Defender seems to be a player, and config says not to import - not saved");
-			console && console.log && console.log("Not saved a report! - Player as defender, config says no.");
-			return false;
-		}
-		
+        var defender = $("#attack_info_def th:not(:contains('" + _("Defender") + "'))", repTable);
+        if (!getSetting("playerimport", true) && defender.length >= 1 && !defender.text().match("---")){
+            var linkd = $("<span>" + _("Saved") + "</span>");
+            repTable.parent().before(linkd);
+            linkd.text("Defender seems to be a player, and config says not to import - not saved");
+            return "The defender appears to be a player.";
+        }
+
+        var attackerVillage = $("#attack_info_att th:not(:contains('" + _("Attacker") + "'))", repTable).closest("tbody").find("tr:contains('Origin') td:not(:contains('Origin'))");
+        var localCoords = splitOutCoords(attackerVillage.text(), true).split("|");
+
+        var defenderVillage = $("#attack_info_def th:not(:contains('" + _("Defender") + "'))", repTable).closest("tbody").find("tr:contains('Destination') td:not(:contains('Destination'))");
+        var vilCoords = splitOutCoords(defenderVillage.text(), true).split("|");
+
         var resources = $($("tr td", espionage).get(0));
         var resz = resources.text().trim().split("  ");
         if (resources.get(0).innerHTML.indexOf("wood") === -1){
@@ -1101,7 +1173,7 @@ function doReport(doc, reportID){
         offsetz[2] = offsets.substring(3, 5);
         var offset = ((offsetz[0] === "+") ? -1 : 1) * (parseInt(offsetz[1])*60 + parseInt(offsetz[2]));
         minute += offset;
-        
+
         var day = new Date();
         day.setUTCFullYear(year);
         day.setUTCMonth(month-1);
@@ -1109,16 +1181,17 @@ function doReport(doc, reportID){
         day.setUTCHours(hour);
         day.setUTCMinutes(minute);
         day.setUTCSeconds(second);
-        
+
         var battleTime = day;
         var buildings;
+        var woodCamp, clayCamp, ironCamp, warehouse, wall;
         if ($("tr", espionage).length >= 2){
             buildings = espionage.text();
-            var woodCamp = parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Timber camp") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, "")),
-                clayCamp = parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Clay pit") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, "")),
-                ironCamp = parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Iron mine") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, "")),
-                warehouse = parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Warehouse") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, "")),
-                wall = parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Wall") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, ""));
+            woodCamp = parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Timber camp") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, ""));
+            clayCamp = parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Clay pit") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, ""));
+            ironCamp = parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Iron mine") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, ""));
+            warehouse = parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Warehouse") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, ""));
+            wall = parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Wall") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, ""));
             woodCamp = (isNaN(woodCamp)) ? 0 : woodCamp;
             clayCamp = (isNaN(clayCamp)) ? 0 : clayCamp;
             ironCamp = (isNaN(ironCamp)) ? 0 : ironCamp;
@@ -1131,70 +1204,38 @@ function doReport(doc, reportID){
                 warehouse = 10,
                 wall = 0;
         }
-        var hoursAgo = (new Date() - battleTime) / 60 / 60 / 1000;
-        var wood2 = wood + (resourceSp[woodCamp] * hoursAgo * getWorldSpeed()),
-            clay2 = clay + (resourceSp[clayCamp] * hoursAgo * getWorldSpeed()),
-            iron2 = iron + (resourceSp[ironCamp] * hoursAgo * getWorldSpeed());
-        wood2 = (wood2 > warehouseC[warehouse]) ? warehouseC[warehouse] : wood2;
-        clay2 = (clay2 > warehouseC[warehouse]) ? warehouseC[warehouse] : clay2;
-        iron2 = (iron2 > warehouseC[warehouse]) ? warehouseC[warehouse] : iron2;
-        /* vilCoords = $(".quickedit-label", repTable).text().split("(")[2].split(")")[0].split("|") */
-        var vilCoords = $($("#attack_info_def span a", repTable).get(0)).text().split("(")[1].split(")")[0].split("|"),
-            localCoords = $($("#attack_info_att span a", repTable).get(0)).text().split("(")[1].split(")")[0].split("|"), /* getLocalCoords() */
-            distance = Math.round(Math.sqrt(Math.pow(vilCoords[0] - localCoords[0], 2) + Math.pow(vilCoords[1] - localCoords[1], 2)) * 100) / 100,
-            hours = distance * (speed.lc / getUnitSpeed()) / 60;
-        var wood3 = wood2 + (resourceSp[woodCamp] * hours * getWorldSpeed()),
-            clay3 = clay2 + (resourceSp[clayCamp] * hours * getWorldSpeed()),
-            iron3 = iron2 + (resourceSp[ironCamp] * hours * getWorldSpeed());
-        wood3 = (wood3 > warehouseC[warehouse]) ? warehouseC[warehouse] : wood3;
-        clay3 = (clay3 > warehouseC[warehouse]) ? warehouseC[warehouse] : clay3;
-        iron3 = (iron3 > warehouseC[warehouse]) ? warehouseC[warehouse] : iron3;
         var buildz = {};
-        buildz["woodcamp"] = woodCamp;
-        buildz["claycamp"] = clayCamp;
-        buildz["ironcamp"] = ironCamp;
-        buildz["warehouse"] = warehouse;
-        buildz["wall"] = wall;
+        buildz.woodcamp = woodCamp;
+        buildz.claycamp = clayCamp;
+        buildz.ironcamp = ironCamp;
+        buildz.warehouse = warehouse;
+        buildz.wall = wall;
         /*CHURCH*/
-        buildz.barracks = buildings && parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Barracks") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, "")) || 0,
-        buildz.rally = buildings && parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Rally point") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, "")) || 0,
-        buildz.stable = buildings && parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Stable") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, "")) || 0,
-        buildz.workshop = buildings && parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Workshop") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, "")) || 0,
-        buildz.academy = buildings && parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Academy") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, "")) || 0,
-        buildz.smithy = buildings && parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Smithy") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, "")) || 0,
-        buildz.statue = buildings && parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Statue") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, "")) || 0,
-        buildz.market = buildings && parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Market") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, "")) || 0,
-        buildz.hq = buildings && parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Headquarters") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, "")) || 0,
+        buildz.barracks = buildings && parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Barracks") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, "")) || 0;
+        buildz.place = buildings && parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Rally point") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, "")) || 0;
+        buildz.stable = buildings && parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Stable") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, "")) || 0;
+        buildz.garage = buildings && parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Workshop") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, "")) || 0;
+        buildz.snob = buildings && parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Academy") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, "")) || 0;
+        buildz.smith = buildings && parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Smithy") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, "")) || 0;
+        buildz.statue = buildings && parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Statue") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, "")) || 0;
+        buildz.market = buildings && parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Market") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, "")) || 0;
+        buildz.main = buildings && parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Headquarters") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, "")) || 0;
         buildz.farm = buildings && parseInt(buildings.replace(new RegExp("[\\s\\S]*" + _("Farm") + " \\(" + _("Level") + " "), "").replace(/\)[\s\S]*/, "")) || 0;
         var linkd = $("<span>" + _("Saved") + "</span>");
         linkd.css("display", "none");
-        
+
         repTable.parent().before(linkd);
-        var wentWell = false;
-        (function(){
-            /*
-            if ($("th[width=400] span.quickedit-label", repTable).get(0).innerText.split("(")[1].split(")")[0] !== getLocalName() && linkd.css("display") === "none") {
-                linkd.text("This report doesn't appear to come from this village - Are you sure? ");
-                linkd.css("display", "block").css("color", "#F00");
-                console && console.log && console.log("Report not from this village - " + vilCoords[0] + "|" + vilCoords[1] + " - " + parseInt(reportID));
-            } else {
-            */
-            if (addReport(parseInt(reportID), localCoords, vilCoords, wood, clay, iron, battleTime, buildz)){
-                linkd.text("Saved");
-                linkd.css("display", "block").css("color", "");
-                console && console.log && console.log("Saved a report! - " + localCoords[0] + "|" + localCoords[1] + " - " + vilCoords[0] + "|" + vilCoords[1] + " - " + parseInt(reportID));
-                wentWell = true;
-            } else {
-                linkd.text("Oops! There was an error.");
-                linkd.css("display", "block").css("color", "#F00");
-                console && console.log && console.log("Error with a report! - " + localCoords[0] + "|" + localCoords[1] + " - " + vilCoords[0] + "|" + vilCoords[1] + " - " + parseInt(reportID));
-            }
-            /* } */
-        })();
-        
-        var lcA1 = Math.floor((wood + clay + iron) / carry.lc + 0.25),
-            lcA2 = Math.floor((wood2 + clay2 + iron2) / carry.lc + 0.25),
-            lcA3 = Math.floor((wood3 + clay3 + iron3) / carry.lc + 0.25);
+        var progress = addReport(parseInt(reportID), localCoords, vilCoords, wood, clay, iron, battleTime, buildz);
+        if (progress === true){
+            linkd.text("Saved");
+            linkd.css("display", "block").css("color", "");
+            console.log("Saved a report! - " + localCoords[0] + "|" + localCoords[1] + " - " + vilCoords[0] + "|" + vilCoords[1] + " - " + parseInt(reportID));
+            return true;
+        } else {
+            linkd.text("Oops! There was an error.");
+            linkd.css("display", "block").css("color", "#F00");
+            console.log("Error with a report! - " + localCoords[0] + "|" + localCoords[1] + " - " + vilCoords[0] + "|" + vilCoords[1] + " - " + parseInt(reportID));
+            return progress;
+        }
     }
-    return wentWell;
 }
