@@ -78,6 +78,18 @@ var langShinko = {
         "Lower coin costs": "Menores custos de moeda",
         "Haul capacity": "Capacidade de saque",
         "Reduced package costs": "?"
+    },
+    "pt_PT": {
+        "Produced nobleman": "Nobres produzidos",
+        "Resource production": "Produção de recursos",
+        "Recruitment speed": "Velocidade de recrutamento",
+        "Attack strength": "Força de ataque",
+        "Defense strength": "Força Defesa",
+        "Luck": "Sorte",
+        "Population capacity": "Capacidade da população",
+        "Lower coin costs": "Menores custos de moeda",
+        "Haul capacity": "Capacidade de carga",
+        "Reduced package costs": "?"
     }
 
 };
@@ -160,10 +172,10 @@ $.getAll = function (
 $.getAll(URLs,
     (i, data) => {
         console.log("Grabbing page " + i);
-        if ($(data).find("rc-anchor-container")[0]) {
+        /*if ($(data).find("#recaptcha-token").outerHTML!=undefined){
             alert("Triggered captcha! Please restart the script")
             throw Error("Rip");
-        }
+        }*/
 
         tempRows = $(data).find("table .vis> tbody > tr");
 
