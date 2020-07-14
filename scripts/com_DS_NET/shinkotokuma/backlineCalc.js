@@ -65,7 +65,7 @@ function popupSophie(html) {
         </tr>
     </table>
     <hr>
-    <center><img class="tooltip-delayed" title="Sophie -Shinko to Kuma-" src="https://dl.dropboxusercontent.com/s/0do4be4rzef4j30/sophie2.gif" style="cursor:help; position: relative"></center>
+    <center><img id="sophieImg" class="tooltip-delayed" title="Sophie -Shinko to Kuma-" src="https://dl.dropboxusercontent.com/s/bxoyga8wa6yuuz4/sophie2.gif" style="cursor:help; position: relative"></center>
     <br>
     <center>
     <p><font color="${titleColor}">Creator: </font><a href="https://shinko-to-kuma.my-free.website/" style="text-shadow:-1px -1px 0 ${titleColor},1px -1px 0 ${titleColor},-1px 1px 0 ${titleColor},1px 1px 0 ${titleColor};" title="Sophie profile" target="_blank">Sophie "Shinko to Kuma"</a>
@@ -77,6 +77,9 @@ function popupSophie(html) {
     $("#popup").draggable();
     $("#pasteHere").eq(0).append(html);
     $("#progress").remove();
+    if (game_data.locale == "ar_AE") {
+        $("#sophieImg").attr("src", "https://media2.giphy.com/media/qYr8p3Dzbet5S/giphy.gif");
+    }
     //$("#totalPackets")[0].innerHTML=totalPackets;
     rows=$("#troops")[0].children[0].childNodes.length-1;
     for (var p = 0; p <rows ; p++) {
