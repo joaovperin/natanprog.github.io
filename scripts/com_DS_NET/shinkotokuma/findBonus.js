@@ -18,7 +18,7 @@ var headerColor = "#202225";
 var currentTime = Date.parse(new Date());
 if (localStorage.getItem("mapVillageTime") != null) {
     mapVillageTime = localStorage.getItem("mapVillageTime");
-    if (currentTime >= mapVillageTime + 60 * 60 * 24 * 1000) {
+    if (parseInt(currentTime) >= parseInt(mapVillageTime) + 60 * 60 * 24 * 1000) {
         //hour has passed
         console.log("Hour has passed, recollecting the village data");
         $.get("map/village.txt", function (data) {
@@ -193,7 +193,7 @@ function displayArray(x) {
                 <td style="text-align:center; width:auto; background-color:${backgroundColor}"><span><font color="white">${calcDistance(stoneBonus[i][0])}</font></span></td>
             </tr>`
         }
-    }
+    } 
     if (x == 2) {
         for (var i = 0; i < ironBonus.length; i++) {
             tempHTML += `
@@ -261,6 +261,7 @@ function displayArray(x) {
     tempHTML += "</table>";
     $("#villageList").eq(0).empty();
     $("#villageList").eq(0).append(tempHTML);
+    sortTableTest(1)
 }
 
 function calcDistance(village) {
@@ -270,4 +271,60 @@ function calcDistance(village) {
     var b = y1 - y2;
     var distance = Math.round(Math.hypot(a, b));
     return distance;
+}
+
+
+function sortTableTest(n) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("bonusWood");
+    switching = true;
+    // Set the sorting direction to ascending:
+    dir = "asc";
+    /* Make a loop that will continue until
+    no switching has been done: */
+    while (switching) {
+        // Start by saying: no switching is done:
+        switching = false;
+        rows = table.rows;
+        /* Loop through all table rows (except the
+        first, which contains table headers): */
+        for (i = 1; i < (rows.length - 1); i++) {
+            // Start by saying there should be no switching:
+            shouldSwitch = false;
+            /* Get the two elements you want to compare,
+            one from current row and one from the next: */
+            x = rows[i].getElementsByTagName("td")[n];
+            y = rows[i + 1].getElementsByTagName("td")[n];
+            /* Check if the two rows should switch place,
+            based on the direction, asc or desc: */
+            if (dir == "asc") {
+                if (Number(x.innerText.replace(/\./g, '')) > Number(y.innerText.replace(/\./g, ''))) {
+                    // If so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                }
+            } else if (dir == "desc") {
+                if (Number(x.innerText.replace(/\./g, '')) < Number(y.innerText.replace(/\./g, ''))) {
+                    // If so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+        }
+        if (shouldSwitch) {
+            /* If a switch has been marked, make the switch
+            and mark that a switch has been done: */
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            // Each time a switch is done, increase this count by 1:
+            switchcount++;
+        } else {
+            /* If no switching has been done AND the direction is "asc",
+            set the direction to "desc" and run the while loop again. */
+            if (switchcount == 0 && dir == "desc") {
+                dir = "asc";
+                switching = true;
+            }
+        }
+    }
 }
