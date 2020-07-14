@@ -1,5 +1,5 @@
 javascript:
-var allowed = new Array();
+/*var allowed = new Array();
 allowed['spear'] = true;
 allowed['sword'] = true;
 allowed['axe'] = true;
@@ -13,7 +13,7 @@ allowed['catapult'] = true;
 allowed['snob'] = false;
 var coords = '551|222 550|231 534|222 562|244';
 var land = "November 09, 2013 17:00:00";
-var landWindow = [0, 30, 0];
+var landWindow = [0, 30, 0];*/
 var eleDoc = (window.frames.length > 0) ? window.main.document : document;
 var now = new Date();
 var units = {
@@ -192,4 +192,4 @@ function calculateIfAttackCanLand() {
     }
 }
 calculateIfAttackCanLand();
-void(0);
+//void(0);
