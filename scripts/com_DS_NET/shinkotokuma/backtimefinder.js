@@ -18,7 +18,7 @@ var backgroundColor = "#36393f";
 var borderColor = "#3e4147";
 var headerColor = "#202225";
 var titleColor = "#ffffdf";
-
+$("#backtimeFinderSophie").remove();
 $.get("/game.php?&screen=overview_villages&type=return&mode=commands&group=0&", function (data) {
     //collect all returning commands
     temp = $(data).find("#commands_table .nowrap");
@@ -115,7 +115,7 @@ function findBacktimes(returning, incoming) {
     html += `</table>
             <hr>
             <br>
-            <center><img class=" tooltip-delayed" title="Sophie -Shinko to Kuma-" src="https://dl.dropboxusercontent.com/s/0do4be4rzef4j30/sophie2.gif" style="cursor:help; position: relative"></center>
+            <center><img id="sophieImg" class=" tooltip-delayed" title="Sophie -Shinko to Kuma-" src="https://dl.dropboxusercontent.com/s/bxoyga8wa6yuuz4/sophie2.gif" style="cursor:help; position: relative"></center>
             <br>
             <center>
             <p>
@@ -128,6 +128,9 @@ function findBacktimes(returning, incoming) {
     $("#mobileContent").eq(0).prepend(html);
     $("#backtimeFinderSophieTable a").css('color', "#40D0E0");
     $("#backtimeFinderSophie").draggable();
+    if (game_data.locale == "ar_AE") {
+        $("#sophieImg").attr("src", "https://media2.giphy.com/media/qYr8p3Dzbet5S/giphy.gif");
+    }
 }
 
 
