@@ -1,7 +1,7 @@
 /*
  * Script Name: Filter Reports
- * Version: v1.0.2
- * Last Updated: 2020-06-26
+ * Version: v1.0.3
+ * Last Updated: 2020-07-16
  * Author: RedAlert
  * Author URL: https://twscripts.ga/
  * Author Contact: RedAlert#9859 (Discord)
@@ -12,7 +12,7 @@
 
 var scriptData = {
     name: 'Filter Reports',
-    version: 'v1.0.2',
+    version: 'v1.0.3',
     author: 'RedAlert',
     authorUrl: 'https://twscripts.ga/',
     helpLink:
@@ -42,8 +42,8 @@ var translations = {
         'Script is already loaded and running!':
             'Script is already loaded and running!',
         'Reset Filters': 'Reset Filters',
-        'Filter Player Reports': 'Filter Player Reports',
-        'Filter Barbarian Reports': 'Filter Barbarian Reports',
+        'Players Only': 'Players Only',
+        'Barbarians Only': 'Barbarians Only',
         'No reports found!': 'No reports found!',
         'Reports have been selected!': 'Reports have been selected!',
         'No reports found fitting the criteria!':
@@ -76,8 +76,8 @@ var translations = {
         'Script is already loaded and running!':
             'Skript je už načítaný a spustený!',
         'Reset Filters': 'Resetovať filtre',
-        'Filter Player Reports': 'Filtrovať oznámenia hráčov',
-        'Filter Barbarian Reports': 'Filtrovať oznámenia barbarov',
+        'Players Only': 'Filtrovať oznámenia hráčov',
+        'Barbarians Only': 'Filtrovať oznámenia barbarov',
         'No reports found!': 'Žiadne oznámenia!',
         'Reports have been selected!': 'Oznámenia boli vybrané!',
         'No reports found fitting the criteria!':
