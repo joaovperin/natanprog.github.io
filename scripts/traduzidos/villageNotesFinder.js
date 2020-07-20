@@ -119,7 +119,7 @@ $.getAll(infoURLs,
         thisVillaNotes = $(blabla).find(".village-notes-container")[0].innerHTML;
         thisVillaName = $(blabla).find(".icon.header.village")[1].parentElement.innerText;
         thisVillaCoordinate = $(blabla).find("td:contains('"+langShinko[game_data.locale]["coord"]+"')").next()[2].innerText;
-        if ($(blabla).find("td:contains('Player:')").length != 0) {
+        if ($(blabla).find("td:contains('"+langShinko[game_data.locale]["player"]+"')").length != 0) {
             thisVillaPlayer = $(blabla).find("td:contains('"+langShinko[game_data.locale]["player"]+"')").next()[2].innerText;
             thisVillaPlayerID = $(blabla).find("td:contains('"+langShinko[game_data.locale]["player"]+"')").next()[2].children[0].href.match(/id=(\d*)/)[1];
             thisVillaPlayerID=`<a href="/game.php?&screen=info_player&id=${thisVillaPlayerID}">${thisVillaPlayer}</a>`
