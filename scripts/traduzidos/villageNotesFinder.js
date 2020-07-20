@@ -107,7 +107,7 @@ $.getAll = function (
     }
 };
 
-
+debugger;
 infoURLs = [];
 for (var i = 0; i < villageIDs.length; i++) {
     infoURLs.push(`/game.php?&screen=info_village&id=${villageIDs[i]}`);
